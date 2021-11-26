@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<parent>
+		<groupId>io.github.jaxer-in</groupId>
+		<artifactId>jaxer-parent</artifactId>
+		<version>${revision}</version>
+	</parent>
+
+	<artifactId>jaxer-api</artifactId>
+	<name>Jaxer Api</name>
+	<description>Jaxer api for backend projects</description>
+	<url>https://github.com/jaxer-in/jaxer-api</url>
+
+	<modelVersion>4.0.0</modelVersion>
+	<packaging>jar</packaging>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+
+	<scm>
+		<connection>scm:git:git://github.com:jaxer-in/jaxer-api.git</connection>
+		<developerConnection>scm:git:ssh://github.com:jaxer-in/jaxer-api.git</developerConnection>
+		<url>https://github.com/jaxer-in/jaxer-api.git/tree/main</url>
+	</scm>
+
+	<dependencies>
+		<dependency>
+			<groupId>io.github.jaxer-in</groupId>
+			<artifactId>jaxer-core</artifactId>
+			<version>${revision}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>4.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.22</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+</project>

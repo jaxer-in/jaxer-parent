@@ -3,7 +3,7 @@
 
 	<groupId>io.github.jaxer-in</groupId>
 	<artifactId>jaxer-parent</artifactId>
-	<version>1.0.1-beta</version>
+	<version>${revision}</version>
 
 	<name>Jaxer Parent</name>
 	<description>Parent project for managing all jaxer projects</description>
@@ -18,9 +18,15 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jaxer.latest.version>1.1.0-beta</jaxer.latest.version>
-		<jaxer.core.version>1.0.0-beta</jaxer.core.version>
+		<revision>1.0.2-beta</revision>
+		<flatten.version>1.2.7</flatten.version>
 	</properties>
+
+	<modules>
+		<module>jaxer-core</module>
+		<module>jaxer-api</module>
+		<module>jaxer-sdbms</module>
+	</modules>
 
 	<build>
 		<resources>
@@ -115,6 +121,34 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+
+
+			<!--flatten-maven-plugin-->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>flatten-maven-plugin</artifactId>
+				<version>${flatten.version}</version>
+				<configuration>
+					<updatePomFile>true</updatePomFile>
+					<flattenMode>resolveCiFriendliesOnly</flattenMode>
+				</configuration>
+				<executions>
+					<execution>
+						<id>flatten</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>flatten</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>flatten.clean</id>
+						<phase>clean</phase>
+						<goals>
+							<goal>clean</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 
@@ -172,12 +206,11 @@
 		</profile>
 	</profiles>
 
-	<!-- [start] Sonatype Metadata Requirements. -->
 	<!-- https://central.sonatype.org/publish/requirements/#sufficient-metadata -->
 	<licenses>
 		<license>
 			<name>Apache 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
+			<url>https://raw.githubusercontent.com/jaxer-in/jaxer-parent/main/LICENSE</url>
 		</license>
 	</licenses>
 
@@ -194,8 +227,13 @@
 
 	<developers>
 		<developer>
+			<id>jaxer</id>
 			<name>Jaxer</name>
 			<email>jaxer@outlook.in</email>
+			<roles>
+				<role>Project Lead</role>
+			</roles>
+			<organization>Jaxer</organization>
 		</developer>
 	</developers>
 
@@ -204,5 +242,20 @@
 		<developerConnection>scm:git:ssh://github.com:jaxer-in/jaxer-parent.git</developerConnection>
 		<url>https://github.com/jaxer-in/jaxer-parent.git/tree/main</url>
 	</scm>
+
+	<dependencies>
+		<!-- Log4j2 -->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>2.14.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>2.14.1</version>
+		</dependency>
+	</dependencies>
 
 </project>
