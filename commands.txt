@@ -1,0 +1,2 @@
+How to push on prod
+mvn clean deploy -Dgpg.passphrase="secret-password" -Dmaven.test.skip=true -Pci-cd
