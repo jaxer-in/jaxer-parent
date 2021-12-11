@@ -1,5 +1,5 @@
 
-package in.jaxer.api.demo;
+package in.jaxer.api.tasks;
 
 import in.jaxer.api.dtos.ApiResponseDto;
 import in.jaxer.api.dtos.RequestResponseDto;

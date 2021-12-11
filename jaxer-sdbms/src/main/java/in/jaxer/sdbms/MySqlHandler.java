@@ -1,13 +1,13 @@
 
 package in.jaxer.sdbms;
 
-import in.jaxer.sdbms.utils.AbstractJpaHandler;
 import in.jaxer.core.utilities.Collections;
 import in.jaxer.core.utilities.Strings;
 import in.jaxer.core.utilities.Validator;
-import in.jaxer.sdbms.annotations.Column;
+import in.jaxer.sdbms.annotations.PrimaryKey;
 import in.jaxer.sdbms.dto.PaginationDto;
 import in.jaxer.sdbms.exceptions.SDBMSException;
+import in.jaxer.sdbms.utils.AbstractJpaHandler;
 import in.jaxer.sdbms.utils.NamedStatementUtils;
 import java.beans.PropertyDescriptor;
 import java.sql.Connection;
@@ -88,7 +88,7 @@ public class MySqlHandler extends AbstractJpaHandler
 	public int delete(Connection connection, Class outputClass, Object id)
 	{
 		String tableName = getTableName(outputClass);
-		String primaryKeyColumnName = getPrimaryColumn(outputClass).value();
+		String primaryKeyColumnName = getPrimaryColumnName(outputClass);
 
 		String sql = "DELETE FROM `" + tableName + "` WHERE `" + primaryKeyColumnName + "` = ?";
 
@@ -109,7 +109,7 @@ public class MySqlHandler extends AbstractJpaHandler
 	public <T> T merge(Connection connection, T t)
 	{
 		Class outputClass = t.getClass();
-		getPrimaryColumn(outputClass);
+		getPrimaryKey(outputClass);
 
 		String tableName = getTableName(outputClass);
 		String comma = ",";
@@ -183,23 +183,27 @@ public class MySqlHandler extends AbstractJpaHandler
 		/**
 		 * Adding primary column if auto_increment is disabled
 		 */
-		Column primaryColumn = getPrimaryColumn(outputClass);
-		if (primaryColumn.primaryKey() && !primaryColumn.autoIncrement())
+		PrimaryKey primaryKey = getPrimaryKey(outputClass);
+		HashMap<String, Object> primaryColumnHashMap = getColumnKeyValue(outputClass, true);
+		Set<Map.Entry<String, Object>> primaryColumnEntryset = primaryColumnHashMap.entrySet();
+		for (Map.Entry<String, Object> entry : primaryColumnEntryset)
 		{
-			HashMap<String, Object> primaryColumnHashMap = getColumnKeyValue(outputClass, true);
-			Set<Map.Entry<String, Object>> primaryColumnEntryset = primaryColumnHashMap.entrySet();
-			for (Map.Entry<String, Object> entry : primaryColumnEntryset)
+			if (Validator.isNotEmpty(entry.getKey()))
 			{
-				if (Validator.isNotEmpty(entry.getKey()))
+				columnNames += " `" + entry.getKey() + "`" + comma;
+
+				Object object = entry.getValue();
+				if (object == null && primaryKey.uuidValue())
 				{
-					columnNames += " `" + entry.getKey() + "`" + comma;
-					value += " :" + entry.getValue() + comma;
-
-					//
-					columnHashMap.put(entry.getKey(), entry.getValue());
+					value += " :" + Strings.getUUID().replace("-", "") + comma;
+				} else
+				{
+					value += " :" + object + comma;
 				}
-			}
 
+				//Adding primary column key-value to previous non-primary hashmap
+				columnHashMap.put(entry.getKey(), entry.getValue());
+			}
 		}
 
 		columnNames = Strings.removeEndsWith(columnNames, comma);
@@ -219,9 +223,8 @@ public class MySqlHandler extends AbstractJpaHandler
 				{
 					if (resultSet.next())
 					{
-						new PropertyDescriptor(primaryColumn.value(), outputClass)
-								.getWriteMethod()
-								.invoke(t, resultSet.getObject(1));
+//						new PropertyDescriptor(primaryKey.value(), outputClass).getWriteMethod().invoke(t, resultSet.getObject(1));
+						new PropertyDescriptor(getPrimaryFieldName(outputClass), outputClass).getWriteMethod().invoke(t, resultSet.getObject(1));
 					}
 				}
 			}

@@ -20,7 +20,7 @@ import lombok.extern.log4j.Log4j2;
  * @author Shakir Ansari
  */
 @Log4j2
-@Builder
+@Builder(setterPrefix = "with")
 public class SimpleQuery
 {
 
@@ -35,8 +35,6 @@ public class SimpleQuery
 
 	private HashMap<String, Collection> paramListMap;
 
-	private Class entity;
-
 	public void setNativeQuery(String sqlQuery)
 	{
 		this.sqlQuery = sqlQuery;
@@ -50,11 +48,6 @@ public class SimpleQuery
 	public void setParameterList(String paramName, Collection collection)
 	{
 		this.paramListMap.put(paramName, collection);
-	}
-
-	public void addEntity(Class entity)
-	{
-		this.entity = entity;
 	}
 
 	private void processParams(NamedStatement namedStatement)
@@ -83,13 +76,8 @@ public class SimpleQuery
 		}
 	}
 
-	public <T> List<T> getResultList()
+	public <T> List<T> getResultList(Class<T> entity)
 	{
-		if (this.entity == null)
-		{
-			throw new SDBMSException("Entity is undefined");
-		}
-
 		try (NamedStatement namedStatement = new NamedStatement(connection, sqlQuery))
 		{
 			processParams(namedStatement);

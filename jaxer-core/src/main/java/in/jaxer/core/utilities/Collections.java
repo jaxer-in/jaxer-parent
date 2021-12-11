@@ -19,17 +19,17 @@ public class Collections
 
 	public static boolean isEmpty(Collection collection)
 	{
-		return Validator.isEmpty(collection);
+		return JValidator.isEmpty(collection);
 	}
 
 	public static boolean isNotEmpty(Collection collection)
 	{
-		return Validator.isNotEmpty(collection);
+		return JValidator.isNotEmpty(collection);
 	}
 
 	public static boolean isEmpty(Map map)
 	{
-		return Validator.isEmpty(map);
+		return JValidator.isEmpty(map);
 	}
 
 	public static boolean isNotEmpty(Map map)
@@ -128,7 +128,7 @@ public class Collections
 
 	public static <T> List<T> toList(String text, Class<T> clazz)
 	{
-		Validator.requireNotEmpty(text);
+		JValidator.requireNotEmpty(text);
 
 		JsonArray array = JsonParser.parseString(text).getAsJsonArray();
 

@@ -2,6 +2,7 @@
 package in.jaxer.sdbms;
 
 import in.jaxer.core.utilities.Validator;
+import in.jaxer.sdbms.annotations.PrimaryKey;
 import in.jaxer.sdbms.annotations.Table;
 import in.jaxer.sdbms.exceptions.SDBMSException;
 import java.lang.reflect.Field;
@@ -108,20 +109,17 @@ public abstract class Repository<T, ID>
 
 		for (Field field : fields)
 		{
-			if (field.isAnnotationPresent(in.jaxer.sdbms.annotations.Column.class))
+			if (field.isAnnotationPresent(in.jaxer.sdbms.annotations.Column.class)
+					&& field.isAnnotationPresent(PrimaryKey.class))
 			{
-				in.jaxer.sdbms.annotations.Column column = field.getAnnotation(in.jaxer.sdbms.annotations.Column.class);
-				if (column.primaryKey())
-				{
-					primaryKeyName = column.value();
-					break;
-				}
+				primaryKeyName = field.getAnnotation(in.jaxer.sdbms.annotations.Column.class).value();
+				break;
 			}
 		}
 
 		if (Validator.isEmpty(primaryKeyName))
 		{
-			throw new SDBMSException("Primary Key not found in output class");
+			throw new SDBMSException("Annotation @" + PrimaryKey.class.getName() + " not found in " + outputClass.getName() + " class");
 		}
 
 		String sql = "SELECT * FROM `" + tableName + "` WHERE `" + primaryKeyName + "` = :pKey";

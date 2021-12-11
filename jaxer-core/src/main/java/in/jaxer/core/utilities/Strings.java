@@ -69,7 +69,7 @@ public class Strings
 
 		List<String> traces = new ArrayList<>();
 
-		if (Validator.isNotEmpty(throwable.getMessage()))
+		if (JValidator.isNotEmpty(throwable.getMessage()))
 		{
 			traces.add(throwable.getMessage());
 		}
@@ -88,7 +88,7 @@ public class Strings
 
 		List<String> traces = new ArrayList<>();
 
-		if (Validator.isNotEmpty(exception.getMessage()))
+		if (JValidator.isNotEmpty(exception.getMessage()))
 		{
 			traces.add(exception.getMessage());
 		}
@@ -117,7 +117,7 @@ public class Strings
 	{
 		List<String> traces = getListOfStackTraces(throwable, packageFilter);
 
-		if (Validator.isEmpty(traces))
+		if (JValidator.isEmpty(traces))
 		{
 			return null;
 		}
@@ -269,7 +269,7 @@ public class Strings
 
 	public String getLimitedString(String str, int limit)
 	{
-		Validator.requireNotNull(str);
+		JValidator.requireNotNull(str);
 
 		int len = str.length();
 		if (len < limit)
@@ -308,9 +308,9 @@ public class Strings
 
 	public static String replaceAll(String str, String sourceString, String targetString)
 	{
-		Validator.requireNotEmpty(str);
-		Validator.requireNotEmpty(sourceString);
-		Validator.requireNotEmpty(targetString);
+		JValidator.requireNotEmpty(str);
+		JValidator.requireNotEmpty(sourceString);
+		JValidator.requireNotEmpty(targetString);
 
 		while (str.indexOf(sourceString) > 0)
 		{
@@ -336,7 +336,7 @@ public class Strings
 
 	public static String reverse(String str)
 	{
-		Validator.requireNotNull(str);
+		JValidator.requireNotNull(str);
 
 		int len = str.length();
 		char temp[] = new char[len];
@@ -349,7 +349,7 @@ public class Strings
 
 	public static String setName(String name)
 	{
-		Validator.requireNotNull(name);
+		JValidator.requireNotNull(name);
 
 		char temp[] = name.toLowerCase().toCharArray(), ch;
 		ch = name.charAt(0);
@@ -363,7 +363,7 @@ public class Strings
 
 	public static String shuffle(String str)
 	{
-		Validator.requireNotNull(str);
+		JValidator.requireNotNull(str);
 
 		int len = str.length();
 		if (len == 1)
@@ -387,14 +387,14 @@ public class Strings
 
 	public static String padRight(String s, int n)
 	{
-		Validator.requireNotNull(s);
+		JValidator.requireNotNull(s);
 
 		return String.format("%-" + n + "s", s);
 	}
 
 	public static String padLeft(String s, int n)
 	{
-		Validator.requireNotNull(s);
+		JValidator.requireNotNull(s);
 
 		return String.format("%" + n + "s", s);
 	}
@@ -441,7 +441,7 @@ public class Strings
 
 	public static String getPrettyJson(String uglyJson)
 	{
-		Validator.requireNotEmpty(uglyJson, "Json string cannot be empty");
+		JValidator.requireNotEmpty(uglyJson, "Json string cannot be empty");
 
 		JsonElement jsonElement = JsonParser.parseString(uglyJson);
 		return Singletons.getGson(true).toJson(jsonElement);
@@ -449,8 +449,8 @@ public class Strings
 
 	public static String removeStartsWith(String string, String startsWith)
 	{
-		Validator.requireNotNull(string, "String cannot be null");
-		Validator.requireNotNull(startsWith, "startsWith cannot be null");
+		JValidator.requireNotNull(string, "String cannot be null");
+		JValidator.requireNotNull(startsWith, "startsWith cannot be null");
 
 		if (string.startsWith(startsWith))
 		{
@@ -461,8 +461,8 @@ public class Strings
 
 	public static String removeEndsWith(String string, String endsWith)
 	{
-		Validator.requireNotNull(string, "String cannot be null");
-		Validator.requireNotNull(endsWith, "endsWith cannot be null");
+		JValidator.requireNotNull(string, "String cannot be null");
+		JValidator.requireNotNull(endsWith, "endsWith cannot be null");
 
 		if (string.endsWith(endsWith))
 		{

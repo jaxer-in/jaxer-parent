@@ -3,7 +3,7 @@ package in.jaxer.core.encoders;
 
 import in.jaxer.core.constants.Constants;
 import in.jaxer.core.constants.ContentType;
-import in.jaxer.core.utilities.Validator;
+import in.jaxer.core.utilities.JValidator;
 import java.util.Arrays;
 import java.util.Base64;
 import javax.crypto.Cipher;
@@ -21,7 +21,7 @@ public class AesEncoder
 
 	private static byte[] getKeyBytes(String key)
 	{
-		Validator.requireNotNull(key, "Key cannot be null");
+		JValidator.requireNotNull(key, "Key cannot be null");
 
 		while (key.length() < 16)
 		{

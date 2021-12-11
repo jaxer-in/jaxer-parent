@@ -32,7 +32,7 @@ public class Randoms
 
 	public static char getRandomChar(char[] array)
 	{
-		Validator.requireNotEmpty(array);
+		JValidator.requireNotEmpty(array);
 
 		return array[getRandomIntInRange(0, array.length - 1)];
 	}

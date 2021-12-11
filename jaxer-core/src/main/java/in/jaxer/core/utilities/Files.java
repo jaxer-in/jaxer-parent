@@ -21,11 +21,13 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.file.FileAlreadyExistsException;
+import lombok.extern.log4j.Log4j2;
 
 /**
  *
  * @author Shakir Ansari
  */
+@Log4j2
 public class Files
 {
 
@@ -36,12 +38,13 @@ public class Files
 			String hash0 = HashHandler.getFileChecksumSHA1(file0);
 			String hash1 = HashHandler.getFileChecksumSHA1(file1);
 
-			System.out.println("Files.equals() - hash0: [" + hash0 + "]");
-			System.out.println("Files.equals() - hash1: [" + hash1 + "]");
+			log.debug("file0: {}, hash0: {}", file0, hash0);
+			log.debug("file1: {}, hash1: {}", file1, hash1);
 
 			return hash0.equals(hash1);
 		} catch (Exception ex)
 		{
+			log.error("Exception", ex);
 			throw new RuntimeException("Exception occured while executing equals(file0, file1)", ex);
 		}
 	}
@@ -287,8 +290,8 @@ public class Files
 			outputStream.write(buffer, 0, i);
 			totalReadBytes += i;
 
-//			System.out.println("Files.copyBytes() - total read bytes: [" + totalReadBytes + "]");
 		}
+		log.debug("totalReadBytes: {}", totalReadBytes);
 		outputStream.flush();
 	}
 
@@ -312,8 +315,7 @@ public class Files
 			}
 		}
 
-		System.out.println("Files.delete() - [" + file.delete() + "] --- " + file.getAbsolutePath());
-
+		log.debug("[{}] \t {}" + file.delete(), file.getAbsolutePath());
 	}
 
 	public static String getMimeType(String fileName)
@@ -329,7 +331,7 @@ public class Files
 	public static String getDefaultMimeType(String filename)
 	{
 		String mime = getMimeType(filename);
-		return Validator.isNotEmpty(mime) ? mime : ContentType.APPLICATION_OCTET_STREAM;
+		return JValidator.isNotEmpty(mime) ? mime : ContentType.APPLICATION_OCTET_STREAM;
 	}
 
 	public static String getDefaultMimeType(File file)
@@ -344,7 +346,7 @@ public class Files
 		String contentType = uRLConnection.getContentType();
 		int contentLength = uRLConnection.getContentLength();
 
-		System.out.println("Files.download() - contentType:" + contentType + ", contentLength:" + contentLength);
+		log.debug("contentType: {}, contentLength: {}", contentType, contentLength);
 
 		String filename = url.getFile();
 		filename = filename.substring(filename.lastIndexOf('/') + 1);
@@ -355,7 +357,7 @@ public class Files
 			Files.copyBytes(inputStream, fileOutputStream);
 		} catch (Exception exception)
 		{
-			System.out.println("Files.download() - Exception:\n" + exception);
+			log.error("Exception", exception);
 		}
 	}
 }

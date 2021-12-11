@@ -13,11 +13,19 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import javax.imageio.ImageIO;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.extern.log4j.Log4j2;
 
 /**
  *
  * @author Shakir Ansari
  */
+@Log4j2
+@Getter
+@Setter
+@ToString
 public class ImagePlaceholder
 {
 
@@ -44,76 +52,6 @@ public class ImagePlaceholder
 		this.textColor = new Color(180, 180, 180); //new Color(200, 200, 200);
 		this.text = Jaxer.ProjectProperties.getKey(Jaxer.ProjectProperties.PROJECT_NAME);
 		this.fileType = Constants.JPG;
-	}
-
-	public int getWidth()
-	{
-		return width;
-	}
-
-	public void setWidth(int width)
-	{
-		this.width = width;
-	}
-
-	public int getHeight()
-	{
-		return height;
-	}
-
-	public void setHeight(int height)
-	{
-		this.height = height;
-	}
-
-	public Font getFont()
-	{
-		return font;
-	}
-
-	public void setFont(Font font)
-	{
-		this.font = font;
-	}
-
-	public Color getBackgroundColor()
-	{
-		return backgroundColor;
-	}
-
-	public void setBackgroundColor(Color backgroundColor)
-	{
-		this.backgroundColor = backgroundColor;
-	}
-
-	public Color getTextColor()
-	{
-		return textColor;
-	}
-
-	public void setTextColor(Color textColor)
-	{
-		this.textColor = textColor;
-	}
-
-	public String getText()
-	{
-		return text;
-	}
-
-	public void setText(String text)
-	{
-		this.text = text;
-	}
-
-	public String getFileType()
-	{
-		return fileType;
-	}
-
-	public void setFileType(String fileType)
-	{
-		this.fileType = fileType;
 	}
 
 	public BufferedImage createPlaceholder(String msg) throws Exception
@@ -144,7 +82,14 @@ public class ImagePlaceholder
 		return bufferedImage;
 	}
 
-	public void saveImage(String text) throws Exception
+	/**
+	 *
+	 * @param text your text on image
+	 *
+	 * @return will return file location
+	 *
+	 */
+	public String saveImage(String text)
 	{
 		String filePath = Systems.getUserHomeDirectory() + File.separator + "image_placeholder_" + System.currentTimeMillis() + "." + this.getFileType();
 
@@ -152,8 +97,13 @@ public class ImagePlaceholder
 		{
 			ImageIO.write(createPlaceholder(text), this.getFileType(), fileOutputStream);
 			fileOutputStream.flush();
+		} catch (Exception ex)
+		{
+			log.error("Exception", ex);
+			throw new RuntimeException(ex);
 		}
-		System.out.println("ImagePlaceholder.saveImage() - file is saved " + filePath);
-	}
 
+		log.info("file is saved {}", filePath);
+		return filePath;
+	}
 }

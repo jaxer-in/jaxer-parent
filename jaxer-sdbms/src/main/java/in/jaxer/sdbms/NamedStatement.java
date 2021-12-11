@@ -1,6 +1,7 @@
 
 package in.jaxer.sdbms;
 
+import in.jaxer.core.utilities.Utilities;
 import in.jaxer.core.utilities.Validator;
 import in.jaxer.sdbms.exceptions.SDBMSException;
 import in.jaxer.sdbms.utils.NamedStatementUtils;
@@ -82,45 +83,54 @@ public class NamedStatement implements AutoCloseable
 	public boolean execute() throws SQLException
 	{
 		setValueMap();
+		log.debug("execute");
 		return preparedStatement.execute();
 	}
 
 	public ResultSet getGeneratedKeys() throws SQLException
 	{
+		log.debug("getGeneratedKeys");
 		return preparedStatement.getGeneratedKeys();
 	}
 
 	public ResultSet executeQuery() throws SQLException
 	{
 		setValueMap();
+		log.debug("executeQuery");
 		return preparedStatement.executeQuery();
 	}
 
 	public int executeUpdate() throws SQLException
 	{
 		setValueMap();
+		log.debug("executeUpdate");
 		return preparedStatement.executeUpdate();
 	}
 
 	public long executeLargeUpdate() throws SQLException
 	{
 		setValueMap();
+		log.debug("executeLargeUpdate");
 		return preparedStatement.executeLargeUpdate();
 	}
 
 	public void addBatch() throws SQLException
 	{
+		log.debug("addBatch");
 		preparedStatement.addBatch();
 	}
 
 	public int[] executeBatch() throws SQLException
 	{
 		setValueMap();
+		log.debug("executeBatch");
 		return preparedStatement.executeBatch();
 	}
 
 	private void setValueMap() throws SQLException
 	{
+		log.debug("setValueMap");
+
 		if (Validator.isEmpty(valueMap))
 		{
 			valueMap = new HashMap<>();
@@ -223,14 +233,10 @@ public class NamedStatement implements AutoCloseable
 	@Override
 	public void close() throws SQLException
 	{
-		if (preparedStatement != null)
-		{
-			log.debug("Closing preparedStatement");
-			preparedStatement.close();
-			log.debug("PreparedStatement closed");
-		} else
-		{
-			log.debug("PreparedStatement is already null");
-		}
+		log.debug("Closing preparedStatement");
+
+		Utilities.close(preparedStatement);
+
+		log.debug("PreparedStatement closed");
 	}
 }

@@ -1,17 +1,22 @@
 
 package in.jaxer.api.request;
 
+import in.jaxer.api.constants.RequestConstant;
 import in.jaxer.api.dtos.RequestResponseDto;
-import in.jaxer.core.utilities.Utilities;
+import in.jaxer.core.utilities.JUtilities;
+import in.jaxer.core.utilities.JValidator;
 import java.sql.Connection;
+import java.sql.Timestamp;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import lombok.extern.log4j.Log4j2;
 
 /**
  *
  * @author Shakir Ansari
  */
-public abstract class AbstractTask
+@Log4j2
+public abstract class AbstractHttpRequestTask
 {
 
 	private RequestResponseDto requestResponseDto = null;
@@ -63,7 +68,7 @@ public abstract class AbstractTask
 
 	public <T> T getParameter(String paramName, Class<T> T)
 	{
-		return Utilities.toObject(getParameter(paramName), T);
+		return JUtilities.toObject(getParameter(paramName), T);
 	}
 
 	public int getParameterAsInt(String paramName)
@@ -77,7 +82,7 @@ public abstract class AbstractTask
 
 	public <T> List<T> getParameterList(String paramName, Class<T> T)
 	{
-		return Utilities.toObjectList(getParameter(paramName), T);
+		return JUtilities.toObjectList(getParameter(paramName), T);
 	}
 
 	public void setTemporaryObject(String key, Object value)
@@ -99,4 +104,36 @@ public abstract class AbstractTask
 	{
 		requestResponseDto.addUserMessage(userMessage);
 	}
+
+	public Timestamp getTimeStamp()
+	{
+		Timestamp timestamp = getClientMilliseconds() == 0l
+				? new Timestamp(System.currentTimeMillis())
+				: new Timestamp(getClientMilliseconds());
+
+		log.debug("timestamp: [" + timestamp + "]");
+
+		return timestamp;
+	}
+
+	private long getClientMilliseconds()
+	{
+		if (JValidator.isNotEmpty(getParameter(RequestConstant.API_CLIENT_MILLISECONDS)))
+		{
+			return Long.parseLong(getParameter(RequestConstant.API_CLIENT_MILLISECONDS));
+		}
+
+		return 0l;
+	}
+
+//	public boolean isRequestSourceAndroid()
+//	{
+//		return requestResponseDto.isRequestSourceAndroid();
+//	}
+//
+//	public boolean isRequestSourceWEB()
+//	{
+//		return requestResponseDto.isRequestSourceWEB();
+//	}
+
 }

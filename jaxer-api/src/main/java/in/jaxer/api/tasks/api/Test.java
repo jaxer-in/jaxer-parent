@@ -1,5 +1,5 @@
 
-package in.jaxer.api.demo.api;
+package in.jaxer.api.tasks.api;
 
 import in.jaxer.api.annotations.ApiTask;
 import in.jaxer.api.request.AbstractApiTask;

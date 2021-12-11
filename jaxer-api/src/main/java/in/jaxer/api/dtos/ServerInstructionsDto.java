@@ -3,20 +3,17 @@ package in.jaxer.api.dtos;
 
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Getter;
 
 /**
  *
  * @author Shakir Ansari
  */
+@Getter
 public class ServerInstructionsDto
 {
 
 	private List<String> serverInstructions;
-
-	public List<String> getServerInstructions()
-	{
-		return serverInstructions;
-	}
 
 	public void addServerInstruction(String instruction)
 	{

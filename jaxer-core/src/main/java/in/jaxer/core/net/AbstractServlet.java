@@ -5,8 +5,8 @@ import in.jaxer.core.constants.ContentType;
 import in.jaxer.core.constants.HttpConstants;
 import in.jaxer.core.constants.Singletons;
 import in.jaxer.core.utilities.Files;
-import in.jaxer.core.utilities.Utilities;
-import in.jaxer.core.utilities.Validator;
+import in.jaxer.core.utilities.JUtilities;
+import in.jaxer.core.utilities.JValidator;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.File;
@@ -103,7 +103,7 @@ public class AbstractServlet extends GenericServlet
 	protected List<String> getPathParams(HttpServletRequest httpServletRequest)
 	{
 		String paramString = httpServletRequest.getPathInfo();
-		if (Validator.isEmpty(paramString))
+		if (JValidator.isEmpty(paramString))
 		{
 			return null;
 		}
@@ -208,7 +208,7 @@ public class AbstractServlet extends GenericServlet
 	protected void printFile(HttpServletResponse httpServletResponse, File file) throws FileNotFoundException, IOException
 	{
 		String mimeType = getServletContext().getMimeType(file.getName());
-		if (Validator.isEmpty(mimeType))
+		if (JValidator.isEmpty(mimeType))
 		{
 			mimeType = ContentType.APPLICATION_OCTET_STREAM;
 		}
@@ -225,7 +225,7 @@ public class AbstractServlet extends GenericServlet
 	{
 		String filename = file.getName();
 		String mimeType = getServletContext().getMimeType(filename);
-		if (Validator.isEmpty(mimeType))
+		if (JValidator.isEmpty(mimeType))
 		{
 			mimeType = ContentType.APPLICATION_OCTET_STREAM;
 		}
@@ -234,7 +234,7 @@ public class AbstractServlet extends GenericServlet
 
 		if (renameWithTimeStamp)
 		{
-			String ext = Utilities.getExtensionWithDot(filename);
+			String ext = JUtilities.getExtensionWithDot(filename);
 			filename = filename.replace(ext, "_" + System.currentTimeMillis() + ext);
 		}
 

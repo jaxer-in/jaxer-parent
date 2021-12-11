@@ -34,6 +34,27 @@ public class Singletons
 		return simpleDateFormat;
 	}
 
+	public static Gson getGson()
+	{
+		if (gson == null)
+		{
+			gson = new Gson();
+		}
+
+		return gson;
+	}
+
+	public static Gson getGsonPrettyPrinting()
+	{
+		if (gsonPretty == null)
+		{
+			gsonPretty = new Gson();
+		}
+
+		return gsonPretty;
+	}
+
+	@Deprecated
 	public static Gson getGson(boolean pretty)
 	{
 		if (pretty)

@@ -22,14 +22,11 @@ import jdk.nashorn.internal.ir.debug.ObjectSizeCalculator;
 import lombok.extern.log4j.Log4j2;
 
 /**
- * This class has been deprecated in after v1.0.2-beta
  *
- * @see in.jaxer.core.utilities.JUtilities
  * @author Shakir Ansari
  */
 @Log4j2
-@Deprecated
-public class Utilities
+public class JUtilities
 {
 
 	public static int min(int... values)
@@ -171,30 +168,12 @@ public class Utilities
 		}
 	}
 
-	/**
-	 * Please use skr.core.Strings.valueOf(object)
-	 *
-	 * @param data
-	 *
-	 * @return
-	 *
-	 * @deprecated
-	 */
 	@Deprecated
 	public static String getNotNull(Object data)
 	{
 		return getNotNull(data, "");
 	}
 
-	/**
-	 * Please use skr.core.Strings.valueOf(object)
-	 *
-	 * @param object
-	 *
-	 * @return
-	 *
-	 * @deprecated
-	 */
 	@Deprecated
 	public static String toString(Object object)
 	{
@@ -212,16 +191,6 @@ public class Utilities
 	{
 		return string;
 	}
-
-	/**
-	 * Please use <h1>skr.core.Strings.valueOf(date)</h1>
-	 *
-	 * @param date
-	 *
-	 * @return
-	 *
-	 * @deprecated
-	 */
 	@Deprecated
 	public static String toString(Date date)
 	{
@@ -284,12 +253,12 @@ public class Utilities
 
 	public static String toJsonString(Object object)
 	{
-		return object == null ? null : Singletons.getGson(false).toJson(object);
+		return object == null ? null : Singletons.getGson().toJson(object);
 	}
 
 	public static <T> T toObject(String jsonString, Class<T> clazz)
 	{
-		return JValidator.isEmpty(jsonString) ? null : Singletons.getGson(false).fromJson(jsonString, clazz);
+		return JValidator.isEmpty(jsonString) ? null : Singletons.getGson().fromJson(jsonString, clazz);
 	}
 
 	public static <T> List<T> toObjectList(String jsonString, Class<T> clazz)
@@ -308,4 +277,17 @@ public class Utilities
 			log.warn("autoCloseable.close() executed unsuccessfully");
 		}
 	}
+
+	public static void consoleLoadingAnimation() throws Exception
+	{
+		String anim = "|/-\\";
+		for (int x = 0; x <= 100; x++)
+		{
+			String data = "\r" + anim.charAt(x % anim.length()) + " " + x + "%";
+			System.out.write(data.getBytes());
+			Thread.sleep(50);
+		}
+		System.out.println("");
+	}
+
 }

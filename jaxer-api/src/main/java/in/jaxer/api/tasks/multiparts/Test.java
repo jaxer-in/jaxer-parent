@@ -1,5 +1,5 @@
 
-package in.jaxer.api.demo.multiparts;
+package in.jaxer.api.tasks.multiparts;
 
 import in.jaxer.api.annotations.MultipartTask;
 import in.jaxer.api.dtos.MultipartRequestDto;

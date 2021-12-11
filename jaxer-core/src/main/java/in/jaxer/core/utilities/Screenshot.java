@@ -14,7 +14,7 @@ public class Screenshot
 
 	public static BufferedImage getScreenShot() throws Exception
 	{
-		Rectangle rectangle = new Rectangle(Utilities.getScreenDimension());
+		Rectangle rectangle = new Rectangle(JUtilities.getScreenDimension());
 		BufferedImage bufferedImage = Singletons.getRobot().createScreenCapture(rectangle);
 		return bufferedImage;
 	}

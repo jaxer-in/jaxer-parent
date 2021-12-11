@@ -2,8 +2,8 @@
 package in.jaxer.sdbms.utils;
 
 import in.jaxer.core.utilities.Collections;
+import in.jaxer.core.utilities.JValidator;
 import in.jaxer.core.utilities.Strings;
-import in.jaxer.core.utilities.Validator;
 import in.jaxer.sdbms.NamedStatement;
 import in.jaxer.sdbms.Parameter;
 import in.jaxer.sdbms.annotations.Column;
@@ -77,7 +77,7 @@ public class NamedStatementUtils
 
 	public static void setParameterValue(Map<String, Parameter> valueMap, List<Parameter> parameters)
 	{
-		if (Validator.isEmpty(parameters))
+		if (JValidator.isEmpty(parameters))
 		{
 			return;
 		}
@@ -103,7 +103,7 @@ public class NamedStatementUtils
 
 	public static String queryParser(String query, Map paramMap)
 	{
-		Validator.requireNotEmpty(query, "Query cannot be empty");
+		JValidator.requireNotEmpty(query, "Query cannot be empty");
 
 		int length = query.length();
 		StringBuilder parsedQuery = new StringBuilder(length);

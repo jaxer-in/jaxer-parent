@@ -2,7 +2,7 @@
 package in.jaxer.api.request;
 
 import in.jaxer.api.annotations.ApiTask;
-import in.jaxer.api.constants.ApiRequestConstants;
+import in.jaxer.api.constants.RequestConstant;
 import in.jaxer.api.dtos.ApiResponseDto;
 import in.jaxer.api.dtos.RequestResponseDto;
 import in.jaxer.api.exceptions.ApiException;
@@ -18,11 +18,13 @@ import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lombok.extern.log4j.Log4j2;
 
 /**
  *
  * @author Shakir Ansari
  */
+@Log4j2
 public class RequestHandler // extends AbstractRequestHandler
 {
 
@@ -38,7 +40,7 @@ public class RequestHandler // extends AbstractRequestHandler
 	{
 		if (Collections.isEmpty(taskList))
 		{
-			System.out.println("RequestHandler.<init>() - initializing taskList");
+			log.debug("initializing taskList");
 			taskList = PackageScanner.findClasses(basePackage, ApiTask.class);
 		}
 	}
@@ -52,7 +54,7 @@ public class RequestHandler // extends AbstractRequestHandler
 		if (!isMultipartRequest)
 		{
 			String requestBody = Servlets.getRequestBody(request);
-			System.out.println(this.getClass().getName() + ".init() - requestBody: [" + requestBody + "]");
+			log.debug("requestBody: {}", requestBody);
 			requestMap = Singletons.getGson(false).fromJson(requestBody, HashMap.class);
 		}
 
@@ -112,7 +114,7 @@ public class RequestHandler // extends AbstractRequestHandler
 
 		processApiTask((AbstractApiTask) clazz.newInstance(), connection);
 
-		getRequestResponseDto().setParameter(ApiRequestConstants.MESSAGE, ApiRequestConstants.SUCCESS);
+		getRequestResponseDto().setParameter(RequestConstant.MESSAGE, RequestConstant.SUCCESS);
 
 		return getRequestResponseDto().getApiResponseDto();
 	}
@@ -125,14 +127,19 @@ public class RequestHandler // extends AbstractRequestHandler
 
 	private void validateApiParams()
 	{
-		if (requestMap.get(ApiRequestConstants.API_REQUEST_SOURCE) == null)
+		if (requestMap.get(RequestConstant.API_REQUEST_SOURCE) == null)
 		{
 			throw new ApiException("API_REQUEST_SOURCE is missing");
 		}
 
-		if (requestMap.get(ApiRequestConstants.API_TASK_NAME) == null)
+		if (requestMap.get(RequestConstant.API_TASK_NAME) == null)
 		{
 			throw new ApiException("API_TASK_NAME is missing");
+		}
+
+		if (requestMap.get(RequestConstant.API_VERSION) == null)
+		{
+			throw new ApiException("API_VERSION is missing");
 		}
 	}
 }

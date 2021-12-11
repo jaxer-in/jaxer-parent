@@ -6,11 +6,13 @@ import in.jaxer.sdbms.exceptions.ColumnNotFoundException;
 import in.jaxer.sdbms.exceptions.ReadOnlyException;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Getter;
 
 /**
  *
  * @author Shakir Ansari
  */
+@Getter
 public class Row
 {
 
@@ -27,16 +29,6 @@ public class Row
 	public void makeReadOnly()
 	{
 		this.readOnly = true;
-	}
-
-	public boolean isReadOnly()
-	{
-		return readOnly;
-	}
-
-	public List<Column> getColumnList()
-	{
-		return this.columnList;
 	}
 
 	public Column getColumn(String columnName)
@@ -71,11 +63,13 @@ public class Row
 		throw new ColumnNotFoundException("Column not found at index: " + columnIndex);
 	}
 
+	@Deprecated
 	public Object getColumnValue(String columnName)
 	{
 		return getColumn(columnName).getValue();
 	}
 
+	@Deprecated
 	public Object getColumnValue(int columnIndex)
 	{
 		return getColumn(columnIndex).getValue();
@@ -85,7 +79,7 @@ public class Row
 	{
 		if (this.readOnly)
 		{
-			throw new ReadOnlyException("Row in read only, unable to add columns");
+			throw new ReadOnlyException("Row is read only, unable to add columns");
 		}
 		this.columnList.add(column);
 	}

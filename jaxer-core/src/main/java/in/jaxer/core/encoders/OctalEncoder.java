@@ -1,7 +1,7 @@
 
 package in.jaxer.core.encoders;
 
-import in.jaxer.core.utilities.Validator;
+import in.jaxer.core.utilities.JValidator;
 
 /**
  *
@@ -22,7 +22,7 @@ public class OctalEncoder
 
 	public static String encode(String message)
 	{
-		Validator.requireNotEmpty(message);
+		JValidator.requireNotEmpty(message);
 
 		String encoded = "";
 
@@ -37,7 +37,7 @@ public class OctalEncoder
 
 	public static String decode(String message)
 	{
-		Validator.requireNotEmpty(message);
+		JValidator.requireNotEmpty(message);
 
 		String pattern = "^[0-9]*$";
 		if (!message.matches(pattern))
@@ -57,6 +57,6 @@ public class OctalEncoder
 			decoded += (char) convert(charInt[i]);
 		}
 
-		return Validator.isEmpty(decoded) ? null : decoded;
+		return JValidator.isEmpty(decoded) ? null : decoded;
 	}
 }

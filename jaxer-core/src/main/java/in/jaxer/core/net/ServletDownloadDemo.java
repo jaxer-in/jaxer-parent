@@ -2,7 +2,7 @@
 package in.jaxer.core.net;
 
 import in.jaxer.core.constants.ContentType;
-import in.jaxer.core.utilities.Validator;
+import in.jaxer.core.utilities.JValidator;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -31,7 +31,7 @@ public class ServletDownloadDemo extends HttpServlet
 		{
 			String mimeType = getServletContext().getMimeType(fullFile);
 
-			if (Validator.isEmpty(mimeType))
+			if (JValidator.isEmpty(mimeType))
 			{
 				mimeType = ContentType.APPLICATION_OCTET_STREAM;
 			}

@@ -1,8 +1,8 @@
 
 package in.jaxer.core.encoders;
 
+import in.jaxer.core.utilities.JValidator;
 import in.jaxer.core.utilities.Strings;
-import in.jaxer.core.utilities.Validator;
 
 /**
  *
@@ -56,7 +56,7 @@ public class Number52Encoder
 
 	public static String encode(String message)
 	{
-		Validator.requireNotEmpty(message);
+		JValidator.requireNotEmpty(message);
 
 		int ch;
 		int length = message.length();
@@ -76,7 +76,7 @@ public class Number52Encoder
 
 	public static String decode(String message)
 	{
-		Validator.requireNotEmpty(message);
+		JValidator.requireNotEmpty(message);
 
 		if (!Strings.isAlphaNumeric(message))
 		{

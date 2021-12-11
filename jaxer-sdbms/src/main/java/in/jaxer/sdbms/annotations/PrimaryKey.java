@@ -14,6 +14,9 @@ import java.lang.annotation.Target;
 @Retention(value = RetentionPolicy.RUNTIME)
 public @interface PrimaryKey
 {
-
-	public boolean autoIncrement() default false;
+	/**
+	 * When enabled an auto generated 32bit long random UUID will be inserted
+	 * @return
+	 */
+	public boolean uuidValue() default false;
 }

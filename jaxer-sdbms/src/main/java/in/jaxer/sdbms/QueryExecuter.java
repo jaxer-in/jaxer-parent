@@ -4,7 +4,6 @@ package in.jaxer.sdbms;
 import in.jaxer.sdbms.exceptions.SDBMSException;
 import in.jaxer.sdbms.utils.NamedStatementUtils;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -156,55 +155,6 @@ public class QueryExecuter
 			NamedStatementUtils.setParameteres(namedStatement, parameterList);
 
 			return namedStatement.executeLargeUpdate();
-		} catch (Exception exception)
-		{
-			log.error("Exception", exception);
-			throw new SDBMSException(exception);
-		}
-	}
-
-	@Deprecated
-	public static <T> List<T> execute(Connection connection, Class<T> outputClass, String sql, Object... objects)
-	{
-		log.debug("sql: {}", sql);
-		log.debug("outputClass: {}", outputClass);
-		log.debug("objects: {}", objects);
-
-		try (PreparedStatement preparedStatement = connection.prepareStatement(sql);)
-		{
-			for (int i = 0; i < objects.length; i++)
-			{
-				preparedStatement.setObject(i + 1, objects[i]);
-			}
-
-			try (ResultSet resultSet = preparedStatement.executeQuery();)
-			{
-				return ResultsetMapper.getObjectList(resultSet, outputClass);
-			}
-		} catch (Exception exception)
-		{
-			log.error("Exception", exception);
-			throw new SDBMSException(exception);
-		}
-	}
-
-	@Deprecated
-	public static List<Row> execute(Connection connection, String sql, Object... objects)
-	{
-		log.debug("sql: {}", sql);
-		log.debug("objects: {}", objects);
-
-		try (PreparedStatement preparedStatement = connection.prepareStatement(sql);)
-		{
-			for (int i = 0; i < objects.length; i++)
-			{
-				preparedStatement.setObject(i + 1, objects[i]);
-			}
-
-			try (ResultSet resultSet = preparedStatement.executeQuery();)
-			{
-				return ResultsetMapper.getRowList(resultSet);
-			}
 		} catch (Exception exception)
 		{
 			log.error("Exception", exception);

@@ -3,7 +3,7 @@ package in.jaxer.core.net;
 
 import in.jaxer.core.constants.ContentType;
 import in.jaxer.core.constants.HttpConstants;
-import in.jaxer.core.utilities.Validator;
+import in.jaxer.core.utilities.JValidator;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -38,7 +38,7 @@ public class ApacheHttpHandler
 	{
 		HttpPost httpPost = new HttpPost(url);
 
-		if (Validator.isNotEmpty(nameValuePairs))
+		if (JValidator.isNotEmpty(nameValuePairs))
 		{
 			httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 		}
@@ -51,7 +51,7 @@ public class ApacheHttpHandler
 	{
 		HttpPost httpPost = new HttpPost(url);
 
-		if (Validator.isNotEmpty(jsonString))
+		if (JValidator.isNotEmpty(jsonString))
 		{
 			StringEntity stringEntity = new StringEntity(jsonString);
 			stringEntity.setContentType(ContentType.APPLICATION_JSON);
@@ -68,7 +68,7 @@ public class ApacheHttpHandler
 	{
 		HttpPut httpPut = new HttpPut(url);
 
-		if (Validator.isNotEmpty(jsonString))
+		if (JValidator.isNotEmpty(jsonString))
 		{
 			StringEntity stringEntity = new StringEntity(jsonString);
 			stringEntity.setContentType(ContentType.APPLICATION_JSON);

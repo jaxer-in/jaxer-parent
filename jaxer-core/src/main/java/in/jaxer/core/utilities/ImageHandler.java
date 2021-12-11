@@ -87,7 +87,7 @@ public class ImageHandler
 
 	public static String resize(File source, int percentage) throws FileNotFoundException, IOException
 	{
-		Dimension dimension = Utilities.getImageDimension(source);
+		Dimension dimension = JUtilities.getImageDimension(source);
 		int width = dimension.width * percentage / 100;
 		int height = dimension.height * percentage / 100;
 

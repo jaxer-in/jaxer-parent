@@ -7,13 +7,10 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * This class has been deprecated in after v1.0.2-beta
  *
- * @see in.jaxer.core.utilities.JJValidator
  * @author Shakir Ansari
  */
-@Deprecated
-public class Validator
+public class JValidator
 {
 
 	public static boolean isEmpty(String string)
@@ -29,7 +26,6 @@ public class Validator
 	/**
 	 *
 	 * @param strings
-	 *
 	 * @return true if all empty
 	 */
 	public static boolean isEmpty(String... strings)
@@ -104,6 +100,10 @@ public class Validator
 		}
 	}
 
+	/**
+	 *
+	 * @param str
+	 */
 	public static void requireNotEmpty(String str)
 	{
 		requireNotEmpty(str, "String cannot be null or empty");
@@ -125,6 +125,10 @@ public class Validator
 		}
 	}
 
+	/**
+	 *
+	 * @param collection
+	 */
 	public static void requireNotEmpty(Collection collection)
 	{
 		requireNotEmpty(collection, "Collection cannot not be empty");
@@ -146,6 +150,10 @@ public class Validator
 		}
 	}
 
+	/**
+	 *
+	 * @param object
+	 */
 	public static void requireNotNull(Object object)
 	{
 		if (object == null)

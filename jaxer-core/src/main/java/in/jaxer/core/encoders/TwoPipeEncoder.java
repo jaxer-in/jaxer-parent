@@ -1,7 +1,7 @@
 
 package in.jaxer.core.encoders;
 
-import in.jaxer.core.utilities.Validator;
+import in.jaxer.core.utilities.JValidator;
 
 /**
  *
@@ -14,7 +14,7 @@ public class TwoPipeEncoder
 
 	public static String encode(String message)
 	{
-		Validator.requireNotEmpty(message);
+		JValidator.requireNotEmpty(message);
 
 		String firstHalf = "", secondHalf = "";
 		for (int i = 0; i < message.length(); i++)
@@ -34,7 +34,7 @@ public class TwoPipeEncoder
 
 	public static String decode(String msg)
 	{
-		Validator.requireNotEmpty(msg);
+		JValidator.requireNotEmpty(msg);
 
 		int len = msg.length();
 

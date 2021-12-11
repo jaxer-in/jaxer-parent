@@ -33,11 +33,13 @@ public class ConsoleInput implements AutoCloseable
 		updateBufferedReader();
 	}
 
+	@Deprecated
 	public InputStream getIn()
 	{
 		return inputStream;
 	}
 
+	@Deprecated
 	public void setIn(InputStream in)
 	{
 		this.inputStream = in;
@@ -100,15 +102,9 @@ public class ConsoleInput implements AutoCloseable
 	{
 		if (this.autoClose)
 		{
-			if (this.inputStream != null)
-			{
-				this.inputStream.close();
-			}
+			JUtilities.close(inputStream);
 
-			if (this.bufferedReader != null)
-			{
-				this.bufferedReader.close();
-			}
+			JUtilities.close(bufferedReader);
 		}
 	}
 }

@@ -7,7 +7,7 @@ import java.sql.Connection;
  *
  * @author Shakir Ansari
  */
-public abstract class AbstractApiTask extends AbstractTask
+public abstract class AbstractApiTask extends AbstractHttpRequestTask
 {
 
 	public abstract void doApiTask(Connection connection) throws Exception;

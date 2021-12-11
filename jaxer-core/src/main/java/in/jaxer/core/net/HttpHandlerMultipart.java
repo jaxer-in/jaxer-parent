@@ -3,7 +3,7 @@ package in.jaxer.core.net;
 
 import in.jaxer.core.constants.Constants;
 import in.jaxer.core.constants.ContentType;
-import in.jaxer.core.utilities.Validator;
+import in.jaxer.core.utilities.JValidator;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -180,7 +180,7 @@ public class HttpHandlerMultipart
 				 PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(outputStream, charset), true);)
 			{
 				//Headers
-				if (Validator.isNotEmpty(headers))
+				if (JValidator.isNotEmpty(headers))
 				{
 					for (Map.Entry<String, String> entry : headers.entrySet())
 					{
@@ -189,7 +189,7 @@ public class HttpHandlerMultipart
 				}
 
 				//Parameters
-				if (Validator.isNotEmpty(parameters))
+				if (JValidator.isNotEmpty(parameters))
 				{
 					for (Map.Entry<String, String> entry : parameters.entrySet())
 					{
@@ -198,7 +198,7 @@ public class HttpHandlerMultipart
 				}
 
 				//Files
-				if (Validator.isNotEmpty(fileParts))
+				if (JValidator.isNotEmpty(fileParts))
 				{
 					for (Map.Entry<String, File> entry : fileParts.entrySet())
 					{

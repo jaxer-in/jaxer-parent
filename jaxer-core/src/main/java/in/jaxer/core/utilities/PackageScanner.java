@@ -168,7 +168,7 @@ public class PackageScanner
 
 		List<Class> annotationClassList = new ArrayList<>();
 
-		if (Validator.isNotEmpty(classList))
+		if (JValidator.isNotEmpty(classList))
 		{
 			for (Class clazz : classList)
 			{

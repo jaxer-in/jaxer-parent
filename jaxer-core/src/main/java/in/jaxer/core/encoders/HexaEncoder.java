@@ -1,7 +1,7 @@
 
 package in.jaxer.core.encoders;
 
-import in.jaxer.core.utilities.Validator;
+import in.jaxer.core.utilities.JValidator;
 import java.util.Arrays;
 
 /**
@@ -55,7 +55,7 @@ public class HexaEncoder
 
 	public static String encode(String message)
 	{
-		Validator.requireNotEmpty(message);
+		JValidator.requireNotEmpty(message);
 
 		String encoded = "";
 
@@ -70,7 +70,7 @@ public class HexaEncoder
 
 	public static String decode(String message)
 	{
-		Validator.requireNotEmpty(message);
+		JValidator.requireNotEmpty(message);
 
 		String messageLowerCase = message.toLowerCase();
 
@@ -92,6 +92,6 @@ public class HexaEncoder
 			decoded += (char) convert(charInt[i]);
 		}
 
-		return Validator.isEmpty(decoded) ? null : decoded;
+		return JValidator.isEmpty(decoded) ? null : decoded;
 	}
 }

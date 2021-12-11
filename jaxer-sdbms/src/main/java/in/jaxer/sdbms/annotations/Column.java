@@ -19,9 +19,9 @@ public @interface Column
 
 	public String value();
 
-	public boolean primaryKey() default false;
+//	public boolean primaryKey() default false;
 
-	public boolean autoIncrement() default false;
+//	public boolean autoIncrement() default false;
 
 	public boolean nullable() default true;
 

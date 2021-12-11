@@ -1,7 +1,7 @@
 
 package in.jaxer.api.dtos;
 
-import in.jaxer.api.constants.ApiRequestConstants;
+import in.jaxer.api.constants.RequestConstant;
 import in.jaxer.core.utilities.Validator;
 import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
@@ -90,17 +90,17 @@ public class RequestResponseDto
 
 	public String getTaskName()
 	{
-		return getParameter(isMultipartRequest ? ApiRequestConstants.API_MULTIPART_TASK_NAME : ApiRequestConstants.API_TASK_NAME);
+		return getParameter(isMultipartRequest ? RequestConstant.API_MULTIPART_TASK_NAME : RequestConstant.API_TASK_NAME);
 	}
 
 	public String getAccessToken()
 	{
-		return getParameter(ApiRequestConstants.API_ACCESS_TOKEN);
+		return getParameter(RequestConstant.API_ACCESS_TOKEN);
 	}
 
 	public String getRequestSource()
 	{
-		return getParameter(ApiRequestConstants.API_REQUEST_SOURCE);
+		return getParameter(RequestConstant.API_REQUEST_SOURCE);
 	}
 
 	public void setParameter(String paramName, Object object)

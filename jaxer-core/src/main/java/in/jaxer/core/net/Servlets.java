@@ -5,8 +5,8 @@ import in.jaxer.core.constants.ContentType;
 import in.jaxer.core.constants.HttpConstants;
 import in.jaxer.core.constants.Singletons;
 import in.jaxer.core.utilities.Files;
-import in.jaxer.core.utilities.Utilities;
-import in.jaxer.core.utilities.Validator;
+import in.jaxer.core.utilities.JUtilities;
+import in.jaxer.core.utilities.JValidator;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.File;
@@ -37,27 +37,27 @@ public class Servlets
 	public static String getIpAddress(HttpServletRequest httpServletRequest)
 	{
 		String ip = httpServletRequest.getHeader("X-Forwarded-For");
-		if (Validator.isEmpty(ip) || "unknown".equalsIgnoreCase(ip))
+		if (JValidator.isEmpty(ip) || "unknown".equalsIgnoreCase(ip))
 		{
 			ip = httpServletRequest.getHeader("Proxy-Client-IP");
 		}
 
-		if (Validator.isEmpty(ip) || "unknown".equalsIgnoreCase(ip))
+		if (JValidator.isEmpty(ip) || "unknown".equalsIgnoreCase(ip))
 		{
 			ip = httpServletRequest.getHeader("WL-Proxy-Client-IP");
 		}
 
-		if (Validator.isEmpty(ip) || "unknown".equalsIgnoreCase(ip))
+		if (JValidator.isEmpty(ip) || "unknown".equalsIgnoreCase(ip))
 		{
 			ip = httpServletRequest.getHeader("HTTP_CLIENT_IP");
 		}
 
-		if (Validator.isEmpty(ip) || "unknown".equalsIgnoreCase(ip))
+		if (JValidator.isEmpty(ip) || "unknown".equalsIgnoreCase(ip))
 		{
 			ip = httpServletRequest.getHeader("HTTP_X_FORWARDED_FOR");
 		}
 
-		if (Validator.isEmpty(ip) || "unknown".equalsIgnoreCase(ip))
+		if (JValidator.isEmpty(ip) || "unknown".equalsIgnoreCase(ip))
 		{
 			ip = httpServletRequest.getRemoteAddr();
 		}
@@ -77,7 +77,7 @@ public class Servlets
 		String params[] = paramString.split("/");
 		for (String param : params)
 		{
-			if (Validator.isNotEmpty(param))
+			if (JValidator.isNotEmpty(param))
 			{
 				list.add(param);
 			}
@@ -193,6 +193,30 @@ public class Servlets
 		printResponse(httpServletResponse, Singletons.getGson(isPrettyPrint).toJson(obj));
 	}
 
+	/**
+	 * If HttpServletRequest contain parameter [isPrettyPrint=true]
+	 * then it will send pretty response
+	 *
+	 * @param request
+	 * @param response
+	 * @param obj
+	 *
+	 * @throws IOException
+	 */
+	static public void printJsonResponse(HttpServletRequest request, HttpServletResponse response, Object obj) throws IOException
+	{
+		setResponseJson(response);
+
+		String isPrettyPrint = request.getParameter("isPrettyPrint");
+		if (JValidator.isNotEmpty(isPrettyPrint) && isPrettyPrint.equalsIgnoreCase("true"))
+		{
+			printResponse(response, Singletons.getGsonPrettyPrinting().toJson(obj));
+		} else
+		{
+			printResponse(response, Singletons.getGson().toJson(obj));
+		}
+	}
+
 	static public void printXlsResponse(HttpServletResponse httpServletResponse, String fileName, String data) throws IOException
 	{
 		httpServletResponse.setContentType(ContentType.SPREADSHEET_XLS);
@@ -243,7 +267,7 @@ public class Servlets
 
 		if (renameWithTimeStamp)
 		{
-			String ext = Utilities.getExtensionWithDot(filename);
+			String ext = JUtilities.getExtensionWithDot(filename);
 			filename = filename.replace(ext, "_" + System.currentTimeMillis() + ext);
 		}
 
@@ -266,6 +290,7 @@ public class Servlets
 	 * In simple words, this method will let you know if the request contains attachments or not
 	 *
 	 * @param request
+	 *
 	 * @return boolean
 	 */
 	static public boolean isMultipartRequest(HttpServletRequest request)
