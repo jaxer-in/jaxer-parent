@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
  */
 @Target(value = ElementType.TYPE)
 @Retention(value = RetentionPolicy.RUNTIME)
-public @interface ApiTask
+public @interface RestTask
 {
 
 	public boolean isPublicApi() default false;

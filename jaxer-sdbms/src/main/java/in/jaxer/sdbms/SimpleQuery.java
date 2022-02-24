@@ -1,8 +1,8 @@
 
 package in.jaxer.sdbms;
 
-import in.jaxer.core.utilities.Validator;
-import in.jaxer.sdbms.exceptions.SDBMSException;
+import in.jaxer.core.utilities.JValidator;
+import in.jaxer.sdbms.exceptions.JaxerSDBMSException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.Collection;
@@ -52,7 +52,7 @@ public class SimpleQuery
 
 	private void processParams(NamedStatement namedStatement)
 	{
-		if (Validator.isNotEmpty(paramListMap))
+		if (JValidator.isNotEmpty(paramListMap))
 		{
 			Set<Map.Entry<String, Collection>> entrysetList = paramListMap.entrySet();
 			for (Map.Entry<String, Collection> entry : entrysetList)
@@ -63,7 +63,7 @@ public class SimpleQuery
 				}
 			}
 		}
-		if (Validator.isNotEmpty(paramMap))
+		if (JValidator.isNotEmpty(paramMap))
 		{
 			Set<Map.Entry<String, Object>> entryset = paramMap.entrySet();
 			for (Map.Entry<String, Object> entry : entryset)
@@ -89,7 +89,7 @@ public class SimpleQuery
 		} catch (Exception exception)
 		{
 			log.error("Exception", exception);
-			throw new SDBMSException(exception);
+			throw new JaxerSDBMSException(exception);
 		}
 	}
 
@@ -106,7 +106,7 @@ public class SimpleQuery
 		} catch (Exception exception)
 		{
 			log.error("Exception", exception);
-			throw new SDBMSException(exception);
+			throw new JaxerSDBMSException(exception);
 		}
 	}
 }

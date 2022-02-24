@@ -280,6 +280,8 @@ public class Files
 
 	public static void copyBytes(int bufferSize, InputStream inputStream, OutputStream outputStream) throws FileNotFoundException, IOException
 	{
+		log.info("bufferSize: {}, inputStream: {}, outputStream: {}", bufferSize, inputStream, outputStream);
+		
 		int i;
 		byte[] buffer = new byte[bufferSize];
 

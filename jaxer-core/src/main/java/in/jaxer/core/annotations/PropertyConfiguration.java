@@ -1,5 +1,5 @@
 
-package in.jaxer.api.annotations;
+package in.jaxer.core.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -12,8 +12,9 @@ import java.lang.annotation.Target;
  */
 @Target(value = ElementType.TYPE)
 @Retention(value = RetentionPolicy.RUNTIME)
-public @interface MultipartTask
+public @interface PropertyConfiguration
 {
 
-	public boolean isPublicTask() default false;
+	public String value();
+
 }

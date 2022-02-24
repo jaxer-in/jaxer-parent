@@ -1,10 +1,10 @@
 
 package in.jaxer.sdbms;
 
-import in.jaxer.core.utilities.Validator;
+import in.jaxer.core.utilities.JValidator;
 import in.jaxer.sdbms.annotations.Column;
 import in.jaxer.sdbms.annotations.Table;
-import in.jaxer.sdbms.exceptions.SDBMSException;
+import in.jaxer.sdbms.exceptions.JaxerSDBMSException;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.sql.ResultSet;
@@ -29,7 +29,7 @@ public class ResultsetMapper
 	{
 		if (!outputClass.isAnnotationPresent(Table.class))
 		{
-			throw new SDBMSException(outputClass.getName() + " must be decorated by @" + Table.class.getName());
+			throw new JaxerSDBMSException(outputClass.getName() + " must be decorated by @" + Table.class.getName());
 		}
 
 		try
@@ -70,7 +70,8 @@ public class ResultsetMapper
 								{
 									new PropertyDescriptor(field.getName(), outputClass)
 											.getWriteMethod()
-											.invoke(bean, resultSet.getObject(columnName, fieldType));
+											//											.invoke(bean, resultSet.getObject(columnName, fieldType));
+											.invoke(bean, columnValue);
 								}
 								break;
 							}
@@ -90,7 +91,7 @@ public class ResultsetMapper
 		} catch (Exception exception)
 		{
 			log.error("Exception", exception);
-			throw new SDBMSException(exception);
+			throw new JaxerSDBMSException(exception);
 		}
 	}
 
@@ -105,11 +106,11 @@ public class ResultsetMapper
 				outputList.add(resultSet.getObject(1, outputClass));
 			}
 
-			return Validator.isEmpty(outputList) ? null : outputList;
+			return JValidator.isEmpty(outputList) ? null : outputList;
 		} catch (Exception exception)
 		{
 			log.error("Exception", exception);
-			throw new SDBMSException(exception);
+			throw new JaxerSDBMSException(exception);
 		}
 	}
 
@@ -127,7 +128,7 @@ public class ResultsetMapper
 		} catch (Exception exception)
 		{
 			log.error("Exception", exception);
-			throw new SDBMSException(exception);
+			throw new JaxerSDBMSException(exception);
 		}
 	}
 
@@ -165,7 +166,7 @@ public class ResultsetMapper
 		} catch (Exception exception)
 		{
 			log.error("Exception", exception);
-			throw new SDBMSException(exception);
+			throw new JaxerSDBMSException(exception);
 		}
 	}
 
@@ -194,7 +195,7 @@ public class ResultsetMapper
 		} catch (Exception exception)
 		{
 			log.error("Exception", exception);
-			throw new SDBMSException(exception);
+			throw new JaxerSDBMSException(exception);
 		}
 	}
 }

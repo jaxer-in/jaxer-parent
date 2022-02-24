@@ -3,29 +3,27 @@ package in.jaxer.api.tasks.multiparts;
 
 import in.jaxer.api.annotations.MultipartTask;
 import in.jaxer.api.dtos.MultipartRequestDto;
-import in.jaxer.api.request.AbstractMultipartTask;
+import in.jaxer.api.core.tasks.AbstractMultipartTask;
+import java.sql.Connection;
+import javax.servlet.http.Part;
+import lombok.extern.log4j.Log4j2;
 
 /**
  *
  * @author Shakir Ansari
  */
+@Log4j2
 @MultipartTask
 public class Test extends AbstractMultipartTask
 {
-//	private static final Logger logger = Logger.getLogger(Test.class);
-
 	private MultipartRequestDto multipartRequestDto = null;
 
-//	@Override
-//	public void doMultipartTask(Connection connection) throws Exception
-//	{
-//		List<Part> partList = getPartList();
-//		logger.debug("partList: [" + partList + "]");
-//
-//		for (Part part : partList)
-//		{
-//			logger.debug("Uploaded file name is: [" + part.getSubmittedFileName() + "]");
-//		}
-//
-//	}
+	@Override
+	public void doMultipartTask(Connection connection) throws Exception
+	{
+		Part part = getSinglePart();
+
+		log.debug("part.getSubmittedFileName: {}", part.getSubmittedFileName());
+	}
+
 }

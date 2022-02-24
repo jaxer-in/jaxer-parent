@@ -11,7 +11,7 @@
 
 	<name>Jaxer Core Library</name>
 	<description>Simple and light weight library to overcome complex task</description>
-	<url>https://github.com/jaxer-in/jaxer-core</url>
+	<url>https://github.com/jaxer-in/jaxer-parent</url>
 
 	<modelVersion>4.0.0</modelVersion>
 	<packaging>jar</packaging>

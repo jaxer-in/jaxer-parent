@@ -1,4 +1,4 @@
-# jaxer-parent
+# test-jaxer-parent
 Parent project for managing all jaxer projects
 
 [Maven Central Repository - jaxer](https://mvnrepository.com/artifact/io.github.jaxer-in)

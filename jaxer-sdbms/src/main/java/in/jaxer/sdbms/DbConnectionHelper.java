@@ -2,7 +2,7 @@
 package in.jaxer.sdbms;
 
 import in.jaxer.core.constants.DbDriverClassNames;
-import in.jaxer.core.utilities.Validator;
+import in.jaxer.core.utilities.JValidator;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -47,7 +47,7 @@ public class DbConnectionHelper
 	{
 		String url = null;
 
-		if (Validator.isEmpty(queryParam))
+		if (JValidator.isEmpty(queryParam))
 		{
 			url = "jdbc:mysql://" + host + "/" + dbName;
 		} else
@@ -65,10 +65,20 @@ public class DbConnectionHelper
 		return getConnection(DbDriverClassNames.ORG_H2_DRIVER, url, username, password);
 	}
 
+	public static Connection getH2EmbededConnection(String dbName, String username, String password, String filePassword) throws ClassNotFoundException, SQLException
+	{
+		return getH2EmbededConnection(dbName, username, filePassword + " " + password);
+	}
+
 	public static Connection getH2ServerConnection(String host, String dbName, String username, String password) throws ClassNotFoundException, SQLException
 	{
 		String url = "jdbc:h2:tcp://" + host + "/~/" + dbName;
 		return getConnection(DbDriverClassNames.ORG_H2_DRIVER, url, username, password);
+	}
+
+	public static Connection getH2ServerConnection(String host, String dbName, String username, String password, String filePassword) throws ClassNotFoundException, SQLException
+	{
+		return getH2ServerConnection(host, dbName, username, filePassword + " " + password);
 	}
 
 	public static Connection getHSQLConnection(String dbName, String username, String password) throws ClassNotFoundException, SQLException

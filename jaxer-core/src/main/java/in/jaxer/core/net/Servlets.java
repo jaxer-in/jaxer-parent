@@ -187,6 +187,8 @@ public class Servlets
 		}
 	}
 
+
+	@Deprecated	
 	static public void printJsonResponse(HttpServletResponse httpServletResponse, Object obj, boolean isPrettyPrint) throws IOException
 	{
 		setResponseJson(httpServletResponse);

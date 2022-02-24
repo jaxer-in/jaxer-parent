@@ -36,13 +36,21 @@ public class Strings
 		suffixes.put(1_000_000_000_000_000_000L, "E");
 	}
 
-	private static List<String> getStackTraces(StackTraceElement[] stackTraceElements, List<String> traces, String packageFilter)
+	public static List<String> getListOfStackTraces(Throwable throwable, String packageFilter)
 	{
-		if (stackTraceElements == null || stackTraceElements.length == 0)
+		if (throwable == null)
 		{
 			return null;
 		}
 
+		List<String> traces = new ArrayList<>();
+
+		if (JValidator.isNotEmpty(throwable.getMessage()))
+		{
+			traces.add(throwable.getMessage());
+		}
+
+		StackTraceElement[] stackTraceElements = throwable.getStackTrace();
 		for (StackTraceElement stackTraceElement : stackTraceElements)
 		{
 			if (packageFilter == null)
@@ -60,44 +68,24 @@ public class Strings
 		return traces;
 	}
 
-	public static List<String> getListOfStackTraces(Throwable throwable, String packageFilter)
-	{
-		if (throwable == null)
-		{
-			return null;
-		}
-
-		List<String> traces = new ArrayList<>();
-
-		if (JValidator.isNotEmpty(throwable.getMessage()))
-		{
-			traces.add(throwable.getMessage());
-		}
-
-		getStackTraces(throwable.getStackTrace(), traces, packageFilter);
-
-		return traces;
-	}
-
-	public static List<String> getListOfStackTraces(Exception exception, String packageFilter)
-	{
-		if (exception == null)
-		{
-			return null;
-		}
-
-		List<String> traces = new ArrayList<>();
-
-		if (JValidator.isNotEmpty(exception.getMessage()))
-		{
-			traces.add(exception.getMessage());
-		}
-
-		getStackTraces(exception.getStackTrace(), traces, packageFilter);
-
-		return traces;
-	}
-
+//	public static List<String> getListOfStackTraces(Exception exception, String packageFilter)
+//	{
+//		if (exception == null)
+//		{
+//			return null;
+//		}
+//
+//		List<String> traces = new ArrayList<>();
+//
+//		if (JValidator.isNotEmpty(exception.getMessage()))
+//		{
+//			traces.add(exception.getMessage());
+//		}
+//
+//		getStackTraces(exception.getStackTrace(), traces, packageFilter);
+//
+//		return traces;
+//	}
 	public static HashMap<String, List<String>> getStackTraces(Exception exception, String packageFilter)
 	{
 		if (exception == null)

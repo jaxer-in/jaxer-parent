@@ -12,11 +12,11 @@ public class RequestConstant
 
 	public static final String SUCCESS = "success";
 
+	public static final String JSON_BODY_PAYLOAD = "JSON_BODY_PAYLOAD";
+
 	public static final String API_TASK_NAME = "API_TASK_NAME";
 
 	public static final String API_VERSION = "API_VERSION";
-
-	public static final String API_MULTIPART_TASK_NAME = "API_MULTIPART_TASK_NAME";
 
 	public static final String API_ACCESS_TOKEN = "API_ACCESS_TOKEN";
 
@@ -27,5 +27,7 @@ public class RequestConstant
 	public static final String API_REQUEST_SOURCE_ANDROID = "ANDROID";
 
 	public static final String API_CLIENT_MILLISECONDS = "API_CLIENT_MILLISECONDS";
+
+	public static final String MULTIPART_TASK_NAME = "MULTIPART_TASK_NAME";
 
 }
