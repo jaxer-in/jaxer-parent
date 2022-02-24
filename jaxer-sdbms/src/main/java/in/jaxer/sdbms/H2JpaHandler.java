@@ -10,7 +10,7 @@ import java.util.List;
  * @author Shakir
  * Date 23 Feb, 2022 - 9:05:30 PM
  */
-public class H2Handler extends AbstractJpaHandler
+public class H2JpaHandler extends AbstractJpaHandler
 {
 
 	@Override
