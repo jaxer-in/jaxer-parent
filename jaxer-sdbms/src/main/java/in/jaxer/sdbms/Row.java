@@ -63,18 +63,6 @@ public class Row
 		throw new ColumnNotFoundException("Column not found at index: " + columnIndex);
 	}
 
-	@Deprecated
-	public Object getColumnValue(String columnName)
-	{
-		return getColumn(columnName).getValue();
-	}
-
-	@Deprecated
-	public Object getColumnValue(int columnIndex)
-	{
-		return getColumn(columnIndex).getValue();
-	}
-
 	public void addColumn(Column column)
 	{
 		if (this.readOnly)
