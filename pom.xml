@@ -20,7 +20,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<revision>1.0.4-beta</revision>
 		<version.flatten>1.2.7</version.flatten>
-		<version.log4j2>2.16.0</version.log4j2>
+		<version.log4j2>2.17.1</version.log4j2>
 	</properties>
 
 	<modules>
