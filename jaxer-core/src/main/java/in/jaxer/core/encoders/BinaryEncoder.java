@@ -2,11 +2,14 @@
 package in.jaxer.core.encoders;
 
 import in.jaxer.core.utilities.JValidator;
+import java.util.Arrays;
+import lombok.extern.log4j.Log4j2;
 
 /**
  *
  * @author Shakir Ansari
  */
+@Log4j2
 public class BinaryEncoder
 {
 
@@ -47,7 +50,7 @@ public class BinaryEncoder
 
 		//spliting with two delimiters [2 or 3]
 		String[] charInt = message.split("[23]");
-//		System.out.println("BinaryEncoder.decode() - " + Arrays.toString(charInt));
+		log.debug(Arrays.toString(charInt));
 
 		String decoded = "";
 

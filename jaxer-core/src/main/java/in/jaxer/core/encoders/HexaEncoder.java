@@ -3,45 +3,17 @@ package in.jaxer.core.encoders;
 
 import in.jaxer.core.utilities.JValidator;
 import java.util.Arrays;
+import lombok.extern.log4j.Log4j2;
 
 /**
  *
  * @author Shakir Ansari
  */
+@Log4j2
 public class HexaEncoder
 {
 
 	final private String digits = "0123456789ABCDEF";
-
-	private int myHex2decimal(String s)
-	{
-		s = s.toUpperCase();
-
-		int val = 0;
-		for (int i = 0; i < s.length(); i++)
-		{
-			char c = s.charAt(i);
-			int d = digits.indexOf(c);
-			val = 16 * val + d;
-		}
-		return val;
-	}
-
-	private String myDecimal2hex(int d)
-	{
-		if (d == 0)
-		{
-			return "0";
-		}
-		String hex = "";
-		while (d > 0)
-		{
-			int digit = d % 16;                // rightmost digit
-			hex = digits.charAt(digit) + hex;  // string concatenation
-			d = d / 16;
-		}
-		return hex;
-	}
 
 	public static String convert(int x)
 	{
@@ -82,7 +54,7 @@ public class HexaEncoder
 
 		//spliting with two delimiters [g or h]
 		String[] charInt = messageLowerCase.split("[gh]");
-		System.out.println("HexaEncryptor.decode() - " + Arrays.toString(charInt));
+		log.debug(Arrays.toString(charInt));
 
 		String decoded = "";
 
@@ -93,5 +65,35 @@ public class HexaEncoder
 		}
 
 		return JValidator.isEmpty(decoded) ? null : decoded;
+	}
+
+	private int myHex2decimal(String s)
+	{
+		s = s.toUpperCase();
+
+		int val = 0;
+		for (int i = 0; i < s.length(); i++)
+		{
+			char c = s.charAt(i);
+			int d = digits.indexOf(c);
+			val = 16 * val + d;
+		}
+		return val;
+	}
+
+	private String myDecimal2hex(int d)
+	{
+		if (d == 0)
+		{
+			return "0";
+		}
+		String hex = "";
+		while (d > 0)
+		{
+			int digit = d % 16;                // rightmost digit
+			hex = digits.charAt(digit) + hex;  // string concatenation
+			d = d / 16;
+		}
+		return hex;
 	}
 }

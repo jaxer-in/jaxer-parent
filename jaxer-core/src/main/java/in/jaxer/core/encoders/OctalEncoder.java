@@ -2,11 +2,14 @@
 package in.jaxer.core.encoders;
 
 import in.jaxer.core.utilities.JValidator;
+import java.util.Arrays;
+import lombok.extern.log4j.Log4j2;
 
 /**
  *
  * @author Shakir Ansari
  */
+@Log4j2
 public class OctalEncoder
 {
 
@@ -47,7 +50,7 @@ public class OctalEncoder
 
 		//spliting with two delimiters [8 or 9]
 		String[] charInt = message.split("[89]");
-//		System.out.println("OctalEncoder.decode() - " + Arrays.toString(charInt));
+		log.debug(Arrays.toString(charInt));
 
 		String decoded = "";
 
