@@ -1,6 +1,8 @@
 
 package in.jaxer.core.utilities;
 
+import com.google.common.collect.ImmutableSet;
+import com.google.common.reflect.ClassPath;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -8,16 +10,18 @@ import java.lang.annotation.Annotation;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLDecoder;
-import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+import lombok.extern.log4j.Log4j2;
 
 /**
  *
  * @author Shakir Ansari
  */
+@Log4j2
 public class PackageScanner
 {
 
@@ -25,19 +29,6 @@ public class PackageScanner
 
 	private static final String DOT_CLASS = ".class";
 
-//	@Deprecated
-//	private static Set<Class<?>> getTypesAnnotatedWith(Class c)
-//	{
-//		Reflections reflections = new Reflections("");
-//
-//		Set<Class<?>> annotated = reflections.getTypesAnnotatedWith(c);
-//
-//		for (Class<?> class1 : annotated)
-//		{
-////			System.out.println("PackageScanner.getTypesAnnotatedWith() - type: [" + class1.getName() + "]");
-//		}
-//		return annotated;
-//	}
 	private static boolean isValidEntryName(String entryName)
 	{
 		return entryName != null
@@ -52,9 +43,9 @@ public class PackageScanner
 				: className;
 	}
 
-	private static void getClassListFromJar(List<Class> classes, URL jarUrl) throws UnsupportedEncodingException, IOException, ClassNotFoundException
+	private static void getClassListFromJar(Set<Class> classes, URL jarUrl) throws UnsupportedEncodingException, IOException, ClassNotFoundException
 	{
-		System.out.println("PackageScanner.getClassListFromJar() - ");
+		log.debug("classes: {}, jarUrl: {}", classes, jarUrl);
 
 		if (!jarUrl.getProtocol().equals("jar"))
 		{
@@ -70,7 +61,7 @@ public class PackageScanner
 		jarFileName = URLDecoder.decode(jarUrl.getFile(), "UTF-8");
 		jarFileName = jarFileName.substring(5, jarFileName.indexOf("!"));
 
-		System.out.println("PackageScanner.getClassNamesFromPackage() - jarFileName: [" + jarFileName + "]");
+		log.info("jarFileName: {}", jarFileName);
 
 		jarFile = new JarFile(jarFileName);
 		jarEntries = jarFile.entries();
@@ -86,8 +77,10 @@ public class PackageScanner
 		}
 	}
 
-	private static void getClassListFromBuildFolder(List<Class> classes, File buildFolder, String packageName, final boolean recursive) throws ClassNotFoundException
+	private static void getClassListFromBuildFolder(Set<Class> classes, File buildFolder, String packageName, final boolean recursive) throws ClassNotFoundException
 	{
+		log.debug("classes: {}, buildFolder: {}, packageName: {}, recursive: {}", classes, buildFolder, packageName, recursive);
+
 		File[] fileList = buildFolder.listFiles();
 		for (File file : fileList)
 		{
@@ -125,9 +118,11 @@ public class PackageScanner
 		}
 	}
 
-	private static List<Class> getClassNamesFromPackage(String packageName) throws Exception
+	private static Set<Class> getClassNamesFromPackage(String packageName) throws Exception
 	{
-		final List<Class> classes = new ArrayList<>();
+		log.debug("packageName: {}", packageName);
+
+		final Set<Class> classes = new HashSet<>();
 		final boolean recursive = packageName.endsWith(".*");
 
 		if (recursive)
@@ -136,7 +131,8 @@ public class PackageScanner
 		}
 
 		URL packageURL;
-		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+//		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+		ClassLoader classLoader = ClassLoader.getSystemClassLoader();
 
 		packageName = packageName.replace('.', '/');
 		packageURL = classLoader.getResource(packageName);
@@ -154,19 +150,19 @@ public class PackageScanner
 		return classes;
 	}
 
-	public static List<Class> findClasses(String packageName) throws Exception
+	public static Set<Class> findClasses(String packageName) throws Exception
 	{
-		List<Class> classList = getClassNamesFromPackage(packageName);
-
-//		System.out.println("PackageScanner.findClasses() - classList: [" + classList + "]");
-		return classList;
+		log.debug("packageName: {}", packageName);
+		return getClassNamesFromPackage(packageName);
 	}
 
-	public static List<Class> findClasses(String packageName, Class<? extends Annotation> annotationClass) throws Exception
+	public static Set<Class> findClasses(String packageName, Class<? extends Annotation> annotationClass) throws Exception
 	{
-		List<Class> classList = findClasses(packageName);
+		log.debug("packageName: {}, annotationClass: {}", packageName, annotationClass);
 
-		List<Class> annotationClassList = new ArrayList<>();
+		Set<Class> classList = findClasses(packageName);
+
+		Set<Class> annotationClassList = new HashSet<>();
 
 		if (JValidator.isNotEmpty(classList))
 		{
@@ -179,8 +175,53 @@ public class PackageScanner
 			}
 		}
 
-		System.out.println("PackageScanner.findClasses() - classList: [" + classList + "]");
-
 		return annotationClassList;
+	}
+
+	public static Set<Class> getClasses(String packageName)
+	{
+		log.debug("packageName: {}", packageName);
+		Set<Class> classSet = new HashSet<>();
+
+		try
+		{
+			ClassPath classPath = ClassPath.from(ClassLoader.getSystemClassLoader());
+
+			ImmutableSet<ClassPath.ClassInfo> immutableSet = classPath.getTopLevelClassesRecursive(packageName);
+			if (immutableSet != null)
+			{
+				for (ClassPath.ClassInfo classInfo : immutableSet)
+				{
+					String className = classInfo.getName();
+					if (className.startsWith(packageName))
+					{
+						className = className.replace('/', '.');
+						classSet.add(Class.forName(className));
+					}
+				}
+			}
+		} catch (Exception ex)
+		{
+			log.error("Exception", ex);
+			throw new RuntimeException(ex);
+		}
+		return classSet;
+	}
+
+	public static Set<Class> getClasses(String packageName, Class<? extends Annotation> annotationClass)
+	{
+		log.debug("packageName: {}, annotationClass: {}", packageName, annotationClass);
+
+		Set<Class> classSet = new HashSet<>();
+		Set<Class> classSetFull = getClasses(packageName);
+		for (Class c : classSetFull)
+		{
+			if (c.isAnnotationPresent(annotationClass))
+			{
+				classSet.add(c);
+			}
+		}
+
+		return classSet;
 	}
 }

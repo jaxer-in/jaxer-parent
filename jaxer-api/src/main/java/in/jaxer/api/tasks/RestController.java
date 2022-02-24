@@ -4,7 +4,7 @@ package in.jaxer.api.tasks;
 import in.jaxer.api.dtos.ApiResponseDto;
 import in.jaxer.api.dtos.RequestResponseDto;
 import in.jaxer.api.listners.Authentication;
-import in.jaxer.api.request.AbstractRestController;
+import in.jaxer.api.core.controllers.AbstractRestController;
 import in.jaxer.core.net.Servlets;
 import java.io.IOException;
 import java.sql.Connection;
@@ -30,7 +30,7 @@ public class RestController extends AbstractRestController
 
 		System.out.println("apiResponseDto: [" + apiResponseDto + "]");
 
-		Servlets.printJsonResponse(response, apiResponseDto, false);
+		Servlets.printJsonResponse(request, response, apiResponseDto);
 	}
 
 	@Override

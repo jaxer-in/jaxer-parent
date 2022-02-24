@@ -3,15 +3,20 @@ package in.jaxer.core.utilities;
 
 import in.jaxer.core.constants.HttpConstants;
 import in.jaxer.core.constants.Singletons;
+import in.jaxer.core.exceptions.JaxerCoreException;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.Inet4Address;
+import java.net.Inet6Address;
+import java.net.InetAddress;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Date;
@@ -74,12 +79,14 @@ public class JUtilities
 
 	public static boolean isHtmlString(String str)
 	{
+		log.debug("str: {}", str);
 		Pattern htmlPattern = Pattern.compile(".*\\<[^>]+>.*", Pattern.DOTALL);
 		return htmlPattern.matcher(str).matches();
 	}
 
 	public static String getExtension(String sourceImage)
 	{
+		log.debug("sourceImage: {}", sourceImage);
 		if (sourceImage.contains("."))
 		{
 			return sourceImage.substring(sourceImage.lastIndexOf(".") + 1);
@@ -89,27 +96,37 @@ public class JUtilities
 
 	public static String getExtensionWithDot(String sourceImage)
 	{
+		log.debug("sourceImage: {}", sourceImage);
+
 		String ext = getExtension(sourceImage);
 		return ext == null ? null : "." + ext;
 	}
 
 	public static Dimension getImageDimension(String sourceImageFile) throws IOException
 	{
+		log.debug("sourceImageFile: {}", sourceImageFile);
 		return getImageDimension(new File(sourceImageFile));
 	}
 
 	public static Dimension getImageDimension(File imgFile) throws IOException
 	{
-		return getImageDimension(ImageIO.read(imgFile));
+		log.debug("imgFile: {}", imgFile);
+		try (InputStream inputStream = new FileInputStream(imgFile))
+		{
+			return getImageDimension(inputStream);
+		}
+//		return getImageDimension(ImageIO.read(imgFile));
 	}
 
 	public static Dimension getImageDimension(InputStream inputStream) throws IOException
 	{
+		log.debug("inputStream: {}", inputStream);
 		return getImageDimension(ImageIO.read(inputStream));
 	}
 
 	public static Dimension getImageDimension(BufferedImage bufferedImage) throws IOException
 	{
+		log.debug("bufferedImage: {}", bufferedImage);
 		return bufferedImage == null ? null : new Dimension(bufferedImage.getWidth(), bufferedImage.getHeight());
 	}
 
@@ -191,6 +208,7 @@ public class JUtilities
 	{
 		return string;
 	}
+
 	@Deprecated
 	public static String toString(Date date)
 	{
@@ -271,10 +289,10 @@ public class JUtilities
 		try
 		{
 			autoCloseable.close();
-			log.debug("autoCloseable.close() executed successfully");
+			log.debug("autoCloseable.close() executed successfully: {}", autoCloseable.toString());
 		} catch (Exception exception)
 		{
-			log.warn("autoCloseable.close() executed unsuccessfully");
+			log.warn("autoCloseable.close() executed unsuccessfully: {}", autoCloseable.toString());
 		}
 	}
 
@@ -285,9 +303,41 @@ public class JUtilities
 		{
 			String data = "\r" + anim.charAt(x % anim.length()) + " " + x + "%";
 			System.out.write(data.getBytes());
-			Thread.sleep(50);
+			Thread.sleep(25);
 		}
 		System.out.println("");
 	}
 
+	public static String getLocalHostAddress()
+	{
+		try
+		{
+			return InetAddress.getLocalHost().getHostAddress();
+		} catch (Exception exception)
+		{
+			throw new JaxerCoreException(exception);
+		}
+	}
+
+	public static String getLocalHostAddressV4()
+	{
+		try
+		{
+			return Inet4Address.getLocalHost().getHostAddress();
+		} catch (Exception exception)
+		{
+			throw new JaxerCoreException(exception);
+		}
+	}
+
+	public static String getLocalHostAddressV6()
+	{
+		try
+		{
+			return Inet6Address.getLocalHost().getHostAddress();
+		} catch (Exception exception)
+		{
+			throw new JaxerCoreException(exception);
+		}
+	}
 }

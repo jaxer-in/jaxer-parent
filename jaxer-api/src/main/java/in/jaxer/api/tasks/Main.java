@@ -1,10 +1,10 @@
 
 package in.jaxer.api.tasks;
 
-import in.jaxer.api.annotations.ApiTask;
+import in.jaxer.api.annotations.RestTask;
+import in.jaxer.core.utilities.PackageScanner;
 import java.util.Set;
 import lombok.extern.log4j.Log4j2;
-import org.reflections.Reflections;
 
 /**
  *
@@ -19,10 +19,18 @@ public class Main
 	{
 		long start = 0l, end = 0l;
 
+//		Set<Class> refClasses1 = PackageScanner.getClasses("in.jaxer.api", RestTask.class);
+
 		start = System.currentTimeMillis();
-		Set<Class<?>> refClasses = new Reflections("in.jaxer.api").getTypesAnnotatedWith(ApiTask.class);
+		Set<Class> refClasses = PackageScanner.getClasses("in.jaxer.api", RestTask.class);
 		end = System.currentTimeMillis();
 
-		log.info("Reflections took: {} ms", end - start);
+		log.info("Guava took: {} ms", end - start);
+
+		start = System.currentTimeMillis();
+		Set<Class> refClassesP = PackageScanner.findClasses("in.jaxer.api", RestTask.class);
+		end = System.currentTimeMillis();
+
+		log.info("PackageScanner took: {} ms", end - start);
 	}
 }

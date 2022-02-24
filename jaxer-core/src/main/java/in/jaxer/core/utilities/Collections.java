@@ -88,7 +88,6 @@ public class Collections
 
 	public static <T> List<T> subList(List<T> list, int start, int end)
 	{
-
 		List<T> responseList = new ArrayList<>();
 
 		if (isNotEmpty(list))

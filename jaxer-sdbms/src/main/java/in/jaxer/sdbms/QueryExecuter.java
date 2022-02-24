@@ -1,7 +1,7 @@
 
 package in.jaxer.sdbms;
 
-import in.jaxer.sdbms.exceptions.SDBMSException;
+import in.jaxer.sdbms.exceptions.JaxerSDBMSException;
 import in.jaxer.sdbms.utils.NamedStatementUtils;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -44,7 +44,7 @@ public class QueryExecuter
 		} catch (Exception exception)
 		{
 			log.error("Exception", exception);
-			throw new SDBMSException(exception);
+			throw new JaxerSDBMSException(exception);
 		}
 	}
 
@@ -75,7 +75,7 @@ public class QueryExecuter
 		} catch (Exception exception)
 		{
 			log.error("Exception", exception);
-			throw new SDBMSException(exception);
+			throw new JaxerSDBMSException(exception);
 		}
 	}
 
@@ -104,7 +104,7 @@ public class QueryExecuter
 		} catch (Exception exception)
 		{
 			log.error("Exception", exception);
-			throw new SDBMSException(exception);
+			throw new JaxerSDBMSException(exception);
 		}
 	}
 
@@ -131,7 +131,7 @@ public class QueryExecuter
 		} catch (Exception exception)
 		{
 			log.error("Exception", exception);
-			throw new SDBMSException(exception);
+			throw new JaxerSDBMSException(exception);
 		}
 	}
 
@@ -158,7 +158,7 @@ public class QueryExecuter
 		} catch (Exception exception)
 		{
 			log.error("Exception", exception);
-			throw new SDBMSException(exception);
+			throw new JaxerSDBMSException(exception);
 		}
 	}
 }

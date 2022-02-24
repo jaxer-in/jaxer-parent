@@ -1,10 +1,10 @@
 
 package in.jaxer.sdbms;
 
-import in.jaxer.core.utilities.Validator;
+import in.jaxer.core.utilities.JValidator;
 import in.jaxer.sdbms.annotations.PrimaryKey;
 import in.jaxer.sdbms.annotations.Table;
-import in.jaxer.sdbms.exceptions.SDBMSException;
+import in.jaxer.sdbms.exceptions.JaxerSDBMSException;
 import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -29,7 +29,7 @@ public abstract class Repository<T, ID>
 				+ " from " + (Repository.class.getName())
 				+ ", to configure " + Connection.class.getName();
 
-		throw new SDBMSException(msg);
+		throw new JaxerSDBMSException(msg);
 	}
 
 	public abstract T persist(Connection connection, T t);
@@ -54,7 +54,7 @@ public abstract class Repository<T, ID>
 		} catch (Exception exception)
 		{
 			log.error("Exception", exception);
-			throw new SDBMSException(exception);
+			throw new JaxerSDBMSException(exception);
 		}
 	}
 
@@ -79,7 +79,7 @@ public abstract class Repository<T, ID>
 		} catch (Exception exception)
 		{
 			log.error("Exception", exception);
-			throw new SDBMSException(exception);
+			throw new JaxerSDBMSException(exception);
 		}
 		return tList;
 	}
@@ -91,7 +91,7 @@ public abstract class Repository<T, ID>
 
 		if (!outputClass.isAnnotationPresent(Table.class))
 		{
-			throw new SDBMSException("OutputClass should be decorated by @" + Table.class.getName());
+			throw new JaxerSDBMSException("OutputClass should be decorated by @" + Table.class.getName());
 		}
 
 		String tableName = null;
@@ -99,9 +99,9 @@ public abstract class Repository<T, ID>
 		Table table = (Table) outputClass.getAnnotation(Table.class);
 		tableName = table.value();
 
-		if (Validator.isEmpty(tableName))
+		if (JValidator.isEmpty(tableName))
 		{
-			throw new SDBMSException("Table name not found in output class");
+			throw new JaxerSDBMSException("Table name not found in output class");
 		}
 
 		String primaryKeyName = null;
@@ -117,9 +117,9 @@ public abstract class Repository<T, ID>
 			}
 		}
 
-		if (Validator.isEmpty(primaryKeyName))
+		if (JValidator.isEmpty(primaryKeyName))
 		{
-			throw new SDBMSException("Annotation @" + PrimaryKey.class.getName() + " not found in " + outputClass.getName() + " class");
+			throw new JaxerSDBMSException("Annotation @" + PrimaryKey.class.getName() + " not found in " + outputClass.getName() + " class");
 		}
 
 		String sql = "SELECT * FROM `" + tableName + "` WHERE `" + primaryKeyName + "` = :pKey";
@@ -133,13 +133,13 @@ public abstract class Repository<T, ID>
 				T bean = (T) outputClass.newInstance();
 
 				List<T> objectList = ResultsetMapper.getObjectList(resultSet, outputClass);
-				bean = Validator.isEmpty(objectList) ? null : objectList.get(0);
+				bean = JValidator.isEmpty(objectList) ? null : objectList.get(0);
 				return bean;
 			}
 		} catch (Exception exception)
 		{
 			log.error("Exception", exception);
-			throw new SDBMSException(exception);
+			throw new JaxerSDBMSException(exception);
 		}
 	}
 
@@ -151,7 +151,7 @@ public abstract class Repository<T, ID>
 		} catch (Exception exception)
 		{
 			log.error("Exception", exception);
-			throw new SDBMSException(exception);
+			throw new JaxerSDBMSException(exception);
 		}
 	}
 
@@ -164,7 +164,7 @@ public abstract class Repository<T, ID>
 			T t = find(connection, outputClass, id);
 			if (t != null)
 			{
-				if (Validator.isEmpty(tList))
+				if (JValidator.isEmpty(tList))
 				{
 					tList = new ArrayList<>();
 				}
@@ -183,7 +183,7 @@ public abstract class Repository<T, ID>
 		} catch (Exception exception)
 		{
 			log.error("Exception", exception);
-			throw new SDBMSException(exception);
+			throw new JaxerSDBMSException(exception);
 		}
 	}
 
@@ -197,7 +197,7 @@ public abstract class Repository<T, ID>
 		} catch (Exception exception)
 		{
 			log.error("Exception", exception);
-			throw new SDBMSException(exception);
+			throw new JaxerSDBMSException(exception);
 		}
 	}
 
@@ -209,7 +209,7 @@ public abstract class Repository<T, ID>
 		} catch (Exception exception)
 		{
 			log.error("Exception", exception);
-			throw new SDBMSException(exception);
+			throw new JaxerSDBMSException(exception);
 		}
 	}
 
@@ -225,7 +225,7 @@ public abstract class Repository<T, ID>
 		} catch (Exception exception)
 		{
 			log.error("Exception", exception);
-			throw new SDBMSException(exception);
+			throw new JaxerSDBMSException(exception);
 		}
 	}
 
@@ -251,7 +251,7 @@ public abstract class Repository<T, ID>
 		} catch (Exception exception)
 		{
 			log.error("Exception", exception);
-			throw new SDBMSException(exception);
+			throw new JaxerSDBMSException(exception);
 		}
 	}
 }

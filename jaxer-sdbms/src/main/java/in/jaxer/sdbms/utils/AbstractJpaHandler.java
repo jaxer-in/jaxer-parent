@@ -6,8 +6,7 @@ import in.jaxer.sdbms.Parameter;
 import in.jaxer.sdbms.annotations.Column;
 import in.jaxer.sdbms.annotations.PrimaryKey;
 import in.jaxer.sdbms.annotations.Table;
-import in.jaxer.sdbms.dto.PaginationDto;
-import in.jaxer.sdbms.exceptions.SDBMSException;
+import in.jaxer.sdbms.exceptions.JaxerSDBMSException;
 import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -26,7 +25,9 @@ import lombok.extern.log4j.Log4j2;
 public abstract class AbstractJpaHandler
 {
 
-	abstract public <T> List<T> find(Connection connection, Class<T> outputClass, List<Parameter> parameterList, PaginationDto paginationDto);
+	abstract public <T> T find(Connection connection, Class<T> outputClass, List<Parameter> parameterList);
+
+	abstract public <T> List<T> findList(Connection connection, Class<T> outputClass, List<Parameter> parameterList);
 
 	abstract public int delete(Connection connection, Class outputClass, Object id);
 
@@ -38,19 +39,17 @@ public abstract class AbstractJpaHandler
 
 	abstract protected String getWhereClause(List<Parameter> parameterList);
 
-	abstract protected String getOrderBy(PaginationDto paginationDto);
-
 	protected String getTableName(Class outputClass)
 	{
 		if (!outputClass.isAnnotationPresent(Table.class))
 		{
-			throw new SDBMSException("OutputClass [" + outputClass.getName() + "] should be decorated by @" + Table.class.getName());
+			throw new JaxerSDBMSException("OutputClass [" + outputClass.getName() + "] should be decorated by @" + Table.class.getName());
 		}
 
 		String tableName = ((Table) outputClass.getAnnotation(Table.class)).value();
 		if (JValidator.isEmpty(tableName))
 		{
-			throw new SDBMSException("Table name not found in " + outputClass.getName());
+			throw new JaxerSDBMSException("Table name not found in " + outputClass.getName());
 		}
 
 		return tableName;
@@ -97,7 +96,7 @@ public abstract class AbstractJpaHandler
 			}
 		}
 
-		throw new SDBMSException("Primary Column not found in " + aClass.getName());
+		throw new JaxerSDBMSException("Primary Column not found in " + aClass.getName());
 	}
 
 	protected String getPrimaryFieldName(Class aClass)
@@ -112,7 +111,7 @@ public abstract class AbstractJpaHandler
 			}
 		}
 
-		throw new SDBMSException("Primary Column not found in " + aClass.getName());
+		throw new JaxerSDBMSException("Primary Column not found in " + aClass.getName());
 	}
 
 	protected List<PrimaryKey> getPrimaryKeyColumnList(Class outputClass)
@@ -164,7 +163,7 @@ public abstract class AbstractJpaHandler
 			{
 				if (entry.getValue() == null)
 				{
-					throw new SDBMSException("Primary key cannot be null for " + outputClass.getName());
+					throw new JaxerSDBMSException("Primary key cannot be null for " + outputClass.getName());
 				}
 			}
 		}
@@ -172,34 +171,26 @@ public abstract class AbstractJpaHandler
 
 	public <T> T find(Connection connection, Class<T> outputClass, Object id)
 	{
+		JValidator.requireNotNull(id, "Id cannot be null");
+
 		return find(connection, outputClass, new Parameter(getPrimaryColumnName(outputClass), id, true));
 	}
 
 	public <T> T find(Connection connection, Class<T> outputClass, Parameter parameter)
 	{
 		JValidator.requireNotNull(parameter, "Parameter cannot be null");
-		return find(connection, outputClass, Arrays.asList(parameter));
+
+		return  find(connection, outputClass, Arrays.asList(parameter));
 	}
 
-	public <T> T find(Connection connection, Class<T> outputClass, List<Parameter> parameterList)
+	public <T> List<T> findList(Connection connection, Class<T> outputClass)
 	{
-		List<T> list = find(connection, outputClass, parameterList, new PaginationDto());
-		return JValidator.isNotEmpty(list) ? list.get(0) : null;
+		return findList(connection, outputClass, new ArrayList<>());
 	}
 
-	public <T> List<T> findList(Connection connection, Class<T> outputClass, PaginationDto paginationDto)
+	public <T> List<T> findList(Connection connection, Class<T> outputClass, Parameter parameter)
 	{
-		return findList(connection, outputClass, new ArrayList<>(), paginationDto);
-	}
-
-	public <T> List<T> findList(Connection connection, Class<T> outputClass, Parameter parameter, PaginationDto paginationDto)
-	{
-		return findList(connection, outputClass, Arrays.asList(parameter), paginationDto);
-	}
-
-	public <T> List<T> findList(Connection connection, Class<T> outputClass, List<Parameter> parameterList, PaginationDto paginationDto)
-	{
-		return find(connection, outputClass, parameterList, paginationDto);
+		return findList(connection, outputClass, Arrays.asList(parameter));
 	}
 
 	public <T> List<T> findByIdList(Connection connection, Class<T> outputClass, List<Integer> idList)

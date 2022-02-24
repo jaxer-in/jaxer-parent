@@ -2,7 +2,7 @@
 package in.jaxer.api.dtos;
 
 import in.jaxer.api.constants.RequestConstant;
-import in.jaxer.core.utilities.Validator;
+import in.jaxer.core.utilities.JValidator;
 import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,12 +40,12 @@ public class RequestResponseDto
 
 	public void setTemporaryObject(String key, Object value)
 	{
-		if (Validator.isEmpty(key) || value == null)
+		if (JValidator.isEmpty(key) || value == null)
 		{
 			return;
 		}
 
-		if (Validator.isEmpty(temporaryObjects))
+		if (JValidator.isEmpty(temporaryObjects))
 		{
 			temporaryObjects = new HashMap<>();
 		}
@@ -56,7 +56,7 @@ public class RequestResponseDto
 
 	public <T> T getTemporaryObject(String key, Class<T> T)
 	{
-		if (Validator.isEmpty(key) || T == null)
+		if (JValidator.isEmpty(key) || T == null)
 		{
 			return null;
 		}
@@ -65,7 +65,7 @@ public class RequestResponseDto
 
 		return (T) raw;
 //		System.out.println("RequestResponseDto.getTemporaryObject() - raw: [" + raw + "]");
-//		if (Validator.isEmpty(raw))
+//		if (JValidator.isEmpty(raw))
 //		{
 //			return null;
 //		}
@@ -90,7 +90,7 @@ public class RequestResponseDto
 
 	public String getTaskName()
 	{
-		return getParameter(isMultipartRequest ? RequestConstant.API_MULTIPART_TASK_NAME : RequestConstant.API_TASK_NAME);
+		return getParameter(isMultipartRequest ? RequestConstant.MULTIPART_TASK_NAME : RequestConstant.API_TASK_NAME);
 	}
 
 	public String getAccessToken()

@@ -1,7 +1,6 @@
 
 package in.jaxer.api.dtos;
 
-import java.util.HashMap;
 import java.util.List;
 import lombok.ToString;
 
@@ -19,8 +18,8 @@ public class ErrorDto
 
 	public String errorMessage;
 
-	public HashMap<String, List<String>> stacktraceHashMap;
+//	public HashMap<String, List<String>> stacktraceHashMap;
+	public List<String> stacktraceList;
 
 	public int httpStatus;
-
 }

@@ -4,20 +4,23 @@ package in.jaxer.api.dtos;
 import in.jaxer.api.constants.ApiStatus;
 import in.jaxer.api.exceptions.ApiException;
 import in.jaxer.api.exceptions.UserException;
+import in.jaxer.core.utilities.JValidator;
 import in.jaxer.core.utilities.Strings;
-import in.jaxer.core.utilities.Validator;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.ToString;
+import lombok.extern.log4j.Log4j2;
 
 /**
  *
  * @author Shakir Ansari
  */
+@Log4j2
+@ToString
 public class ApiResponseDto
 {
-//	private static final Logger logger = Logger.getLogger(ApiResponseCO.class);
 
 	public Map<String, Object> taskResponseValue = null;
 
@@ -27,10 +30,10 @@ public class ApiResponseDto
 
 	public void addTaskResponseValue(String key, Object value)
 	{
-		Validator.requireNotEmpty(key);
-		Validator.requireNotNull(value);
+		JValidator.requireNotEmpty(key);
+		JValidator.requireNotNull(value);
 
-		if (Validator.isEmpty(taskResponseValue))
+		if (JValidator.isEmpty(taskResponseValue))
 		{
 			taskResponseValue = new HashMap();
 		}
@@ -40,9 +43,9 @@ public class ApiResponseDto
 
 	public void addUserMessage(String msg)
 	{
-		Validator.requireNotEmpty(msg);
+		JValidator.requireNotEmpty(msg);
 
-		if (Validator.isEmpty(userMessageList))
+		if (JValidator.isEmpty(userMessageList))
 		{
 			userMessageList = new ArrayList<>();
 		}
@@ -52,7 +55,7 @@ public class ApiResponseDto
 
 	public void addErrorDto(Exception exception)
 	{
-		Validator.requireNotNull(exception);
+		JValidator.requireNotNull(exception);
 
 		if (exception instanceof UserException)
 		{
@@ -72,15 +75,33 @@ public class ApiResponseDto
 
 			if (apiStatus != null)
 			{
+				errorDto.errorCode = apiStatus.getCode();
 				errorDto.errorMessage = apiStatus.getMessage();
 //				errorDto.httpStatus = apiStatus.getHttpStatus();
-				errorDto.errorCode = apiStatus.getCode();
+			} else
+			{
+				errorDto.errorMessage = apiException.getMessage();
 			}
-		} else
-		{
-			errorDto.errorMessage = "Something went wrong";
 		}
 
-		errorDto.stacktraceHashMap = Strings.getStackTraces(exception, null);
+		if (JValidator.isEmpty(errorDto.errorMessage))
+		{
+			errorDto.errorMessage = exception.getMessage();
+
+			if (JValidator.isEmpty(errorDto.errorMessage))
+			{
+				errorDto.errorMessage = "Something went wrong";
+			}
+		}
+
+		errorDto.stacktraceList = Strings.getListOfStackTraces(exception, null);
+
+		if (JValidator.isNotEmpty(errorDto.stacktraceList))
+		{
+			if (errorDto.stacktraceList.get(0).equalsIgnoreCase(errorDto.errorMessage))
+			{
+				errorDto.stacktraceList.remove(0);
+			}
+		}
 	}
 }

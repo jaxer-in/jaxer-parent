@@ -2,11 +2,10 @@
 package in.jaxer.sdbms;
 
 import in.jaxer.core.utilities.Collections;
+import in.jaxer.core.utilities.JValidator;
 import in.jaxer.core.utilities.Strings;
-import in.jaxer.core.utilities.Validator;
 import in.jaxer.sdbms.annotations.PrimaryKey;
-import in.jaxer.sdbms.dto.PaginationDto;
-import in.jaxer.sdbms.exceptions.SDBMSException;
+import in.jaxer.sdbms.exceptions.JaxerSDBMSException;
 import in.jaxer.sdbms.utils.AbstractJpaHandler;
 import in.jaxer.sdbms.utils.NamedStatementUtils;
 import java.beans.PropertyDescriptor;
@@ -14,6 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,45 +43,50 @@ public class MySqlHandler extends AbstractJpaHandler
 	{
 	}
 
-	@Override
-	public <T> List<T> find(Connection connection, Class<T> outputClass, List<Parameter> params, PaginationDto paginationDto)
+	private <T> List<T> _find(final boolean isSingleObject, Connection connection, Class<T> outputClass, List<Parameter> params)
 	{
 		String tableName = getTableName(outputClass);
 
 		String where = getWhereClause(params);
-		String orderBy = getOrderBy(paginationDto);
 
 		String sql = "SELECT * FROM `" + tableName + "`";
 		sql = sql + " " + where;
-//		sql = sql + " " + orderBy;
-		sql = sql + " LIMIT :limit OFFSET :offset";
 
-		log.debug("sql: {}", sql);
-		log.debug("params: {}", params);
-		log.debug("paginationDto: {}", paginationDto);
+		if (isSingleObject)
+		{
+			sql = sql + " LIMIT 1";
+		}
+
+		log.debug("sql: {}, params: {}", sql, params);
 
 		try (NamedStatement namedStatement = new NamedStatement(connection, sql))
 		{
-			namedStatement.setParameter("limit", paginationDto.pageSize);
-			namedStatement.setParameter("offset", paginationDto.pageIndex * paginationDto.pageSize);
-
-			if (Validator.isNotEmpty(orderBy))
-			{
-//				namedPreparedStatement.setParameter("orderBy", paginationDto.sortBy);
-			}
-
 			NamedStatementUtils.setParameteres(namedStatement, params);
 
 			try (ResultSet resultSet = namedStatement.executeQuery())
 			{
 				List<T> objectList = ResultsetMapper.getObjectList(resultSet, outputClass);
-				return Validator.isEmpty(objectList) ? null : objectList;
+
+				return objectList;
 			}
 		} catch (Exception exception)
 		{
 			log.error("Exception: ", exception);
-			throw new SDBMSException(exception);
+			throw new JaxerSDBMSException(exception);
 		}
+	}
+
+	@Override
+	public <T> T find(Connection connection, Class<T> outputClass, List<Parameter> parameterList)
+	{
+		List<T> objectList = _find(true, connection, outputClass, parameterList);
+		return JValidator.isEmpty(objectList) ? null : objectList.get(0);
+	}
+
+	@Override
+	public <T> List<T> findList(Connection connection, Class<T> outputClass, List<Parameter> parameterList)
+	{
+		return _find(true, connection, outputClass, parameterList);
 	}
 
 	@Override
@@ -101,7 +106,7 @@ public class MySqlHandler extends AbstractJpaHandler
 		} catch (Exception exception)
 		{
 			log.error("Exception: ", exception);
-			throw new SDBMSException(exception);
+			throw new JaxerSDBMSException(exception);
 		}
 	}
 
@@ -121,7 +126,7 @@ public class MySqlHandler extends AbstractJpaHandler
 		Set<Map.Entry<String, Object>> columnEntryset = columnHashMap.entrySet();
 		for (Map.Entry<String, Object> entry : columnEntryset)
 		{
-			if (Validator.isNotEmpty(entry.getKey()))
+			if (JValidator.isNotEmpty(entry.getKey()))
 			{
 				columns += " `" + entry.getKey() + "` = :" + entry.getValue() + comma;
 			}
@@ -155,7 +160,7 @@ public class MySqlHandler extends AbstractJpaHandler
 		} catch (Exception exception)
 		{
 			log.error("Exception: ", exception);
-			throw new SDBMSException(exception);
+			throw new JaxerSDBMSException(exception);
 		}
 	}
 
@@ -173,7 +178,7 @@ public class MySqlHandler extends AbstractJpaHandler
 		Set<Map.Entry<String, Object>> columnEntryset = columnHashMap.entrySet();
 		for (Map.Entry<String, Object> entry : columnEntryset)
 		{
-			if (Validator.isNotEmpty(entry.getKey()))
+			if (JValidator.isNotEmpty(entry.getKey()))
 			{
 				columnNames += " `" + entry.getKey() + "`" + comma;
 				value += " :" + entry.getValue() + comma;
@@ -188,7 +193,7 @@ public class MySqlHandler extends AbstractJpaHandler
 		Set<Map.Entry<String, Object>> primaryColumnEntryset = primaryColumnHashMap.entrySet();
 		for (Map.Entry<String, Object> entry : primaryColumnEntryset)
 		{
-			if (Validator.isNotEmpty(entry.getKey()))
+			if (JValidator.isNotEmpty(entry.getKey()))
 			{
 				columnNames += " `" + entry.getKey() + "`" + comma;
 
@@ -231,7 +236,7 @@ public class MySqlHandler extends AbstractJpaHandler
 		} catch (Exception exception)
 		{
 			log.error("Exception: ", exception);
-			throw new SDBMSException(exception);
+			throw new JaxerSDBMSException(exception);
 		}
 
 		return t;
@@ -259,7 +264,7 @@ public class MySqlHandler extends AbstractJpaHandler
 		} catch (Exception exception)
 		{
 			log.error("Exception: ", exception);
-			throw new SDBMSException(exception);
+			throw new JaxerSDBMSException(exception);
 		}
 	}
 
@@ -272,7 +277,7 @@ public class MySqlHandler extends AbstractJpaHandler
 		{
 			for (Parameter parameter : parameterList)
 			{
-				if (parameter.getValue() instanceof java.util.Collection)
+				if (parameter.getValue() instanceof Collection)
 				{
 					where += parameter.isEquals()
 							? " AND `" + parameter.getName() + "`" + " IN (:" + parameter.getName() + ")"
@@ -289,14 +294,4 @@ public class MySqlHandler extends AbstractJpaHandler
 		return where;
 	}
 
-	@Override
-	protected String getOrderBy(PaginationDto paginationDto)
-	{
-		if (paginationDto == null || Validator.isEmpty(paginationDto.sortBy))
-		{
-			return "";
-		}
-
-		return "ORDER BY :orderBy " + paginationDto.orderBy;
-	}
 }

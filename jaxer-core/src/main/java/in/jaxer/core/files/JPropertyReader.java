@@ -30,11 +30,13 @@ public class JPropertyReader implements AutoCloseable
 
 	public String getKey(String key)
 	{
+		JValidator.requireNotEmpty(key, "Key could not be empty.");
 		return this.properties.getProperty(key);
 	}
 
 	public void setKey(String key, String value)
 	{
+		JValidator.requireNotEmpty(key, "Key could not be empty.");
 		this.properties.setProperty(key, value);
 	}
 
@@ -51,7 +53,12 @@ public class JPropertyReader implements AutoCloseable
 
 	public boolean containKey(String key)
 	{
-		return getKey(key) != null;
+		return this.properties.containsKey(key);
+	}
+
+	public boolean containsValue(String key)
+	{
+		return this.properties.containsValue(key);
 	}
 
 	@Override

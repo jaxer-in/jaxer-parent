@@ -1,7 +1,7 @@
 
 package in.jaxer.sdbms;
 
-import in.jaxer.core.utilities.Validator;
+import in.jaxer.core.utilities.JValidator;
 import in.jaxer.sdbms.exceptions.ColumnNotFoundException;
 import in.jaxer.sdbms.exceptions.ReadOnlyException;
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ public class Row
 
 	public Column getColumn(String columnName)
 	{
-		if (Validator.isNotEmpty(columnList))
+		if (JValidator.isNotEmpty(columnList))
 		{
 			for (Column column : columnList)
 			{
@@ -49,7 +49,7 @@ public class Row
 
 	public Column getColumn(int columnIndex)
 	{
-		if (Validator.isNotEmpty(columnList))
+		if (JValidator.isNotEmpty(columnList))
 		{
 			for (Column column : columnList)
 			{
@@ -89,7 +89,7 @@ public class Row
 	{
 		String row = this.getClass().getName() + " [";
 
-		if (Validator.isNotEmpty(this.columnList))
+		if (JValidator.isNotEmpty(this.columnList))
 		{
 			String appender = ", ";
 			for (Column column : columnList)

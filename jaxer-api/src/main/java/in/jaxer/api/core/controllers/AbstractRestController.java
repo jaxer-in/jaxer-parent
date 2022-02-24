@@ -1,22 +1,22 @@
 
-package in.jaxer.api.request;
+package in.jaxer.api.core.controllers;
 
+import in.jaxer.api.annotations.RestTask;
+import in.jaxer.api.core.request.RestRequestHandler;
 import in.jaxer.api.dtos.ApiResponseDto;
 import in.jaxer.api.listners.Authentication;
-import java.io.IOException;
 import java.sql.Connection;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lombok.extern.log4j.Log4j2;
 
 /**
  *
  * @author Shakir Ansari
  */
-public abstract class AbstractRestController extends HttpServlet
+@Log4j2
+public abstract class AbstractRestController extends AbstractController
 {
-
-	abstract protected String getBasePackage();
 
 	protected ApiResponseDto doProcess(HttpServletRequest request, HttpServletResponse response)
 	{
@@ -29,8 +29,8 @@ public abstract class AbstractRestController extends HttpServlet
 
 		try
 		{
-			RequestHandler requestHandler = new RequestHandler(getBasePackage());
-			apiResponseDto = requestHandler.doHandleRequest(connection, request, response, authentication);
+			RestRequestHandler requestHandler = new RestRequestHandler(getBasePackage(), RestTask.class);
+			apiResponseDto = requestHandler.processRequest(connection, request, response, authentication);
 		} catch (Exception exception)
 		{
 			if (apiResponseDto == null)
@@ -42,19 +42,7 @@ public abstract class AbstractRestController extends HttpServlet
 
 		if (apiResponseDto.errorDto != null)
 		{
-//			response.setStatus(apiResponseDto.errorDto.httpStatus);
-		}
-
-		return apiResponseDto;
-	}
-
-	protected ApiResponseDto doProcessException(HttpServletResponse response, Exception throwable) throws IOException
-	{
-		ApiResponseDto apiResponseDto = new ApiResponseDto();
-		apiResponseDto.addErrorDto(throwable);
-
-		if (apiResponseDto.errorDto != null)
-		{
+			log.info("apiResponseDto: {}", apiResponseDto);
 //			response.setStatus(apiResponseDto.errorDto.httpStatus);
 		}
 

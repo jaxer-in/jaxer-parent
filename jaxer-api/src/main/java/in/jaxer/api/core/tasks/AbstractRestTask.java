@@ -1,5 +1,5 @@
 
-package in.jaxer.api.request;
+package in.jaxer.api.core.tasks;
 
 import in.jaxer.api.constants.RequestConstant;
 import in.jaxer.api.dtos.RequestResponseDto;
@@ -16,7 +16,7 @@ import lombok.extern.log4j.Log4j2;
  * @author Shakir Ansari
  */
 @Log4j2
-public abstract class AbstractHttpRequestTask
+public abstract class AbstractRestTask
 {
 
 	private RequestResponseDto requestResponseDto = null;
@@ -25,6 +25,8 @@ public abstract class AbstractHttpRequestTask
 
 	public void processAbstractTask(Connection connection) throws Exception
 	{
+		log.debug("--------------------");
+
 		doBeforeTask(connection);
 
 		doTask(connection);
@@ -135,5 +137,4 @@ public abstract class AbstractHttpRequestTask
 //	{
 //		return requestResponseDto.isRequestSourceWEB();
 //	}
-
 }
