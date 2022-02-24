@@ -23,25 +23,23 @@ import lombok.extern.log4j.Log4j2;
 /**
  *
  * @author Shakir Ansari
- * @see  in.jaxer.sdbms.MysqlJpaHandler
  */
 @Log4j2
-@Deprecated
-public class MySqlHandler extends AbstractJpaHandler
+public class MysqlJpaHandler extends AbstractJpaHandler
 {
 
-	private static MySqlHandler instance;
+	private static MysqlJpaHandler instance;
 
-	public static MySqlHandler getInstance()
+	public static MysqlJpaHandler getInstance()
 	{
 		if (instance == null)
 		{
-			instance = new MySqlHandler();
+			instance = new MysqlJpaHandler();
 		}
 		return instance;
 	}
 
-	private MySqlHandler()
+	private MysqlJpaHandler()
 	{
 	}
 

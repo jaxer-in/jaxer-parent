@@ -23,7 +23,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
-import jdk.nashorn.internal.ir.debug.ObjectSizeCalculator;
 import lombok.extern.log4j.Log4j2;
 
 /**
@@ -262,11 +261,6 @@ public class JUtilities
 	public static int getPercentage(int value, int percentage)
 	{
 		return value * percentage / 100;
-	}
-
-	public static long sizeOf(Object obj)
-	{
-		return ObjectSizeCalculator.getObjectSize(obj);
 	}
 
 	public static String toJsonString(Object object)
