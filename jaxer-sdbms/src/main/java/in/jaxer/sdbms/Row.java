@@ -3,7 +3,6 @@ package in.jaxer.sdbms;
 
 import in.jaxer.core.utilities.JValidator;
 import in.jaxer.sdbms.exceptions.ColumnNotFoundException;
-import in.jaxer.sdbms.exceptions.ReadOnlyException;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
@@ -18,17 +17,9 @@ public class Row
 
 	private final List<Column> columnList;
 
-	private boolean readOnly;
-
-	public Row(boolean readOnly)
+	public Row(List<Column> columnList)
 	{
-		this.columnList = new ArrayList<>();
-		this.readOnly = readOnly;
-	}
-
-	public void makeReadOnly()
-	{
-		this.readOnly = true;
+		this.columnList = new ArrayList(columnList);
 	}
 
 	public Column getColumn(String columnName)
@@ -61,15 +52,6 @@ public class Row
 		}
 
 		throw new ColumnNotFoundException("Column not found at index: " + columnIndex);
-	}
-
-	public void addColumn(Column column)
-	{
-		if (this.readOnly)
-		{
-			throw new ReadOnlyException("Row is read only, unable to add columns");
-		}
-		this.columnList.add(column);
 	}
 
 	@Override

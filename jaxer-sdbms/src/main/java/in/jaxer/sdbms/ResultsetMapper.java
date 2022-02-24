@@ -70,7 +70,7 @@ public class ResultsetMapper
 								{
 									new PropertyDescriptor(field.getName(), outputClass)
 											.getWriteMethod()
-											//											.invoke(bean, resultSet.getObject(columnName, fieldType));
+											//.invoke(bean, resultSet.getObject(columnName, fieldType));
 											.invoke(bean, columnValue);
 								}
 								break;
@@ -142,7 +142,7 @@ public class ResultsetMapper
 
 			while (resultSet.next())
 			{
-				Row row = new Row(false);
+				List<in.jaxer.sdbms.Column> columns = new ArrayList<>();
 
 				for (int i = 0; i < resultSetMetaData.getColumnCount(); i++)
 				{
@@ -156,11 +156,9 @@ public class ResultsetMapper
 							resultSetMetaData.isNullable(currentCoulmnCount) == 1//nullable
 					);
 
-					row.addColumn(column);
+					columns.add(column);
 				}
-
-				row.makeReadOnly();
-				rowList.add(row);
+				rowList.add(new Row(columns));
 			}
 			return rowList;
 		} catch (Exception exception)
