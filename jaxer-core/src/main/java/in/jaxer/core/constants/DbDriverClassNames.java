@@ -29,4 +29,9 @@ public class DbDriverClassNames
 	 */
 	public static final String ORACLE_JDBC_DRIVER_ORACLEDRIVER = "oracle.jdbc.driver.OracleDriver";
 
+	/**
+	 * For sqlite database
+	 */
+	public static final String ORG_SQLITE_JDBC = "org.sqlite.JDBC";
+
 }
