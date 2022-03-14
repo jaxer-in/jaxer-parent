@@ -1,16 +1,16 @@
 
 package in.jaxer.api.core.request;
 
+import in.jaxer.api.annotations.RestTask;
+import in.jaxer.api.constants.RequestConstant;
 import in.jaxer.api.core.tasks.AbstractApiTask;
 import in.jaxer.api.core.tasks.AbstractRestTask;
-import in.jaxer.api.constants.RequestConstant;
 import in.jaxer.api.exceptions.ApiException;
 import in.jaxer.api.listners.Authentication;
 import in.jaxer.core.utilities.JValidator;
 import java.lang.annotation.Annotation;
 import java.sql.Connection;
 import lombok.extern.log4j.Log4j2;
-import in.jaxer.api.annotations.RestTask;
 
 /**
  *
@@ -62,9 +62,18 @@ public class RestRequestHandler extends AbstractRequestHandler
 			throw new ApiException(RequestConstant.API_REQUEST_SOURCE + " is missing");
 		}
 
-		if (getRequestResponseDto().getParameter(RequestConstant.API_TASK_NAME) == null)
+		if (getRequestResponseDto().isIsMultipartRequest())
 		{
-			throw new ApiException(RequestConstant.API_TASK_NAME + " is missing");
+			if (getRequestResponseDto().getParameter(RequestConstant.MULTIPART_TASK_NAME) == null)
+			{
+				throw new ApiException(RequestConstant.MULTIPART_TASK_NAME + " is missing");
+			}
+		} else
+		{
+			if (getRequestResponseDto().getParameter(RequestConstant.API_TASK_NAME) == null)
+			{
+				throw new ApiException(RequestConstant.API_TASK_NAME + " is missing");
+			}
 		}
 
 		if (getRequestResponseDto().getParameter(RequestConstant.API_VERSION) == null)
