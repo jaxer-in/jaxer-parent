@@ -62,18 +62,9 @@ public class RestRequestHandler extends AbstractRequestHandler
 			throw new ApiException(RequestConstant.API_REQUEST_SOURCE + " is missing");
 		}
 
-		if (getRequestResponseDto().isIsMultipartRequest())
+		if (getRequestResponseDto().getParameter(RequestConstant.API_TASK_NAME) == null)
 		{
-			if (getRequestResponseDto().getParameter(RequestConstant.MULTIPART_TASK_NAME) == null)
-			{
-				throw new ApiException(RequestConstant.MULTIPART_TASK_NAME + " is missing");
-			}
-		} else
-		{
-			if (getRequestResponseDto().getParameter(RequestConstant.API_TASK_NAME) == null)
-			{
-				throw new ApiException(RequestConstant.API_TASK_NAME + " is missing");
-			}
+			throw new ApiException(RequestConstant.API_TASK_NAME + " is missing");
 		}
 
 		if (getRequestResponseDto().getParameter(RequestConstant.API_VERSION) == null)
