@@ -1,8 +1,8 @@
 
 package in.jaxer.core.utilities;
 
-import static org.junit.Assert.assertEquals;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -26,7 +26,7 @@ public class SystemsTest
 		String value = "some.dummy.value";
 		Systems.setProperty(key, value);
 
-		assertEquals(value, Systems.getProperty(key));
+		Assertions.assertEquals(value, Systems.getProperty(key));
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class SystemsTest
 		System.out.println("isMac");
 		boolean expResult = false;
 		boolean result = Systems.isMac();
-		assertEquals(expResult, result);
+		Assertions.assertEquals(expResult, result);
 	}
 
 	/**
@@ -61,7 +61,7 @@ public class SystemsTest
 		System.out.println("isWindows");
 		boolean expResult = true;
 		boolean result = Systems.isWindows();
-		assertEquals(expResult, result);
+		Assertions.assertEquals(expResult, result);
 	}
 
 	/**
@@ -73,7 +73,7 @@ public class SystemsTest
 		System.out.println("isSolaris");
 		boolean expResult = false;
 		boolean result = Systems.isSolaris();
-		assertEquals(expResult, result);
+		Assertions.assertEquals(expResult, result);
 	}
 
 	/**
@@ -85,7 +85,7 @@ public class SystemsTest
 		System.out.println("isUnix");
 		boolean expResult = false;
 		boolean result = Systems.isUnix();
-		assertEquals(expResult, result);
+		Assertions.assertEquals(expResult, result);
 	}
 
 	/**
@@ -108,7 +108,7 @@ public class SystemsTest
 		System.out.println("getUserHomeDirectory");
 		String expResult = "C:\\Users\\Shakir";
 		String result = Systems.getUserHomeDirectory();
-		assertEquals(expResult, result);
+		Assertions.assertEquals(expResult, result);
 	}
 
 	/**
@@ -131,7 +131,7 @@ public class SystemsTest
 		System.out.println("getTempDirectory");
 		String expResult = "C:\\Users\\Shakir\\AppData\\Local\\Temp\\";
 		String result = Systems.getTempDirectory();
-		assertEquals(expResult, result);
+		Assertions.assertEquals(expResult, result);
 	}
 
 	/**

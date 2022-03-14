@@ -1,7 +1,7 @@
 
 package in.jaxer.sdbms.dto;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -18,5 +18,4 @@ public class PaginationDtoTest
 		String result = instance.toString();
 		System.out.println("PaginationDtoTest.testToString() - " + result);
 	}
-
 }

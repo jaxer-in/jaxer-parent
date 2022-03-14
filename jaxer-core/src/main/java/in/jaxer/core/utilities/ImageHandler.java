@@ -15,22 +15,25 @@ import javax.imageio.ImageIO;
 import javax.imageio.ImageWriteParam;
 import javax.imageio.ImageWriter;
 import javax.imageio.stream.ImageOutputStream;
+import lombok.extern.log4j.Log4j2;
 
 /**
  *
  * @author Shakir Ansari
  */
+@Log4j2
 public class ImageHandler
 {
 
 	public static void doOptimize(String source, String target, float quality) throws FileNotFoundException, IOException
 	{
+		log.info("quality: {}, source: {}, target: {}", quality, source, target);
 		doOptimize(new File(source), new File(target), quality);
 	}
 
 	public static void doOptimize(File source, File target, float quality) throws FileNotFoundException, IOException
 	{
-		System.out.println("ImageHandler.doOptimize() - Processing: " + source.getName());
+		log.info("quality: {}, source: {}, target: {}", quality, source, target);
 		BufferedImage bufferedImage = ImageIO.read(source);
 
 		try (OutputStream outputStream = new FileOutputStream(target);
@@ -51,12 +54,12 @@ public class ImageHandler
 		}
 	}
 
-	public static String resize(String source, int width, int height) throws FileNotFoundException, IOException
+	public static void resize(String source, String target, int width, int height) throws FileNotFoundException, IOException
 	{
-		return resize(new File(source), width, height);
+		resize(new File(source), new File(target), width, height);
 	}
 
-	public static String resize(File source, int width, int height) throws FileNotFoundException, IOException
+	public static void resize(File source, File target, int width, int height) throws FileNotFoundException, IOException
 	{
 		try (FileInputStream fileInputStream = new FileInputStream(source);)
 		{
@@ -69,34 +72,89 @@ public class ImageHandler
 			g2d.dispose();
 
 			String ext = Files.getExtensionWithoutDot(source.getName());
-			String outputImagePath = getResizedFileName(source, width, height);
 
 			// writes to output file
-			ImageIO.write(outputImage, ext, new File(outputImagePath));
+			ImageIO.write(outputImage, ext, target);
 
-			System.out.println("ImageHandler.resize() - outputImagePath: " + outputImagePath);
-
-			return outputImagePath;
+			log.debug("Resized: target: {}", target.getAbsolutePath());
 		}
 	}
 
-	public static String resize(String source, int percentage) throws FileNotFoundException, IOException
+	public static void resizeByWidth(File source, File target, int width) throws FileNotFoundException, IOException
 	{
-		return resize(new File(source), percentage);
+		if (width <= 0)
+		{
+			throw new IllegalArgumentException("width cannot be zero or less");
+		}
+
+		try (FileInputStream fileInputStream = new FileInputStream(source))
+		{
+			BufferedImage inputImage = ImageIO.read(fileInputStream);
+
+			int w = inputImage.getWidth();
+			int h = inputImage.getHeight();
+
+			h = h / (w / width);
+
+			BufferedImage outputImage = new BufferedImage(width, h, inputImage.getType());
+
+			// scales the input image to the output image
+			Graphics2D g2d = outputImage.createGraphics();
+			g2d.drawImage(inputImage, 0, 0, width, h, null);
+			g2d.dispose();
+
+			String ext = Files.getExtensionWithoutDot(source.getName());
+
+			// writes to output file
+			ImageIO.write(outputImage, ext, target);
+
+			log.debug("Resized: target: {}", target.getAbsolutePath());
+		}
 	}
 
-	public static String resize(File source, int percentage) throws FileNotFoundException, IOException
+	public static void resizeByHeight(File source, File target, int height) throws FileNotFoundException, IOException
+	{
+		if (height <= 0)
+		{
+			throw new IllegalArgumentException("height cannot be zero or less");
+		}
+
+		try (FileInputStream fileInputStream = new FileInputStream(source))
+		{
+			BufferedImage inputImage = ImageIO.read(fileInputStream);
+
+			int w = inputImage.getWidth();
+			int h = inputImage.getHeight();
+
+			w = w / (h / height);
+
+			BufferedImage outputImage = new BufferedImage(height, h, inputImage.getType());
+
+			// scales the input image to the output image
+			Graphics2D g2d = outputImage.createGraphics();
+			g2d.drawImage(inputImage, 0, 0, height, h, null);
+			g2d.dispose();
+
+			String ext = Files.getExtensionWithoutDot(source.getName());
+
+			// writes to output file
+			ImageIO.write(outputImage, ext, target);
+
+			log.debug("Resized: target: {}", target.getAbsolutePath());
+		}
+	}
+	public static void resize(String source, String target, int percentage) throws FileNotFoundException, IOException
+	{
+		resize(new File(source), new File(target), percentage);
+	}
+
+	public static void resize(File source, File target, int percentage) throws FileNotFoundException, IOException
 	{
 		Dimension dimension = JUtilities.getImageDimension(source);
 		int width = dimension.width * percentage / 100;
 		int height = dimension.height * percentage / 100;
 
-		return resize(source, width, height);
-	}
-
-	private static String getResizedFileName(File file, int width, int height)
-	{
-		return getNewName(file, "_" + width + "x" + height);
+		resize(source, target, width, height);
 	}
 
 	private static String getNewName(File file, String postfix)

@@ -42,5 +42,6 @@ buildNumber.properties
 .mvn/wrapper/maven-wrapper.jar
 
 .flattened-pom.xml
+/jaxer-api/nbproject/
 /jaxer-sdbms/nbproject/
 /jaxer-core/nbproject/
