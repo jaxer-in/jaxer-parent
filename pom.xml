@@ -245,7 +245,7 @@
 	<scm>
 		<connection>scm:git:git://github.com:jaxer-in/jaxer-parent.git</connection>
 		<developerConnection>scm:git:ssh://github.com:jaxer-in/jaxer-parent.git</developerConnection>
-		<url>https://github.com/jaxer-in/jaxer-parent.git/tree/main</url>
+		<url>https://github.com/jaxer-in/jaxer-parent</url>
 	</scm>
 
 	<dependencies>
