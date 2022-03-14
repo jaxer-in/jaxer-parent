@@ -18,7 +18,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<revision>1.0.5-beta</revision>
+		<revision>1.0.6-beta</revision>
 
 		<version.flatten>1.2.7</version.flatten>
 		<version.log4j2>2.17.1</version.log4j2>
@@ -39,8 +39,6 @@
 		</resources>
 
 		<plugins>
-
-
 			<!--flatten-maven-plugin-->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -179,35 +177,6 @@
 								<version>1.9.5</version>
 							</dependency>
 						</dependencies>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
-		<!-- GPG Signature on release -->
-		<profile>
-			<id>release-sign-artifacts</id>
-			<activation>
-				<property>
-					<name>performRelease</name>
-					<value>true</value>
-				</property>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-gpg-plugin</artifactId>
-						<version>1.6</version>
-						<executions>
-							<execution>
-								<id>sign-artifacts</id>
-								<phase>verify</phase>
-								<goals>
-									<goal>sign</goal>
-								</goals>
-							</execution>
-						</executions>
 					</plugin>
 				</plugins>
 			</build>
