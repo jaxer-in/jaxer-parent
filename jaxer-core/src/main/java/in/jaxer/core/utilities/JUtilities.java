@@ -258,7 +258,21 @@ public class JUtilities
 		}
 	}
 
+	/**
+	 *
+	 * @param value
+	 * @param percentage
+	 * @return
+	 * @deprecated
+	 * @see getPercentage(double, float)
+	 */
+	@Deprecated
 	public static int getPercentage(int value, int percentage)
+	{
+		return value * percentage / 100;
+	}
+
+	public static double getPercentage(double value, float percentage)
 	{
 		return value * percentage / 100;
 	}
