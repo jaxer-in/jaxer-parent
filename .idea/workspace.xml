@@ -5,7 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8634e999-e94c-4650-abc3-825143794512" name="Changes" comment="dev changes">
-      <change beforePath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/MysqlJpaHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/MysqlJpaHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jaxer.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-core/src/test/java/in/jaxer/core/encoders/BinaryEncoderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/test/java/in/jaxer/core/encoders/BinaryEncoderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +39,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
