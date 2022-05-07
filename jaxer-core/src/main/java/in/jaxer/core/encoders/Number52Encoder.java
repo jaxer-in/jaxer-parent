@@ -109,7 +109,7 @@ public class Number52Encoder extends Encoder
 		String pattern = "^[0-9a-zA-Z]*$";
 		if (!message.matches(pattern))
 		{
-			throw new ValidationException("Invalid enxryption format");
+			throw new ValidationException(INVALID_ENCRYPTION_FORMAT);
 		}
 
 		/**
