@@ -10,19 +10,21 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import lombok.extern.log4j.Log4j2;
 
 /**
  *
  * @author Shakir Ansari
  */
+@Log4j2
 public class HttpHandler
 {
 
 	public static String doHttpRequest(String httpMethod, String urlString, String payload)
 	{
-		System.out.println("HttpHandler.doHttpRequest() - httpMethod: [" + httpMethod + "]");
-		System.out.println("HttpHandler.doHttpRequest() - urlString: [" + urlString + "]");
-		System.out.println("HttpHandler.doHttpRequest() - payload: [" + payload + "]");
+		log.debug("httpMethod: {}", httpMethod);
+		log.debug("urlString: {}", urlString);
+		log.debug("payload: {}", payload);
 
 		try
 		{
@@ -60,7 +62,7 @@ public class HttpHandler
 					response.append(responseLine).append(System.lineSeparator());
 				}
 
-				System.out.println("HttpHandler.doHttpRequest() - time took: [" + Time.timeDifference(startMiliSeconds) + "]");
+				log.debug("time took: {}", Time.timeDifference(startMiliSeconds));
 
 				return response.toString();
 			}
