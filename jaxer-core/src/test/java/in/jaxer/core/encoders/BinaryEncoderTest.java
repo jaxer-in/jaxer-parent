@@ -23,8 +23,6 @@ public class BinaryEncoderTest
 
 	private Encoder encoder;
 
-	private final String encodedMessage = "211010003110010121101100311011002110111131000002111011131101111211100103110110021100100";
-
 	public BinaryEncoderTest()
 	{
 	}
@@ -67,25 +65,19 @@ public class BinaryEncoderTest
 	}
 
 	@Test
-	public void encodedMesssageShouldBeEqualsTo()
+	public void encodedMesssageShouldBeEqualsToDecodedMessage()
 	{
-		System.out.println("encodedMesssageShouldBeEqualsTo");
+		System.out.println("encodedMesssageShouldBeEqualsToDecodedMessage");
 
-		String response = encoder.encode("hello world");
-//		System.out.println("response: [" + response + "]");
+		String message = "HelloWorld!!";
+		System.out.println("message: [" + message + "]");
 
-		MatcherAssert.assertThat(response, CoreMatchers.equalTo(encodedMessage));
-	}
+		String encoded = encoder.encode(message);
+		System.out.println("encoded: [" + encoded + "]");
 
-	@Test
-	public void decodedMesssageShouldBeEqualsTo()
-	{
-		System.out.println("encodedMesssageShouldBeEqualsTo");
+		String decoded = encoder.decode(encoded);
+		System.out.println("decoded: [" + decoded + "]");
 
-		String decodedMessage = "hello world";
-		String response = encoder.decode(encodedMessage);
-//		System.out.println("response: [" + response + "]");
-
-		MatcherAssert.assertThat(response, CoreMatchers.equalTo(decodedMessage));
+		MatcherAssert.assertThat(message, CoreMatchers.equalTo(decoded));
 	}
 }
