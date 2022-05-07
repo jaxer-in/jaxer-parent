@@ -11,11 +11,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lombok.extern.log4j.Log4j2;
 
 /**
  *
  * @author Shakir Ansari
  */
+@Log4j2
 public class ServletDownloadDemo extends HttpServlet
 {
 
@@ -36,7 +38,7 @@ public class ServletDownloadDemo extends HttpServlet
 				mimeType = ContentType.APPLICATION_OCTET_STREAM;
 			}
 
-			System.out.println("MIME type: " + mimeType);
+			log.debug("mimeType: {}", mimeType);
 
 			response.setContentType(mimeType);
 			response.setHeader("Content-Disposition", "attachment; filename=\"" + filename + "\"");
