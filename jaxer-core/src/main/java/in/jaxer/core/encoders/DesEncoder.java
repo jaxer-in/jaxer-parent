@@ -3,6 +3,7 @@ package in.jaxer.core.encoders;
 
 import in.jaxer.core.constants.Constants;
 import in.jaxer.core.constants.ContentType;
+import in.jaxer.core.utilities.JValidator;
 import java.util.Base64;
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
@@ -12,7 +13,7 @@ import javax.crypto.SecretKey;
  *
  * @author Shakir Ansari
  */
-public class DesEncoder
+public class DesEncoder extends Encoder
 {
 
 	private static KeyGenerator keygenerator = null;
@@ -39,8 +40,10 @@ public class DesEncoder
 		}
 	}
 
-	public static String encode(final String message)
+	@Override
+	public String encode(final String message)
 	{
+		JValidator.requireNotEmpty(message);
 		try
 		{
 			init();
@@ -57,8 +60,10 @@ public class DesEncoder
 		}
 	}
 
-	public static String decode(final String message)
+	@Override
+	public String decode(final String message)
 	{
+		JValidator.requireNotEmpty(message);
 		try
 		{
 			init();
@@ -73,5 +78,17 @@ public class DesEncoder
 		{
 			throw new RuntimeException("Error occured while decrypting message", exception);
 		}
+	}
+
+	@Override
+	public String convert(int x)
+	{
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	@Override
+	public int convert(String string)
+	{
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 }
