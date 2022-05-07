@@ -67,25 +67,20 @@ public class HexaEncoderTest
 	}
 
 	@Test
-	public void encodedMesssageShouldBeEqualsTo()
+	public void encodedMesssageShouldBeEqualsToDecodedMessage()
 	{
-		System.out.println("encodedMesssageShouldBeEqualsTo");
+		System.out.println("encodedMesssageShouldBeEqualsToDecodedMessage");
 
-		String response = encoder.encode("hello world");
-		System.out.println("response: [" + response + "]");
+		String message = "HelloWorld!!";
+		System.out.println("message: [" + message + "]");
 
-		MatcherAssert.assertThat(response, CoreMatchers.equalTo(encodedMessage));
+		String encoded = encoder.encode(message);
+		System.out.println("encoded: [" + encoded + "]");
+
+		String decoded = encoder.decode(encoded);
+		System.out.println("decoded: [" + decoded + "]");
+
+		MatcherAssert.assertThat(message, CoreMatchers.equalTo(decoded));
 	}
 
-	@Test
-	public void decodedMesssageShouldBeEqualsTo()
-	{
-		System.out.println("encodedMesssageShouldBeEqualsTo");
-
-		String decodedMessage = "hello world";
-		String response = encoder.decode(encodedMessage);
-		System.out.println("response: [" + response + "]");
-
-		MatcherAssert.assertThat(response, CoreMatchers.equalTo(decodedMessage));
-	}
 }
