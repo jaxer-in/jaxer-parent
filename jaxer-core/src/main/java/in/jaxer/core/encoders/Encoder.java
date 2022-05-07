@@ -9,12 +9,13 @@ package in.jaxer.core.encoders;
 public abstract class Encoder
 {
 
+	protected final String INVALID_ENCRYPTION_FORMAT = "Invalid encryption format";
+
 	abstract public String convert(int x);
 
 	abstract public int convert(String string);
 
 //	abstract public String validationPattern();
-
 	abstract public String encode(String message);
 
 	abstract public String decode(String message);
