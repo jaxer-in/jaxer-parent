@@ -8,7 +8,7 @@ import in.jaxer.core.utilities.JValidator;
  *
  * @author Shakir Ansari
  */
-public class Number52Encoder extends Encoder
+public class Number52Encoder implements Encoder
 {
 
 	private String numberScale;
@@ -43,7 +43,6 @@ public class Number52Encoder extends Encoder
 		return _numberScale;
 	}
 
-	@Override
 	public String convert(int x)
 	{
 		if (x == 0)
@@ -63,7 +62,6 @@ public class Number52Encoder extends Encoder
 		return num52;
 	}
 
-	@Override
 	public int convert(String s)
 	{
 		int val = 0;

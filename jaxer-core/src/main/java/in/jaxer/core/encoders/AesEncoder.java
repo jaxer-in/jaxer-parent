@@ -14,8 +14,10 @@ import javax.crypto.spec.SecretKeySpec;
  *
  * @author Shakir Ansari
  */
-public class AesEncoder
+public class AesEncoder implements Encoder
 {
+
+	private final String key;
 
 	private static Cipher cipher = null;
 
@@ -46,8 +48,16 @@ public class AesEncoder
 		return new SecretKeySpec(Arrays.copyOf(getKeyBytes(key), 16), Constants.AES);
 	}
 
-	public static String encode(final String key, final String message)
+	public AesEncoder(String key)
 	{
+		this.key = key;
+	}
+
+	@Override
+	public String encode(final String message)
+	{
+		JValidator.requireNotEmpty(message);
+
 		try
 		{
 			if (cipher == null)
@@ -67,11 +77,13 @@ public class AesEncoder
 		{
 			throw new RuntimeException("Error occured while encrypting message", exception);
 		}
-
 	}
 
-	public static String decode(final String key, final String message)
+	@Override
+	public String decode(final String message)
 	{
+		JValidator.requireNotEmpty(message);
+
 		try
 		{
 			if (cipher == null)
@@ -90,4 +102,5 @@ public class AesEncoder
 			throw new RuntimeException("Error occured while decrypting message", exception);
 		}
 	}
+
 }

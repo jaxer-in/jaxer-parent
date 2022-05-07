@@ -8,7 +8,7 @@ import in.jaxer.core.utilities.JValidator;
  *
  * @author Shakir Ansari
  */
-public class TwoPipeEncoder extends Encoder
+public class TwoPipeEncoder implements Encoder
 {
 
 	private static final String EXTENSION = ".tp";
@@ -74,15 +74,4 @@ public class TwoPipeEncoder extends Encoder
 		return deMsg;
 	}
 
-	@Override
-	public String convert(int x)
-	{
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-
-	@Override
-	public int convert(String string)
-	{
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
 }

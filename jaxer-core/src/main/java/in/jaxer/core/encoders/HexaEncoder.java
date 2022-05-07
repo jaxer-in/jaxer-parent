@@ -10,12 +10,11 @@ import lombok.extern.log4j.Log4j2;
  * @author Shakir Ansari
  */
 @Log4j2
-public class HexaEncoder extends Encoder
+public class HexaEncoder implements Encoder
 {
 
-	final private String digits = "0123456789ABCDEF";
+	private final String digits = "0123456789ABCDEF";
 
-	@Override
 	public String convert(int x)
 	{
 		//return Integer.toHexString(x);
@@ -34,7 +33,6 @@ public class HexaEncoder extends Encoder
 		return hex;
 	}
 
-	@Override
 	public int convert(String s)
 	{
 		//return Integer.parseInt(string, 16);

@@ -10,16 +10,14 @@ import lombok.extern.log4j.Log4j2;
  * @author Shakir Ansari
  */
 @Log4j2
-public class OctalEncoder extends Encoder
+public class OctalEncoder implements Encoder
 {
 
-	@Override
 	public String convert(int x)
 	{
 		return Integer.toOctalString(x);
 	}
 
-	@Override
 	public int convert(String string)
 	{
 		return Integer.parseInt(string, 8);

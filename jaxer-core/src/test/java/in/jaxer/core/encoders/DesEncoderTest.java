@@ -70,13 +70,13 @@ public class DesEncoderTest
 		System.out.println("encodedMesssageShouldBeEqualsToDecodedMessage");
 
 		String message = "HelloWorld!!";
-//		System.out.println("message: [" + message + "]");
+		System.out.println("message: [" + message + "]");
 
 		String encoded = encoder.encode(message);
-//		System.out.println("encoded: [" + encoded + "]");
+		System.out.println("encoded: [" + encoded + "]");
 
 		String decoded = encoder.decode(encoded);
-//		System.out.println("decoded: [" + decoded + "]");
+		System.out.println("decoded: [" + decoded + "]");
 
 		MatcherAssert.assertThat(message, CoreMatchers.equalTo(decoded));
 	}

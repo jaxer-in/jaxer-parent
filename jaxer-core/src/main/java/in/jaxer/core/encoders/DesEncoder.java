@@ -13,7 +13,7 @@ import javax.crypto.SecretKey;
  *
  * @author Shakir Ansari
  */
-public class DesEncoder extends Encoder
+public class DesEncoder implements Encoder
 {
 
 	private static KeyGenerator keygenerator = null;
@@ -78,17 +78,5 @@ public class DesEncoder extends Encoder
 		{
 			throw new RuntimeException("Error occured while decrypting message", exception);
 		}
-	}
-
-	@Override
-	public String convert(int x)
-	{
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-
-	@Override
-	public int convert(String string)
-	{
-		throw new UnsupportedOperationException("Not supported yet.");
 	}
 }
