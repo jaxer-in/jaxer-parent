@@ -10,22 +10,49 @@ import lombok.extern.log4j.Log4j2;
  * @author Shakir Ansari
  */
 @Log4j2
-public class HexaEncoder
+public class HexaEncoder extends Encoder
 {
 
 	final private String digits = "0123456789ABCDEF";
 
-	public static String convert(int x)
+	@Override
+	public String convert(int x)
 	{
-		return Integer.toHexString(x);
+		//return Integer.toHexString(x);
+
+		if (x == 0)
+		{
+			return "0";
+		}
+		String hex = "";
+		while (x > 0)
+		{
+			int digit = x % 16;                // rightmost digit
+			hex = digits.charAt(digit) + hex;  // string concatenation
+			x = x / 16;
+		}
+		return hex;
 	}
 
-	public static int convert(String string)
+	@Override
+	public int convert(String s)
 	{
-		return Integer.parseInt(string, 16);
+		//return Integer.parseInt(string, 16);
+
+		s = s.toUpperCase();
+
+		int val = 0;
+		for (int i = 0; i < s.length(); i++)
+		{
+			char c = s.charAt(i);
+			int d = digits.indexOf(c);
+			val = 16 * val + d;
+		}
+		return val;
 	}
 
-	public static String encode(String message)
+	@Override
+	public String encode(String message)
 	{
 		JValidator.requireNotEmpty(message);
 
@@ -40,7 +67,8 @@ public class HexaEncoder
 		return encoded;
 	}
 
-	public static String decode(String message)
+	@Override
+	public String decode(String message)
 	{
 		JValidator.requireNotEmpty(message);
 
@@ -67,33 +95,4 @@ public class HexaEncoder
 		return JValidator.isEmpty(decoded) ? null : decoded;
 	}
 
-	private int myHex2decimal(String s)
-	{
-		s = s.toUpperCase();
-
-		int val = 0;
-		for (int i = 0; i < s.length(); i++)
-		{
-			char c = s.charAt(i);
-			int d = digits.indexOf(c);
-			val = 16 * val + d;
-		}
-		return val;
-	}
-
-	private String myDecimal2hex(int d)
-	{
-		if (d == 0)
-		{
-			return "0";
-		}
-		String hex = "";
-		while (d > 0)
-		{
-			int digit = d % 16;                // rightmost digit
-			hex = digits.charAt(digit) + hex;  // string concatenation
-			d = d / 16;
-		}
-		return hex;
-	}
 }

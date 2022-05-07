@@ -10,20 +10,23 @@ import lombok.extern.log4j.Log4j2;
  * @author Shakir Ansari
  */
 @Log4j2
-public class OctalEncoder
+public class OctalEncoder extends Encoder
 {
 
-	public static String convert(int x)
+	@Override
+	public String convert(int x)
 	{
 		return Integer.toOctalString(x);
 	}
 
-	public static int convert(String string)
+	@Override
+	public int convert(String string)
 	{
 		return Integer.parseInt(string, 8);
 	}
 
-	public static String encode(String message)
+	@Override
+	public String encode(String message)
 	{
 		JValidator.requireNotEmpty(message);
 
@@ -38,7 +41,8 @@ public class OctalEncoder
 		return encoded;
 	}
 
-	public static String decode(String message)
+	@Override
+	public String decode(String message)
 	{
 		JValidator.requireNotEmpty(message);
 

@@ -11,14 +11,16 @@ import lombok.extern.log4j.Log4j2;
  * @author Shakir Ansari
  */
 @Log4j2
-public class BinaryEncoder implements Encoder
+public class BinaryEncoder extends Encoder
 {
 
+	@Override
 	public String convert(int x)
 	{
 		return Integer.toBinaryString(x);
 	}
 
+	@Override
 	public int convert(String string)
 	{
 		return Integer.parseInt(string, 2);

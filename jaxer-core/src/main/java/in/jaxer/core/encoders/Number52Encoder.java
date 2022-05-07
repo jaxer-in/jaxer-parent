@@ -1,29 +1,54 @@
 
 package in.jaxer.core.encoders;
 
+import in.jaxer.core.exceptions.ValidationException;
 import in.jaxer.core.utilities.JValidator;
-import in.jaxer.core.utilities.Strings;
 
 /**
  *
  * @author Shakir Ansari
  */
-public class Number52Encoder
+public class Number52Encoder extends Encoder
 {
 
-	private final static String upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	private String numberScale;
 
-	private final static String lower = upper.toLowerCase();
+	public Number52Encoder()
+	{
+		numberScale = initNumberScale();
+		System.out.println("Number52Encoder.<init>() - numberScale: [" + numberScale + "]");
+	}
 
-	private final static String number = "0123456789";
+	private String initNumberScale()
+	{
+		String _numberScale = "";
+		/**
+		 * ASKII
+		 * A-Z = 65...90
+		 * a-z = 97...122
+		 * 0-9 = 48...57
+		 */
+		for (int i = 0; i < 26; i++)
+		{
+			_numberScale += "" + (char) ((int) 'A' + i);
+		}
+		for (int i = 0; i < 10; i++)
+		{
+			_numberScale += "" + (i);
+		}
+		for (int i = 0; i < 26; i++)
+		{
+			_numberScale += "" + (char) ((int) 'a' + i);
+		}
+		return _numberScale;
+	}
 
-	private static final String alfa52 = upper + number + lower;
-
-	public static String convert(int x)
+	@Override
+	public String convert(int x)
 	{
 		if (x == 0)
 		{
-			return String.valueOf(alfa52.charAt(0));
+			return String.valueOf(numberScale.charAt(0));
 		}
 
 		String num52 = "";
@@ -31,30 +56,32 @@ public class Number52Encoder
 
 		while (x > 0)
 		{
-			temp = x % alfa52.length();
-			num52 = alfa52.charAt(temp) + num52;
-			x /= alfa52.length();
+			temp = x % numberScale.length();
+			num52 = numberScale.charAt(temp) + num52;
+			x /= numberScale.length();
 		}
 		return num52;
 	}
 
-	public static int convert(String string)
+	@Override
+	public int convert(String s)
 	{
 		int val = 0;
 
-		for (int i = 0; i < string.length(); i++)
+		for (int i = 0; i < s.length(); i++)
 		{
-			int d = alfa52.indexOf(string.charAt(i));
+			int d = numberScale.indexOf(s.charAt(i));
 			if (d == -1)
 			{
 				throw new IllegalArgumentException("Invalid number format");
 			}
-			val = alfa52.length() * val + d;
+			val = numberScale.length() * val + d;
 		}
 		return val;
 	}
 
-	public static String encode(String message)
+	@Override
+	public String encode(String message)
 	{
 		JValidator.requireNotEmpty(message);
 
@@ -74,13 +101,15 @@ public class Number52Encoder
 		return encoded;
 	}
 
-	public static String decode(String message)
+	@Override
+	public String decode(String message)
 	{
 		JValidator.requireNotEmpty(message);
 
-		if (!Strings.isAlphaNumeric(message))
+		String pattern = "^[0-9a-zA-Z]*$";
+		if (!message.matches(pattern))
 		{
-			throw new RuntimeException("Invalid number format");
+			throw new ValidationException("Invalid enxryption format");
 		}
 
 		/**

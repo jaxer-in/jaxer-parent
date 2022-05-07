@@ -72,7 +72,7 @@ public class Systems
 		for (String key : properties.stringPropertyNames())
 		{
 			String value = properties.getProperty(key);
-			System.out.println(" [ " + key + ":" + value + "]");
+			System.out.println("[" + key + ":" + value + "]");
 		}
 	}
 }

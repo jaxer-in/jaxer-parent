@@ -6,11 +6,17 @@ package in.jaxer.core.encoders;
  * @author Shakir
  * @date 24 Apr, 2022 - 6:28:45 PM
  */
-public interface Encoder
+public abstract class Encoder
 {
 
-	public String encode(String message);
+	abstract public String convert(int x);
 
-	public String decode(String message);
+	abstract public int convert(String string);
+
+//	abstract public String validationPattern();
+
+	abstract public String encode(String message);
+
+	abstract public String decode(String message);
 
 }
