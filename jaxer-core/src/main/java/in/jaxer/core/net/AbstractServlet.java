@@ -171,7 +171,7 @@ public class AbstractServlet extends GenericServlet
 	protected void writeJsonResponse(HttpServletResponse httpServletResponse, Object obj) throws IOException
 	{
 		setResponseJson(httpServletResponse);
-		writeResponse(httpServletResponse, Singletons.getGson(false).toJson(obj));
+		writeResponse(httpServletResponse, Singletons.getGson().toJson(obj));
 	}
 
 	protected void writeXlsResponse(HttpServletResponse httpServletResponse, String fileName, String data) throws IOException
