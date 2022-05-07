@@ -78,26 +78,19 @@ public class Number52EncoderTest
 	}
 
 	@Test
-	public void decodedMesssageShouldBeEqualsTo()
+	public void encodedMesssageShouldBeEqualsToDecodedMessage()
 	{
-		System.out.println("encodedMesssageShouldBeEqualsTo");
+		System.out.println("encodedMesssageShouldBeEqualsToDecodedMessage");
 
-		String decodedMessage = "hello world";
-		String response = encoder.decode(encodedMessage);
-//		System.out.println("response: [" + response + "]");
+		String message = "HelloWorld!!";
+		System.out.println("message: [" + message + "]");
 
-		MatcherAssert.assertThat(response, CoreMatchers.equalTo(decodedMessage));
-	}
+		String encoded = encoder.encode(message);
+		System.out.println("encoded: [" + encoded + "]");
 
-	@Test
-	public void handleIfEncodedMessageIsInvalid()
-	{
-		System.out.println("handleIfEncodedMessageIsInvalid");
+		String decoded = encoder.decode(encoded);
+		System.out.println("decoded: [" + decoded + "]");
 
-		String message = "hello world";
-		String encoded = "(123)";
-
-		Assertions.assertThrows(ValidationException.class, () -> encoder.decode(encoded));
-
+		MatcherAssert.assertThat(message, CoreMatchers.equalTo(decoded));
 	}
 }
