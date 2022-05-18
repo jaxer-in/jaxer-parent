@@ -52,7 +52,7 @@ public class SystemsTest
 	public void testIsSolaris()
 	{
 		System.out.println("isSolaris");
-		Assertions.assertEquals(false, Systems.isWindows());
+		Assertions.assertEquals(false, Systems.isSolaris());
 	}
 
 	@Test
