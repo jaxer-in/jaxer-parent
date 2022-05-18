@@ -414,7 +414,7 @@ public class Strings
 		JValidator.requireNotEmpty(uglyJson, "Json string cannot be empty");
 
 		JsonElement jsonElement = JsonParser.parseString(uglyJson);
-		return Singletons.getGson(true).toJson(jsonElement);
+		return Singletons.getGsonPrettyPrinting().toJson(jsonElement);
 	}
 
 	public static String removeStartsWith(String string, String startsWith)
