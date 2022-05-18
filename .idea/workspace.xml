@@ -5,13 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8634e999-e94c-4650-abc3-825143794512" name="Changes" comment="dev changes">
-      <change afterPath="$PROJECT_DIR$/.idea/jaxer.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/test/java/in/jaxer/core/encoders/BinaryEncoderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/test/java/in/jaxer/core/encoders/BinaryEncoderTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/Strings.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/Strings.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
