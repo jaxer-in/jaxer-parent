@@ -1,11 +1,9 @@
-
 package in.jaxer.core.utilities;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author Shakir
  */
 public class SystemsTest
