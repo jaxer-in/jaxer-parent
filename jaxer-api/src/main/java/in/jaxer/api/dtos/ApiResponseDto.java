@@ -1,4 +1,3 @@
-
 package in.jaxer.api.dtos;
 
 import in.jaxer.api.constants.ApiStatus;
@@ -6,22 +5,21 @@ import in.jaxer.api.exceptions.ApiException;
 import in.jaxer.api.exceptions.UserException;
 import in.jaxer.core.utilities.JValidator;
 import in.jaxer.core.utilities.Strings;
+import lombok.ToString;
+import lombok.extern.log4j.Log4j2;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.ToString;
-import lombok.extern.log4j.Log4j2;
 
 /**
- *
  * @author Shakir Ansari
  */
 @Log4j2
 @ToString
 public class ApiResponseDto
 {
-
 	public Map<String, Object> taskResponseValue = null;
 
 	public List<String> userMessageList = null;
