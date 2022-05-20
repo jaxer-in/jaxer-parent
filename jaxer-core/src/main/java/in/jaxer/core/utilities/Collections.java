@@ -1,40 +1,63 @@
-
 package in.jaxer.core.utilities;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import in.jaxer.core.constants.Singletons;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
 /**
- *
  * @author Shakir Ansari
  */
 public class Collections
 {
 
+	@Deprecated
 	public static boolean isEmpty(Collection collection)
 	{
 		return JValidator.isEmpty(collection);
 	}
 
+	public static boolean isNullOrEmpty(Collection collection)
+	{
+		return collection == null || collection.isEmpty();
+	}
+
+	@Deprecated
 	public static boolean isNotEmpty(Collection collection)
 	{
 		return JValidator.isNotEmpty(collection);
 	}
 
+	public static boolean isNotNullAndNotEmpty(Collection collection)
+	{
+		return collection != null && !collection.isEmpty();
+	}
+
+	@Deprecated
 	public static boolean isEmpty(Map map)
 	{
 		return JValidator.isEmpty(map);
 	}
 
+	public static boolean isNullOrEmpty(Map map)
+	{
+		return map == null || map.isEmpty();
+	}
+
+	@Deprecated
 	public static boolean isNotEmpty(Map map)
 	{
 		return !isEmpty(map);
+	}
+
+	public static boolean isNotNullAndNotEmpty(Map map)
+	{
+		return map != null && !map.isEmpty();
 	}
 
 	public static <T> List<T> append(List<T> list1, List<T> list2)
