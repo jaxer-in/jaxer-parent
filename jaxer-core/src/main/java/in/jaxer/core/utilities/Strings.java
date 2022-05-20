@@ -1,24 +1,16 @@
-
 package in.jaxer.core.utilities;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import in.jaxer.core.constants.RegexConstants;
 import in.jaxer.core.constants.Singletons;
+
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.NavigableMap;
-import java.util.Random;
-import java.util.TreeMap;
-import java.util.UUID;
 
 /**
- *
  * @author Shakir Ansari
  */
 public class Strings
@@ -34,6 +26,16 @@ public class Strings
 		suffixes.put(1_000_000_000_000L, "T");
 		suffixes.put(1_000_000_000_000_000L, "P");
 		suffixes.put(1_000_000_000_000_000_000L, "E");
+	}
+
+	public static boolean isNullOrEmpty(String str)
+	{
+		return str == null || str.isEmpty();
+	}
+
+	public static boolean isNotNullAndNotEmpty(String str)
+	{
+		return str != null && !str.isEmpty();
 	}
 
 	public static List<String> getListOfStackTraces(Throwable throwable, String packageFilter)
@@ -92,7 +94,7 @@ public class Strings
 			return null;
 		}
 
-		StringBuilder builder = new StringBuilder("");
+		StringBuilder builder = new StringBuilder();
 
 		for (String trace : traces)
 		{
@@ -175,9 +177,7 @@ public class Strings
 		{
 			return false;
 		}
-		int last_dot = email.lastIndexOf('.'),
-				at = email.indexOf('@'),
-				dt = email.indexOf('.');
+		int last_dot = email.lastIndexOf('.'), at = email.indexOf('@'), dt = email.indexOf('.');
 		boolean flag = false;
 
 		if (last_dot > 0 && at > 0)
@@ -291,9 +291,7 @@ public class Strings
 
 	public static String replaceOnce(String str, String sourceString, String targetString)
 	{
-		int len = str.length(),
-				sub_len = sourceString.length(),
-				pos = str.indexOf(sourceString);
+		int len = str.length(), sub_len = sourceString.length(), pos = str.indexOf(sourceString);
 
 		if (pos > 0 && len > 2)
 		{
@@ -309,7 +307,7 @@ public class Strings
 		JValidator.requireNotNull(str);
 
 		int len = str.length();
-		char temp[] = new char[len];
+		char[] temp = new char[len];
 		for (int i = 0; i < len; i++)
 		{
 			temp[len - 1 - i] = str.charAt(i);
@@ -321,7 +319,8 @@ public class Strings
 	{
 		JValidator.requireNotNull(name);
 
-		char temp[] = name.toLowerCase().toCharArray(), ch;
+		char[] temp = name.toLowerCase().toCharArray();
+		char ch;
 		ch = name.charAt(0);
 		if (ch >= 'a' && ch <= 'z')
 		{
