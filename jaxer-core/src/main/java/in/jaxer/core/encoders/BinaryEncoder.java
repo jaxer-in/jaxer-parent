@@ -1,13 +1,12 @@
-
 package in.jaxer.core.encoders;
 
 import in.jaxer.core.exceptions.EncoderException;
 import in.jaxer.core.utilities.JValidator;
-import java.util.Arrays;
 import lombok.extern.log4j.Log4j2;
 
+import java.util.Arrays;
+
 /**
- *
  * @author Shakir Ansari
  */
 @Log4j2
@@ -27,7 +26,7 @@ public class BinaryEncoder implements Encoder
 	@Override
 	public String encode(String message)
 	{
-		JValidator.requireNotEmpty(message);
+		JValidator.throwWhenNullOrEmpty(message);
 
 		String encoded = "";
 
@@ -43,7 +42,7 @@ public class BinaryEncoder implements Encoder
 	@Override
 	public String decode(String message)
 	{
-		JValidator.requireNotEmpty(message);
+		JValidator.throwWhenNullOrEmpty(message);
 
 		String pattern = "^[0-3]*$";
 		if (!message.matches(pattern))
@@ -63,6 +62,6 @@ public class BinaryEncoder implements Encoder
 			decoded += (char) convert(charInt[i]);
 		}
 
-		return JValidator.isEmpty(decoded) ? null : decoded;
+		return JValidator.isNullOrEmpty(decoded) ? null : decoded;
 	}
 }

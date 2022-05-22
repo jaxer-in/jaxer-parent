@@ -1,18 +1,16 @@
-
 package in.jaxer.core.encoders;
 
 import in.jaxer.core.utilities.JValidator;
-import java.util.Arrays;
 import lombok.extern.log4j.Log4j2;
 
+import java.util.Arrays;
+
 /**
- *
  * @author Shakir Ansari
  */
 @Log4j2
 public class HexaEncoder implements Encoder
 {
-
 	private final String digits = "0123456789ABCDEF";
 
 	public String convert(int x)
@@ -52,14 +50,14 @@ public class HexaEncoder implements Encoder
 	@Override
 	public String encode(String message)
 	{
-		JValidator.requireNotEmpty(message);
+		JValidator.throwWhenNullOrEmpty(message);
 
 		String encoded = "";
 
 		for (int i = 0; i < message.length(); i++)
 		{
 			encoded += (i % 2 == 0) ? "g" : "h";
-			encoded += convert((int) message.charAt(i));
+			encoded += convert(message.charAt(i));
 		}
 
 		return encoded;
@@ -68,7 +66,7 @@ public class HexaEncoder implements Encoder
 	@Override
 	public String decode(String message)
 	{
-		JValidator.requireNotEmpty(message);
+		JValidator.throwWhenNullOrEmpty(message);
 
 		String messageLowerCase = message.toLowerCase();
 
@@ -90,7 +88,7 @@ public class HexaEncoder implements Encoder
 			decoded += (char) convert(charInt[i]);
 		}
 
-		return JValidator.isEmpty(decoded) ? null : decoded;
+		return JValidator.isNullOrEmpty(decoded) ? null : decoded;
 	}
 
 }

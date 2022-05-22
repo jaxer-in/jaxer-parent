@@ -1,5 +1,7 @@
-
 package in.jaxer.core.net.socket;
+
+import in.jaxer.core.utilities.JUtilities;
+import lombok.extern.log4j.Log4j2;
 
 import java.io.Closeable;
 import java.io.DataInputStream;
@@ -8,20 +10,15 @@ import java.io.IOException;
 import java.net.Socket;
 
 /**
- *
  * @author Shakir Ansari
  */
+@Log4j2
 public class Client implements AutoCloseable
 {
-
 	private DataInputStream dataInputStream;
-
 	private DataOutputStream dataOutputStream;
-
 	private Socket socket;
-
 	private String port;
-
 	private String host;
 
 	public DataInputStream getDataInputStream()
@@ -76,39 +73,35 @@ public class Client implements AutoCloseable
 
 	private void close(Closeable closeable)
 	{
-		try
-		{
-			if (closeable != null)
-			{
-				closeable.close();
-			}
-		} catch (Exception e)
-		{
-		}
+		JUtilities.close(closeable);
 	}
 
 	public void start() throws IOException
 	{
-		System.out.println("CLIENT starting at port: " + this.port);
+		log.info("CLIENT starting at port: {}", this::getPort);
 
 		this.socket = new Socket(this.host, Integer.parseInt(port));
 		this.dataInputStream = new DataInputStream(this.socket.getInputStream());
 		this.dataOutputStream = new DataOutputStream(this.socket.getOutputStream());
 
-		System.out.println("CLIENT started at port: " + this.port);
+		log.info("CLIENT started at port: {}", this::getPort);
 	}
 
 	public void stop()
 	{
-		System.out.println("CLIENT stopping at port: " + this.port);
+		log.info("CLIENT stopping at port: {}", this::getPort);
+
 		this.close(this.dataInputStream);
 		this.close(this.dataOutputStream);
 		this.close(this.socket);
-		System.out.println("CLIENT stopped at port: " + this.port);
+
+		log.info("CLIENT stopped at port: {}", this::getPort);
 	}
 
 	public void sendMessage(String msg) throws IOException
 	{
+		log.debug("Sending msg: {}", msg);
+
 		this.dataOutputStream.writeUTF(msg);
 		this.dataOutputStream.flush();
 	}

@@ -1,25 +1,21 @@
-
 package in.jaxer.core.files;
 
 import in.jaxer.core.Jaxer;
 import in.jaxer.core.constants.Constants;
 import in.jaxer.core.utilities.Systems;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.font.TextLayout;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileOutputStream;
-import javax.imageio.ImageIO;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.extern.log4j.Log4j2;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.font.TextLayout;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileOutputStream;
+
 /**
- *
  * @author Shakir Ansari
  */
 @Log4j2
@@ -28,19 +24,12 @@ import lombok.extern.log4j.Log4j2;
 @ToString
 public class ImagePlaceholder
 {
-
 	private int width;
-
 	private int height;
-
 	private Font font;
-
 	private Color backgroundColor;
-
 	private Color textColor;
-
 	private String text;
-
 	private String fileType;
 
 	public ImagePlaceholder()
@@ -83,17 +72,18 @@ public class ImagePlaceholder
 	}
 
 	/**
-	 *
 	 * @param text your text on image
 	 *
 	 * @return will return file location
-	 *
 	 */
 	public String saveImage(String text)
 	{
-		String filePath = Systems.getUserHomeDirectory() + File.separator + "image_placeholder_" + System.currentTimeMillis() + "." + this.getFileType();
+		log.debug("text: {}", text);
 
-		try (FileOutputStream fileOutputStream = new FileOutputStream(filePath);)
+		String filePath = Systems.getUserHomeDirectory() + File.separator + "image_placeholder_" + System.currentTimeMillis() + "." + this.getFileType();
+		log.debug("filePath: {}", filePath);
+
+		try (FileOutputStream fileOutputStream = new FileOutputStream(filePath))
 		{
 			ImageIO.write(createPlaceholder(text), this.getFileType(), fileOutputStream);
 			fileOutputStream.flush();
@@ -103,7 +93,6 @@ public class ImagePlaceholder
 			throw new RuntimeException(ex);
 		}
 
-		log.info("file is saved {}", filePath);
 		return filePath;
 	}
 }

@@ -1,4 +1,3 @@
-
 package in.jaxer.core.net;
 
 import in.jaxer.core.constants.ContentType;
@@ -7,31 +6,22 @@ import in.jaxer.core.constants.Singletons;
 import in.jaxer.core.utilities.Files;
 import in.jaxer.core.utilities.JUtilities;
 import in.jaxer.core.utilities.JValidator;
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.util.Arrays;
-import java.util.List;
+
 import javax.servlet.GenericServlet;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.util.Arrays;
+import java.util.List;
 
 /**
- *
  * @author Shakir Ansari
  */
 public class AbstractServlet extends GenericServlet
 {
-
 	@Override
 	public void service(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException
 	{
@@ -103,7 +93,7 @@ public class AbstractServlet extends GenericServlet
 	protected List<String> getPathParams(HttpServletRequest httpServletRequest)
 	{
 		String paramString = httpServletRequest.getPathInfo();
-		if (JValidator.isEmpty(paramString))
+		if (JValidator.isNullOrEmpty(paramString))
 		{
 			return null;
 		}
@@ -161,7 +151,7 @@ public class AbstractServlet extends GenericServlet
 
 	private void writeResponse(HttpServletResponse httpServletResponse, Object object) throws IOException
 	{
-		try (PrintWriter printWriter = httpServletResponse.getWriter();)
+		try (PrintWriter printWriter = httpServletResponse.getWriter())
 		{
 			printWriter.write(object.toString());
 			printWriter.flush();
@@ -193,7 +183,7 @@ public class AbstractServlet extends GenericServlet
 		writeResponse(httpServletResponse, data);
 	}
 
-	protected void printFile(HttpServletResponse httpServletResponse, File file, String mimeType) throws FileNotFoundException, IOException
+	protected void printFile(HttpServletResponse httpServletResponse, File file, String mimeType) throws IOException
 	{
 		httpServletResponse.setContentType(mimeType);
 		System.out.println("AbstractServlet.printFile() - mimeType: [" + mimeType + "]");
@@ -205,10 +195,10 @@ public class AbstractServlet extends GenericServlet
 		}
 	}
 
-	protected void printFile(HttpServletResponse httpServletResponse, File file) throws FileNotFoundException, IOException
+	protected void printFile(HttpServletResponse httpServletResponse, File file) throws IOException
 	{
 		String mimeType = getServletContext().getMimeType(file.getName());
-		if (JValidator.isEmpty(mimeType))
+		if (JValidator.isNullOrEmpty(mimeType))
 		{
 			mimeType = ContentType.APPLICATION_OCTET_STREAM;
 		}
@@ -216,7 +206,7 @@ public class AbstractServlet extends GenericServlet
 		printFile(httpServletResponse, file, mimeType);
 	}
 
-	protected void printImage(HttpServletResponse httpServletResponse, File imageFile) throws FileNotFoundException, IOException
+	protected void printImage(HttpServletResponse httpServletResponse, File imageFile) throws IOException
 	{
 		printFile(httpServletResponse, imageFile, ContentType.IMAGE_JPG);
 	}
@@ -225,7 +215,7 @@ public class AbstractServlet extends GenericServlet
 	{
 		String filename = file.getName();
 		String mimeType = getServletContext().getMimeType(filename);
-		if (JValidator.isEmpty(mimeType))
+		if (JValidator.isNullOrEmpty(mimeType))
 		{
 			mimeType = ContentType.APPLICATION_OCTET_STREAM;
 		}
@@ -243,7 +233,7 @@ public class AbstractServlet extends GenericServlet
 		httpServletResponse.setContentLengthLong(file.length());
 
 		try (OutputStream outputStream = httpServletResponse.getOutputStream();
-			 FileInputStream fileInputStream = new FileInputStream(file);)
+			 FileInputStream fileInputStream = new FileInputStream(file))
 		{
 			Files.copyBytes(fileInputStream, outputStream);
 		}

@@ -1,18 +1,17 @@
-
 package in.jaxer.api.core.tasks;
 
 import in.jaxer.api.constants.RequestConstant;
 import in.jaxer.api.dtos.RequestResponseDto;
 import in.jaxer.core.utilities.JUtilities;
 import in.jaxer.core.utilities.JValidator;
+import lombok.extern.log4j.Log4j2;
+
+import javax.servlet.http.HttpServletRequest;
 import java.sql.Connection;
 import java.sql.Timestamp;
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import lombok.extern.log4j.Log4j2;
 
 /**
- *
  * @author Shakir Ansari
  */
 @Log4j2
@@ -120,7 +119,7 @@ public abstract class AbstractRestTask
 
 	private long getClientMilliseconds()
 	{
-		if (JValidator.isNotEmpty(getParameter(RequestConstant.API_CLIENT_MILLISECONDS)))
+		if (JValidator.isNotNullAndNotEmpty(getParameter(RequestConstant.API_CLIENT_MILLISECONDS)))
 		{
 			return Long.parseLong(getParameter(RequestConstant.API_CLIENT_MILLISECONDS));
 		}

@@ -1,26 +1,17 @@
-
 package in.jaxer.core.encoders;
 
 import in.jaxer.core.exceptions.ValidationException;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
- *
  * @author Shakir
  */
 @TestInstance(Lifecycle.PER_CLASS)
 public class OctalEncoderTest
 {
-
 	private Encoder encoder;
 
 	private final String encodedMessage = "8150914581549154815794081679157816291548144";

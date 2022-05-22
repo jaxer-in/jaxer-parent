@@ -1,26 +1,27 @@
-
 package in.jaxer.core.files;
 
 import in.jaxer.core.utilities.JUtilities;
 import in.jaxer.core.utilities.JValidator;
+import lombok.extern.log4j.Log4j2;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
 /**
- *
  * @author Shakir Ansari
  */
+@Log4j2
 public class JPropertyReader implements AutoCloseable
 {
-
 	private final InputStream inputStream;
-
 	private final Properties properties;
 
 	public JPropertyReader(String fileName) throws IOException
 	{
+		log.info("fileName: {}", fileName);
 		fileName = fileName.endsWith(".properties") ? fileName : fileName + ".properties";
+		log.debug("fileName: {}", fileName);
 
 		this.inputStream = this.getClass().getClassLoader().getResourceAsStream(fileName);
 
@@ -30,21 +31,26 @@ public class JPropertyReader implements AutoCloseable
 
 	public String getKey(String key)
 	{
-		JValidator.requireNotEmpty(key, "Key could not be empty.");
+		log.debug("key: {}", key);
+		JValidator.throwWhenNullOrEmpty(key, "Key could not be null/empty.");
+
 		return this.properties.getProperty(key);
 	}
 
 	public void setKey(String key, String value)
 	{
-		JValidator.requireNotEmpty(key, "Key could not be empty.");
+		log.debug("key: {}, value: {}", key, value);
+		JValidator.throwWhenNullOrEmpty(key, "Key could not be null/empty.");
+
 		this.properties.setProperty(key, value);
 	}
 
 	public int getInt(String key, int defaultValue)
 	{
-		JValidator.requireNotEmpty(key, "Key could not be empty.");
+		log.debug("key: {}, defaultValue: {}", key, defaultValue);
+		JValidator.throwWhenNullOrEmpty(key, "Key could not be null/empty.");
 
-		if (JValidator.isNotEmpty(this.properties.getProperty(key)))
+		if (JValidator.isNotNullAndNotEmpty(this.properties.getProperty(key)))
 		{
 			return Integer.parseInt(this.properties.getProperty(key));
 		}
@@ -53,12 +59,18 @@ public class JPropertyReader implements AutoCloseable
 
 	public boolean containKey(String key)
 	{
+		log.debug("key: {}", key);
+		JValidator.throwWhenNullOrEmpty(key, "Key could not be null/empty.");
+
 		return this.properties.containsKey(key);
 	}
 
-	public boolean containsValue(String key)
+	public boolean containsValue(String value)
 	{
-		return this.properties.containsValue(key);
+		log.debug("value: {}", value);
+		JValidator.throwWhenNull(value, "Value could not be null");
+
+		return this.properties.containsValue(value);
 	}
 
 	@Override

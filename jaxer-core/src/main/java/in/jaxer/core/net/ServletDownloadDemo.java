@@ -1,20 +1,19 @@
-
 package in.jaxer.core.net;
 
 import in.jaxer.core.constants.ContentType;
 import in.jaxer.core.utilities.JValidator;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import lombok.extern.log4j.Log4j2;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import lombok.extern.log4j.Log4j2;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
- *
  * @author Shakir Ansari
  */
 @Log4j2
@@ -32,13 +31,14 @@ public class ServletDownloadDemo extends HttpServlet
 			 FileInputStream fileInputStream = new java.io.FileInputStream(fullFile);)
 		{
 			String mimeType = getServletContext().getMimeType(fullFile);
+			log.debug("before mimeType: {}", mimeType);
 
-			if (JValidator.isEmpty(mimeType))
+			if (JValidator.isNullOrEmpty(mimeType))
 			{
 				mimeType = ContentType.APPLICATION_OCTET_STREAM;
 			}
 
-			log.debug("mimeType: {}", mimeType);
+			log.debug("after mimeType: {}", mimeType);
 
 			response.setContentType(mimeType);
 			response.setHeader("Content-Disposition", "attachment; filename=\"" + filename + "\"");

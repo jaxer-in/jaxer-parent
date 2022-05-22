@@ -1,15 +1,12 @@
-
 package in.jaxer.core.utilities;
 
 import java.util.Random;
 
 /**
- *
  * @author Shakir Ansari
  */
 public class RandomString
 {
-
 	private String characterString = "abcdefghijklmnopqrstuvwxyz0123456789";
 
 	private int length = 8;

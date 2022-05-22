@@ -47,7 +47,7 @@ public class Strings
 
 		List<String> traces = new ArrayList<>();
 
-		if (JValidator.isNotEmpty(throwable.getMessage()))
+		if (Strings.isNotNullAndNotEmpty(throwable.getMessage()))
 		{
 			traces.add(throwable.getMessage());
 		}
@@ -89,7 +89,7 @@ public class Strings
 	{
 		List<String> traces = getListOfStackTraces(throwable, packageFilter);
 
-		if (JValidator.isEmpty(traces))
+		if (JValidator.isNullOrEmpty(traces))
 		{
 			return null;
 		}
@@ -239,13 +239,14 @@ public class Strings
 
 	public String getLimitedString(String str, int limit)
 	{
-		JValidator.requireNotNull(str);
+		JValidator.throwWhenNullOrEmpty(str);
 
 		int len = str.length();
 		if (len < limit)
 		{
 			limit = len;
 		}
+
 		return str.substring(0, limit);
 	}
 
@@ -278,9 +279,9 @@ public class Strings
 
 	public static String replaceAll(String str, String sourceString, String targetString)
 	{
-		JValidator.requireNotEmpty(str);
-		JValidator.requireNotEmpty(sourceString);
-		JValidator.requireNotEmpty(targetString);
+		JValidator.throwWhenNullOrEmpty(str);
+		JValidator.throwWhenNullOrEmpty(sourceString);
+		JValidator.throwWhenNullOrEmpty(targetString);
 
 		while (str.indexOf(sourceString) > 0)
 		{
@@ -304,7 +305,7 @@ public class Strings
 
 	public static String reverse(String str)
 	{
-		JValidator.requireNotNull(str);
+		JValidator.throwWhenNullOrEmpty(str);
 
 		int len = str.length();
 		char[] temp = new char[len];
@@ -317,7 +318,7 @@ public class Strings
 
 	public static String setName(String name)
 	{
-		JValidator.requireNotNull(name);
+		JValidator.throwWhenNullOrEmpty(name);
 
 		char[] temp = name.toLowerCase().toCharArray();
 		char ch;
@@ -332,7 +333,7 @@ public class Strings
 
 	public static String shuffle(String str)
 	{
-		JValidator.requireNotNull(str);
+		JValidator.throwWhenNullOrEmpty(str);
 
 		int len = str.length();
 		if (len == 1)
@@ -356,14 +357,14 @@ public class Strings
 
 	public static String padRight(String s, int n)
 	{
-		JValidator.requireNotNull(s);
+		JValidator.throwWhenNullOrEmpty(s);
 
 		return String.format("%-" + n + "s", s);
 	}
 
 	public static String padLeft(String s, int n)
 	{
-		JValidator.requireNotNull(s);
+		JValidator.throwWhenNullOrEmpty(s);
 
 		return String.format("%" + n + "s", s);
 	}
@@ -410,7 +411,7 @@ public class Strings
 
 	public static String getPrettyJson(String uglyJson)
 	{
-		JValidator.requireNotEmpty(uglyJson, "Json string cannot be empty");
+		JValidator.throwWhenNullOrEmpty(uglyJson, "Json string cannot be empty");
 
 		JsonElement jsonElement = JsonParser.parseString(uglyJson);
 		return Singletons.getGsonPrettyPrinting().toJson(jsonElement);
@@ -418,8 +419,8 @@ public class Strings
 
 	public static String removeStartsWith(String string, String startsWith)
 	{
-		JValidator.requireNotNull(string, "String cannot be null");
-		JValidator.requireNotNull(startsWith, "startsWith cannot be null");
+		JValidator.throwWhenNullOrEmpty(string, "String cannot be null");
+		JValidator.throwWhenNullOrEmpty(startsWith, "startsWith cannot be null");
 
 		if (string.startsWith(startsWith))
 		{
@@ -430,8 +431,8 @@ public class Strings
 
 	public static String removeEndsWith(String string, String endsWith)
 	{
-		JValidator.requireNotNull(string, "String cannot be null");
-		JValidator.requireNotNull(endsWith, "endsWith cannot be null");
+		JValidator.throwWhenNullOrEmpty(string, "String cannot be null");
+		JValidator.throwWhenNullOrEmpty(endsWith, "endsWith cannot be null");
 
 		if (string.endsWith(endsWith))
 		{

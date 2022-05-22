@@ -1,8 +1,7 @@
-
 package in.jaxer.api.core.request;
 
-import in.jaxer.api.core.tasks.AbstractRestTask;
 import in.jaxer.api.constants.RequestConstant;
+import in.jaxer.api.core.tasks.AbstractRestTask;
 import in.jaxer.api.dtos.ApiResponseDto;
 import in.jaxer.api.dtos.RequestResponseDto;
 import in.jaxer.api.listners.Authentication;
@@ -11,16 +10,16 @@ import in.jaxer.core.net.Servlets;
 import in.jaxer.core.utilities.Collections;
 import in.jaxer.core.utilities.JValidator;
 import in.jaxer.core.utilities.PackageScanner;
+import lombok.extern.log4j.Log4j2;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.lang.annotation.Annotation;
 import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Set;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import lombok.extern.log4j.Log4j2;
 
 /**
- *
  * @author Shakir
  * Date 21 Dec, 2021 - 9:11:23 PM
  */
@@ -71,7 +70,7 @@ public abstract class AbstractRequestHandler
 			String requestBody = Servlets.getRequestBody(request);
 			log.debug("requestBody: {}", requestBody);
 
-			if (JValidator.isNotEmpty(requestBody))
+			if (JValidator.isNotNullAndNotEmpty(requestBody))
 			{
 				requestMap = Singletons.getGson().fromJson(requestBody, HashMap.class);
 			}

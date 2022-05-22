@@ -184,7 +184,7 @@ public class JValidator
 
 	public static void throwWhenNullOrEmpty(String str)
 	{
-		throwWhenNullOrEmpty("String cannot be null or empty");
+		throwWhenNullOrEmpty(str, "String cannot be null or empty");
 	}
 
 	@Deprecated

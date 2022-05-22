@@ -1,17 +1,16 @@
-
 package in.jaxer.core.encoders;
 
 import in.jaxer.core.constants.Constants;
-import in.jaxer.core.constants.ContentType;
 import in.jaxer.core.utilities.JValidator;
-import java.util.Arrays;
-import java.util.Base64;
+
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.Base64;
 
 /**
- *
  * @author Shakir Ansari
  */
 public class AesEncoder implements Encoder
@@ -23,7 +22,7 @@ public class AesEncoder implements Encoder
 
 	private static byte[] getKeyBytes(String key)
 	{
-		JValidator.requireNotNull(key, "Key cannot be null");
+		JValidator.throwWhenNullOrEmpty(key, "Key cannot be null");
 
 		while (key.length() < 16)
 		{
@@ -56,7 +55,7 @@ public class AesEncoder implements Encoder
 	@Override
 	public String encode(final String message)
 	{
-		JValidator.requireNotEmpty(message);
+		JValidator.throwWhenNullOrEmpty(message);
 
 		try
 		{
@@ -69,7 +68,7 @@ public class AesEncoder implements Encoder
 
 			cipher.init(Cipher.ENCRYPT_MODE, secretKey);
 
-			byte[] cipherText = cipher.doFinal(message.getBytes(ContentType.UTF_8));
+			byte[] cipherText = cipher.doFinal(message.getBytes(StandardCharsets.UTF_8));
 
 			return Base64.getEncoder().encodeToString(cipherText);
 
@@ -82,7 +81,7 @@ public class AesEncoder implements Encoder
 	@Override
 	public String decode(final String message)
 	{
-		JValidator.requireNotEmpty(message);
+		JValidator.throwWhenNullOrEmpty(message);
 
 		try
 		{
@@ -102,5 +101,4 @@ public class AesEncoder implements Encoder
 			throw new RuntimeException("Error occured while decrypting message", exception);
 		}
 	}
-
 }

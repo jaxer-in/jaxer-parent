@@ -28,10 +28,10 @@ public class ApiResponseDto
 
 	public void addTaskResponseValue(String key, Object value)
 	{
-		JValidator.requireNotEmpty(key);
-		JValidator.requireNotNull(value);
+		JValidator.throwWhenNullOrEmpty(key);
+		JValidator.throwWhenNull(value);
 
-		if (JValidator.isEmpty(taskResponseValue))
+		if (JValidator.isNullOrEmpty(taskResponseValue))
 		{
 			taskResponseValue = new HashMap();
 		}
@@ -41,9 +41,9 @@ public class ApiResponseDto
 
 	public void addUserMessage(String msg)
 	{
-		JValidator.requireNotEmpty(msg);
+		JValidator.throwWhenNullOrEmpty(msg);
 
-		if (JValidator.isEmpty(userMessageList))
+		if (JValidator.isNullOrEmpty(userMessageList))
 		{
 			userMessageList = new ArrayList<>();
 		}
@@ -53,7 +53,7 @@ public class ApiResponseDto
 
 	public void addErrorDto(Exception exception)
 	{
-		JValidator.requireNotNull(exception);
+		JValidator.throwWhenNull(exception);
 
 		if (exception instanceof UserException)
 		{
@@ -82,11 +82,11 @@ public class ApiResponseDto
 			}
 		}
 
-		if (JValidator.isEmpty(errorDto.errorMessage))
+		if (JValidator.isNullOrEmpty(errorDto.errorMessage))
 		{
 			errorDto.errorMessage = exception.getMessage();
 
-			if (JValidator.isEmpty(errorDto.errorMessage))
+			if (JValidator.isNullOrEmpty(errorDto.errorMessage))
 			{
 				errorDto.errorMessage = "Something went wrong";
 			}
@@ -94,7 +94,7 @@ public class ApiResponseDto
 
 		errorDto.stacktraceList = Strings.getListOfStackTraces(exception, null);
 
-		if (JValidator.isNotEmpty(errorDto.stacktraceList))
+		if (JValidator.isNotNullAndNotEmpty(errorDto.stacktraceList))
 		{
 			if (errorDto.stacktraceList.get(0).equalsIgnoreCase(errorDto.errorMessage))
 			{

@@ -1,33 +1,27 @@
-
 package in.jaxer.core.net;
 
 import in.jaxer.core.constants.Constants;
 import in.jaxer.core.utilities.Files;
 import in.jaxer.core.utilities.Systems;
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import lombok.extern.log4j.Log4j2;
+
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
-import lombok.extern.log4j.Log4j2;
 
 /**
- *
  * @author Shakir Ansari
  */
 @Log4j2
 public class FileDownloader
 {
-
 	public static void download(final String url)
 	{
 		String filePath = Systems.getUserHomeDirectory() + File.separator + getFileName(url);
 
 		try (InputStream inputStream = new BufferedInputStream(new URL(url).openStream());
-			 FileOutputStream fileOutputStream = new FileOutputStream(filePath);)
+			 FileOutputStream fileOutputStream = new FileOutputStream(filePath))
 		{
 			String length = Files.getFileSize(getLength(url));
 

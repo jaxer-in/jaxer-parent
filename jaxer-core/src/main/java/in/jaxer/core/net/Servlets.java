@@ -1,4 +1,3 @@
-
 package in.jaxer.core.net;
 
 import in.jaxer.core.constants.ContentType;
@@ -7,23 +6,15 @@ import in.jaxer.core.constants.Singletons;
 import in.jaxer.core.utilities.Files;
 import in.jaxer.core.utilities.JUtilities;
 import in.jaxer.core.utilities.JValidator;
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
- *
  * @author Shakir Ansari
  */
 public class Servlets
@@ -37,27 +28,27 @@ public class Servlets
 	public static String getIpAddress(HttpServletRequest httpServletRequest)
 	{
 		String ip = httpServletRequest.getHeader("X-Forwarded-For");
-		if (JValidator.isEmpty(ip) || "unknown".equalsIgnoreCase(ip))
+		if (JValidator.isNullOrEmpty(ip) || "unknown".equalsIgnoreCase(ip))
 		{
 			ip = httpServletRequest.getHeader("Proxy-Client-IP");
 		}
 
-		if (JValidator.isEmpty(ip) || "unknown".equalsIgnoreCase(ip))
+		if (JValidator.isNullOrEmpty(ip) || "unknown".equalsIgnoreCase(ip))
 		{
 			ip = httpServletRequest.getHeader("WL-Proxy-Client-IP");
 		}
 
-		if (JValidator.isEmpty(ip) || "unknown".equalsIgnoreCase(ip))
+		if (JValidator.isNullOrEmpty(ip) || "unknown".equalsIgnoreCase(ip))
 		{
 			ip = httpServletRequest.getHeader("HTTP_CLIENT_IP");
 		}
 
-		if (JValidator.isEmpty(ip) || "unknown".equalsIgnoreCase(ip))
+		if (JValidator.isNullOrEmpty(ip) || "unknown".equalsIgnoreCase(ip))
 		{
 			ip = httpServletRequest.getHeader("HTTP_X_FORWARDED_FOR");
 		}
 
-		if (JValidator.isEmpty(ip) || "unknown".equalsIgnoreCase(ip))
+		if (JValidator.isNullOrEmpty(ip) || "unknown".equalsIgnoreCase(ip))
 		{
 			ip = httpServletRequest.getRemoteAddr();
 		}
@@ -77,7 +68,7 @@ public class Servlets
 		String params[] = paramString.split("/");
 		for (String param : params)
 		{
-			if (JValidator.isNotEmpty(param))
+			if (JValidator.isNotNullAndNotEmpty(param))
 			{
 				list.add(param);
 			}
@@ -188,7 +179,7 @@ public class Servlets
 	}
 
 
-	@Deprecated	
+	@Deprecated
 	static public void printJsonResponse(HttpServletResponse httpServletResponse, Object obj, boolean isPrettyPrint) throws IOException
 	{
 		setResponseJson(httpServletResponse);
@@ -210,7 +201,7 @@ public class Servlets
 		setResponseJson(response);
 
 		String isPrettyPrint = request.getParameter("isPrettyPrint");
-		if (JValidator.isNotEmpty(isPrettyPrint) && isPrettyPrint.equalsIgnoreCase("true"))
+		if (JValidator.isNotNullAndNotEmpty(isPrettyPrint) && isPrettyPrint.equalsIgnoreCase("true"))
 		{
 			printResponse(response, Singletons.getGsonPrettyPrinting().toJson(obj));
 		} else

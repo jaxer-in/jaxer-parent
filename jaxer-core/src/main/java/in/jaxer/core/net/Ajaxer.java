@@ -1,16 +1,13 @@
-
 package in.jaxer.core.net;
 
-import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
- *
  * @author Shakir Ansari
  */
 public class Ajaxer
 {
-
 	public static final String CONECTION_FAILED = "Unable to connect with Database";
 
 	public static final String DONE = "DONE";

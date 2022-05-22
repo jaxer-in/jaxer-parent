@@ -1,14 +1,13 @@
-
 package in.jaxer.api.dtos;
 
 import in.jaxer.api.constants.RequestConstant;
 import in.jaxer.core.utilities.JValidator;
-import java.util.HashMap;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 
 /**
- *
  * @author Shakir Ansari
  */
 public class RequestResponseDto
@@ -40,12 +39,12 @@ public class RequestResponseDto
 
 	public void setTemporaryObject(String key, Object value)
 	{
-		if (JValidator.isEmpty(key) || value == null)
+		if (JValidator.isNullOrEmpty(key) || value == null)
 		{
 			return;
 		}
 
-		if (JValidator.isEmpty(temporaryObjects))
+		if (JValidator.isNullOrEmpty(temporaryObjects))
 		{
 			temporaryObjects = new HashMap<>();
 		}
@@ -56,7 +55,7 @@ public class RequestResponseDto
 
 	public <T> T getTemporaryObject(String key, Class<T> T)
 	{
-		if (JValidator.isEmpty(key) || T == null)
+		if (JValidator.isNullOrEmpty(key) || T == null)
 		{
 			return null;
 		}

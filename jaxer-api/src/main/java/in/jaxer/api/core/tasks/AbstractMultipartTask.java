@@ -1,16 +1,15 @@
-
 package in.jaxer.api.core.tasks;
 
 import in.jaxer.core.utilities.JValidator;
+import lombok.extern.log4j.Log4j2;
+
+import javax.servlet.http.Part;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import javax.servlet.http.Part;
-import lombok.extern.log4j.Log4j2;
 
 /**
- *
  * @author Shakir Ansari
  */
 @Log4j2
@@ -70,7 +69,7 @@ public abstract class AbstractMultipartTask extends AbstractRestTask
 
 		for (Part part : parts)
 		{
-			if (JValidator.isEmpty(part.getSubmittedFileName()))
+			if (JValidator.isNullOrEmpty(part.getSubmittedFileName()))
 			{
 				continue;
 			}

@@ -1,32 +1,20 @@
-
 package in.jaxer.core.utilities;
 
 import in.jaxer.core.constants.HttpConstants;
 import in.jaxer.core.constants.Singletons;
 import in.jaxer.core.exceptions.JaxerCoreException;
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import lombok.extern.log4j.Log4j2;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.Inet4Address;
-import java.net.Inet6Address;
-import java.net.InetAddress;
-import java.net.URL;
-import java.net.URLConnection;
+import java.io.*;
+import java.net.*;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
-import javax.imageio.ImageIO;
-import lombok.extern.log4j.Log4j2;
 
 /**
- *
  * @author Shakir Ansari
  */
 @Log4j2
@@ -141,7 +129,7 @@ public class JUtilities
 
 	public static boolean isUrl(String urlString)
 	{
-		if (JValidator.isEmpty(urlString))
+		if (JValidator.isNullOrEmpty(urlString))
 		{
 			return false;
 		}
@@ -259,12 +247,13 @@ public class JUtilities
 	}
 
 	/**
-	 *
 	 * @param value
 	 * @param percentage
+	 *
 	 * @return
-	 * @deprecated
+	 *
 	 * @see getPercentage(double, float)
+	 * @deprecated
 	 */
 	@Deprecated
 	public static int getPercentage(int value, int percentage)
@@ -284,12 +273,12 @@ public class JUtilities
 
 	public static <T> T toObject(String jsonString, Class<T> clazz)
 	{
-		return JValidator.isEmpty(jsonString) ? null : Singletons.getGson().fromJson(jsonString, clazz);
+		return JValidator.isNullOrEmpty(jsonString) ? null : Singletons.getGson().fromJson(jsonString, clazz);
 	}
 
 	public static <T> List<T> toObjectList(String jsonString, Class<T> clazz)
 	{
-		return JValidator.isEmpty(jsonString) ? null : Collections.toList(jsonString, clazz);
+		return JValidator.isNullOrEmpty(jsonString) ? null : Collections.toList(jsonString, clazz);
 	}
 
 	public static void close(AutoCloseable autoCloseable)

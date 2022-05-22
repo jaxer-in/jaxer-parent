@@ -1,30 +1,19 @@
-
 package in.jaxer.core.utilities;
 
 import com.google.gson.Gson;
 import in.jaxer.core.constants.Constants;
 import in.jaxer.core.constants.ContentType;
 import in.jaxer.core.constants.Singletons;
+import lombok.extern.log4j.Log4j2;
+
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.file.FileAlreadyExistsException;
-import lombok.extern.log4j.Log4j2;
 
 /**
- *
  * @author Shakir Ansari
  */
 @Log4j2
@@ -281,7 +270,7 @@ public class Files
 	public static void copyBytes(int bufferSize, InputStream inputStream, OutputStream outputStream) throws FileNotFoundException, IOException
 	{
 		log.info("bufferSize: {}, inputStream: {}, outputStream: {}", bufferSize, inputStream, outputStream);
-		
+
 		int i;
 		byte[] buffer = new byte[bufferSize];
 
@@ -333,7 +322,7 @@ public class Files
 	public static String getDefaultMimeType(String filename)
 	{
 		String mime = getMimeType(filename);
-		return JValidator.isNotEmpty(mime) ? mime : ContentType.APPLICATION_OCTET_STREAM;
+		return JValidator.isNotNullAndNotEmpty(mime) ? mime : ContentType.APPLICATION_OCTET_STREAM;
 	}
 
 	public static String getDefaultMimeType(File file)

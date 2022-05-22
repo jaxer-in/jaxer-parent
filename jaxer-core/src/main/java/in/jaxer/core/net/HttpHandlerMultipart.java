@@ -1,17 +1,10 @@
-
 package in.jaxer.core.net;
 
 import in.jaxer.core.constants.Constants;
 import in.jaxer.core.constants.ContentType;
 import in.jaxer.core.utilities.JValidator;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
+
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
@@ -19,25 +12,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
  * @author Shakir Ansari
  */
 public class HttpHandlerMultipart
 {
-
 	private final String boundary;
-//	private HttpURLConnection httpURLConnection;
-
+	//	private HttpURLConnection httpURLConnection;
 	private String charset;
-
 	private String requestURL;
-//	private OutputStream outputStream;
+	//	private OutputStream outputStream;
 //	private PrintWriter printWriter;
-
 	private Map<String, String> headers;
-
 	private Map<String, String> parameters;
-
 	private Map<String, File> fileParts;
 
 	public HttpHandlerMultipart(String requestURL) throws IOException
@@ -180,7 +166,7 @@ public class HttpHandlerMultipart
 				 PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(outputStream, charset), true);)
 			{
 				//Headers
-				if (JValidator.isNotEmpty(headers))
+				if (JValidator.isNotNullAndNotEmpty(headers))
 				{
 					for (Map.Entry<String, String> entry : headers.entrySet())
 					{
@@ -189,7 +175,7 @@ public class HttpHandlerMultipart
 				}
 
 				//Parameters
-				if (JValidator.isNotEmpty(parameters))
+				if (JValidator.isNotNullAndNotEmpty(parameters))
 				{
 					for (Map.Entry<String, String> entry : parameters.entrySet())
 					{
@@ -198,7 +184,7 @@ public class HttpHandlerMultipart
 				}
 
 				//Files
-				if (JValidator.isNotEmpty(fileParts))
+				if (JValidator.isNotNullAndNotEmpty(fileParts))
 				{
 					for (Map.Entry<String, File> entry : fileParts.entrySet())
 					{
@@ -238,5 +224,4 @@ public class HttpHandlerMultipart
 			throw new RuntimeException(ex);
 		}
 	}
-
 }
