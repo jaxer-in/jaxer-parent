@@ -1,6 +1,5 @@
 package in.jaxer.sdbms.utils;
 
-import in.jaxer.core.utilities.Collections;
 import in.jaxer.core.utilities.JValidator;
 import in.jaxer.core.utilities.Strings;
 import in.jaxer.sdbms.NamedStatement;
@@ -70,7 +69,7 @@ public class NamedStatementUtils
 
 	public static void setParameterValue(Map<String, Parameter> valueMap, List<Parameter> parameters)
 	{
-		if (JValidator.isEmpty(parameters))
+		if (JValidator.isNullOrEmpty(parameters))
 		{
 			return;
 		}
@@ -204,7 +203,7 @@ public class NamedStatementUtils
 
 	public static void setParameteres(NamedStatement namedStatement, List<Parameter> parameterList)
 	{
-		if (Collections.isEmpty(parameterList))
+		if (JValidator.isNullOrEmpty(parameterList))
 		{
 			log.error("parameterList is empty");
 			return;

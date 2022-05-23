@@ -1,8 +1,9 @@
-
 package in.jaxer.core.utilities;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.reflect.ClassPath;
+import lombok.extern.log4j.Log4j2;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -15,10 +16,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
-import lombok.extern.log4j.Log4j2;
 
 /**
- *
  * @author Shakir Ansari
  */
 @Log4j2
@@ -164,7 +163,7 @@ public class PackageScanner
 
 		Set<Class> annotationClassList = new HashSet<>();
 
-		if (JValidator.isNotEmpty(classList))
+		if (JValidator.isNotNullAndNotEmpty(classList))
 		{
 			for (Class clazz : classList)
 			{

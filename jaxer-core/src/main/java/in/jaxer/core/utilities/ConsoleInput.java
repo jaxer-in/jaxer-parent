@@ -1,19 +1,12 @@
-
 package in.jaxer.core.utilities;
 
-import java.io.BufferedReader;
-import java.io.Console;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 
 /**
- *
  * @author Shakir Ansari
  */
 public class ConsoleInput implements AutoCloseable
 {
-
 	private InputStream inputStream = null;
 
 	private BufferedReader bufferedReader = null;

@@ -1,15 +1,13 @@
-
 package in.jaxer.sdbms.exceptions;
 
 /**
- *
  * @author Shakir Ansari
  */
-public class ReadOnlyException extends RuntimeException
+public class ReadOnlyException extends JaxerSDBMSException
 {
-
 	public ReadOnlyException()
 	{
+		super();
 	}
 
 	public ReadOnlyException(String msg)

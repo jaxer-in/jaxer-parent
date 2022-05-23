@@ -77,7 +77,7 @@ public class MySqlHandler extends AbstractJpaHandler
 	public <T> T find(Connection connection, Class<T> outputClass, List<Parameter> parameterList)
 	{
 		List<T> objectList = _find(true, connection, outputClass, parameterList);
-		return JValidator.isEmpty(objectList) ? null : objectList.get(0);
+		return JValidator.isNullOrEmpty(objectList) ? null : objectList.get(0);
 	}
 
 	@Override

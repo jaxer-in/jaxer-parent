@@ -1,10 +1,8 @@
-
 package in.jaxer.api.exceptions;
 
 import in.jaxer.api.constants.ApiStatus;
 
 /**
- *
  * @author Shakir Ansari
  */
 public class UserException extends Exception
@@ -12,6 +10,7 @@ public class UserException extends Exception
 
 	public UserException()
 	{
+		super();
 	}
 
 	public UserException(String message)

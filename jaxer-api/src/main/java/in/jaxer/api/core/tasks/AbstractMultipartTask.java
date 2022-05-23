@@ -50,7 +50,7 @@ public abstract class AbstractMultipartTask extends AbstractRestTask
 	protected Part getSinglePart() throws Exception
 	{
 		List<Part> parts = getPartList();
-		if (JValidator.isEmpty(parts))
+		if (JValidator.isNullOrEmpty(parts))
 		{
 			return null;
 		}
@@ -62,7 +62,7 @@ public abstract class AbstractMultipartTask extends AbstractRestTask
 		List<Part> partList = new ArrayList<>();
 		Collection<Part> parts = getRequestResponseDto().getHttpServletRequest().getParts();
 
-		if (JValidator.isEmpty(parts))
+		if (JValidator.isNullOrEmpty(parts))
 		{
 			return partList;
 		}

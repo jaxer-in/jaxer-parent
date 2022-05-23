@@ -1,22 +1,19 @@
-
 package in.jaxer.core.encoders;
 
 import in.jaxer.core.exceptions.ValidationException;
 import in.jaxer.core.utilities.JValidator;
 
 /**
- *
  * @author Shakir Ansari
  */
 public class TwoPipeEncoder implements Encoder
 {
-
 	private static final String EXTENSION = ".tp";
 
 	@Override
 	public String encode(String message)
 	{
-		JValidator.requireNotEmpty(message);
+		JValidator.throwWhenNullOrEmpty(message);
 
 		String firstHalf = "", secondHalf = "";
 		for (int i = 0; i < message.length(); i++)
@@ -37,7 +34,7 @@ public class TwoPipeEncoder implements Encoder
 	@Override
 	public String decode(String msg)
 	{
-		JValidator.requireNotEmpty(msg);
+		JValidator.throwWhenNullOrEmpty(msg);
 
 		int len = msg.length();
 

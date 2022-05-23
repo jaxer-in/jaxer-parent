@@ -1,13 +1,10 @@
-
 package in.jaxer.core.utilities;
 
 /**
- *
  * @author Shakir Ansari
  */
 public class Sortings
 {
-
 	public static void bubbleSort(int[] x)
 	{
 		boolean doMore = true;
@@ -24,23 +21,6 @@ public class Sortings
 					doMore = true;
 				}
 			}
-		}
-	}
-
-	public static void reverseArray(int[] b)
-	{
-		int left = 0;
-		int right = b.length - 1;
-		int temp = 0;
-
-		while (left < right)
-		{
-			temp = b[left];
-			b[left] = b[right];
-			b[right] = temp;
-
-			left++;
-			right--;
 		}
 	}
 
@@ -65,6 +45,22 @@ public class Sortings
 				x[i] = x[minIndex];
 				x[minIndex] = temp;
 			}
+		}
+	}
+
+	public static void reverseArray(int[] b)
+	{
+		int left = 0;
+		int right = b.length - 1;
+
+		while (left < right)
+		{
+			int temp = b[left];
+			b[left] = b[right];
+			b[right] = temp;
+
+			left++;
+			right--;
 		}
 	}
 }

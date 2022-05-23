@@ -1,13 +1,10 @@
-
 package in.jaxer.sdbms.exceptions;
 
 /**
- *
  * @author Shakir Ansari
  */
-public class ColumnNotFoundException extends RuntimeException
+public class ColumnNotFoundException extends JaxerSDBMSException
 {
-
 	public ColumnNotFoundException()
 	{
 		super();

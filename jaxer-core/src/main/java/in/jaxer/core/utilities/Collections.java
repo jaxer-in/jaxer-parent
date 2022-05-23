@@ -62,17 +62,17 @@ public class Collections
 
 	public static <T> List<T> append(List<T> list1, List<T> list2)
 	{
-		if (isEmpty(list1) && isEmpty(list2))
+		if (isNullOrEmpty(list1) && isNullOrEmpty(list2))
 		{
 			return null;
 		}
 
-		if (isEmpty(list1))
+		if (isNullOrEmpty(list1))
 		{
 			return list2;
 		}
 
-		if (isEmpty(list2))
+		if (isNullOrEmpty(list2))
 		{
 			return list1;
 		}
@@ -93,7 +93,7 @@ public class Collections
 		}
 
 		List<T> responseList = new ArrayList<>();
-		if (isNotEmpty(list))
+		if (isNotNullAndNotEmpty(list))
 		{
 			for (int i = 0; i < list.size(); i++)
 			{
@@ -113,7 +113,7 @@ public class Collections
 	{
 		List<T> responseList = new ArrayList<>();
 
-		if (isNotEmpty(list))
+		if (isNotNullAndNotEmpty(list))
 		{
 			for (int i = start - 1; i < end; i++)
 			{
@@ -126,7 +126,7 @@ public class Collections
 
 	public static <T> List<T> reverse(List<T> list)
 	{
-		if (isEmpty(list))
+		if (isNullOrEmpty(list))
 		{
 			return null;
 		}
@@ -150,14 +150,14 @@ public class Collections
 
 	public static <T> List<T> toList(String text, Class<T> clazz)
 	{
-		JValidator.requireNotEmpty(text);
+		JValidator.throwWhenNullOrEmpty(text);
 
 		JsonArray array = JsonParser.parseString(text).getAsJsonArray();
 
 		List<T> tList = new ArrayList<>();
 		for (final JsonElement json : array)
 		{
-			tList.add(Singletons.getGson(false).fromJson(json, clazz));
+			tList.add(Singletons.getGson().fromJson(json, clazz));
 		}
 		return tList;
 	}

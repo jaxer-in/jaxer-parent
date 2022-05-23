@@ -1,22 +1,21 @@
-
 package in.jaxer.core.encoders;
 
 import in.jaxer.core.exceptions.ValidationException;
 import in.jaxer.core.utilities.JValidator;
+import lombok.extern.log4j.Log4j2;
 
 /**
- *
  * @author Shakir Ansari
  */
+@Log4j2
 public class Number52Encoder implements Encoder
 {
-
 	private String numberScale;
 
 	public Number52Encoder()
 	{
 		numberScale = initNumberScale();
-		System.out.println("Number52Encoder.<init>() - numberScale: [" + numberScale + "]");
+		log.info("numberScale: {}", numberScale);
 	}
 
 	private String initNumberScale()
@@ -81,7 +80,7 @@ public class Number52Encoder implements Encoder
 	@Override
 	public String encode(String message)
 	{
-		JValidator.requireNotEmpty(message);
+		JValidator.throwWhenNullOrEmpty(message);
 
 		int ch;
 		int length = message.length();
@@ -102,7 +101,7 @@ public class Number52Encoder implements Encoder
 	@Override
 	public String decode(String message)
 	{
-		JValidator.requireNotEmpty(message);
+		JValidator.throwWhenNullOrEmpty(message);
 
 		String pattern = "^[0-9a-zA-Z]*$";
 		if (!message.matches(pattern))
