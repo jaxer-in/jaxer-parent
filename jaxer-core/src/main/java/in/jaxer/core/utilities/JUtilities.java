@@ -20,10 +20,9 @@ import java.util.regex.Pattern;
 @Log4j2
 public class JUtilities
 {
-
 	public static int min(int... values)
 	{
-		int min = 0;
+		int min = values[0];
 		for (int val : values)
 		{
 			min = Math.min(min, val);
@@ -33,7 +32,7 @@ public class JUtilities
 
 	public static int max(int... values)
 	{
-		int max = 0;
+		int max = values[0];
 		for (int value : values)
 		{
 			max = Math.max(max, value);
@@ -59,7 +58,6 @@ public class JUtilities
 			return true;
 		} catch (Exception exception)
 		{
-			exception.printStackTrace();
 			return false;
 		}
 	}
