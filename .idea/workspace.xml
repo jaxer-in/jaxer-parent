@@ -5,46 +5,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8634e999-e94c-4650-abc3-825143794512" name="Changes" comment="dev changes">
-      <change afterPath="$PROJECT_DIR$/jaxer-core/src/test/java/in/jaxer/core/utilities/ClipboardHandlerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jaxer-core/src/test/java/in/jaxer/core/utilities/SortingsTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-api/src/main/java/in/jaxer/api/core/request/AbstractRequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-api/src/main/java/in/jaxer/api/core/request/AbstractRequestHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-api/src/main/java/in/jaxer/api/core/request/MultipartRequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-api/src/main/java/in/jaxer/api/core/request/MultipartRequestHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-api/src/main/java/in/jaxer/api/core/request/RestRequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-api/src/main/java/in/jaxer/api/core/request/RestRequestHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jaxer-api/src/main/java/in/jaxer/api/core/tasks/AbstractMultipartTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-api/src/main/java/in/jaxer/api/core/tasks/AbstractMultipartTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-api/src/main/java/in/jaxer/api/core/tasks/AbstractRestTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-api/src/main/java/in/jaxer/api/core/tasks/AbstractRestTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-api/src/main/java/in/jaxer/api/dtos/ApiResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-api/src/main/java/in/jaxer/api/dtos/ApiResponseDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-api/src/main/java/in/jaxer/api/dtos/RequestResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-api/src/main/java/in/jaxer/api/dtos/RequestResponseDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/encoders/AesEncoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/encoders/AesEncoder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/encoders/BinaryEncoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/encoders/BinaryEncoder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/encoders/HexaEncoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/encoders/HexaEncoder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/encoders/OctalEncoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/encoders/OctalEncoder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/files/GZipManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/files/GZipManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/files/ImagePlaceholder.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/files/ImagePlaceholder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/files/JPropertyReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/files/JPropertyReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/files/PropertyConfigurationManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/files/PropertyConfigurationManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/net/AbstractServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/net/AbstractServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/net/Ajaxer.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/net/Ajaxer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/net/ApacheHttpHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/net/ApacheHttpHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/net/FileDownloader.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/net/FileDownloader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/net/HttpHandlerMultipart.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/net/HttpHandlerMultipart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/net/ServletDownloadDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/net/ServletDownloadDemo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/net/Servlets.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/net/Servlets.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/net/socket/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/net/socket/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/net/socket/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/net/socket/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/ClipboardHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/ClipboardHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-api/src/main/java/in/jaxer/api/exceptions/ApiException.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-api/src/main/java/in/jaxer/api/exceptions/ApiException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-api/src/main/java/in/jaxer/api/exceptions/JaxerApiException.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-api/src/main/java/in/jaxer/api/exceptions/JaxerApiException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-api/src/main/java/in/jaxer/api/exceptions/UserException.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-api/src/main/java/in/jaxer/api/exceptions/UserException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/encoders/Number52Encoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/encoders/Number52Encoder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/encoders/TwoPipeEncoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/encoders/TwoPipeEncoder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/exceptions/EncoderException.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/exceptions/EncoderException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/exceptions/JaxerCoreException.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/exceptions/JaxerCoreException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/exceptions/ValidationException.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/exceptions/ValidationException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/Collections.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/Collections.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/ConsoleInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/ConsoleInput.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/DtoMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/DtoMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/Files.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/Files.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/JUtilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/JUtilities.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/JValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/JValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/PackageScanner.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/PackageScanner.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/QRCodeHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/QRCodeHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/RandomString.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/RandomString.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/Strings.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/Strings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/test/java/in/jaxer/core/encoders/BinaryEncoderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/test/java/in/jaxer/core/encoders/BinaryEncoderTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/test/java/in/jaxer/core/encoders/OctalEncoderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/test/java/in/jaxer/core/encoders/OctalEncoderTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/test/java/in/jaxer/core/utilities/SystemsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/test/java/in/jaxer/core/utilities/SystemsTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/Sortings.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/Sortings.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/MySqlHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/MySqlHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/MysqlJpaHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/MysqlJpaHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/NamedStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/NamedStatement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/ResultsetMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/ResultsetMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/RawMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/RawMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/Repository.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/Repository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/Row.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/Row.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/SimpleQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/SimpleQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/dto/PaginationDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/dto/PaginationDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/exceptions/ColumnNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/exceptions/ColumnNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/exceptions/JaxerSDBMSException.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/exceptions/JaxerSDBMSException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/exceptions/ReadOnlyException.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/exceptions/ReadOnlyException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/exceptions/ValidationException.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/exceptions/ValidationException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/utils/AbstractJpaHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/utils/AbstractJpaHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/utils/NamedStatementUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/utils/NamedStatementUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -76,6 +67,10 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$MAVEN_REPOSITORY$/com/google/zxing/javase/3.4.1/javase-3.4.1-sources.jar!/com/google/zxing/client/j2se/MatrixToImageWriter.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.22/lombok-1.18.22-sources.jar!/lombok/AccessLevel.java" root0="SKIP_INSPECTION" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -90,6 +85,9 @@
     <option name="myRunOnSave" value="true" />
   </component>
   <component name="ProjectId" id="25k1TnEHCDqEIxXkdFxoe415qwS" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -104,7 +102,7 @@
     "project.structure.last.edited": "SDKs",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.keymap"
+    "settings.editor.selected.configurable": "inlay.hints"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -115,22 +113,7 @@
       <recent name="in.jaxer.core.utilities" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.OctalEncoderTest">
-    <configuration name="BinaryEncoderTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="jaxer-core" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="in.jaxer.core.encoders.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="in.jaxer.core.encoders" />
-      <option name="MAIN_CLASS_NAME" value="in.jaxer.core.encoders.BinaryEncoderTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.SortingsTest">
     <configuration name="ClipboardHandlerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="jaxer-core" />
       <extension name="coverage">
@@ -177,12 +160,44 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SortingsTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="jaxer-core" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="in.jaxer.core.utilities.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="in.jaxer.core.utilities" />
+      <option name="MAIN_CLASS_NAME" value="in.jaxer.core.utilities.SortingsTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SortingsTest.bubbleSortTest1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="jaxer-core" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="in.jaxer.core.utilities.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="in.jaxer.core.utilities" />
+      <option name="MAIN_CLASS_NAME" value="in.jaxer.core.utilities.SortingsTest" />
+      <option name="METHOD_NAME" value="bubbleSortTest1" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.SortingsTest" />
+        <item itemvalue="JUnit.SortingsTest.bubbleSortTest1" />
         <item itemvalue="JUnit.OctalEncoderTest" />
         <item itemvalue="JUnit.ClipboardHandlerTest" />
         <item itemvalue="JUnit.ClipboardHandlerTest.onCopyPasteEmptyString" />
-        <item itemvalue="JUnit.BinaryEncoderTest" />
       </list>
     </recent_temporary>
   </component>
@@ -240,5 +255,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="dev changes" />
     <option name="LAST_COMMIT_MESSAGE" value="dev changes" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
