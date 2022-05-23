@@ -5,38 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8634e999-e94c-4650-abc3-825143794512" name="Changes" comment="dev changes">
-      <change afterPath="$PROJECT_DIR$/jaxer-core/src/test/java/in/jaxer/core/utilities/SortingsTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-api/src/main/java/in/jaxer/api/core/tasks/AbstractMultipartTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-api/src/main/java/in/jaxer/api/core/tasks/AbstractMultipartTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-api/src/main/java/in/jaxer/api/exceptions/ApiException.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-api/src/main/java/in/jaxer/api/exceptions/ApiException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-api/src/main/java/in/jaxer/api/exceptions/JaxerApiException.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-api/src/main/java/in/jaxer/api/exceptions/JaxerApiException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-api/src/main/java/in/jaxer/api/exceptions/UserException.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-api/src/main/java/in/jaxer/api/exceptions/UserException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/encoders/Number52Encoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/encoders/Number52Encoder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/encoders/TwoPipeEncoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/encoders/TwoPipeEncoder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/exceptions/EncoderException.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/exceptions/EncoderException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/exceptions/JaxerCoreException.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/exceptions/JaxerCoreException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/exceptions/ValidationException.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/exceptions/ValidationException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/Collections.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/Collections.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/ConsoleInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/ConsoleInput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/DtoMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/DtoMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/Files.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/Files.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/JValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/JValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/PackageScanner.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/PackageScanner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/QRCodeHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/QRCodeHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/Sortings.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/Sortings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/MySqlHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/MySqlHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/MysqlJpaHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/MysqlJpaHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/RawMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/RawMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/Repository.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/Repository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/Row.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/Row.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/SimpleQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/SimpleQuery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/dto/PaginationDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/dto/PaginationDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/exceptions/ColumnNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/exceptions/ColumnNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/exceptions/JaxerSDBMSException.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/exceptions/JaxerSDBMSException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/exceptions/ReadOnlyException.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/exceptions/ReadOnlyException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/exceptions/ValidationException.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/exceptions/ValidationException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/utils/AbstractJpaHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/utils/AbstractJpaHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/utils/NamedStatementUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-sdbms/src/main/java/in/jaxer/sdbms/utils/NamedStatementUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/JUtilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/JUtilities.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,19 +62,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "last_opened_file_path": "C:/Users/Shakir/Documents/git/personal/ershakiransari.github.io/jaxer/pom.xml",
-    "project.structure.last.edited": "SDKs",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "inlay.hints"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Shakir/Documents/git/personal/ershakiransari.github.io/jaxer/pom.xml&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;inlay.hints&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -113,8 +83,8 @@
       <recent name="in.jaxer.core.utilities" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.SortingsTest">
-    <configuration name="ClipboardHandlerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.JUtilitiesTest">
+    <configuration name="JUtilitiesTest$ReverseTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="jaxer-core" />
       <extension name="coverage">
         <pattern>
@@ -122,14 +92,14 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="in.jaxer.core.utilities" />
-      <option name="MAIN_CLASS_NAME" value="in.jaxer.core.utilities.ClipboardHandlerTest" />
+      <option name="PACKAGE_NAME" value="in.jaxer.core.utilities.JUtilitiesTest" />
+      <option name="MAIN_CLASS_NAME" value="in.jaxer.core.utilities.JUtilitiesTest$ReverseTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ClipboardHandlerTest.onCopyPasteEmptyString" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="JUtilitiesTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="jaxer-core" />
       <extension name="coverage">
         <pattern>
@@ -138,9 +108,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="in.jaxer.core.utilities" />
-      <option name="MAIN_CLASS_NAME" value="in.jaxer.core.utilities.ClipboardHandlerTest" />
-      <option name="METHOD_NAME" value="onCopyPasteEmptyString" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="in.jaxer.core.utilities.JUtilitiesTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -193,11 +162,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.JUtilitiesTest" />
+        <item itemvalue="JUnit.JUtilitiesTest$ReverseTest" />
         <item itemvalue="JUnit.SortingsTest" />
         <item itemvalue="JUnit.SortingsTest.bubbleSortTest1" />
         <item itemvalue="JUnit.OctalEncoderTest" />
-        <item itemvalue="JUnit.ClipboardHandlerTest" />
-        <item itemvalue="JUnit.ClipboardHandlerTest.onCopyPasteEmptyString" />
       </list>
     </recent_temporary>
   </component>
