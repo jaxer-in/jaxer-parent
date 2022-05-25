@@ -82,29 +82,37 @@ public class JUtilities
 		return ext == null ? null : "." + ext;
 	}
 
-	public static Dimension getImageDimension(String sourceImageFile) throws IOException
+	public static Dimension getImageDimension(String sourceImageFile)
 	{
 		log.debug("sourceImageFile: {}", sourceImageFile);
 		return getImageDimension(new File(sourceImageFile));
 	}
 
-	public static Dimension getImageDimension(File imgFile) throws IOException
+	public static Dimension getImageDimension(File imgFile)
 	{
 		log.debug("imgFile: {}", imgFile);
 		try (InputStream inputStream = new FileInputStream(imgFile))
 		{
 			return getImageDimension(inputStream);
+		} catch (Exception e)
+		{
+			throw new JaxerCoreException(e);
 		}
-//		return getImageDimension(ImageIO.read(imgFile));
 	}
 
-	public static Dimension getImageDimension(InputStream inputStream) throws IOException
+	public static Dimension getImageDimension(InputStream inputStream)
 	{
 		log.debug("inputStream: {}", inputStream);
-		return getImageDimension(ImageIO.read(inputStream));
+		try
+		{
+			return getImageDimension(ImageIO.read(inputStream));
+		} catch (Exception e)
+		{
+			throw new JaxerCoreException(e);
+		}
 	}
 
-	public static Dimension getImageDimension(BufferedImage bufferedImage) throws IOException
+	public static Dimension getImageDimension(BufferedImage bufferedImage)
 	{
 		log.debug("bufferedImage: {}", bufferedImage);
 		return bufferedImage == null ? null : new Dimension(bufferedImage.getWidth(), bufferedImage.getHeight());

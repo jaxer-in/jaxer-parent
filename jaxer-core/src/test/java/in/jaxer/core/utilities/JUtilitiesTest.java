@@ -4,6 +4,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+
 class JUtilitiesTest
 {
 	@Nested
@@ -173,4 +179,127 @@ class JUtilitiesTest
 		}
 	}
 
+	@Nested
+	public class GetImageDimensionTest
+	{
+		@Test
+		void whenArgIsString()
+		{
+			URL url = JUtilities.class.getResource("/statics/images/lorem-picsum-536x354.jpg");
+
+			Dimension dimension = JUtilities.getImageDimension(url.getPath());
+			Assertions.assertEquals(dimension.width, 536);
+			Assertions.assertEquals(dimension.height, 354);
+		}
+
+		@Test
+		void whenArgIsInvalidString()
+		{
+			URL url = JUtilities.class.getResource("/statics/images/file-does-not-exist.jpg");
+
+			Assertions.assertThrows(NullPointerException.class, () -> JUtilities.getImageDimension(url.getPath()));
+		}
+
+		@Test
+		void whenArgIsFile()
+		{
+			URL url = JUtilities.class.getResource("/statics/images/lorem-picsum-536x354.jpg");
+
+			Dimension dimension = JUtilities.getImageDimension(new File(url.getPath()));
+			Assertions.assertEquals(dimension.width, 536);
+			Assertions.assertEquals(dimension.height, 354);
+		}
+
+		@Test
+		void whenArgIsInvalidFile()
+		{
+			URL url = JUtilities.class.getResource("/statics/images/file-does-not-exist.jpg");
+
+			Assertions.assertThrows(NullPointerException.class, () -> JUtilities.getImageDimension(new File(url.getPath())));
+		}
+
+		@Test
+		void whenArgIsInputStream()
+		{
+			URL url = JUtilities.class.getResource("/statics/images/lorem-picsum-536x354.jpg");
+
+			try
+			{
+				Dimension dimension = JUtilities.getImageDimension(url.openStream());
+				Assertions.assertEquals(dimension.width, 536);
+				Assertions.assertEquals(dimension.height, 354);
+			} catch (IOException e)
+			{
+				throw new RuntimeException(e);
+			}
+
+		}
+
+		@Test
+		void whenArgIsInvalidInputStream()
+		{
+			URL url = JUtilities.class.getResource("/statics/images/file-does-not-exist.jpg");
+
+			Assertions.assertThrows(NullPointerException.class, () ->
+			{
+				Dimension dimension = JUtilities.getImageDimension(url.openStream());
+				Assertions.assertEquals(dimension.width, 536);
+				Assertions.assertEquals(dimension.height, 354);
+			});
+		}
+
+		@Test
+		void whenArgIsBufferedImage()
+		{
+			URL url = JUtilities.class.getResource("/statics/images/lorem-picsum-536x354.jpg");
+
+			try
+			{
+				Dimension dimension = JUtilities.getImageDimension(ImageIO.read(url));
+				Assertions.assertEquals(dimension.width, 536);
+				Assertions.assertEquals(dimension.height, 354);
+			} catch (IOException e)
+			{
+				throw new RuntimeException(e);
+			}
+		}
+
+		@Test
+		void whenArgIsInvalidBufferedImage()
+		{
+			URL url = JUtilities.class.getResource("/statics/images/file-does-not-exist.jpg");
+
+			Assertions.assertThrows(IllegalArgumentException.class, () -> JUtilities.getImageDimension(ImageIO.read(url)));
+		}
+	}
+
+	@Nested
+	public class GetScreenDimensionTest
+	{
+		@Test
+		void shouldBeGreaterThanZero()
+		{
+			Dimension dimension = JUtilities.getScreenDimension();
+			System.out.printf("dimension: %s\n", dimension);
+
+			Assertions.assertTrue(dimension.width > 0);
+			Assertions.assertTrue(dimension.height > 0);
+		}
+	}
+
+	@Nested
+	public class IsUrlTest
+	{
+		@Test
+		void whenInvalidUrl()
+		{
+			Assertions.assertEquals(false, JUtilities.isUrl("hello-world.com"));
+		}
+
+		@Test
+		void whenValidUrl()
+		{
+			Assertions.assertEquals(true, JUtilities.isUrl("https://www.some-website.com"));
+		}
+	}
 }
