@@ -6,7 +6,19 @@
   <component name="ChangeListManager">
     <list default="true" id="8634e999-e94c-4650-abc3-825143794512" name="Changes" comment="dev changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-api/src/main/java/in/jaxer/api/core/request/AbstractRequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-api/src/main/java/in/jaxer/api/core/request/AbstractRequestHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-api/src/main/java/in/jaxer/api/core/tasks/AbstractRestTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-api/src/main/java/in/jaxer/api/core/tasks/AbstractRestTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/constants/RegexConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/constants/RegexConstants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/constants/Singletons.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/constants/Singletons.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/files/PropertyConfigurationManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/files/PropertyConfigurationManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/net/AbstractServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/net/AbstractServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/net/Servlets.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/net/Servlets.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/Collections.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/Collections.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/Files.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/Files.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/JUtilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/JUtilities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/JValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/JValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/Strings.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/Strings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-core/src/test/java/in/jaxer/core/utilities/JUtilitiesTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/test/java/in/jaxer/core/utilities/JUtilitiesTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +32,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -62,19 +75,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Shakir/Documents/git/personal/ershakiransari.github.io/jaxer/pom.xml&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;inlay.hints&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "last_opened_file_path": "C:/Users/Shakir/Documents/git/personal/ershakiransari.github.io/jaxer/pom.xml",
+    "project.structure.last.edited": "SDKs",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "fileTemplates"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -83,7 +96,23 @@
       <recent name="in.jaxer.core.utilities" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.JUtilitiesTest">
+  <component name="RunManager" selected="Maven.parent-clean-package">
+    <configuration name="JUtilitiesTest$GetExtensionTest.whenNoExtensionFile" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="jaxer-core" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="in.jaxer.core.utilities.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="in.jaxer.core.utilities.JUtilitiesTest" />
+      <option name="MAIN_CLASS_NAME" value="in.jaxer.core.utilities.JUtilitiesTest$GetExtensionTest" />
+      <option name="METHOD_NAME" value="whenNoExtensionFile" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="JUtilitiesTest$ReverseTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="jaxer-core" />
       <extension name="coverage">
@@ -109,21 +138,6 @@
       </extension>
       <option name="PACKAGE_NAME" value="in.jaxer.core.utilities" />
       <option name="MAIN_CLASS_NAME" value="in.jaxer.core.utilities.JUtilitiesTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="OctalEncoderTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="jaxer-core" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="in.jaxer.core.encoders.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="in.jaxer.core.encoders" />
-      <option name="MAIN_CLASS_NAME" value="in.jaxer.core.encoders.OctalEncoderTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -163,10 +177,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.JUtilitiesTest" />
+        <item itemvalue="JUnit.JUtilitiesTest$GetExtensionTest.whenNoExtensionFile" />
         <item itemvalue="JUnit.JUtilitiesTest$ReverseTest" />
         <item itemvalue="JUnit.SortingsTest" />
         <item itemvalue="JUnit.SortingsTest.bubbleSortTest1" />
-        <item itemvalue="JUnit.OctalEncoderTest" />
       </list>
     </recent_temporary>
   </component>
