@@ -11,7 +11,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 
 import java.io.BufferedReader;
@@ -24,14 +23,19 @@ import java.util.List;
  */
 public class ApacheHttpHandler
 {
-	private final static HttpClient httpClient = HttpClientBuilder.create().build();
+	private final HttpClient httpClient;
+
+	public ApacheHttpHandler(HttpClient httpClient)
+	{
+		this.httpClient = httpClient;
+	}
 
 	public String doGet(String url) throws IOException
 	{
 		HttpGet httpGet = new HttpGet(url);
 		return getResponse(httpClient.execute(httpGet));
 	}
-
+	
 	public String doPost(String url, List nameValuePairs) throws IOException
 	{
 		HttpPost httpPost = new HttpPost(url);
@@ -79,7 +83,7 @@ public class ApacheHttpHandler
 		return getResponse(httpResponse);
 	}
 
-	public String hitHttpDelete(String url) throws IOException
+	public String doDelete(String url) throws IOException
 	{
 		HttpDelete httpDelete = new HttpDelete(url);
 
