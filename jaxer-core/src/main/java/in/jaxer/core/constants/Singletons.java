@@ -1,30 +1,32 @@
-
 package in.jaxer.core.constants;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.text.SimpleDateFormat;
+
 import javax.activation.MimetypesFileTypeMap;
+import java.awt.*;
+import java.text.SimpleDateFormat;
 
 /**
- *
  * @author Shakir Ansari
  */
 public class Singletons
 {
 
+	@Deprecated
 	private static SimpleDateFormat simpleDateFormat;
 
+	@Deprecated
 	private static Gson gsonPretty;
 
+	@Deprecated
 	private static Gson gson;
 
 	private static MimetypesFileTypeMap mimetypesFileTypeMap = new MimetypesFileTypeMap();
 
 	private static Robot robot = null;
 
+	@Deprecated
 	public static SimpleDateFormat getSimpleDateFormat()
 	{
 		if (simpleDateFormat == null)
@@ -34,6 +36,7 @@ public class Singletons
 		return simpleDateFormat;
 	}
 
+	@Deprecated
 	public static Gson getGson()
 	{
 		if (gson == null)
@@ -44,6 +47,7 @@ public class Singletons
 		return gson;
 	}
 
+	@Deprecated
 	public static Gson getGsonPrettyPrinting()
 	{
 		if (gsonPretty == null)

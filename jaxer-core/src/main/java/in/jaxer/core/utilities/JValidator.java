@@ -71,7 +71,7 @@ public class JValidator
 	{
 		return !isEmpty(map);
 	}
-	
+
 	public static boolean isNotNullAndNotEmpty(Map map)
 	{
 		return Collections.isNotNullAndNotEmpty(map);

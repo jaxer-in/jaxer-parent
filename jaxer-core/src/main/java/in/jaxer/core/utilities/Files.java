@@ -205,7 +205,7 @@ public class Files
 	public static <T> T readJsonObject(Class<T> outputClass, File file) throws IOException
 	{
 		log.debug("outputClass: {}, file: {}, object", outputClass, file);
-		return readJsonObject(outputClass, Singletons.getGson(), file);
+		return readJsonObject(outputClass, JsonHandler.getGson(), file);
 	}
 
 	public static <T> T readJsonObject(Class<T> outputClass, Gson gson, File file) throws IOException
@@ -218,13 +218,13 @@ public class Files
 	public static void writeJsonObject(File file, Object object) throws IOException
 	{
 		log.debug("file: {}, object: {}", file, object);
-		writeJsonObject(Singletons.getGson(), file, object);
+		writeJsonObject(JsonHandler.getGson(), file, object);
 	}
 
 	public static void writeJsonObject(File file, Object object, boolean append) throws IOException
 	{
 		log.debug("file: {}, object: {}, append: {}", file, object, append);
-		writeJsonObject(Singletons.getGson(), file, object, append);
+		writeJsonObject(JsonHandler.getGson(), file, object, append);
 	}
 
 	public static void writeJsonObject(Gson gson, File file, Object object) throws IOException

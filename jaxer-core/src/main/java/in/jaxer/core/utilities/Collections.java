@@ -1,10 +1,5 @@
 package in.jaxer.core.utilities;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-import in.jaxer.core.constants.Singletons;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -15,7 +10,6 @@ import java.util.Map;
  */
 public class Collections
 {
-
 	@Deprecated
 	public static boolean isEmpty(Collection collection)
 	{
@@ -146,20 +140,6 @@ public class Collections
 		}
 
 		return list;
-	}
-
-	public static <T> List<T> toList(String text, Class<T> clazz)
-	{
-		JValidator.throwWhenNullOrEmpty(text);
-
-		JsonArray array = JsonParser.parseString(text).getAsJsonArray();
-
-		List<T> tList = new ArrayList<>();
-		for (final JsonElement json : array)
-		{
-			tList.add(Singletons.getGson().fromJson(json, clazz));
-		}
-		return tList;
 	}
 
 	public static <T> List<T> getNextIdList(int chunk, int currentIndex, List<T> idList)

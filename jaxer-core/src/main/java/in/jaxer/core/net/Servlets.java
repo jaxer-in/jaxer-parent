@@ -2,10 +2,10 @@ package in.jaxer.core.net;
 
 import in.jaxer.core.constants.ContentType;
 import in.jaxer.core.constants.HttpConstants;
-import in.jaxer.core.constants.Singletons;
 import in.jaxer.core.utilities.Files;
 import in.jaxer.core.utilities.JUtilities;
 import in.jaxer.core.utilities.JValidator;
+import in.jaxer.core.utilities.JsonHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
  */
 public class Servlets
 {
-
 	static public String getRequestForwardURI(HttpServletRequest request)
 	{
 		return request.getAttribute("javax.servlet.forward.request_uri").toString();
@@ -65,7 +64,7 @@ public class Servlets
 		}
 
 		List<String> list = new ArrayList();
-		String params[] = paramString.split("/");
+		String[] params = paramString.split("/");
 		for (String param : params)
 		{
 			if (JValidator.isNotNullAndNotEmpty(param))
@@ -171,7 +170,7 @@ public class Servlets
 
 	static public void printResponse(HttpServletResponse httpServletResponse, Object object) throws IOException
 	{
-		try (PrintWriter printWriter = httpServletResponse.getWriter();)
+		try (PrintWriter printWriter = httpServletResponse.getWriter())
 		{
 			printWriter.write(object.toString());
 			printWriter.flush();
@@ -183,7 +182,13 @@ public class Servlets
 	static public void printJsonResponse(HttpServletResponse httpServletResponse, Object obj, boolean isPrettyPrint) throws IOException
 	{
 		setResponseJson(httpServletResponse);
-		printResponse(httpServletResponse, Singletons.getGson(isPrettyPrint).toJson(obj));
+		if (isPrettyPrint)
+		{
+			printResponse(httpServletResponse, JsonHandler.getGsonPrettyPrinting().toJson(obj));
+		} else
+		{
+			printResponse(httpServletResponse, JsonHandler.getGson().toJson(obj));
+		}
 	}
 
 	/**
@@ -203,10 +208,10 @@ public class Servlets
 		String isPrettyPrint = request.getParameter("isPrettyPrint");
 		if (JValidator.isNotNullAndNotEmpty(isPrettyPrint) && isPrettyPrint.equalsIgnoreCase("true"))
 		{
-			printResponse(response, Singletons.getGsonPrettyPrinting().toJson(obj));
+			printResponse(response, JsonHandler.getGsonPrettyPrinting().toJson(obj));
 		} else
 		{
-			printResponse(response, Singletons.getGson().toJson(obj));
+			printResponse(response, JsonHandler.getGson().toJson(obj));
 		}
 	}
 
@@ -229,7 +234,7 @@ public class Servlets
 		printResponse(httpServletResponse, data);
 	}
 
-	static public void printFile(HttpServletResponse httpServletResponse, File file, String mimeType) throws FileNotFoundException, IOException
+	static public void printFile(HttpServletResponse httpServletResponse, File file, String mimeType) throws IOException
 	{
 		httpServletResponse.setContentType(mimeType);
 		System.out.println("AbstractServlet.printFile() - mimeType: [" + mimeType + "]");
@@ -241,12 +246,12 @@ public class Servlets
 		}
 	}
 
-	static public void printFile(HttpServletResponse httpServletResponse, File file) throws FileNotFoundException, IOException
+	static public void printFile(HttpServletResponse httpServletResponse, File file) throws IOException
 	{
 		printFile(httpServletResponse, file, Files.getDefaultMimeType(file));
 	}
 
-	static public void printImage(HttpServletResponse httpServletResponse, File imageFile) throws FileNotFoundException, IOException
+	static public void printImage(HttpServletResponse httpServletResponse, File imageFile) throws IOException
 	{
 		printFile(httpServletResponse, imageFile, ContentType.IMAGE_JPG);
 	}
@@ -271,7 +276,7 @@ public class Servlets
 		httpServletResponse.setContentLengthLong(file.length());
 
 		try (OutputStream outputStream = httpServletResponse.getOutputStream();
-			 FileInputStream fileInputStream = new FileInputStream(file);)
+			 FileInputStream fileInputStream = new FileInputStream(file))
 		{
 			Files.copyBytes(fileInputStream, outputStream);
 		}

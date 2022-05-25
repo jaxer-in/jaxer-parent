@@ -57,25 +57,7 @@ class JUtilitiesTest
 	}
 
 	@Nested
-	public class IsValidUrlTest
-	{
-		@Test
-		void whenUrlsIsInvalid()
-		{
-			String invalidUrl = "https://some-dummy-url.com";
-			Assertions.assertEquals(JUtilities.isValidUrl(invalidUrl), false);
-		}
-
-		@Test
-		void whenUrlsIsValid()
-		{
-			String invalidUrl = "https://www.fb.com";
-			Assertions.assertEquals(JUtilities.isValidUrl(invalidUrl), true);
-		}
-	}
-
-	@Nested
-	public class ReverseTest
+	public class ReverseArrayTest
 	{
 		@Test
 		public void withPositiveValues()
@@ -95,4 +77,100 @@ class JUtilitiesTest
 			Assertions.assertArrayEquals(expectedArray, sourceArray);
 		}
 	}
+
+	@Nested
+	public class IsValidUrlTest
+	{
+		@Test
+		void whenUrlsIsInvalid()
+		{
+			String invalidUrl = "https://some-dummy-url.com";
+			Assertions.assertEquals(JUtilities.isValidUrl(invalidUrl), false);
+		}
+
+		@Test
+		void whenUrlsIsValid()
+		{
+			String invalidUrl = "https://www.fb.com";
+			Assertions.assertEquals(JUtilities.isValidUrl(invalidUrl), true);
+		}
+	}
+
+	@Nested
+	public class IsHtmlStringTest
+	{
+		@Test
+		void whenHtmlStringSingleLine()
+		{
+			String html = "<h1>Hello world</h1>";
+			Assertions.assertTrue(JUtilities.isHtmlString(html));
+		}
+
+		@Test
+		void whenHtmlStringMultiline()
+		{
+			String html = "" +
+					"<!doctype>" +
+					"\n" +
+					"<body>" +
+					"\n" +
+					"<h1>Hello world</h1>" +
+					"\n" +
+					"<body>" +
+					"";
+			Assertions.assertTrue(JUtilities.isHtmlString(html));
+		}
+
+		@Test
+		void whenPlainString()
+		{
+			String plain = "Hello world";
+			Assertions.assertEquals(false, JUtilities.isHtmlString(plain));
+		}
+	}
+
+	@Nested
+	public class GetExtensionTest
+	{
+		@Test
+		void whenImageFile()
+		{
+			Assertions.assertEquals("jpg", JUtilities.getExtension("c:\\users\\john doe\\images\\IMG_00987.jpg"));
+		}
+
+		@Test
+		void whenBinanyFile()
+		{
+			Assertions.assertEquals("exe", JUtilities.getExtension("c:\\users\\john doe\\softwares\\netbeatns.v13.001.patch.exe"));
+		}
+
+		@Test
+		void whenNoExtensionFile()
+		{
+			Assertions.assertNull(JUtilities.getExtension("c:\\users\\john doe\\etc\\simple-text"));
+		}
+	}
+
+	@Nested
+	public class GetExtensionWithDotTest
+	{
+		@Test
+		void whenImageFile()
+		{
+			Assertions.assertEquals(".jpg", JUtilities.getExtensionWithDot("c:\\users\\john doe\\images\\IMG_00987.jpg"));
+		}
+
+		@Test
+		void whenBinanyFile()
+		{
+			Assertions.assertEquals(".exe", JUtilities.getExtensionWithDot("c:\\users\\john doe\\softwares\\netbeatns.v13.001.patch.exe"));
+		}
+
+		@Test
+		void whenNoExtensionFile()
+		{
+			Assertions.assertNull(JUtilities.getExtensionWithDot("c:\\users\\john doe\\etc\\simple-text"));
+		}
+	}
+
 }

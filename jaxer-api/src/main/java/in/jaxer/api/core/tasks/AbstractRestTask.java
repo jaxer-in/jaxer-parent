@@ -2,8 +2,8 @@ package in.jaxer.api.core.tasks;
 
 import in.jaxer.api.constants.RequestConstant;
 import in.jaxer.api.dtos.RequestResponseDto;
-import in.jaxer.core.utilities.JUtilities;
 import in.jaxer.core.utilities.JValidator;
+import in.jaxer.core.utilities.JsonHandler;
 import lombok.extern.log4j.Log4j2;
 
 import javax.servlet.http.HttpServletRequest;
@@ -69,7 +69,7 @@ public abstract class AbstractRestTask
 
 	public <T> T getParameter(String paramName, Class<T> T)
 	{
-		return JUtilities.toObject(getParameter(paramName), T);
+		return JsonHandler.toObject(getParameter(paramName), T);
 	}
 
 	public int getParameterAsInt(String paramName)
@@ -83,7 +83,7 @@ public abstract class AbstractRestTask
 
 	public <T> List<T> getParameterList(String paramName, Class<T> T)
 	{
-		return JUtilities.toObjectList(getParameter(paramName), T);
+		return JsonHandler.toObjectList(getParameter(paramName), T);
 	}
 
 	public void setTemporaryObject(String key, Object value)

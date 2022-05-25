@@ -1,9 +1,7 @@
 package in.jaxer.core.utilities;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
 import in.jaxer.core.constants.RegexConstants;
-import in.jaxer.core.constants.Singletons;
+import lombok.extern.log4j.Log4j2;
 
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
@@ -13,21 +11,9 @@ import java.util.Map.Entry;
 /**
  * @author Shakir Ansari
  */
+@Log4j2
 public class Strings
 {
-
-	private static final NavigableMap<Long, String> suffixes = new TreeMap<>();
-
-	static
-	{
-		suffixes.put(1_000L, "k");
-		suffixes.put(1_000_000L, "M");
-		suffixes.put(1_000_000_000L, "G");
-		suffixes.put(1_000_000_000_000L, "T");
-		suffixes.put(1_000_000_000_000_000L, "P");
-		suffixes.put(1_000_000_000_000_000_000L, "E");
-	}
-
 	public static boolean isNullOrEmpty(String str)
 	{
 		return str == null || str.isEmpty();
@@ -55,7 +41,7 @@ public class Strings
 		StackTraceElement[] stackTraceElements = throwable.getStackTrace();
 		for (StackTraceElement stackTraceElement : stackTraceElements)
 		{
-			if (packageFilter == null)
+			if (JValidator.isNullOrEmpty(packageFilter))
 			{
 				traces.add(stackTraceElement.toString());
 			} else
@@ -85,6 +71,7 @@ public class Strings
 		return stacktraceHashMap;
 	}
 
+	@Deprecated
 	public static String getStackTraces(Throwable throwable, String separator, String packageFilter)
 	{
 		List<String> traces = getListOfStackTraces(throwable, packageFilter);
@@ -113,56 +100,100 @@ public class Strings
 		return builder.toString();
 	}
 
+	@Deprecated
 	public static String getStackTraces(Throwable throwable, String separator)
 	{
 		return getStackTraces(throwable, separator, null);
 	}
 
+	@Deprecated
 	public static String getStackTraces(Throwable throwable)
 	{
 		return getStackTraces(throwable, System.lineSeparator(), null);
 	}
 
-	public static boolean matches(String regex, String string)
+	public static boolean isHashtag(String str)
 	{
-		return string.matches(regex);
+		log.debug("str: {}", str);
+
+		JValidator.throwWhenNullOrEmpty(str);
+
+		return str.matches(RegexConstants.HASHTAG);
 	}
 
-	public static boolean isHashtag(String string)
+	public static boolean isAadharCardNumber(String str)
 	{
-		return matches(RegexConstants.HASHTAG, string);
+		log.debug("str: {}", str);
+
+		JValidator.throwWhenNullOrEmpty(str);
+
+		return str.matches(RegexConstants.AADHAR_CARD_NUMBER);
 	}
 
-	public static boolean isAadharCardNumber(String string)
+	public static boolean isPanCardNumber(String str)
 	{
-		return matches(RegexConstants.AADHAR_CARD_NUMBER, string);
+		log.debug("str: {}", str);
+
+		JValidator.throwWhenNullOrEmpty(str);
+
+		return str.matches(RegexConstants.PANCARD_NUMBER);
 	}
 
-	public static boolean isPanCardNumber(String string)
+	public static boolean isAlphaNumeric(String str)
 	{
-		return matches(RegexConstants.PANCARD_NUMBER, string);
+		log.debug("str: {}", str);
+
+		JValidator.throwWhenNullOrEmpty(str);
+
+		return str.matches(RegexConstants.ALPHA_NUMERIC);
 	}
 
-	public static boolean isAlphaNumeric(String string)
+	@Deprecated
+	public static boolean isAlpha(String str)
 	{
-		return matches(RegexConstants.ALPHA_NUMERIC, string);
+		log.debug("str: {}", str);
+
+		JValidator.throwWhenNullOrEmpty(str);
+
+		return str.matches(RegexConstants.ALPHA);
 	}
 
-	public static boolean isAlpha(String string)
+	@Deprecated
+	public static boolean isCharactersOlny(String str)
 	{
-		return matches(RegexConstants.ALPHA, string);
+		log.debug("str: {}", str);
+
+		JValidator.throwWhenNullOrEmpty(str);
+
+		return str.matches(RegexConstants.CHARACTERS_ONLY);
 	}
 
-	public static boolean isInt(String string)
+	@Deprecated
+	public static boolean isInt(String str)
 	{
-		return matches(RegexConstants.NUMERIC, string);
+		log.debug("str: {}", str);
+
+		JValidator.throwWhenNullOrEmpty(str);
+
+		return str.matches(RegexConstants.NUMERIC);
 	}
 
-	public static boolean isFloat(String floatValue)
+	@Deprecated
+	public static boolean isNumberOnly(String str)
 	{
+		log.debug("str: {}", str);
+
+		JValidator.throwWhenNullOrEmpty(str);
+
+		return str.matches(RegexConstants.NUMBER_ONLY);
+	}
+
+	public static boolean isFloat(String floatString)
+	{
+		log.debug("floatString: {}", floatString);
 		try
 		{
-			Float.parseFloat(floatValue);
+			Float.parseFloat(floatString);
 			return true;
 		} catch (Exception e)
 		{
@@ -172,6 +203,9 @@ public class Strings
 
 	public boolean isEmail(String email)
 	{
+		log.debug("email: {}", email);
+		JValidator.throwWhenNullOrEmpty(email);
+
 		int len = email.length();
 		if (len < 5)
 		{
@@ -239,15 +273,13 @@ public class Strings
 
 	public String getLimitedString(String str, int limit)
 	{
+		log.debug("str: {}, limit: {}", str, limit);
 		JValidator.throwWhenNullOrEmpty(str);
 
 		int len = str.length();
-		if (len < limit)
-		{
-			limit = len;
-		}
+		log.debug("len: {}", len);
 
-		return str.substring(0, limit);
+		return str.substring(0, len < limit ? len : limit);
 	}
 
 	public static String htmlString(String str)
@@ -279,6 +311,8 @@ public class Strings
 
 	public static String replaceAll(String str, String sourceString, String targetString)
 	{
+		log.debug("str: {}, sourceString: {}, targetString: {}", str, sourceString, targetString);
+
 		JValidator.throwWhenNullOrEmpty(str);
 		JValidator.throwWhenNullOrEmpty(sourceString);
 		JValidator.throwWhenNullOrEmpty(targetString);
@@ -287,11 +321,18 @@ public class Strings
 		{
 			str = replaceOnce(str, sourceString, targetString);
 		}
+
 		return str;
 	}
 
 	public static String replaceOnce(String str, String sourceString, String targetString)
 	{
+		log.debug("str: {}, sourceString: {}, targetString: {}", str, sourceString, targetString);
+
+		JValidator.throwWhenNullOrEmpty(str);
+		JValidator.throwWhenNullOrEmpty(sourceString);
+		JValidator.throwWhenNullOrEmpty(targetString);
+
 		int len = str.length(), sub_len = sourceString.length(), pos = str.indexOf(sourceString);
 
 		if (pos > 0 && len > 2)
@@ -305,6 +346,7 @@ public class Strings
 
 	public static String reverse(String str)
 	{
+		log.debug("str: {}", str);
 		JValidator.throwWhenNullOrEmpty(str);
 
 		int len = str.length();
@@ -318,6 +360,7 @@ public class Strings
 
 	public static String setName(String name)
 	{
+		log.debug("name: {}", name);
 		JValidator.throwWhenNullOrEmpty(name);
 
 		char[] temp = name.toLowerCase().toCharArray();
@@ -327,12 +370,14 @@ public class Strings
 		{
 			ch -= 32;
 		}
+
 		temp[0] = ch;
 		return new String(temp);
 	}
 
 	public static String shuffle(String str)
 	{
+		log.debug("str: {}", str);
 		JValidator.throwWhenNullOrEmpty(str);
 
 		int len = str.length();
@@ -409,36 +454,30 @@ public class Strings
 		return UUID.nameUUIDFromBytes(str.getBytes()).toString();
 	}
 
-	public static String getPrettyJson(String uglyJson)
+	public static String removeStartsWith(String str, String startsWith)
 	{
-		JValidator.throwWhenNullOrEmpty(uglyJson, "Json string cannot be empty");
-
-		JsonElement jsonElement = JsonParser.parseString(uglyJson);
-		return Singletons.getGsonPrettyPrinting().toJson(jsonElement);
-	}
-
-	public static String removeStartsWith(String string, String startsWith)
-	{
-		JValidator.throwWhenNullOrEmpty(string, "String cannot be null");
+		log.debug("str: {}, startsWith: {}", str, startsWith);
+		JValidator.throwWhenNullOrEmpty(str, "String cannot be null");
 		JValidator.throwWhenNullOrEmpty(startsWith, "startsWith cannot be null");
 
-		if (string.startsWith(startsWith))
+		if (str.startsWith(startsWith))
 		{
-			return string.substring(startsWith.length());
+			return str.substring(startsWith.length());
 		}
-		return string;
+		return str;
 	}
 
-	public static String removeEndsWith(String string, String endsWith)
+	public static String removeEndsWith(String str, String endsWith)
 	{
-		JValidator.throwWhenNullOrEmpty(string, "String cannot be null");
+		log.debug("str: {}, endsWith: {}", str, endsWith);
+		JValidator.throwWhenNullOrEmpty(str, "String cannot be null");
 		JValidator.throwWhenNullOrEmpty(endsWith, "endsWith cannot be null");
 
-		if (string.endsWith(endsWith))
+		if (str.endsWith(endsWith))
 		{
-			return string.substring(0, string.length() - endsWith.length());
+			return str.substring(0, str.length() - endsWith.length());
 		}
-		return string;
+		return str;
 	}
 
 	public static String valueOf(Object object)
@@ -446,6 +485,18 @@ public class Strings
 		return object == null ? null : object.toString();
 	}
 
+	public static String valueOf(Object object, String defaultValue)
+	{
+		return object == null ? defaultValue : object.toString();
+	}
+
+	/**
+	 * This method will return milliseconds from a date in string datatype
+	 *
+	 * @param date
+	 *
+	 * @return
+	 */
 	public static String valueOf(Date date)
 	{
 		return date == null ? null : String.valueOf(date.getTime());
@@ -456,16 +507,19 @@ public class Strings
 		return timestamp == null ? null : String.valueOf(timestamp.getTime());
 	}
 
-	public static int charCount(String str, char needle)
+	public static int charCount(String str, char ch)
 	{
+		log.debug("str: {}, ch: {}", str, ch);
 		int count = 0;
-		for (int i = 0; i < str.length(); i++)
+
+		for (char chatAt : str.toCharArray())
 		{
-			if (str.charAt(i) == needle)
+			if (chatAt == ch)
 			{
 				count++;
 			}
 		}
+
 		return count;
 	}
 
@@ -486,6 +540,19 @@ public class Strings
 		{
 			return Long.toString(value); //deal with easy case
 		}
+
+		final NavigableMap<Long, String> suffixes = new TreeMap<Long, String>()
+		{
+			{
+				put(1_000L, "k");
+				put(1_000_000L, "M");
+				put(1_000_000_000L, "G");
+				put(1_000_000_000_000L, "T");
+				put(1_000_000_000_000_000L, "P");
+				put(1_000_000_000_000_000_000L, "E");
+			}
+		};
+
 
 		Entry<Long, String> e = suffixes.floorEntry(value);
 		Long divideBy = e.getKey();

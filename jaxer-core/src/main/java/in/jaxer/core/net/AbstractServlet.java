@@ -2,10 +2,10 @@ package in.jaxer.core.net;
 
 import in.jaxer.core.constants.ContentType;
 import in.jaxer.core.constants.HttpConstants;
-import in.jaxer.core.constants.Singletons;
 import in.jaxer.core.utilities.Files;
 import in.jaxer.core.utilities.JUtilities;
 import in.jaxer.core.utilities.JValidator;
+import in.jaxer.core.utilities.JsonHandler;
 
 import javax.servlet.GenericServlet;
 import javax.servlet.ServletException;
@@ -161,7 +161,7 @@ public class AbstractServlet extends GenericServlet
 	protected void writeJsonResponse(HttpServletResponse httpServletResponse, Object obj) throws IOException
 	{
 		setResponseJson(httpServletResponse);
-		writeResponse(httpServletResponse, Singletons.getGson().toJson(obj));
+		writeResponse(httpServletResponse, JsonHandler.getGson().toJson(obj));
 	}
 
 	protected void writeXlsResponse(HttpServletResponse httpServletResponse, String fileName, String data) throws IOException

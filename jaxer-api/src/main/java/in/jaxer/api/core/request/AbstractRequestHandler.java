@@ -5,10 +5,10 @@ import in.jaxer.api.core.tasks.AbstractRestTask;
 import in.jaxer.api.dtos.ApiResponseDto;
 import in.jaxer.api.dtos.RequestResponseDto;
 import in.jaxer.api.listners.Authentication;
-import in.jaxer.core.constants.Singletons;
 import in.jaxer.core.net.Servlets;
 import in.jaxer.core.utilities.Collections;
 import in.jaxer.core.utilities.JValidator;
+import in.jaxer.core.utilities.JsonHandler;
 import in.jaxer.core.utilities.PackageScanner;
 import lombok.extern.log4j.Log4j2;
 
@@ -72,7 +72,7 @@ public abstract class AbstractRequestHandler
 
 			if (JValidator.isNotNullAndNotEmpty(requestBody))
 			{
-				requestMap = Singletons.getGson().fromJson(requestBody, HashMap.class);
+				requestMap = JsonHandler.getGson().fromJson(requestBody, HashMap.class);
 			}
 		}
 

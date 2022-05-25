@@ -2,8 +2,8 @@ package in.jaxer.core.files;
 
 import in.jaxer.core.annotations.PropertyConfiguration;
 import in.jaxer.core.annotations.PropertyKey;
-import in.jaxer.core.constants.Singletons;
 import in.jaxer.core.utilities.JValidator;
+import in.jaxer.core.utilities.JsonHandler;
 import in.jaxer.core.utilities.PackageScanner;
 import lombok.extern.log4j.Log4j2;
 
@@ -121,7 +121,7 @@ public class PropertyConfigurationManager
 						log.debug("appPropertyKey.type().getName(): {}", appPropertyKey.type().getName());
 						try
 						{
-							field.set(newInstance, Singletons.getGson().fromJson(value, appPropertyKey.type()));
+							field.set(newInstance, JsonHandler.getGson().fromJson(value, appPropertyKey.type()));
 						} catch (Exception exception)
 						{
 							log.error("Exception", exception);
