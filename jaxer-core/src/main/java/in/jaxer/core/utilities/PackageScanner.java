@@ -23,13 +23,13 @@ import java.util.jar.JarFile;
 @Log4j2
 public class PackageScanner
 {
-
 	private static final String DOT_STAR = ".*";
-
 	private static final String DOT_CLASS = ".class";
 
 	private static boolean isValidEntryName(String entryName)
 	{
+		log.debug("entryName: {}", entryName);
+
 		return entryName != null
 				&& entryName.endsWith(".class")
 				&& !entryName.contains("$");
@@ -37,9 +37,9 @@ public class PackageScanner
 
 	private static String removeDotClass(String className)
 	{
-		return className.contains(".class")
-				? className.substring(0, className.length() - ".class".length())
-				: className;
+		log.debug("className: {}", className);
+
+		return Strings.removeEndsWith(className, ".class");
 	}
 
 	private static void getClassListFromJar(Set<Class> classes, URL jarUrl) throws UnsupportedEncodingException, IOException, ClassNotFoundException

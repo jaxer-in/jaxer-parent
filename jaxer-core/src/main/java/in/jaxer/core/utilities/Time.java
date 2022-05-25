@@ -1,49 +1,49 @@
-
 package in.jaxer.core.utilities;
 
 import in.jaxer.core.constants.Constants;
-import in.jaxer.core.constants.Singletons;
+import in.jaxer.core.dtos.TimeDifference;
+import lombok.extern.log4j.Log4j2;
+
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 /**
+ * ** ************************************
+ * ** Useful Keys
+ * ** ************************************
+ *
+ * G Era designator :AD
+ * y Year :1996; 96
+ * Y Week year :2009; 09
+ * M Month in year :July; Jul; 07
+ * w Week in year :27
+ * W Week in month :2
+ * D Day in year :189
+ * d Day in month :10
+ * F Day of week in month :2
+ * E Day name in week :Tuesday; Tue
+ * u Day number of week :(1 = Monday, …, 7 = Sunday)	1
+ * a Am/pm marker	PM
+ * H Hour in day (0-23)	0
+ * k Hour in day (1-24)	24
+ * K Hour in am/pm (0-11)	0
+ * h Hour in am/pm (1-12)	12
+ * m Minute in hour	30
+ * s Second in minute	55
+ * S Millisecond	978
+ * z Time zone	Pacific Standard Time; PST; GMT-08:00
+ * Z Time zone	-0800
+ * X Time zone	-08; -0800; -08:00
+ *
+ * ** *************************************
  *
  * @author Shakir Ansari
  */
+@Log4j2
 public class Time
 {
-
-	/*
-	 *** ************************************
-	 *** Useful Keys
-	 *** ************************************
-	 *
-	 * G Era designator :AD
-	 * y Year :1996; 96
-	 * Y Week year :2009; 09
-	 * M Month in year :July; Jul; 07
-	 * w Week in year :27
-	 * W Week in month :2
-	 * D Day in year :189
-	 * d Day in month :10
-	 * F Day of week in month :2
-	 * E Day name in week :Tuesday; Tue
-	 * u Day number of week :(1 = Monday, …, 7 = Sunday)	1
-	 * a Am/pm marker	PM
-	 * H Hour in day (0-23)	0
-	 * k Hour in day (1-24)	24
-	 * K Hour in am/pm (0-11)	0
-	 * h Hour in am/pm (1-12)	12
-	 * m Minute in hour	30
-	 * s Second in minute	55
-	 * S Millisecond	978
-	 * z Time zone	Pacific Standard Time; PST; GMT-08:00
-	 * Z Time zone	-0800
-	 * X Time zone	-08; -0800; -08:00
-	 *
-	 *** *************************************
-	 */
 	private static Date _addTime(Date date, int field, int amount)
 	{
 		Calendar cal = Calendar.getInstance();
@@ -89,8 +89,8 @@ public class Time
 
 	public static String formatDate(String format, Date date)
 	{
-		Singletons.getSimpleDateFormat().applyPattern(format);
-		return Singletons.getSimpleDateFormat().format(date);
+		new SimpleDateFormat().applyPattern(format);
+		return new SimpleDateFormat().format(date);
 	}
 
 	public static String formatDate(String format, long miliseconds)
@@ -102,8 +102,8 @@ public class Time
 	{
 		try
 		{
-			Singletons.getSimpleDateFormat().applyPattern(format);
-			return Singletons.getSimpleDateFormat().parse(date);
+			new SimpleDateFormat().applyPattern(format);
+			return new SimpleDateFormat().parse(date);
 		} catch (ParseException ex)
 		{
 			throw new RuntimeException("Exception occured while parsing date:[" + date + "], in given format:[" + format + "]", ex);
@@ -150,58 +150,56 @@ public class Time
 		return formatDate(Constants.MySQLDateTime, date);
 	}
 
-	public static String timeDifference(Date start)
+	public static TimeDifference getTimeDifference(Date start)
 	{
-		return timeDifference(start, new Date());
+		log.debug("start: {}", start);
+
+		return getTimeDifference(start, new Date());
 	}
 
-	public static String timeDifference(Date start, Date end)
+	public static TimeDifference getTimeDifference(Date start, Date end)
 	{
-		System.out.println("Time.timeDifference() - start: " + start);
-		System.out.println("Time.timeDifference() - end: " + end);
-		return timeDifference(start.getTime(), end.getTime());
+		log.debug("start: {}, end: {}", start, end);
+
+		return getTimeDifference(start.getTime(), end.getTime());
 	}
 
-	public static String timeDifference(long start)
+	public static TimeDifference getTimeDifference(long start)
 	{
-		return timeDifference(start, System.currentTimeMillis());
+		log.debug("start: {}", start);
+		return getTimeDifference(start, System.currentTimeMillis());
 	}
 
-	public static String timeDifference(long start, long end)
+	public static TimeDifference getTimeDifference(long start, long end)
 	{
-		long diff = end - start;
+		log.debug("start: {}, end: {}", start, end);
 
-		System.out.println("Time.timeDifference() - start: " + start);
-		System.out.println("Time.timeDifference() - end: " + end);
-		System.out.println("Time.timeDifference() - diff: " + diff);
+		boolean inverse = end > start;
+		log.debug("inverse: {}", inverse);
 
-		long seconds = diff / 1000 % 60;
-		long minutes = diff / (60 * 1000) % 60;
-		long hours = diff / (60 * 60 * 1000) % 24;
-		long days = diff / (24 * 60 * 60 * 1000);
+		long diff = inverse ? end - start : start - end;
+		log.debug("diff: {}", diff);
 
-		String response = "";
+		TimeDifference timeDifference = new TimeDifference();
 
-		if (days > 0)
+		if (diff == 0)
 		{
-			response += days + " days, ";
+			return timeDifference;
 		}
 
-		if (hours > 0)
+		timeDifference.seconds = diff / 1000 % 60;
+		timeDifference.minutes = diff / (60 * 1000) % 60;
+		timeDifference.hours = diff / (60 * 60 * 1000) % 24;
+		timeDifference.days = diff / (24 * 60 * 60 * 1000);
+
+		if (inverse)
 		{
-			response += hours + " hours, ";
+			timeDifference.seconds = -timeDifference.seconds;
+			timeDifference.minutes = -timeDifference.minutes;
+			timeDifference.hours = -timeDifference.hours;
+			timeDifference.days = -timeDifference.days;
 		}
 
-		if (minutes > 0)
-		{
-			response += minutes + " minutes, ";
-		}
-
-		if (seconds > 0)
-		{
-			response += seconds + " seconds";
-		}
-
-		return response;
+		return timeDifference;
 	}
 }

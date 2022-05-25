@@ -1,19 +1,18 @@
-
 package in.jaxer.core.net;
 
 import in.jaxer.core.constants.ContentType;
 import in.jaxer.core.constants.HttpConstants;
 import in.jaxer.core.utilities.Time;
+import lombok.extern.log4j.Log4j2;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import lombok.extern.log4j.Log4j2;
 
 /**
- *
  * @author Shakir Ansari
  */
 @Log4j2
@@ -62,7 +61,7 @@ public class HttpHandler
 					response.append(responseLine).append(System.lineSeparator());
 				}
 
-				log.debug("time took: {}", Time.timeDifference(startMiliSeconds));
+				log.debug("time took: {}", Time.getTimeDifference(startMiliSeconds));
 
 				return response.toString();
 			}
