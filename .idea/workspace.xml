@@ -6,19 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="8634e999-e94c-4650-abc3-825143794512" name="Changes" comment="dev changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-api/src/main/java/in/jaxer/api/core/request/AbstractRequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-api/src/main/java/in/jaxer/api/core/request/AbstractRequestHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-api/src/main/java/in/jaxer/api/core/tasks/AbstractRestTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-api/src/main/java/in/jaxer/api/core/tasks/AbstractRestTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/constants/RegexConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/constants/RegexConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/constants/Singletons.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/constants/Singletons.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/files/PropertyConfigurationManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/files/PropertyConfigurationManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/net/AbstractServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/net/AbstractServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/net/Servlets.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/net/Servlets.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/Collections.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/Collections.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/Files.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/Files.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/JUtilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/JUtilities.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/JValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/JValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/Strings.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/Strings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jaxer-core/src/test/java/in/jaxer/core/utilities/JUtilitiesTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/test/java/in/jaxer/core/utilities/JUtilitiesTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/net/HttpHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/net/HttpHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/PackageScanner.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/PackageScanner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/RandomString.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/RandomString.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/Systems.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/Systems.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/Time.java" beforeDir="false" afterPath="$PROJECT_DIR$/jaxer-core/src/main/java/in/jaxer/core/utilities/Time.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +88,7 @@
       <recent name="in.jaxer.core.utilities" />
     </key>
   </component>
-  <component name="RunManager" selected="Maven.parent-clean-package">
+  <component name="RunManager" selected="JUnit.RandomStringTest">
     <configuration name="JUtilitiesTest$GetExtensionTest.whenNoExtensionFile" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="jaxer-core" />
       <extension name="coverage">
@@ -143,6 +135,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="RandomStringTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="jaxer-core" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="in.jaxer.core.utilities.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="in.jaxer.core.utilities" />
+      <option name="MAIN_CLASS_NAME" value="in.jaxer.core.utilities.RandomStringTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SortingsTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="jaxer-core" />
       <extension name="coverage">
@@ -158,29 +165,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SortingsTest.bubbleSortTest1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="jaxer-core" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="in.jaxer.core.utilities.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="in.jaxer.core.utilities" />
-      <option name="MAIN_CLASS_NAME" value="in.jaxer.core.utilities.SortingsTest" />
-      <option name="METHOD_NAME" value="bubbleSortTest1" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.RandomStringTest" />
         <item itemvalue="JUnit.JUtilitiesTest" />
         <item itemvalue="JUnit.JUtilitiesTest$GetExtensionTest.whenNoExtensionFile" />
         <item itemvalue="JUnit.JUtilitiesTest$ReverseTest" />
         <item itemvalue="JUnit.SortingsTest" />
-        <item itemvalue="JUnit.SortingsTest.bubbleSortTest1" />
       </list>
     </recent_temporary>
   </component>
