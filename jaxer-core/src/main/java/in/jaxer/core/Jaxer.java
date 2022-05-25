@@ -1,26 +1,26 @@
-
 package in.jaxer.core;
+
+import lombok.extern.log4j.Log4j2;
 
 import java.io.IOException;
 import java.util.Properties;
-import lombok.extern.log4j.Log4j2;
 
 /**
- *
  * @author Shakir
  * Sep 15, 2021 - 2:15:23 PM
  */
+@Log4j2
 public class Jaxer
 {
-
 	public static void main(String[] args) throws IOException
 	{
-		System.out.println(ProjectProperties.getKey(ProjectProperties.PROJECT_NAME) + "-v" + ProjectProperties.getKey(ProjectProperties.PROJECT_VERSION));
+		log.info("{}-v{}",
+				 ProjectProperties.getKey(ProjectProperties.PROJECT_NAME),
+				 ProjectProperties.getKey(ProjectProperties.PROJECT_VERSION));
 	}
 
 	public static class ProjectProperties
 	{
-
 		private final static Properties projectProperties = new Properties();
 
 		public static final String PROJECT_VERSION = "project.version";

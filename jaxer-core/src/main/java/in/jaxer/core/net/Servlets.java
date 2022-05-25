@@ -108,7 +108,6 @@ public class Servlets
 		httpServletResponse.setContentType(ContentType.IMAGE_JPG);
 	}
 
-	//<editor-fold defaultstate="collapsed" desc=" --- cache response --- ">
 	static public void updateCacheHeaders(HttpServletResponse httpServletResponse, long milli)
 	{
 		httpServletResponse.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
@@ -118,7 +117,6 @@ public class Servlets
 		httpServletResponse.setDateHeader(HttpConstants.Expires, expiry);
 		httpServletResponse.setHeader(HttpConstants.Cache_Control, "max-age=" + milli);
 	}
-	//</editor-fold>
 
 	@Deprecated
 	static public String getRequestBody(HttpServletRequest httpServletRequest, boolean autoClose) throws IOException
@@ -176,7 +174,6 @@ public class Servlets
 			printWriter.flush();
 		}
 	}
-
 
 	@Deprecated
 	static public void printJsonResponse(HttpServletResponse httpServletResponse, Object obj, boolean isPrettyPrint) throws IOException
@@ -237,7 +234,7 @@ public class Servlets
 	static public void printFile(HttpServletResponse httpServletResponse, File file, String mimeType) throws IOException
 	{
 		httpServletResponse.setContentType(mimeType);
-		System.out.println("AbstractServlet.printFile() - mimeType: [" + mimeType + "]");
+		System.out.println("printFile() - mimeType: [" + mimeType + "]");
 
 		try (FileInputStream fileInputStream = new FileInputStream(file);
 			 OutputStream outputStream = new BufferedOutputStream(httpServletResponse.getOutputStream()))
@@ -293,6 +290,7 @@ public class Servlets
 	 */
 	static public boolean isMultipartRequest(HttpServletRequest request)
 	{
-		return request.getContentType() != null && request.getContentType().toLowerCase().contains(ContentType.MULTIPART_FORM_DATA);
+		return request.getContentType() != null
+				&& request.getContentType().toLowerCase().contains(ContentType.MULTIPART_FORM_DATA);
 	}
 }

@@ -1,18 +1,16 @@
-
 package in.jaxer.core.net;
+
+import lombok.extern.log4j.Log4j2;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import lombok.extern.log4j.Log4j2;
 
 /**
- *
  * @author Shakir Ansari
  */
 @Log4j2
 public class SessionManager
 {
-
 	public static Object getObject(HttpServletRequest httpServletRequest, String key)
 	{
 		log.debug("key: {}", key);
@@ -43,7 +41,7 @@ public class SessionManager
 	{
 		log.debug("key: {}, object: {}", key, object);
 
-		if (object == null)
+		if (key == null || object == null)
 		{
 			return;
 		}
