@@ -1,4 +1,3 @@
-
 package in.jaxer.api.constants;
 
 import lombok.Getter;
@@ -6,7 +5,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- *
  * @author Shakir Ansari
  */
 @Getter

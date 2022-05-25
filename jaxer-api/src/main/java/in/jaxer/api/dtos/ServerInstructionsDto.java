@@ -1,12 +1,11 @@
-
 package in.jaxer.api.dtos;
+
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
-import lombok.Getter;
 
 /**
- *
  * @author Shakir Ansari
  */
 @Getter

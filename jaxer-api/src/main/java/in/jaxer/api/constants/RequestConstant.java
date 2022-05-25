@@ -1,8 +1,6 @@
-
 package in.jaxer.api.constants;
 
 /**
- *
  * @author Shakir Ansari
  */
 public class RequestConstant

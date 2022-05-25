@@ -1,11 +1,10 @@
-
 package in.jaxer.api.core.tasks;
 
-import java.sql.Connection;
 import lombok.extern.log4j.Log4j2;
 
+import java.sql.Connection;
+
 /**
- *
  * @author Shakir Ansari
  */
 @Log4j2

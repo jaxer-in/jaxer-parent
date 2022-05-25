@@ -34,7 +34,7 @@ public class RestRequestHandler extends AbstractRequestHandler
 		Class<? extends Annotation> clazz = getRequestedTask(requestedApiTaskName);
 		JValidator.throwWhenNull(clazz, "Request ApiTask [" + requestedApiTaskName + "] not found");
 
-		RestTask apiTask = (RestTask) clazz.getAnnotation(RestTask.class);
+		RestTask apiTask = clazz.getAnnotation(RestTask.class);
 
 		if (!apiTask.isPublicApi())
 		{

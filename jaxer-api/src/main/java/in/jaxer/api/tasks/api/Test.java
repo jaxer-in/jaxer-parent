@@ -1,14 +1,13 @@
-
 package in.jaxer.api.tasks.api;
 
+import in.jaxer.api.annotations.RestTask;
 import in.jaxer.api.core.tasks.AbstractApiTask;
 import in.jaxer.core.utilities.Strings;
 import in.jaxer.core.utilities.Time;
+
 import java.sql.Connection;
-import in.jaxer.api.annotations.RestTask;
 
 /**
- *
  * @author Shakir Ansari
  */
 @RestTask(isPublicApi = true)
