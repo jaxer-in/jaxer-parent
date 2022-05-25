@@ -24,6 +24,7 @@ public class Singletons
 
 	private static MimetypesFileTypeMap mimetypesFileTypeMap = new MimetypesFileTypeMap();
 
+	@Deprecated
 	private static Robot robot = null;
 
 	@Deprecated
@@ -87,6 +88,7 @@ public class Singletons
 		return mimetypesFileTypeMap;
 	}
 
+	@Deprecated
 	public static Robot getRobot() throws AWTException
 	{
 		if (robot == null)

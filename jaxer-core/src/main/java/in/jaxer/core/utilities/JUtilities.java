@@ -296,4 +296,15 @@ public class JUtilities
 			throw new JaxerCoreException(exception);
 		}
 	}
+
+	public static BufferedImage getScreenShot()
+	{
+		try
+		{
+			return new Robot().createScreenCapture(new Rectangle(JUtilities.getScreenDimension()));
+		} catch (Exception exception)
+		{
+			throw new JaxerCoreException((exception));
+		}
+	}
 }
