@@ -1,5 +1,6 @@
 package in.jaxer.api.constants;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -10,9 +11,9 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
 public class ApiStatus
 {
-
 	private int code;
 
 	private String message;
@@ -20,11 +21,5 @@ public class ApiStatus
 	public ApiStatus(int code)
 	{
 		this.code = code;
-	}
-
-	public ApiStatus(int code, String message)
-	{
-		this.code = code;
-		this.message = message;
 	}
 }

@@ -3,7 +3,7 @@ package in.jaxer.api.core.request;
 import in.jaxer.api.annotations.MultipartTask;
 import in.jaxer.api.constants.RequestConstant;
 import in.jaxer.api.core.tasks.AbstractMultipartTask;
-import in.jaxer.api.core.tasks.AbstractRestTask;
+import in.jaxer.api.core.tasks.AbstractTask;
 import in.jaxer.api.exceptions.ApiException;
 import in.jaxer.api.listners.Authentication;
 import in.jaxer.core.utilities.JValidator;
@@ -26,7 +26,7 @@ public class MultipartRequestHandler extends AbstractRequestHandler
 	}
 
 	@Override
-	public AbstractRestTask handleRequest(Connection connection, Authentication authentication) throws Exception
+	public AbstractTask handleRequest(Connection connection, Authentication authentication) throws Exception
 	{
 		final String requestedMultipartTaskName = getRequestResponseDto().getTaskName();
 		log.debug("requestedMultipartTaskName: {}", requestedMultipartTaskName);

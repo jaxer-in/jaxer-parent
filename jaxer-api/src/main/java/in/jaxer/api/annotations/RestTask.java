@@ -12,7 +12,6 @@ import java.lang.annotation.Target;
 @Retention(value = RetentionPolicy.RUNTIME)
 public @interface RestTask
 {
-
 	boolean isPublicApi() default false;
 
 	long clientCachingTime() default 0l;
@@ -27,7 +26,5 @@ public @interface RestTask
 	 *
 	 * @return
 	 */
-	String[] allowedRole() default
-			{
-			};
+	String[] allowedRole() default {};
 }

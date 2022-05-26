@@ -5,7 +5,6 @@ package in.jaxer.api.constants;
  */
 public class RequestConstant
 {
-
 	public static final String MESSAGE = "message";
 
 	public static final String SUCCESS = "success";
@@ -27,5 +26,4 @@ public class RequestConstant
 	public static final String API_CLIENT_MILLISECONDS = "API_CLIENT_MILLISECONDS";
 
 	public static final String MULTIPART_TASK_NAME = "MULTIPART_TASK_NAME";
-
 }

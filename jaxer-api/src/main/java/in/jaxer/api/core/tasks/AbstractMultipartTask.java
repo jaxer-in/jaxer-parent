@@ -13,9 +13,8 @@ import java.util.List;
  * @author Shakir Ansari
  */
 @Log4j2
-public abstract class AbstractMultipartTask extends AbstractRestTask
+public abstract class AbstractMultipartTask extends AbstractTask
 {
-
 	protected int uniqueMediaCount = 0;
 
 	protected int duplicateMediaCount = 0;

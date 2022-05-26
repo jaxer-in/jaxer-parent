@@ -14,7 +14,6 @@ import java.io.IOException;
 @Log4j2
 public abstract class AbstractController extends HttpServlet
 {
-
 	abstract protected String getBasePackage();
 
 	protected ApiResponseDto doProcessException(HttpServletResponse response, Exception throwable) throws IOException

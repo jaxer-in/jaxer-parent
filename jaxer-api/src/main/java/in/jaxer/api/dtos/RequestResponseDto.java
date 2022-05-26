@@ -12,17 +12,11 @@ import java.util.HashMap;
  */
 public class RequestResponseDto
 {
-
 	private HashMap<String, Object> requestMap = null;
-
 	private HashMap<String, Object> temporaryObjects = null;
-
 	private ApiResponseDto apiResponseDto = null;
-
 	private HttpServletRequest httpServletRequest = null;
-
 	private HttpServletResponse httpServletResponse = null;
-
 	private boolean isMultipartRequest = false;
 
 	public RequestResponseDto(HashMap<String, Object> requestMap, HttpServletRequest request, HttpServletResponse response, boolean isMultipartRequest)

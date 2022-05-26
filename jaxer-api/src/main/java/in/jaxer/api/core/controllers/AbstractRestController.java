@@ -16,7 +16,6 @@ import java.sql.Connection;
 @Log4j2
 public abstract class AbstractRestController extends AbstractController
 {
-
 	protected ApiResponseDto doProcess(HttpServletRequest request, HttpServletResponse response)
 	{
 		return this.doProcess(request, response, null, null);
@@ -32,6 +31,8 @@ public abstract class AbstractRestController extends AbstractController
 			apiResponseDto = requestHandler.processRequest(connection, request, response, authentication);
 		} catch (Exception exception)
 		{
+			log.error("Exception", exception);
+
 			if (apiResponseDto == null)
 			{
 				apiResponseDto = new ApiResponseDto();
