@@ -15,14 +15,4 @@ public class ErrorDto
 	public String errorMessage;
 	public List<String> stacktraceList;
 	public int httpStatus;
-
-	public ClientInstructionDto clientInstructionDto;
-
-	public static void main(String[] args)
-	{
-		ErrorDto errorDto = new ErrorDto();
-		errorDto.clientInstructionDto = new ClientInstructionDto();
-		errorDto.clientInstructionDto.addInstruction("abc");
-		System.out.println(errorDto.clientInstructionDto.toString());
-	}
 }
