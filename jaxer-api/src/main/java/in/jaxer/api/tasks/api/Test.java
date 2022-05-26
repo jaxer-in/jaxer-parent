@@ -4,21 +4,22 @@ import in.jaxer.api.annotations.RestTask;
 import in.jaxer.api.core.tasks.AbstractApiTask;
 import in.jaxer.core.utilities.Strings;
 import in.jaxer.core.utilities.Time;
+import lombok.extern.log4j.Log4j2;
 
 import java.sql.Connection;
+import java.util.Date;
 
 /**
  * @author Shakir Ansari
  */
+@Log4j2
 @RestTask(isPublicApi = true)
 public class Test extends AbstractApiTask
 {
-//	private static final Logger logger = Logger.getLogger(Test.class);
-
 	@Override
 	public void doApiTask(Connection connection)
 	{
-//		logger.fatal(Test.class.getSimpleName() + " Api invoked at " + Test.class.getName());
+		log.info("Rest task invoked at {}", new Date());
 
 		setParameter("hello", "world");
 		setParameter("key", Strings.getUUID());

@@ -13,7 +13,6 @@ import java.util.Set;
 @Log4j2
 public class Main
 {
-
 	public static void main(String[] args) throws Exception
 	{
 		long start = 0l, end = 0l;

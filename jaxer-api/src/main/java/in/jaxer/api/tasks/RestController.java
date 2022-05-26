@@ -5,6 +5,7 @@ import in.jaxer.api.dtos.ApiResponseDto;
 import in.jaxer.api.dtos.RequestResponseDto;
 import in.jaxer.api.listners.Authentication;
 import in.jaxer.core.net.Servlets;
+import lombok.extern.log4j.Log4j2;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,21 +17,11 @@ import java.sql.Connection;
 /**
  * @author Shakir Ansari
  */
+@Log4j2
 @WebServlet(urlPatterns = "/jaxerRestController")
 public class RestController extends AbstractRestController
 {
-
 	private static final long serialVersionUID = 1L;
-
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-	{
-		ApiResponseDto apiResponseDto = doProcess(request, response, null, new AuthenticationImpl());
-
-		System.out.println("apiResponseDto: [" + apiResponseDto + "]");
-
-		Servlets.printJsonResponse(request, response, apiResponseDto);
-	}
 
 	@Override
 	protected String getBasePackage()
@@ -38,13 +29,22 @@ public class RestController extends AbstractRestController
 		return "in.jaxer.*";
 	}
 
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		ApiResponseDto apiResponseDto = doProcess(request, response, null, new AuthenticationImpl());
+
+		log.debug("apiResponseDto: {}", apiResponseDto);
+
+		Servlets.printJsonResponse(request, response, apiResponseDto);
+	}
+
+
 	private class AuthenticationImpl implements Authentication
 	{
-
 		@Override
 		public void doAuthentication(Connection connection, RequestResponseDto requestResponseObject)
 		{
 		}
 	}
-
 }
