@@ -1,51 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-	<parent>
-		<groupId>io.github.jaxer-in</groupId>
-		<artifactId>jaxer-parent</artifactId>
-		<version>${revision}</version>
-	</parent>
+    <parent>
+        <groupId>io.github.jaxer-in</groupId>
+        <artifactId>jaxer-parent</artifactId>
+        <version>${revision}</version>
+    </parent>
 
-	<artifactId>jaxer-sdbms</artifactId>
-	<name>Jaxer SDBMS</name>
-	<description>Simple database management system</description>
-	<url>https://github.com/jaxer-in/jaxer-parent</url>
+    <artifactId>jaxer-sdbms</artifactId>
+    <name>Jaxer SDBMS</name>
+    <description>Simple database management system</description>
+    <url>https://github.com/jaxer-in/jaxer-parent</url>
 
-	<modelVersion>4.0.0</modelVersion>
-	<packaging>jar</packaging>
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>jar</packaging>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
-	</properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
 
-	<scm>
-		<connection>scm:git:git://github.com:jaxer-in/jaxer-sdbms.git</connection>
-		<developerConnection>scm:git:ssh://github.com:jaxer-in/jaxer-sdbms.git</developerConnection>
-		<url>https://github.com/jaxer-in/jaxer-sdbms.git/tree/main</url>
-	</scm>
+    <scm>
+        <connection>scm:git:git://github.com:jaxer-in/jaxer-sdbms.git</connection>
+        <developerConnection>scm:git:ssh://github.com:jaxer-in/jaxer-sdbms.git</developerConnection>
+        <url>https://github.com/jaxer-in/jaxer-sdbms.git/tree/main</url>
+        <tag>v${project.version}</tag>
+    </scm>
 
-	<dependencies>
-		<dependency>
-			<groupId>io.github.jaxer-in</groupId>
-			<artifactId>jaxer-core</artifactId>
-			<version>${revision}</version>
-		</dependency>
+    <dependencies>
+        <dependency>
+            <groupId>io.github.jaxer-in</groupId>
+            <artifactId>jaxer-core</artifactId>
+            <version>${revision}</version>
+            <scope>provided</scope>
+        </dependency>
 
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>4.0.1</version>
-			<scope>provided</scope>
-		</dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+        </dependency>
 
-		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.11</version>
-		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest</artifactId>
+        </dependency>
+    </dependencies>
 </project>
