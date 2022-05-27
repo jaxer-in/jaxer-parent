@@ -21,14 +21,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
-
-    <scm>
-        <connection>scm:git:git://github.com:jaxer-in/jaxer-api.git</connection>
-        <developerConnection>scm:git:ssh://github.com:jaxer-in/jaxer-api.git</developerConnection>
-        <url>https://github.com/jaxer-in/jaxer-api.git/tree/main</url>
-        <tag>v${project.version}</tag>
-    </scm>
-
+    
     <dependencies>
         <dependency>
             <groupId>io.github.jaxer-in</groupId>

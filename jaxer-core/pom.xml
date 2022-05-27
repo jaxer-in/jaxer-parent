@@ -24,13 +24,6 @@
         <license.dir>${basedir}</license.dir>
     </properties>
 
-    <scm>
-        <connection>scm:git:git://github.com:jaxer-in/jaxer-core.git</connection>
-        <developerConnection>scm:git:ssh://github.com:jaxer-in/jaxer-core.git</developerConnection>
-        <url>https://github.com/jaxer-in/jaxer-core.git/tree/main</url>
-        <tag>v${project.version}</tag>
-    </scm>
-
     <build>
         <plugins>
             <plugin>
