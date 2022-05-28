@@ -45,3 +45,4 @@ buildNumber.properties
 /jaxer-api/nbproject/
 /jaxer-sdbms/nbproject/
 /jaxer-core/nbproject/
+.idea/workspace.xml
