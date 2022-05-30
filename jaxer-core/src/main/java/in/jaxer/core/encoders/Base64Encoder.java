@@ -2,17 +2,15 @@ package in.jaxer.core.encoders;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Base64;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
  */
 public class Base64Encoder
 {
-
 	public static byte[] encode(byte[] bytes)
 	{
 		return Base64.getEncoder().encode(bytes);

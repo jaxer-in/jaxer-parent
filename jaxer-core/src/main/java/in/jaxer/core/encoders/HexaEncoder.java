@@ -6,7 +6,7 @@ import lombok.extern.log4j.Log4j2;
 import java.util.Arrays;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
  */
 @Log4j2
 public class HexaEncoder implements Encoder
@@ -90,5 +90,4 @@ public class HexaEncoder implements Encoder
 
 		return JValidator.isNullOrEmpty(decoded) ? null : decoded;
 	}
-
 }

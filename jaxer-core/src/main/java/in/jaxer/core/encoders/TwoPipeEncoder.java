@@ -4,7 +4,7 @@ import in.jaxer.core.exceptions.ValidationException;
 import in.jaxer.core.utilities.JValidator;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
  */
 public class TwoPipeEncoder implements Encoder
 {
@@ -70,5 +70,4 @@ public class TwoPipeEncoder implements Encoder
 
 		return deMsg;
 	}
-
 }

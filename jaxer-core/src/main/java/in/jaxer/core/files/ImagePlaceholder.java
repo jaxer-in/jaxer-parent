@@ -16,7 +16,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
  */
 @Log4j2
 @Getter

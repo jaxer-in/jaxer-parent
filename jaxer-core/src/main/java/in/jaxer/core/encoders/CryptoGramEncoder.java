@@ -3,11 +3,10 @@ package in.jaxer.core.encoders;
 import java.util.Random;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
  */
 public class CryptoGramEncoder
 {
-
 	private static char[] getAlphabet()
 	{
 		char[] a = new char[26];

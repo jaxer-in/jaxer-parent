@@ -7,12 +7,11 @@ import lombok.extern.log4j.Log4j2;
 import java.util.Arrays;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
  */
 @Log4j2
 public class BinaryEncoder implements Encoder
 {
-
 	public String convert(int x)
 	{
 		return Integer.toBinaryString(x);

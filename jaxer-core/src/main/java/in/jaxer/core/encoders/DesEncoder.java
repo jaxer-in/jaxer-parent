@@ -1,7 +1,6 @@
 package in.jaxer.core.encoders;
 
 import in.jaxer.core.constants.Constants;
-import in.jaxer.core.constants.ContentType;
 import in.jaxer.core.utilities.JValidator;
 
 import javax.crypto.Cipher;
@@ -11,15 +10,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
  */
 public class DesEncoder implements Encoder
 {
-
 	private static KeyGenerator keygenerator = null;
-
 	private static SecretKey secretKey = null;
-
 	private static Cipher cipher;
 
 	private static void init() throws Exception

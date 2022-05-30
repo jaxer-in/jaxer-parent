@@ -2,7 +2,7 @@ package in.jaxer.core.exceptions;
 
 /**
  * @author Shakir
- * @Date 22 Dec, 2021 - 12:56:26 AM
+ * date 2021-12-22 00:56
  */
 public class JaxerCoreException extends RuntimeException
 {

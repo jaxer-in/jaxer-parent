@@ -1,7 +1,7 @@
 package in.jaxer.core.exceptions;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
  */
 public class ValidationException extends JaxerCoreException
 {

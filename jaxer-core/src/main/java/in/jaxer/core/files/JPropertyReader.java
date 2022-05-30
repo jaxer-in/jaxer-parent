@@ -9,7 +9,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
  */
 @Log4j2
 public class JPropertyReader implements AutoCloseable

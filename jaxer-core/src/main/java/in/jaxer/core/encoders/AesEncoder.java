@@ -11,13 +11,11 @@ import java.util.Arrays;
 import java.util.Base64;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
  */
 public class AesEncoder implements Encoder
 {
-
 	private final String key;
-
 	private static Cipher cipher = null;
 
 	private static byte[] getKeyBytes(String key)

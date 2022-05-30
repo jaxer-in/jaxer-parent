@@ -12,7 +12,7 @@ import java.lang.reflect.Modifier;
 import java.util.Set;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
  */
 @Log4j2
 @lombok.Getter

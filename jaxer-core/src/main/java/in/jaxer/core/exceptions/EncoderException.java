@@ -2,7 +2,7 @@ package in.jaxer.core.exceptions;
 
 /**
  * @author Shakir
- * @date 1 May, 2022 - 6:07:15 PM
+ * date 2022-05-01 - 18:07
  */
 public class EncoderException extends JaxerCoreException
 {

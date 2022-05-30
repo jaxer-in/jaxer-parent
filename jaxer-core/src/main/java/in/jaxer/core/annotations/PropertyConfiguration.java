@@ -6,13 +6,11 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
  */
 @Target(value = ElementType.TYPE)
 @Retention(value = RetentionPolicy.RUNTIME)
 public @interface PropertyConfiguration
 {
-
 	String value();
-
 }

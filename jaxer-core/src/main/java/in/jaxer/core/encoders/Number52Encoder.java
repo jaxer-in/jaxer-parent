@@ -5,7 +5,7 @@ import in.jaxer.core.utilities.JValidator;
 import lombok.extern.log4j.Log4j2;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
  */
 @Log4j2
 public class Number52Encoder implements Encoder

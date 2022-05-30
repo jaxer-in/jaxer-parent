@@ -12,7 +12,7 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
  */
 @Log4j2
 public class GZipManager
