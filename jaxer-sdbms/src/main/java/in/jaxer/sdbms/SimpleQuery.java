@@ -9,7 +9,11 @@ import lombok.extern.log4j.Log4j2;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Shakir Ansari
@@ -77,7 +81,7 @@ public class SimpleQuery
 		{
 			processParams(namedStatement);
 
-			try (ResultSet resultSet = namedStatement.executeQuery();)
+			try (ResultSet resultSet = namedStatement.executeQuery())
 			{
 				return ResultsetMapper.getObjectList(resultSet, entity);
 			}
@@ -94,7 +98,7 @@ public class SimpleQuery
 		{
 			processParams(namedStatement);
 
-			try (ResultSet resultSet = namedStatement.executeQuery();)
+			try (ResultSet resultSet = namedStatement.executeQuery())
 			{
 				return ResultsetMapper.getRowList(resultSet);
 			}

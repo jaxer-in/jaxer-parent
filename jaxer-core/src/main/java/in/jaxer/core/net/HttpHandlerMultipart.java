@@ -18,8 +18,8 @@ public class HttpHandlerMultipart
 {
 	private final String boundary;
 	//	private HttpURLConnection httpURLConnection;
-	private String charset;
-	private String requestURL;
+	private final String charset;
+	private final String requestURL;
 	//	private OutputStream outputStream;
 //	private PrintWriter printWriter;
 	private Map<String, String> headers;
@@ -163,7 +163,7 @@ public class HttpHandlerMultipart
 			httpURLConnection.setRequestProperty("User-Agent", "in.jaxer-agent");
 
 			try (OutputStream outputStream = httpURLConnection.getOutputStream();
-				 PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(outputStream, charset), true);)
+				 PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(outputStream, charset), true))
 			{
 				//Headers
 				if (JValidator.isNotNullAndNotEmpty(headers))
@@ -188,7 +188,7 @@ public class HttpHandlerMultipart
 				{
 					for (Map.Entry<String, File> entry : fileParts.entrySet())
 					{
-						setParameter(printWriter, outputStream, entry.getKey(), (File) entry.getValue());
+						setParameter(printWriter, outputStream, entry.getKey(), entry.getValue());
 					}
 				}
 

@@ -1,13 +1,12 @@
-
 package in.jaxer.sdbms;
 
-import java.util.Collection;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.Collection;
+
 /**
- *
  * @author Shakir Ansari
  */
 @Getter
@@ -25,7 +24,6 @@ public class Parameter
 	private boolean collection;
 
 	/**
-	 *
 	 * @param name  Name of the parameter
 	 * @param value Value of the parameter
 	 */
@@ -38,7 +36,6 @@ public class Parameter
 	}
 
 	/**
-	 *
 	 * @param name   Name of the parameter
 	 * @param value  Value of the parameter
 	 * @param equals value is equal or not

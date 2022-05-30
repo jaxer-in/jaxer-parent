@@ -1,4 +1,3 @@
-
 package in.jaxer.core.annotations;
 
 import java.lang.annotation.ElementType;
@@ -7,7 +6,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- *
  * @author Shakir Ansari
  */
 @Target(value = ElementType.TYPE)
@@ -15,6 +13,6 @@ import java.lang.annotation.Target;
 public @interface PropertyConfiguration
 {
 
-	public String value();
+	String value();
 
 }

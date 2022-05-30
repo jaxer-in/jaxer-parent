@@ -35,7 +35,7 @@ public class ApacheHttpHandler
 		HttpGet httpGet = new HttpGet(url);
 		return getResponse(httpClient.execute(httpGet));
 	}
-	
+
 	public String doPost(String url, List nameValuePairs) throws IOException
 	{
 		HttpPost httpPost = new HttpPost(url);

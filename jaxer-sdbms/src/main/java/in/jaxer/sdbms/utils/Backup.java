@@ -1,4 +1,3 @@
-
 package in.jaxer.sdbms.utils;
 
 import java.io.BufferedReader;
@@ -16,7 +15,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
- *
  * @author Shakir Ansari
  */
 public class Backup
@@ -28,15 +26,15 @@ public class Backup
 
 	private Statement st;
 
-	private int BUFFER = 2048;
+	private final int BUFFER = 2048;
 
 	public boolean mysqlDatabaseRestore(String dbName, String dbUserName, String dbPassword, String source)
 	{
 		boolean status = false;
 		String[] executeCmd = new String[]
-		{
-			"mysql", "--user=" + dbUserName, "--password=" + dbPassword, dbName, "-e", " source " + source
-		};
+				{
+						"mysql", "--user=" + dbUserName, "--password=" + dbPassword, dbName, "-e", " source " + source
+				};
 		Process runtimeProcess;
 		try
 		{
@@ -199,8 +197,8 @@ public class Backup
 		return temp.toString();
 	}
 
-// Mysql path is required to locate the bin folder inside it because it contains the Mysqldump which performs a //main role while taking backup.
-/*
+	// Mysql path is required to locate the bin folder inside it because it contains the Mysqldump which performs a //main role while taking backup.
+	/*
 	 * Function to find MySql Path
 	 */
 	public String getMysqlBinPath(String dbUser, String dbPassword, String databaseName)

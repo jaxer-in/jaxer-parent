@@ -74,7 +74,6 @@ public class PropertyConfigurationManager
 						continue;
 					}
 
-
 					if (Modifier.isPrivate(field.getModifiers()) || Modifier.isProtected(field.getModifiers()))
 					{
 						field.setAccessible(true);
@@ -135,7 +134,6 @@ public class PropertyConfigurationManager
 							}
 						}
 					}
-
 
 					if (Modifier.isPrivate(field.getModifiers()) || Modifier.isProtected(field.getModifiers()))
 					{

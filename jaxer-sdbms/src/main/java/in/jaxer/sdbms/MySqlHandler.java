@@ -14,7 +14,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Shakir Ansari
@@ -96,7 +100,7 @@ public class MySqlHandler extends AbstractJpaHandler
 
 		log.debug("sql: {}", sql);
 
-		try (PreparedStatement preparedStatement = connection.prepareStatement(sql);)
+		try (PreparedStatement preparedStatement = connection.prepareStatement(sql))
 		{
 			preparedStatement.setObject(1, id);
 			return preparedStatement.executeUpdate();
@@ -251,7 +255,7 @@ public class MySqlHandler extends AbstractJpaHandler
 		log.debug("sql: {}", sql);
 		log.debug("parameterList: {}", parameterList);
 
-		try (NamedStatement namedStatement = new NamedStatement(connection, sql);)
+		try (NamedStatement namedStatement = new NamedStatement(connection, sql))
 		{
 			NamedStatementUtils.setParameteres(namedStatement, parameterList);
 			try (ResultSet resultSet = namedStatement.executeQuery())

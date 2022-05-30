@@ -1,16 +1,16 @@
-
 package in.jaxer.core.encoders;
 
 import in.jaxer.core.constants.Constants;
 import in.jaxer.core.constants.ContentType;
 import in.jaxer.core.utilities.JValidator;
-import java.util.Base64;
+
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 /**
- *
  * @author Shakir Ansari
  */
 public class DesEncoder implements Encoder
@@ -50,7 +50,7 @@ public class DesEncoder implements Encoder
 
 			cipher.init(Cipher.ENCRYPT_MODE, secretKey);
 
-			byte[] cipherText = cipher.doFinal(message.getBytes(ContentType.UTF_8));
+			byte[] cipherText = cipher.doFinal(message.getBytes(StandardCharsets.UTF_8));
 
 			return Base64.getEncoder().encodeToString(cipherText);
 

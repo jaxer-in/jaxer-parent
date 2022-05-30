@@ -39,7 +39,6 @@ public class RestController extends AbstractRestController
 		Servlets.printJsonResponse(request, response, apiResponseDto);
 	}
 
-
 	private class AuthenticationImpl implements Authentication
 	{
 		@Override

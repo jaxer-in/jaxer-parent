@@ -1,10 +1,8 @@
-
 package in.jaxer.core.encoders;
 
 import java.util.Random;
 
 /**
- *
  * @author Shakir Ansari
  */
 public class CryptoGramEncoder
@@ -12,7 +10,7 @@ public class CryptoGramEncoder
 
 	private static char[] getAlphabet()
 	{
-		char a[] = new char[26];
+		char[] a = new char[26];
 		for (int i = 0; i < 26; i++)
 		{
 			a[i] = (char) ('A' + i);
@@ -20,7 +18,7 @@ public class CryptoGramEncoder
 		return a;
 	}
 
-	private static void permute(char a[])
+	private static void permute(char[] a)
 	{
 		Random generator = new Random();
 		for (int i = 0; i < a.length - 1; i++)
@@ -32,7 +30,7 @@ public class CryptoGramEncoder
 		}
 	}
 
-	private static String scramble(char key[], String phrase)
+	private static String scramble(char[] key, String phrase)
 	{
 		String puzzle = "";
 		int len = phrase.length(), position;
@@ -53,7 +51,7 @@ public class CryptoGramEncoder
 
 	public static String encode(String msg)
 	{
-		char key[] = getAlphabet();
+		char[] key = getAlphabet();
 		permute(key);
 		return scramble(key, msg);
 	}

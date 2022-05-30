@@ -33,7 +33,7 @@ public class BinaryEncoder implements Encoder
 		for (int i = 0; i < message.length(); i++)
 		{
 			encoded += (i % 2 == 0) ? "2" : "3";
-			encoded += convert((int) message.charAt(i));
+			encoded += convert(message.charAt(i));
 		}
 
 		return encoded;

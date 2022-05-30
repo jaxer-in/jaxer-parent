@@ -42,7 +42,7 @@ public class PackageScanner
 		return Strings.removeEndsWith(className, ".class");
 	}
 
-	private static void getClassListFromJar(Set<Class> classes, URL jarUrl) throws UnsupportedEncodingException, IOException, ClassNotFoundException
+	private static void getClassListFromJar(Set<Class> classes, URL jarUrl) throws IOException, ClassNotFoundException
 	{
 		log.debug("classes: {}, jarUrl: {}", classes, jarUrl);
 

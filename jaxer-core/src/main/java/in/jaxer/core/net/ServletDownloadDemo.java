@@ -28,7 +28,7 @@ public class ServletDownloadDemo extends HttpServlet
 		String fullFile = filepath + File.separator + filename;
 
 		try (OutputStream outStream = response.getOutputStream();
-			 FileInputStream fileInputStream = new java.io.FileInputStream(fullFile);)
+			 FileInputStream fileInputStream = new java.io.FileInputStream(fullFile))
 		{
 			String mimeType = getServletContext().getMimeType(fullFile);
 			log.debug("before mimeType: {}", mimeType);

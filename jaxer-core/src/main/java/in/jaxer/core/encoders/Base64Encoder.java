@@ -1,4 +1,3 @@
-
 package in.jaxer.core.encoders;
 
 import java.io.File;
@@ -9,7 +8,6 @@ import java.io.IOException;
 import java.util.Base64;
 
 /**
- *
  * @author Shakir Ansari
  */
 public class Base64Encoder
@@ -35,34 +33,34 @@ public class Base64Encoder
 		return new String(decode(text.getBytes()));
 	}
 
-	public static void encodeImage(String sourceFile, String targetFile) throws FileNotFoundException, IOException
+	public static void encodeImage(String sourceFile, String targetFile) throws IOException
 	{
 		encodeImage(new File(sourceFile), new File(targetFile));
 	}
 
-	public static void decodeImage(String sourceFile, String targetFile) throws FileNotFoundException, IOException
+	public static void decodeImage(String sourceFile, String targetFile) throws IOException
 	{
 		decodeImage(new File(sourceFile), new File(targetFile));
 	}
 
-	public static void encodeImage(File sourceFile, File targetFile) throws FileNotFoundException, IOException
+	public static void encodeImage(File sourceFile, File targetFile) throws IOException
 	{
 		try (FileInputStream fileInputStream = new FileInputStream(sourceFile);
-			 FileOutputStream fileOutputStream = new FileOutputStream(targetFile);)
+			 FileOutputStream fileOutputStream = new FileOutputStream(targetFile))
 		{
-			final byte byteArray[] = new byte[(int) sourceFile.length()];
+			final byte[] byteArray = new byte[(int) sourceFile.length()];
 			fileInputStream.read(byteArray);
 			String file64 = Base64.getEncoder().encodeToString(byteArray);
 			fileOutputStream.write(file64.getBytes());
 		}
 	}
 
-	public static void decodeImage(File sourceFile, File targetFile) throws FileNotFoundException, IOException
+	public static void decodeImage(File sourceFile, File targetFile) throws IOException
 	{
 		try (FileInputStream fileInputStream = new FileInputStream(sourceFile);
-			 FileOutputStream fileOutputStream = new FileOutputStream(targetFile);)
+			 FileOutputStream fileOutputStream = new FileOutputStream(targetFile))
 		{
-			final byte byteArray[] = new byte[(int) sourceFile.length()];
+			final byte[] byteArray = new byte[(int) sourceFile.length()];
 			fileInputStream.read(byteArray);
 			fileOutputStream.write(Base64.getDecoder().decode(new String(byteArray)));
 		}

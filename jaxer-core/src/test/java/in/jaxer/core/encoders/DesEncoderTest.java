@@ -1,4 +1,3 @@
-
 package in.jaxer.core.encoders;
 
 import in.jaxer.core.exceptions.ValidationException;
@@ -14,7 +13,6 @@ import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
- *
  * @author Shakir
  */
 @TestInstance(Lifecycle.PER_CLASS)

@@ -1,13 +1,12 @@
-
 package in.jaxer.sdbms.utils;
 
 import in.jaxer.sdbms.annotations.Column;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author Shakir Ansari
  */
 public class Utils
