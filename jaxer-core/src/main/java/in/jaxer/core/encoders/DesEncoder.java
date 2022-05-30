@@ -1,6 +1,7 @@
 package in.jaxer.core.encoders;
 
 import in.jaxer.core.constants.Constants;
+import in.jaxer.core.interfaces.Encoder;
 import in.jaxer.core.utilities.JValidator;
 
 import javax.crypto.Cipher;

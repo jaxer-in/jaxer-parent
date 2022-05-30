@@ -1,6 +1,7 @@
 package in.jaxer.core.encoders;
 
 import in.jaxer.core.exceptions.ValidationException;
+import in.jaxer.core.interfaces.Encoder;
 import in.jaxer.core.utilities.JValidator;
 
 /**

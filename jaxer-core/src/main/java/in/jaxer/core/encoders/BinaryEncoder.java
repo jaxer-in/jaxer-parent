@@ -1,6 +1,7 @@
 package in.jaxer.core.encoders;
 
 import in.jaxer.core.exceptions.EncoderException;
+import in.jaxer.core.interfaces.Encoder;
 import in.jaxer.core.utilities.JValidator;
 import lombok.extern.log4j.Log4j2;
 

@@ -1,4 +1,4 @@
-package in.jaxer.core.encoders;
+package in.jaxer.core.interfaces;
 
 /**
  * @author Shakir
