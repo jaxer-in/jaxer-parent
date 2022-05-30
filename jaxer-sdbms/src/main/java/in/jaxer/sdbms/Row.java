@@ -17,7 +17,7 @@ public class Row
 
 	public Row(List<Column> columnList)
 	{
-		this.columnList = new ArrayList(columnList);
+		this.columnList = new ArrayList<>(columnList);
 	}
 
 	public Column getColumn(String columnName)

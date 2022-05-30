@@ -43,7 +43,7 @@ public class H2JpaHandler extends AbstractJpaHandler
 	}
 
 	@Override
-	public long count(Connection connection, Class outputClass, List<Parameter> parameterList)
+	public long count(Connection connection, Class<?> outputClass, List<Parameter> parameterList)
 	{
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}

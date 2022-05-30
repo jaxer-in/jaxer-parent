@@ -6,7 +6,6 @@ import lombok.extern.log4j.Log4j2;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.lang.annotation.Annotation;
 import java.net.URI;
 import java.net.URL;
@@ -177,10 +176,10 @@ public class PackageScanner
 		return annotationClassList;
 	}
 
-	public static Set<Class> getClasses(String packageName)
+	public static Set<Class<?>> getClasses(String packageName)
 	{
 		log.debug("packageName: {}", packageName);
-		Set<Class> classSet = new HashSet<>();
+		Set<Class<?>> classSet = new HashSet<>();
 
 		try
 		{
@@ -207,12 +206,12 @@ public class PackageScanner
 		return classSet;
 	}
 
-	public static Set<Class> getClasses(String packageName, Class<? extends Annotation> annotationClass)
+	public static Set<Class<? extends Annotation>> getClasses(String packageName, Class<? extends Annotation> annotationClass)
 	{
 		log.debug("packageName: {}, annotationClass: {}", packageName, annotationClass);
 
-		Set<Class> classSet = new HashSet<>();
-		Set<Class> classSetFull = getClasses(packageName);
+		Set<Class<? extends Annotation>> classSet = new HashSet<>();
+		Set<Class<?>> classSetFull = getClasses(packageName);
 		for (Class c : classSetFull)
 		{
 			if (c.isAnnotationPresent(annotationClass))
