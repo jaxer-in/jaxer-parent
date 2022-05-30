@@ -1,11 +1,10 @@
 package in.jaxer.core.constants;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
  */
 public class RegexConstants
 {
-
 	public static final String AADHAR_CARD_NUMBER = "[0-9]{12}";
 
 	public static final String HASHTAG = "((#|@){1}+[a-zA-Z0-9_]{1,})";

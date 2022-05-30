@@ -1,45 +1,30 @@
-
 package in.jaxer.core.constants;
 
 /**
- *
- * @author Shakir Ansari
+ * @author Shakir
  */
 public class HttpConstants
 {
-
 	/**
 	 * Standard Http method names
 	 */
 	public static final String DELETE = "DELETE";
-
 	public static final String HEAD = "HEAD";
-
 	public static final String GET = "GET";
-
 	public static final String OPTIONS = "OPTIONS";
-
 	public static final String POST = "POST";
-
 	public static final String PUT = "PUT";
-
 	public static final String TRACE = "TRACE";
 
 	/**
 	 * Standard Http Headers
 	 */
 	public static final String Accept = "Accept";
-
 	public static final String Access_Control_Allow_Headers = "Access-Control-Allow-Headers";
-
 	public static final String Access_Control_Allow_Origin = "Access-Control-Allow-Origin";
-
 	public static final String Access_Control_Allow_Methods = "Access-Control-Allow-Methods";
-
 	public static final String Content_Type = "Content-type";
-
 	public static final String Cache_Control = "Cache-Control";
-
 	public static final String Expires = "Expires";
 
 	/**
@@ -251,5 +236,4 @@ public class HttpConstants
 	 * HTTP Status-Code 505: HTTP Version Not Supported.
 	 */
 	public static final int VERSION = 505;
-
 }

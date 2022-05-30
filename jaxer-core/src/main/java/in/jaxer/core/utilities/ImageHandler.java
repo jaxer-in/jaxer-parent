@@ -10,7 +10,12 @@ import javax.imageio.ImageWriter;
 import javax.imageio.stream.ImageOutputStream;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * @author Shakir Ansari
@@ -18,13 +23,13 @@ import java.io.*;
 @Log4j2
 public class ImageHandler
 {
-	public static void doOptimize(String source, String target, float quality) throws FileNotFoundException, IOException
+	public static void doOptimize(String source, String target, float quality) throws IOException
 	{
 		log.info("quality: {}, source: {}, target: {}", quality, source, target);
 		doOptimize(new File(source), new File(target), quality);
 	}
 
-	public static void doOptimize(File source, File target, float quality) throws FileNotFoundException, IOException
+	public static void doOptimize(File source, File target, float quality) throws IOException
 	{
 		log.info("quality: {}, source: {}, target: {}", quality, source, target);
 		BufferedImage bufferedImage = ImageIO.read(source);
@@ -47,16 +52,16 @@ public class ImageHandler
 		}
 	}
 
-	public static void resize(String source, String target, int width, int height) throws FileNotFoundException, IOException
+	public static void resize(String source, String target, int width, int height) throws IOException
 	{
 		log.info("source: {}, target: {}, width: {}, height: {}", source, target, width, height);
 		resize(new File(source), new File(target), width, height);
 	}
 
-	public static void resize(File source, File target, int width, int height) throws FileNotFoundException, IOException
+	public static void resize(File source, File target, int width, int height) throws IOException
 	{
 		log.info("source: {}, target: {}, width: {}, height: {}", source, target, width, height);
-		try (FileInputStream fileInputStream = new FileInputStream(source);)
+		try (FileInputStream fileInputStream = new FileInputStream(source))
 		{
 			BufferedImage inputImage = ImageIO.read(fileInputStream);
 			BufferedImage outputImage = new BufferedImage(width, height, inputImage.getType());
@@ -75,7 +80,7 @@ public class ImageHandler
 		}
 	}
 
-	public static void resizeByWidth(File source, File target, int width) throws FileNotFoundException, IOException
+	public static void resizeByWidth(File source, File target, int width) throws IOException
 	{
 		log.info("source: {}, target: {}, width: {}", source, target, width);
 		if (width <= 0)
@@ -108,7 +113,7 @@ public class ImageHandler
 		}
 	}
 
-	public static void resizeByHeight(File source, File target, int height) throws FileNotFoundException, IOException
+	public static void resizeByHeight(File source, File target, int height) throws IOException
 	{
 		log.info("source: {}, target: {}, height: {}", source, target, height);
 		if (height <= 0)
@@ -141,13 +146,13 @@ public class ImageHandler
 		}
 	}
 
-	public static void resize(String source, String target, int percentage) throws FileNotFoundException, IOException
+	public static void resize(String source, String target, int percentage) throws IOException
 	{
 		log.info("source: {}, target: {}, percentages: {}", source, target, percentage);
 		resize(new File(source), new File(target), percentage);
 	}
 
-	public static void resize(File source, File target, int percentage) throws FileNotFoundException, IOException
+	public static void resize(File source, File target, int percentage) throws IOException
 	{
 		log.info("source: {}, target: {}, percentages: {}", source, target, percentage);
 		Dimension dimension = JUtilities.getImageDimension(source);

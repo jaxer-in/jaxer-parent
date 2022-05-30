@@ -10,7 +10,7 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class Number52Encoder implements Encoder
 {
-	private String numberScale;
+	private final String numberScale;
 
 	public Number52Encoder()
 	{
@@ -89,7 +89,7 @@ public class Number52Encoder implements Encoder
 
 		for (int i = 0; i < length; i++)
 		{
-			ch = (int) message.charAt(i);
+			ch = message.charAt(i);
 			int first = ch % 10;
 			int second = ch / 10;
 			encoded += first + convert(second);
@@ -137,7 +137,7 @@ public class Number52Encoder implements Encoder
 					temp += message.charAt(nextI);
 					nextI--;
 				}
-				decoded += (char) ((convert(temp) * 10) + (int) (ch - 48));
+				decoded += (char) ((convert(temp) * 10) + (ch - 48));
 			}
 		}
 

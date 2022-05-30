@@ -1,4 +1,3 @@
-
 package in.jaxer.sdbms.annotations;
 
 import java.lang.annotation.ElementType;
@@ -7,7 +6,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- *
  * Reference : javax.persistence.Column
  *
  * @author Shakir Ansari
@@ -17,13 +15,13 @@ import java.lang.annotation.Target;
 public @interface Column
 {
 
-	public String value();
+	String value();
 
 //	public boolean primaryKey() default false;
 
 //	public boolean autoIncrement() default false;
 
-	public boolean nullable() default true;
+	boolean nullable() default true;
 
 //	public boolean unique() default false;
 //	public boolean insertable() default true;

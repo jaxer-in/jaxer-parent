@@ -1,4 +1,3 @@
-
 package in.jaxer.sdbms;
 
 import lombok.AllArgsConstructor;
@@ -6,7 +5,6 @@ import lombok.Getter;
 import lombok.ToString;
 
 /**
- *
  * @author Shakir Ansari
  */
 @Getter

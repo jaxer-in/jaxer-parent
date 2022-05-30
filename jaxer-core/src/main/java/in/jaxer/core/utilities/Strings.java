@@ -553,7 +553,6 @@ public class Strings
 			}
 		};
 
-
 		Entry<Long, String> e = suffixes.floorEntry(value);
 		Long divideBy = e.getKey();
 		String suffix = e.getValue();

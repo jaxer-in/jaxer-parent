@@ -1,17 +1,16 @@
-
 package in.jaxer.sdbms;
 
 import in.jaxer.sdbms.exceptions.JaxerSDBMSException;
 import in.jaxer.sdbms.utils.NamedStatementUtils;
+import lombok.extern.log4j.Log4j2;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import lombok.extern.log4j.Log4j2;
 
 /**
- *
  * @author Shakir Ansari
  */
 @Log4j2
@@ -33,11 +32,11 @@ public class QueryExecuter
 		log.debug("sql: {}", sql);
 		log.debug("parameterList: {}", parameterList);
 
-		try (NamedStatement namedStatement = new NamedStatement(connection, sql);)
+		try (NamedStatement namedStatement = new NamedStatement(connection, sql))
 		{
 			NamedStatementUtils.setParameteres(namedStatement, parameterList);
 
-			try (ResultSet resultSet = namedStatement.executeQuery();)
+			try (ResultSet resultSet = namedStatement.executeQuery())
 			{
 				return ResultsetMapper.getRowList(resultSet);
 			}
@@ -64,11 +63,11 @@ public class QueryExecuter
 		log.debug("outputClass: {}", outputClass);
 		log.debug("parameterList: {}", parameterList);
 
-		try (NamedStatement namedStatement = new NamedStatement(connection, sql);)
+		try (NamedStatement namedStatement = new NamedStatement(connection, sql))
 		{
 			NamedStatementUtils.setParameteres(namedStatement, parameterList);
 
-			try (ResultSet resultSet = namedStatement.executeQuery();)
+			try (ResultSet resultSet = namedStatement.executeQuery())
 			{
 				return ResultsetMapper.getObjectList(resultSet, outputClass);
 			}
@@ -85,13 +84,13 @@ public class QueryExecuter
 		log.debug("rawMapper: {}", rawMapper);
 		log.debug("parameterList: {}", parameterList);
 
-		try (NamedStatement namedStatement = new NamedStatement(connection, sql);)
+		try (NamedStatement namedStatement = new NamedStatement(connection, sql))
 		{
 			NamedStatementUtils.setParameteres(namedStatement, parameterList);
 
 			List<T> list = new ArrayList<>();
 
-			try (ResultSet resultSet = namedStatement.executeQuery();)
+			try (ResultSet resultSet = namedStatement.executeQuery())
 			{
 				int index = 0;
 				while (resultSet.next())
@@ -123,7 +122,7 @@ public class QueryExecuter
 		log.debug("sql: {}", sql);
 		log.debug("parameterList: {}", parameterList);
 
-		try (NamedStatement namedStatement = new NamedStatement(connection, sql);)
+		try (NamedStatement namedStatement = new NamedStatement(connection, sql))
 		{
 			NamedStatementUtils.setParameteres(namedStatement, parameterList);
 
@@ -150,7 +149,7 @@ public class QueryExecuter
 		log.debug("sql: {}", sql);
 		log.debug("parameterList: {}", parameterList);
 
-		try (NamedStatement namedStatement = new NamedStatement(connection, sql);)
+		try (NamedStatement namedStatement = new NamedStatement(connection, sql))
 		{
 			NamedStatementUtils.setParameteres(namedStatement, parameterList);
 

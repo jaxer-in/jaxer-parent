@@ -1,10 +1,8 @@
-
 package in.jaxer.sdbms.dto;
 
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author Shakir
  */
 public class PaginationDtoTest

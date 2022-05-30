@@ -8,11 +8,10 @@ import java.awt.*;
 import java.text.SimpleDateFormat;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
  */
 public class Singletons
 {
-
 	@Deprecated
 	private static SimpleDateFormat simpleDateFormat;
 

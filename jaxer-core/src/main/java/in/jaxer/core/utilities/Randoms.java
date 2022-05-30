@@ -48,10 +48,13 @@ public class Randoms
 		return getRandomIntInRange(highValue + 1, Integer.MAX_VALUE);
 	}
 
+	public static char getRandomChar()
+	{
+		return (char) Randoms.getRandomIntInRange('a', 'z');
+	}
+
 	public static char getRandomChar(char[] array)
 	{
-		JValidator.requireNotEmpty(array);
-
 		return array[getRandomIntInRange(0, array.length - 1)];
 	}
 
