@@ -1,34 +1,24 @@
-
 package in.jaxer.core.net;
 
 import in.jaxer.core.constants.ContentType;
 import in.jaxer.core.constants.HttpConstants;
-import in.jaxer.core.constants.Singletons;
 import in.jaxer.core.utilities.Files;
 import in.jaxer.core.utilities.JUtilities;
 import in.jaxer.core.utilities.JValidator;
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.PrintWriter;
+import in.jaxer.core.utilities.JsonHandler;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
- *
  * @author Shakir Ansari
  */
 public class Servlets
 {
-
 	static public String getRequestForwardURI(HttpServletRequest request)
 	{
 		return request.getAttribute("javax.servlet.forward.request_uri").toString();
@@ -37,27 +27,27 @@ public class Servlets
 	public static String getIpAddress(HttpServletRequest httpServletRequest)
 	{
 		String ip = httpServletRequest.getHeader("X-Forwarded-For");
-		if (JValidator.isEmpty(ip) || "unknown".equalsIgnoreCase(ip))
+		if (JValidator.isNullOrEmpty(ip) || "unknown".equalsIgnoreCase(ip))
 		{
 			ip = httpServletRequest.getHeader("Proxy-Client-IP");
 		}
 
-		if (JValidator.isEmpty(ip) || "unknown".equalsIgnoreCase(ip))
+		if (JValidator.isNullOrEmpty(ip) || "unknown".equalsIgnoreCase(ip))
 		{
 			ip = httpServletRequest.getHeader("WL-Proxy-Client-IP");
 		}
 
-		if (JValidator.isEmpty(ip) || "unknown".equalsIgnoreCase(ip))
+		if (JValidator.isNullOrEmpty(ip) || "unknown".equalsIgnoreCase(ip))
 		{
 			ip = httpServletRequest.getHeader("HTTP_CLIENT_IP");
 		}
 
-		if (JValidator.isEmpty(ip) || "unknown".equalsIgnoreCase(ip))
+		if (JValidator.isNullOrEmpty(ip) || "unknown".equalsIgnoreCase(ip))
 		{
 			ip = httpServletRequest.getHeader("HTTP_X_FORWARDED_FOR");
 		}
 
-		if (JValidator.isEmpty(ip) || "unknown".equalsIgnoreCase(ip))
+		if (JValidator.isNullOrEmpty(ip) || "unknown".equalsIgnoreCase(ip))
 		{
 			ip = httpServletRequest.getRemoteAddr();
 		}
@@ -74,10 +64,10 @@ public class Servlets
 		}
 
 		List<String> list = new ArrayList();
-		String params[] = paramString.split("/");
+		String[] params = paramString.split("/");
 		for (String param : params)
 		{
-			if (JValidator.isNotEmpty(param))
+			if (JValidator.isNotNullAndNotEmpty(param))
 			{
 				list.add(param);
 			}
@@ -118,7 +108,6 @@ public class Servlets
 		httpServletResponse.setContentType(ContentType.IMAGE_JPG);
 	}
 
-	//<editor-fold defaultstate="collapsed" desc=" --- cache response --- ">
 	static public void updateCacheHeaders(HttpServletResponse httpServletResponse, long milli)
 	{
 		httpServletResponse.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
@@ -128,7 +117,6 @@ public class Servlets
 		httpServletResponse.setDateHeader(HttpConstants.Expires, expiry);
 		httpServletResponse.setHeader(HttpConstants.Cache_Control, "max-age=" + milli);
 	}
-	//</editor-fold>
 
 	@Deprecated
 	static public String getRequestBody(HttpServletRequest httpServletRequest, boolean autoClose) throws IOException
@@ -180,19 +168,24 @@ public class Servlets
 
 	static public void printResponse(HttpServletResponse httpServletResponse, Object object) throws IOException
 	{
-		try (PrintWriter printWriter = httpServletResponse.getWriter();)
+		try (PrintWriter printWriter = httpServletResponse.getWriter())
 		{
 			printWriter.write(object.toString());
 			printWriter.flush();
 		}
 	}
 
-
-	@Deprecated	
+	@Deprecated
 	static public void printJsonResponse(HttpServletResponse httpServletResponse, Object obj, boolean isPrettyPrint) throws IOException
 	{
 		setResponseJson(httpServletResponse);
-		printResponse(httpServletResponse, Singletons.getGson(isPrettyPrint).toJson(obj));
+		if (isPrettyPrint)
+		{
+			printResponse(httpServletResponse, JsonHandler.getGsonPrettyPrinting().toJson(obj));
+		} else
+		{
+			printResponse(httpServletResponse, JsonHandler.getGson().toJson(obj));
+		}
 	}
 
 	/**
@@ -210,12 +203,12 @@ public class Servlets
 		setResponseJson(response);
 
 		String isPrettyPrint = request.getParameter("isPrettyPrint");
-		if (JValidator.isNotEmpty(isPrettyPrint) && isPrettyPrint.equalsIgnoreCase("true"))
+		if (JValidator.isNotNullAndNotEmpty(isPrettyPrint) && isPrettyPrint.equalsIgnoreCase("true"))
 		{
-			printResponse(response, Singletons.getGsonPrettyPrinting().toJson(obj));
+			printResponse(response, JsonHandler.getGsonPrettyPrinting().toJson(obj));
 		} else
 		{
-			printResponse(response, Singletons.getGson().toJson(obj));
+			printResponse(response, JsonHandler.getGson().toJson(obj));
 		}
 	}
 
@@ -238,10 +231,10 @@ public class Servlets
 		printResponse(httpServletResponse, data);
 	}
 
-	static public void printFile(HttpServletResponse httpServletResponse, File file, String mimeType) throws FileNotFoundException, IOException
+	static public void printFile(HttpServletResponse httpServletResponse, File file, String mimeType) throws IOException
 	{
 		httpServletResponse.setContentType(mimeType);
-		System.out.println("AbstractServlet.printFile() - mimeType: [" + mimeType + "]");
+		System.out.println("printFile() - mimeType: [" + mimeType + "]");
 
 		try (FileInputStream fileInputStream = new FileInputStream(file);
 			 OutputStream outputStream = new BufferedOutputStream(httpServletResponse.getOutputStream()))
@@ -250,12 +243,12 @@ public class Servlets
 		}
 	}
 
-	static public void printFile(HttpServletResponse httpServletResponse, File file) throws FileNotFoundException, IOException
+	static public void printFile(HttpServletResponse httpServletResponse, File file) throws IOException
 	{
 		printFile(httpServletResponse, file, Files.getDefaultMimeType(file));
 	}
 
-	static public void printImage(HttpServletResponse httpServletResponse, File imageFile) throws FileNotFoundException, IOException
+	static public void printImage(HttpServletResponse httpServletResponse, File imageFile) throws IOException
 	{
 		printFile(httpServletResponse, imageFile, ContentType.IMAGE_JPG);
 	}
@@ -280,7 +273,7 @@ public class Servlets
 		httpServletResponse.setContentLengthLong(file.length());
 
 		try (OutputStream outputStream = httpServletResponse.getOutputStream();
-			 FileInputStream fileInputStream = new FileInputStream(file);)
+			 FileInputStream fileInputStream = new FileInputStream(file))
 		{
 			Files.copyBytes(fileInputStream, outputStream);
 		}
@@ -297,6 +290,7 @@ public class Servlets
 	 */
 	static public boolean isMultipartRequest(HttpServletRequest request)
 	{
-		return request.getContentType() != null && request.getContentType().toLowerCase().contains(ContentType.MULTIPART_FORM_DATA);
+		return request.getContentType() != null
+				&& request.getContentType().toLowerCase().contains(ContentType.MULTIPART_FORM_DATA);
 	}
 }

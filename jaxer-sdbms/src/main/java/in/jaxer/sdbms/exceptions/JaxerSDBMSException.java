@@ -1,20 +1,18 @@
-
 package in.jaxer.sdbms.exceptions;
 
 import in.jaxer.core.exceptions.JaxerCoreException;
 import lombok.Getter;
 
 /**
- *
  * @author Shakir
  * Date 25 Oct, 2021 - 11:28:56 PM
  */
 @Getter
 public class JaxerSDBMSException extends JaxerCoreException
 {
-
 	public JaxerSDBMSException()
 	{
+		super();
 	}
 
 	public JaxerSDBMSException(String message)
@@ -30,5 +28,10 @@ public class JaxerSDBMSException extends JaxerCoreException
 	public JaxerSDBMSException(Throwable cause)
 	{
 		super(cause);
+	}
+
+	public JaxerSDBMSException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace)
+	{
+		super(message, cause, enableSuppression, writableStackTrace);
 	}
 }

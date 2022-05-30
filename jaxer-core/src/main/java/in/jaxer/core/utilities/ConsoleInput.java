@@ -1,4 +1,3 @@
-
 package in.jaxer.core.utilities;
 
 import java.io.BufferedReader;
@@ -8,12 +7,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 /**
- *
  * @author Shakir Ansari
  */
 public class ConsoleInput implements AutoCloseable
 {
-
 	private InputStream inputStream = null;
 
 	private BufferedReader bufferedReader = null;

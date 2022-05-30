@@ -1,8 +1,12 @@
-
 package in.jaxer.sdbms;
 
 import in.jaxer.core.utilities.JValidator;
 import in.jaxer.sdbms.exceptions.JaxerSDBMSException;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.log4j.Log4j2;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.Collection;
@@ -10,13 +14,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.extern.log4j.Log4j2;
 
 /**
- *
  * @author Shakir Ansari
  */
 @Log4j2
@@ -52,7 +51,7 @@ public class SimpleQuery
 
 	private void processParams(NamedStatement namedStatement)
 	{
-		if (JValidator.isNotEmpty(paramListMap))
+		if (JValidator.isNotNullAndNotEmpty(paramListMap))
 		{
 			Set<Map.Entry<String, Collection>> entrysetList = paramListMap.entrySet();
 			for (Map.Entry<String, Collection> entry : entrysetList)
@@ -63,7 +62,7 @@ public class SimpleQuery
 				}
 			}
 		}
-		if (JValidator.isNotEmpty(paramMap))
+		if (JValidator.isNotNullAndNotEmpty(paramMap))
 		{
 			Set<Map.Entry<String, Object>> entryset = paramMap.entrySet();
 			for (Map.Entry<String, Object> entry : entryset)
@@ -82,7 +81,7 @@ public class SimpleQuery
 		{
 			processParams(namedStatement);
 
-			try (ResultSet resultSet = namedStatement.executeQuery();)
+			try (ResultSet resultSet = namedStatement.executeQuery())
 			{
 				return ResultsetMapper.getObjectList(resultSet, entity);
 			}
@@ -99,7 +98,7 @@ public class SimpleQuery
 		{
 			processParams(namedStatement);
 
-			try (ResultSet resultSet = namedStatement.executeQuery();)
+			try (ResultSet resultSet = namedStatement.executeQuery())
 			{
 				return ResultsetMapper.getRowList(resultSet);
 			}

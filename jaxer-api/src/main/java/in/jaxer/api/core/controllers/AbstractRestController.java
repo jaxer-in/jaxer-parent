@@ -1,23 +1,21 @@
-
 package in.jaxer.api.core.controllers;
 
 import in.jaxer.api.annotations.RestTask;
 import in.jaxer.api.core.request.RestRequestHandler;
 import in.jaxer.api.dtos.ApiResponseDto;
 import in.jaxer.api.listners.Authentication;
-import java.sql.Connection;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import lombok.extern.log4j.Log4j2;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.sql.Connection;
+
 /**
- *
  * @author Shakir Ansari
  */
 @Log4j2
 public abstract class AbstractRestController extends AbstractController
 {
-
 	protected ApiResponseDto doProcess(HttpServletRequest request, HttpServletResponse response)
 	{
 		return this.doProcess(request, response, null, null);
@@ -33,6 +31,8 @@ public abstract class AbstractRestController extends AbstractController
 			apiResponseDto = requestHandler.processRequest(connection, request, response, authentication);
 		} catch (Exception exception)
 		{
+			log.error("Exception", exception);
+
 			if (apiResponseDto == null)
 			{
 				apiResponseDto = new ApiResponseDto();

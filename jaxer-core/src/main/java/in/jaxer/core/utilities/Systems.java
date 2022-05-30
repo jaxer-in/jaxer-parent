@@ -1,15 +1,15 @@
-
 package in.jaxer.core.utilities;
+
+import lombok.extern.log4j.Log4j2;
 
 import java.util.Properties;
 
 /**
- *
  * @author Shakir Ansari
  */
+@Log4j2
 public class Systems
 {
-
 	public static void setProperty(String key, String value)
 	{
 		System.setProperty(key, value);
@@ -47,7 +47,6 @@ public class Systems
 
 	public static String getClasspathFromProperty()
 	{
-//		return System.getProperty("java.class.path").split(File.pathSeparator);
 		return System.getProperty("java.class.path");
 	}
 
@@ -72,7 +71,9 @@ public class Systems
 		for (String key : properties.stringPropertyNames())
 		{
 			String value = properties.getProperty(key);
-			System.out.println(" [ " + key + ":" + value + "]");
+
+			log.debug("[{} = {}]", key, value);
+			System.out.println("[" + key + " = " + value + "]");
 		}
 	}
 }

@@ -1,4 +1,3 @@
-
 package in.jaxer.api.dtos;
 
 import in.jaxer.api.constants.ApiStatus;
@@ -6,22 +5,21 @@ import in.jaxer.api.exceptions.ApiException;
 import in.jaxer.api.exceptions.UserException;
 import in.jaxer.core.utilities.JValidator;
 import in.jaxer.core.utilities.Strings;
+import lombok.ToString;
+import lombok.extern.log4j.Log4j2;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.ToString;
-import lombok.extern.log4j.Log4j2;
 
 /**
- *
  * @author Shakir Ansari
  */
 @Log4j2
 @ToString
 public class ApiResponseDto
 {
-
 	public Map<String, Object> taskResponseValue = null;
 
 	public List<String> userMessageList = null;
@@ -30,10 +28,10 @@ public class ApiResponseDto
 
 	public void addTaskResponseValue(String key, Object value)
 	{
-		JValidator.requireNotEmpty(key);
-		JValidator.requireNotNull(value);
+		JValidator.throwWhenNullOrEmpty(key);
+		JValidator.throwWhenNull(value);
 
-		if (JValidator.isEmpty(taskResponseValue))
+		if (JValidator.isNullOrEmpty(taskResponseValue))
 		{
 			taskResponseValue = new HashMap();
 		}
@@ -43,9 +41,9 @@ public class ApiResponseDto
 
 	public void addUserMessage(String msg)
 	{
-		JValidator.requireNotEmpty(msg);
+		JValidator.throwWhenNullOrEmpty(msg);
 
-		if (JValidator.isEmpty(userMessageList))
+		if (JValidator.isNullOrEmpty(userMessageList))
 		{
 			userMessageList = new ArrayList<>();
 		}
@@ -55,7 +53,7 @@ public class ApiResponseDto
 
 	public void addErrorDto(Exception exception)
 	{
-		JValidator.requireNotNull(exception);
+		JValidator.throwWhenNull(exception);
 
 		if (exception instanceof UserException)
 		{
@@ -84,11 +82,11 @@ public class ApiResponseDto
 			}
 		}
 
-		if (JValidator.isEmpty(errorDto.errorMessage))
+		if (JValidator.isNullOrEmpty(errorDto.errorMessage))
 		{
 			errorDto.errorMessage = exception.getMessage();
 
-			if (JValidator.isEmpty(errorDto.errorMessage))
+			if (JValidator.isNullOrEmpty(errorDto.errorMessage))
 			{
 				errorDto.errorMessage = "Something went wrong";
 			}
@@ -96,7 +94,7 @@ public class ApiResponseDto
 
 		errorDto.stacktraceList = Strings.getListOfStackTraces(exception, null);
 
-		if (JValidator.isNotEmpty(errorDto.stacktraceList))
+		if (JValidator.isNotNullAndNotEmpty(errorDto.stacktraceList))
 		{
 			if (errorDto.stacktraceList.get(0).equalsIgnoreCase(errorDto.errorMessage))
 			{

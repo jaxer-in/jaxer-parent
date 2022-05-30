@@ -1,20 +1,18 @@
-
 package in.jaxer.sdbms;
 
 import in.jaxer.core.utilities.JValidator;
 import in.jaxer.sdbms.exceptions.ColumnNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.Getter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author Shakir Ansari
  */
 @Getter
 public class Row
 {
-
 	private final List<Column> columnList;
 
 	public Row(List<Column> columnList)
@@ -24,7 +22,7 @@ public class Row
 
 	public Column getColumn(String columnName)
 	{
-		if (JValidator.isNotEmpty(columnList))
+		if (JValidator.isNotNullAndNotEmpty(columnList))
 		{
 			for (Column column : columnList)
 			{
@@ -40,7 +38,7 @@ public class Row
 
 	public Column getColumn(int columnIndex)
 	{
-		if (JValidator.isNotEmpty(columnList))
+		if (JValidator.isNotNullAndNotEmpty(columnList))
 		{
 			for (Column column : columnList)
 			{
@@ -59,7 +57,7 @@ public class Row
 	{
 		String row = this.getClass().getName() + " [";
 
-		if (JValidator.isNotEmpty(this.columnList))
+		if (JValidator.isNotNullAndNotEmpty(this.columnList))
 		{
 			String appender = ", ";
 			for (Column column : columnList)

@@ -1,26 +1,24 @@
-
 package in.jaxer.sdbms;
 
 import in.jaxer.core.utilities.JValidator;
 import in.jaxer.sdbms.annotations.Column;
 import in.jaxer.sdbms.annotations.Table;
 import in.jaxer.sdbms.exceptions.JaxerSDBMSException;
+import lombok.extern.log4j.Log4j2;
+
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.extern.log4j.Log4j2;
 
 /**
- *
  * @author Shakir Ansari
  */
 @Log4j2
 public class ResultsetMapper
 {
-
 	private ResultsetMapper()
 	{
 	}
@@ -40,7 +38,7 @@ public class ResultsetMapper
 			Field[] fields = outputClass.getDeclaredFields();
 			while (resultSet.next())
 			{
-				T bean = (T) outputClass.newInstance();
+				T bean = outputClass.newInstance();
 
 				for (int i = 0; i < resultSetMetaData.getColumnCount(); i++)
 				{
@@ -106,7 +104,7 @@ public class ResultsetMapper
 				outputList.add(resultSet.getObject(1, outputClass));
 			}
 
-			return JValidator.isEmpty(outputList) ? null : outputList;
+			return JValidator.isNullOrEmpty(outputList) ? null : outputList;
 		} catch (Exception exception)
 		{
 			log.error("Exception", exception);

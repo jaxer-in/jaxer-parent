@@ -1,22 +1,20 @@
-
 package in.jaxer.api.core.tasks;
 
 import in.jaxer.core.utilities.JValidator;
+import lombok.extern.log4j.Log4j2;
+
+import javax.servlet.http.Part;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import javax.servlet.http.Part;
-import lombok.extern.log4j.Log4j2;
 
 /**
- *
  * @author Shakir Ansari
  */
 @Log4j2
-public abstract class AbstractMultipartTask extends AbstractRestTask
+public abstract class AbstractMultipartTask extends AbstractTask
 {
-
 	protected int uniqueMediaCount = 0;
 
 	protected int duplicateMediaCount = 0;
@@ -51,7 +49,7 @@ public abstract class AbstractMultipartTask extends AbstractRestTask
 	protected Part getSinglePart() throws Exception
 	{
 		List<Part> parts = getPartList();
-		if (JValidator.isEmpty(parts))
+		if (JValidator.isNullOrEmpty(parts))
 		{
 			return null;
 		}
@@ -63,14 +61,14 @@ public abstract class AbstractMultipartTask extends AbstractRestTask
 		List<Part> partList = new ArrayList<>();
 		Collection<Part> parts = getRequestResponseDto().getHttpServletRequest().getParts();
 
-		if (JValidator.isEmpty(parts))
+		if (JValidator.isNullOrEmpty(parts))
 		{
 			return partList;
 		}
 
 		for (Part part : parts)
 		{
-			if (JValidator.isEmpty(part.getSubmittedFileName()))
+			if (JValidator.isNullOrEmpty(part.getSubmittedFileName()))
 			{
 				continue;
 			}

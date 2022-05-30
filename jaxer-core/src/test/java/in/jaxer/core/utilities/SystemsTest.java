@@ -1,23 +1,17 @@
-
 package in.jaxer.core.utilities;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author Shakir
  */
 public class SystemsTest
 {
-
 	public SystemsTest()
 	{
 	}
 
-	/**
-	 * Test of setProperty method, of class Systems.
-	 */
 	@Test
 	public void testSetGetProperty()
 	{
@@ -29,9 +23,6 @@ public class SystemsTest
 		Assertions.assertEquals(value, Systems.getProperty(key));
 	}
 
-	/**
-	 * Test of getOsName method, of class Systems.
-	 */
 	@Test
 	public void testGetOsName()
 	{
@@ -40,57 +31,34 @@ public class SystemsTest
 		System.out.println("result: " + result);
 	}
 
-	/**
-	 * Test of isMac method, of class Systems.
-	 */
 	@Test
 	public void testIsMac()
 	{
 		System.out.println("isMac");
-		boolean expResult = false;
-		boolean result = Systems.isMac();
-		Assertions.assertEquals(expResult, result);
+		Assertions.assertEquals(false, Systems.isMac());
 	}
 
-	/**
-	 * Test of isWindows method, of class Systems.
-	 */
 	@Test
 	public void testIsWindows()
 	{
 		System.out.println("isWindows");
-		boolean expResult = true;
-		boolean result = Systems.isWindows();
-		Assertions.assertEquals(expResult, result);
+		Assertions.assertEquals(true, Systems.isWindows());
 	}
 
-	/**
-	 * Test of isSolaris method, of class Systems.
-	 */
 	@Test
 	public void testIsSolaris()
 	{
 		System.out.println("isSolaris");
-		boolean expResult = false;
-		boolean result = Systems.isSolaris();
-		Assertions.assertEquals(expResult, result);
+		Assertions.assertEquals(false, Systems.isSolaris());
 	}
 
-	/**
-	 * Test of isUnix method, of class Systems.
-	 */
 	@Test
 	public void testIsUnix()
 	{
 		System.out.println("isUnix");
-		boolean expResult = false;
-		boolean result = Systems.isUnix();
-		Assertions.assertEquals(expResult, result);
+		Assertions.assertEquals(false, Systems.isUnix());
 	}
 
-	/**
-	 * Test of getClasspathFromProperty method, of class Systems.
-	 */
 	@Test
 	public void testGetClasspathFromProperty()
 	{
@@ -99,9 +67,6 @@ public class SystemsTest
 		System.out.println("result: " + result);
 	}
 
-	/**
-	 * Test of getUserHomeDirectory method, of class Systems.
-	 */
 	@Test
 	public void testGetUserHomeDirectory()
 	{
@@ -111,9 +76,6 @@ public class SystemsTest
 		Assertions.assertEquals(expResult, result);
 	}
 
-	/**
-	 * Test of getPresentWorkingDirectory method, of class Systems.
-	 */
 	@Test
 	public void testGetPresentWorkingDirectory()
 	{
@@ -122,9 +84,6 @@ public class SystemsTest
 		System.out.println("result: " + result);
 	}
 
-	/**
-	 * Test of getTempDirectory method, of class Systems.
-	 */
 	@Test
 	public void testGetTempDirectory()
 	{
@@ -134,9 +93,6 @@ public class SystemsTest
 		Assertions.assertEquals(expResult, result);
 	}
 
-	/**
-	 * Test of printAllProperties method, of class Systems.
-	 */
 	@Test
 	public void testPrintAllProperties()
 	{

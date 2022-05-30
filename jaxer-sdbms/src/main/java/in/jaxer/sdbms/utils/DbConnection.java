@@ -1,19 +1,18 @@
-
 package in.jaxer.sdbms.utils;
 
 import in.jaxer.sdbms.DbConnectionHelper;
 import in.jaxer.sdbms.NamedStatement;
 import in.jaxer.sdbms.ResultsetMapper;
 import in.jaxer.sdbms.Row;
+import lombok.extern.log4j.Log4j2;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
-import lombok.extern.log4j.Log4j2;
 
 /**
- *
  * @author Shakir Ansari
  */
 @Log4j2
@@ -52,7 +51,7 @@ public class DbConnection
 		log.debug("sql: {}", sql);
 
 		try (Connection connection = getConnection();
-			 NamedStatement namedStatement = new NamedStatement(connection, sql);)
+			 NamedStatement namedStatement = new NamedStatement(connection, sql))
 		{
 			namedStatement.setParameterList("userId", Arrays.asList(1, 2));
 			namedStatement.setParameter("type", "_WEB");
@@ -60,7 +59,7 @@ public class DbConnection
 
 			log.debug("namedStatement: {}", namedStatement);
 
-			try (ResultSet resultSet = namedStatement.executeQuery();)
+			try (ResultSet resultSet = namedStatement.executeQuery())
 			{
 				List<Row> rows = ResultsetMapper.getRowList(resultSet);
 				for (Row row : rows)

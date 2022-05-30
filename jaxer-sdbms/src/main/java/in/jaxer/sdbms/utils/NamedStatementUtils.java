@@ -1,12 +1,12 @@
-
 package in.jaxer.sdbms.utils;
 
-import in.jaxer.core.utilities.Collections;
 import in.jaxer.core.utilities.JValidator;
 import in.jaxer.core.utilities.Strings;
 import in.jaxer.sdbms.NamedStatement;
 import in.jaxer.sdbms.Parameter;
 import in.jaxer.sdbms.annotations.Column;
+import lombok.extern.log4j.Log4j2;
+
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.sql.SQLException;
@@ -17,10 +17,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import lombok.extern.log4j.Log4j2;
 
 /**
- *
  * @author Shakir
  * Date 4 Nov, 2021 - 11:19:40 AM
  */
@@ -77,7 +75,7 @@ public class NamedStatementUtils
 
 	public static void setParameterValue(Map<String, Parameter> valueMap, List<Parameter> parameters)
 	{
-		if (JValidator.isEmpty(parameters))
+		if (JValidator.isNullOrEmpty(parameters))
 		{
 			return;
 		}
@@ -103,7 +101,7 @@ public class NamedStatementUtils
 
 	public static String queryParser(String query, Map paramMap)
 	{
-		JValidator.requireNotEmpty(query, "Query cannot be empty");
+		JValidator.throwWhenNullOrEmpty(query, "Query cannot be empty");
 
 		int length = query.length();
 		StringBuilder parsedQuery = new StringBuilder(length);
@@ -189,7 +187,7 @@ public class NamedStatementUtils
 //		sql = setParameterListName(sql, nameMap1);
 //		System.out.println("NamedPreparedStatementUtils.main() - " + sql);
 //		System.out.println("NamedPreparedStatementUtils.main() - valueMap [" + valueMap + "]");
-		try (NamedStatement namedStatement = new NamedStatement(null, sql);)
+		try (NamedStatement namedStatement = new NamedStatement(null, sql))
 		{
 			namedStatement.setParameter("p1", p1);
 			namedStatement.setParameter("p2", p2);
@@ -211,7 +209,7 @@ public class NamedStatementUtils
 
 	public static void setParameteres(NamedStatement namedStatement, List<Parameter> parameterList)
 	{
-		if (Collections.isEmpty(parameterList))
+		if (JValidator.isNullOrEmpty(parameterList))
 		{
 			log.error("parameterList is empty");
 			return;

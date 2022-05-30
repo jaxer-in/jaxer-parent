@@ -1,55 +1,72 @@
-
 package in.jaxer.core.utilities;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-import in.jaxer.core.constants.Singletons;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
 /**
- *
  * @author Shakir Ansari
  */
 public class Collections
 {
-
+	@Deprecated
 	public static boolean isEmpty(Collection collection)
 	{
 		return JValidator.isEmpty(collection);
 	}
 
+	public static boolean isNullOrEmpty(Collection collection)
+	{
+		return collection == null || collection.isEmpty();
+	}
+
+	@Deprecated
 	public static boolean isNotEmpty(Collection collection)
 	{
 		return JValidator.isNotEmpty(collection);
 	}
 
+	public static boolean isNotNullAndNotEmpty(Collection collection)
+	{
+		return collection != null && !collection.isEmpty();
+	}
+
+	@Deprecated
 	public static boolean isEmpty(Map map)
 	{
 		return JValidator.isEmpty(map);
 	}
 
+	public static boolean isNullOrEmpty(Map map)
+	{
+		return map == null || map.isEmpty();
+	}
+
+	@Deprecated
 	public static boolean isNotEmpty(Map map)
 	{
 		return !isEmpty(map);
 	}
 
+	public static boolean isNotNullAndNotEmpty(Map map)
+	{
+		return map != null && !map.isEmpty();
+	}
+
 	public static <T> List<T> append(List<T> list1, List<T> list2)
 	{
-		if (isEmpty(list1) && isEmpty(list2))
+		if (isNullOrEmpty(list1) && isNullOrEmpty(list2))
 		{
 			return null;
 		}
 
-		if (isEmpty(list1))
+		if (isNullOrEmpty(list1))
 		{
 			return list2;
 		}
 
-		if (isEmpty(list2))
+		if (isNullOrEmpty(list2))
 		{
 			return list1;
 		}
@@ -70,7 +87,7 @@ public class Collections
 		}
 
 		List<T> responseList = new ArrayList<>();
-		if (isNotEmpty(list))
+		if (isNotNullAndNotEmpty(list))
 		{
 			for (int i = 0; i < list.size(); i++)
 			{
@@ -90,7 +107,7 @@ public class Collections
 	{
 		List<T> responseList = new ArrayList<>();
 
-		if (isNotEmpty(list))
+		if (isNotNullAndNotEmpty(list))
 		{
 			for (int i = start - 1; i < end; i++)
 			{
@@ -103,7 +120,7 @@ public class Collections
 
 	public static <T> List<T> reverse(List<T> list)
 	{
-		if (isEmpty(list))
+		if (isNullOrEmpty(list))
 		{
 			return null;
 		}
@@ -123,20 +140,6 @@ public class Collections
 		}
 
 		return list;
-	}
-
-	public static <T> List<T> toList(String text, Class<T> clazz)
-	{
-		JValidator.requireNotEmpty(text);
-
-		JsonArray array = JsonParser.parseString(text).getAsJsonArray();
-
-		List<T> tList = new ArrayList<>();
-		for (final JsonElement json : array)
-		{
-			tList.add(Singletons.getGson(false).fromJson(json, clazz));
-		}
-		return tList;
 	}
 
 	public static <T> List<T> getNextIdList(int chunk, int currentIndex, List<T> idList)

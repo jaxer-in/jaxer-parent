@@ -1,14 +1,11 @@
-
 package in.jaxer.core.constants;
 
 /**
- *
  * @author Shakir
- * Date 9 Nov, 2021 - 10:02:58 PM
+ * date 2021-11-09 22:02
  */
 public class DbDriverClassNames
 {
-
 	/**
 	 * For MySQL database
 	 */
@@ -33,5 +30,4 @@ public class DbDriverClassNames
 	 * For sqlite database
 	 */
 	public static final String ORG_SQLITE_JDBC = "org.sqlite.JDBC";
-
 }

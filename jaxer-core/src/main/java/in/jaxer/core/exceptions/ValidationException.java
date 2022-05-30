@@ -1,15 +1,13 @@
-
 package in.jaxer.core.exceptions;
 
 /**
- *
- * @author Shakir Ansari
+ * @author Shakir
  */
-public class ValidationException extends RuntimeException
+public class ValidationException extends JaxerCoreException
 {
-
 	public ValidationException()
 	{
+		super();
 	}
 
 	public ValidationException(String message)

@@ -1,20 +1,20 @@
-
 package in.jaxer.core.encoders;
 
+import in.jaxer.core.exceptions.ValidationException;
+import in.jaxer.core.interfaces.Encoder;
 import in.jaxer.core.utilities.JValidator;
 
 /**
- *
- * @author Shakir Ansari
+ * @author Shakir
  */
-public class TwoPipeEncoder
+public class TwoPipeEncoder implements Encoder
 {
-
 	private static final String EXTENSION = ".tp";
 
-	public static String encode(String message)
+	@Override
+	public String encode(String message)
 	{
-		JValidator.requireNotEmpty(message);
+		JValidator.throwWhenNullOrEmpty(message);
 
 		String firstHalf = "", secondHalf = "";
 		for (int i = 0; i < message.length(); i++)
@@ -32,15 +32,16 @@ public class TwoPipeEncoder
 		return firstHalf + secondHalf + EXTENSION;
 	}
 
-	public static String decode(String msg)
+	@Override
+	public String decode(String msg)
 	{
-		JValidator.requireNotEmpty(msg);
+		JValidator.throwWhenNullOrEmpty(msg);
 
 		int len = msg.length();
 
 		if (!msg.endsWith(EXTENSION))
 		{
-			throw new UnsupportedOperationException("String: [" + msg + "] is not encoded");
+			throw new ValidationException(INVALID_ENCRYPTION_FORMAT);
 		}
 
 		//-- removing extension

@@ -1,4 +1,3 @@
-
 package in.jaxer.sdbms.annotations;
 
 import java.lang.annotation.ElementType;
@@ -7,7 +6,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- *
  * Reference javax.persistence.Id
  *
  * @author Shakir Ansari
@@ -17,5 +15,5 @@ import java.lang.annotation.Target;
 public @interface Id
 {
 
-	public boolean autoIncrement() default false;
+	boolean autoIncrement() default false;
 }

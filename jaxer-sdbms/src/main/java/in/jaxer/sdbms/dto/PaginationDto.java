@@ -1,17 +1,14 @@
-
 package in.jaxer.sdbms.dto;
 
 import lombok.ToString;
 
 /**
- *
  * @author Shakir
  * Date 29 Oct, 2021 - 3:14:21 PM
  */
 @ToString
 public class PaginationDto
 {
-
 	/**
 	 * Current page index
 	 * Start from 0
@@ -32,7 +29,6 @@ public class PaginationDto
 
 	/**
 	 * Server will fetch total records
-	 *
 	 */
 	public long totalRecords;
 

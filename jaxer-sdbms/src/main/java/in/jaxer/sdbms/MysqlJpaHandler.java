@@ -14,7 +14,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Shakir Ansari
@@ -31,7 +35,7 @@ public class MysqlJpaHandler extends AbstractJpaHandler
 
 	public static MysqlJpaHandler getInstance()
 	{
-		if(instance == null)
+		if (instance == null)
 		{
 			instance = new MysqlJpaHandler();
 		}
@@ -47,24 +51,24 @@ public class MysqlJpaHandler extends AbstractJpaHandler
 		String sql = "SELECT * FROM `" + tableName + "`";
 		sql = sql + " " + where;
 
-		if(isSingleObject)
+		if (isSingleObject)
 		{
 			sql = sql + " LIMIT 1";
 		}
 
 		log.debug("sql: {}, params: {}", sql, params);
 
-		try(NamedStatement namedStatement = new NamedStatement(connection, sql))
+		try (NamedStatement namedStatement = new NamedStatement(connection, sql))
 		{
 			NamedStatementUtils.setParameteres(namedStatement, params);
 
-			try(ResultSet resultSet = namedStatement.executeQuery())
+			try (ResultSet resultSet = namedStatement.executeQuery())
 			{
 				List<T> objectList = ResultsetMapper.getObjectList(resultSet, outputClass);
 
 				return objectList;
 			}
-		} catch(Exception exception)
+		} catch (Exception exception)
 		{
 			log.error("Exception: ", exception);
 			throw new JaxerSDBMSException(exception);
@@ -75,7 +79,7 @@ public class MysqlJpaHandler extends AbstractJpaHandler
 	public <T> T find(Connection connection, Class<T> outputClass, List<Parameter> parameterList)
 	{
 		List<T> objectList = _find(true, connection, outputClass, parameterList);
-		return JValidator.isEmpty(objectList)
+		return JValidator.isNullOrEmpty(objectList)
 				? null
 				: objectList.get(0);
 	}
@@ -96,11 +100,11 @@ public class MysqlJpaHandler extends AbstractJpaHandler
 
 		log.debug("sql: {}", sql);
 
-		try(PreparedStatement preparedStatement = connection.prepareStatement(sql))
+		try (PreparedStatement preparedStatement = connection.prepareStatement(sql))
 		{
 			preparedStatement.setObject(1, id);
 			return preparedStatement.executeUpdate();
-		} catch(Exception exception)
+		} catch (Exception exception)
 		{
 			log.error("Exception: ", exception);
 			throw new JaxerSDBMSException(exception);
@@ -121,22 +125,22 @@ public class MysqlJpaHandler extends AbstractJpaHandler
 
 		String columns = "";
 		Set<Map.Entry<String, Object>> columnEntryset = columnHashMap.entrySet();
-		for(Map.Entry<String, Object> entry : columnEntryset)
+		for (Map.Entry<String, Object> entry : columnEntryset)
 		{
-			if(JValidator.isNotEmpty(entry.getKey()))
+			if (JValidator.isNotNullAndNotEmpty(entry.getKey()))
 			{
 				columns += " `" + entry.getKey() + "` = :" + entry.getValue() + comma;
 			}
 		}
 
-		if(columns.endsWith(comma))
+		if (columns.endsWith(comma))
 		{
 			columns = Strings.removeEndsWith(columns, comma);
 		}
 
 		String where = "WHERE 1=1";
 		Set<Map.Entry<String, Object>> primaryEntryset = primaryHashMap.entrySet();
-		for(Map.Entry<String, Object> primaryEntry : primaryEntryset)
+		for (Map.Entry<String, Object> primaryEntry : primaryEntryset)
 		{
 			where += " AND `" + primaryEntry.getKey() + "` = :" + primaryEntry.getValue();
 			break;
@@ -146,7 +150,7 @@ public class MysqlJpaHandler extends AbstractJpaHandler
 
 		log.debug("sql: {}", sql);
 
-		try(NamedStatement namedStatement = new NamedStatement(connection, sql))
+		try (NamedStatement namedStatement = new NamedStatement(connection, sql))
 		{
 			columnHashMap.putAll(primaryHashMap);
 
@@ -154,7 +158,7 @@ public class MysqlJpaHandler extends AbstractJpaHandler
 
 			namedStatement.executeUpdate();
 			return t;
-		} catch(Exception exception)
+		} catch (Exception exception)
 		{
 			log.error("Exception: ", exception);
 			throw new JaxerSDBMSException(exception);
@@ -173,9 +177,9 @@ public class MysqlJpaHandler extends AbstractJpaHandler
 
 		HashMap<String, Object> columnHashMap = getColumnKeyValue(outputClass, false);
 		Set<Map.Entry<String, Object>> columnEntryset = columnHashMap.entrySet();
-		for(Map.Entry<String, Object> entry : columnEntryset)
+		for (Map.Entry<String, Object> entry : columnEntryset)
 		{
-			if(JValidator.isNotEmpty(entry.getKey()))
+			if (JValidator.isNotNullAndNotEmpty(entry.getKey()))
 			{
 				columnNames += " `" + entry.getKey() + "`" + comma;
 				value += " :" + entry.getValue() + comma;
@@ -188,14 +192,14 @@ public class MysqlJpaHandler extends AbstractJpaHandler
 		PrimaryKey primaryKey = getPrimaryKey(outputClass);
 		HashMap<String, Object> primaryColumnHashMap = getColumnKeyValue(outputClass, true);
 		Set<Map.Entry<String, Object>> primaryColumnEntryset = primaryColumnHashMap.entrySet();
-		for(Map.Entry<String, Object> entry : primaryColumnEntryset)
+		for (Map.Entry<String, Object> entry : primaryColumnEntryset)
 		{
-			if(JValidator.isNotEmpty(entry.getKey()))
+			if (JValidator.isNotNullAndNotEmpty(entry.getKey()))
 			{
 				columnNames += " `" + entry.getKey() + "`" + comma;
 
 				Object object = entry.getValue();
-				if(object == null && primaryKey.uuidValue())
+				if (object == null && primaryKey.uuidValue())
 				{
 					value += " :" + Strings.getUUID().replace("-", "") + comma;
 				} else
@@ -215,22 +219,22 @@ public class MysqlJpaHandler extends AbstractJpaHandler
 
 		log.debug("sql: {}", sql);
 
-		try(NamedStatement namedStatement = new NamedStatement(connection, sql, Statement.RETURN_GENERATED_KEYS))
+		try (NamedStatement namedStatement = new NamedStatement(connection, sql, Statement.RETURN_GENERATED_KEYS))
 		{
 			NamedStatementUtils.setParameteres(namedStatement, columnHashMap, outputClass, t);
 
-			if(0 != namedStatement.executeUpdate())
+			if (0 != namedStatement.executeUpdate())
 			{
-				try(ResultSet resultSet = namedStatement.getGeneratedKeys())
+				try (ResultSet resultSet = namedStatement.getGeneratedKeys())
 				{
-					if(resultSet.next())
+					if (resultSet.next())
 					{
 //						new PropertyDescriptor(primaryKey.value(), outputClass).getWriteMethod().invoke(t, resultSet.getObject(1));
 						new PropertyDescriptor(getPrimaryFieldName(outputClass), outputClass).getWriteMethod().invoke(t, resultSet.getObject(1));
 					}
 				}
 			}
-		} catch(Exception exception)
+		} catch (Exception exception)
 		{
 			log.error("Exception: ", exception);
 			throw new JaxerSDBMSException(exception);
@@ -251,16 +255,16 @@ public class MysqlJpaHandler extends AbstractJpaHandler
 		log.debug("sql: {}", sql);
 		log.debug("parameterList: {}", parameterList);
 
-		try(NamedStatement namedStatement = new NamedStatement(connection, sql))
+		try (NamedStatement namedStatement = new NamedStatement(connection, sql))
 		{
 			NamedStatementUtils.setParameteres(namedStatement, parameterList);
-			try(ResultSet resultSet = namedStatement.executeQuery())
+			try (ResultSet resultSet = namedStatement.executeQuery())
 			{
 				return resultSet.next()
 						? resultSet.getLong(1)
 						: 0;
 			}
-		} catch(Exception exception)
+		} catch (Exception exception)
 		{
 			log.error("Exception: ", exception);
 			throw new JaxerSDBMSException(exception);
@@ -272,11 +276,11 @@ public class MysqlJpaHandler extends AbstractJpaHandler
 	{
 		String where = "WHERE 1=1";
 
-		if(Collections.isNotEmpty(parameterList))
+		if (Collections.isNotEmpty(parameterList))
 		{
-			for(Parameter parameter : parameterList)
+			for (Parameter parameter : parameterList)
 			{
-				if(parameter.getValue() instanceof Collection)
+				if (parameter.getValue() instanceof Collection)
 				{
 					where += parameter.isEquals()
 							? " AND `" + parameter.getName() + "`" + " IN (:" + parameter.getName() + ")"

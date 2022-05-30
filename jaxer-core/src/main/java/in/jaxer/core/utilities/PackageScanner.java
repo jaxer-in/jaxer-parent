@@ -1,8 +1,9 @@
-
 package in.jaxer.core.utilities;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.reflect.ClassPath;
+import lombok.extern.log4j.Log4j2;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -15,22 +16,20 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
-import lombok.extern.log4j.Log4j2;
 
 /**
- *
  * @author Shakir Ansari
  */
 @Log4j2
 public class PackageScanner
 {
-
 	private static final String DOT_STAR = ".*";
-
 	private static final String DOT_CLASS = ".class";
 
 	private static boolean isValidEntryName(String entryName)
 	{
+		log.debug("entryName: {}", entryName);
+
 		return entryName != null
 				&& entryName.endsWith(".class")
 				&& !entryName.contains("$");
@@ -38,12 +37,12 @@ public class PackageScanner
 
 	private static String removeDotClass(String className)
 	{
-		return className.contains(".class")
-				? className.substring(0, className.length() - ".class".length())
-				: className;
+		log.debug("className: {}", className);
+
+		return Strings.removeEndsWith(className, ".class");
 	}
 
-	private static void getClassListFromJar(Set<Class> classes, URL jarUrl) throws UnsupportedEncodingException, IOException, ClassNotFoundException
+	private static void getClassListFromJar(Set<Class> classes, URL jarUrl) throws IOException, ClassNotFoundException
 	{
 		log.debug("classes: {}, jarUrl: {}", classes, jarUrl);
 
@@ -164,7 +163,7 @@ public class PackageScanner
 
 		Set<Class> annotationClassList = new HashSet<>();
 
-		if (JValidator.isNotEmpty(classList))
+		if (JValidator.isNotNullAndNotEmpty(classList))
 		{
 			for (Class clazz : classList)
 			{

@@ -1,29 +1,53 @@
-
 package in.jaxer.core.encoders;
 
+import in.jaxer.core.exceptions.ValidationException;
+import in.jaxer.core.interfaces.Encoder;
 import in.jaxer.core.utilities.JValidator;
-import in.jaxer.core.utilities.Strings;
+import lombok.extern.log4j.Log4j2;
 
 /**
- *
- * @author Shakir Ansari
+ * @author Shakir
  */
-public class Number52Encoder
+@Log4j2
+public class Number52Encoder implements Encoder
 {
+	private final String numberScale;
 
-	private final static String upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	public Number52Encoder()
+	{
+		numberScale = initNumberScale();
+		log.info("numberScale: {}", numberScale);
+	}
 
-	private final static String lower = upper.toLowerCase();
+	private String initNumberScale()
+	{
+		String _numberScale = "";
+		/**
+		 * ASKII
+		 * A-Z = 65...90
+		 * a-z = 97...122
+		 * 0-9 = 48...57
+		 */
+		for (int i = 0; i < 26; i++)
+		{
+			_numberScale += "" + (char) ((int) 'A' + i);
+		}
+		for (int i = 0; i < 10; i++)
+		{
+			_numberScale += "" + (i);
+		}
+		for (int i = 0; i < 26; i++)
+		{
+			_numberScale += "" + (char) ((int) 'a' + i);
+		}
+		return _numberScale;
+	}
 
-	private final static String number = "0123456789";
-
-	private static final String alfa52 = upper + number + lower;
-
-	public static String convert(int x)
+	public String convert(int x)
 	{
 		if (x == 0)
 		{
-			return String.valueOf(alfa52.charAt(0));
+			return String.valueOf(numberScale.charAt(0));
 		}
 
 		String num52 = "";
@@ -31,32 +55,33 @@ public class Number52Encoder
 
 		while (x > 0)
 		{
-			temp = x % alfa52.length();
-			num52 = alfa52.charAt(temp) + num52;
-			x /= alfa52.length();
+			temp = x % numberScale.length();
+			num52 = numberScale.charAt(temp) + num52;
+			x /= numberScale.length();
 		}
 		return num52;
 	}
 
-	public static int convert(String string)
+	public int convert(String s)
 	{
 		int val = 0;
 
-		for (int i = 0; i < string.length(); i++)
+		for (int i = 0; i < s.length(); i++)
 		{
-			int d = alfa52.indexOf(string.charAt(i));
+			int d = numberScale.indexOf(s.charAt(i));
 			if (d == -1)
 			{
 				throw new IllegalArgumentException("Invalid number format");
 			}
-			val = alfa52.length() * val + d;
+			val = numberScale.length() * val + d;
 		}
 		return val;
 	}
 
-	public static String encode(String message)
+	@Override
+	public String encode(String message)
 	{
-		JValidator.requireNotEmpty(message);
+		JValidator.throwWhenNullOrEmpty(message);
 
 		int ch;
 		int length = message.length();
@@ -65,7 +90,7 @@ public class Number52Encoder
 
 		for (int i = 0; i < length; i++)
 		{
-			ch = (int) message.charAt(i);
+			ch = message.charAt(i);
 			int first = ch % 10;
 			int second = ch / 10;
 			encoded += first + convert(second);
@@ -74,13 +99,15 @@ public class Number52Encoder
 		return encoded;
 	}
 
-	public static String decode(String message)
+	@Override
+	public String decode(String message)
 	{
-		JValidator.requireNotEmpty(message);
+		JValidator.throwWhenNullOrEmpty(message);
 
-		if (!Strings.isAlphaNumeric(message))
+		String pattern = "^[0-9a-zA-Z]*$";
+		if (!message.matches(pattern))
 		{
-			throw new RuntimeException("Invalid number format");
+			throw new ValidationException(INVALID_ENCRYPTION_FORMAT);
 		}
 
 		/**
@@ -111,7 +138,7 @@ public class Number52Encoder
 					temp += message.charAt(nextI);
 					nextI--;
 				}
-				decoded += (char) ((convert(temp) * 10) + (int) (ch - 48));
+				decoded += (char) ((convert(temp) * 10) + (ch - 48));
 			}
 		}
 

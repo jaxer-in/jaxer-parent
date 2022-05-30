@@ -1,16 +1,15 @@
-
 package in.jaxer.core.utilities;
 
 import in.jaxer.core.constants.HttpConstants;
-import in.jaxer.core.constants.Singletons;
 import in.jaxer.core.exceptions.JaxerCoreException;
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import lombok.extern.log4j.Log4j2;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -19,23 +18,18 @@ import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
-import javax.imageio.ImageIO;
-import lombok.extern.log4j.Log4j2;
 
 /**
- *
  * @author Shakir Ansari
  */
 @Log4j2
 public class JUtilities
 {
-
 	public static int min(int... values)
 	{
-		int min = 0;
+		int min = values[0];
 		for (int val : values)
 		{
 			min = Math.min(min, val);
@@ -45,7 +39,7 @@ public class JUtilities
 
 	public static int max(int... values)
 	{
-		int max = 0;
+		int max = values[0];
 		for (int value : values)
 		{
 			max = Math.max(max, value);
@@ -53,7 +47,7 @@ public class JUtilities
 		return max;
 	}
 
-	public static void reverse(byte bytes[], int len)
+	public static void reverse(byte[] bytes, int len)
 	{
 		for (int i = 0; i < len / 2; i++)
 		{
@@ -71,7 +65,6 @@ public class JUtilities
 			return true;
 		} catch (Exception exception)
 		{
-			exception.printStackTrace();
 			return false;
 		}
 	}
@@ -83,14 +76,11 @@ public class JUtilities
 		return htmlPattern.matcher(str).matches();
 	}
 
-	public static String getExtension(String sourceImage)
+	public static String getExtension(String str)
 	{
-		log.debug("sourceImage: {}", sourceImage);
-		if (sourceImage.contains("."))
-		{
-			return sourceImage.substring(sourceImage.lastIndexOf(".") + 1);
-		}
-		return null;
+		log.debug("str: {}", str);
+
+		return str.contains(".") ? str.substring(str.lastIndexOf(".") + 1) : null;
 	}
 
 	public static String getExtensionWithDot(String sourceImage)
@@ -101,29 +91,37 @@ public class JUtilities
 		return ext == null ? null : "." + ext;
 	}
 
-	public static Dimension getImageDimension(String sourceImageFile) throws IOException
+	public static Dimension getImageDimension(String sourceImageFile)
 	{
 		log.debug("sourceImageFile: {}", sourceImageFile);
 		return getImageDimension(new File(sourceImageFile));
 	}
 
-	public static Dimension getImageDimension(File imgFile) throws IOException
+	public static Dimension getImageDimension(File imgFile)
 	{
 		log.debug("imgFile: {}", imgFile);
 		try (InputStream inputStream = new FileInputStream(imgFile))
 		{
 			return getImageDimension(inputStream);
+		} catch (Exception e)
+		{
+			throw new JaxerCoreException(e);
 		}
-//		return getImageDimension(ImageIO.read(imgFile));
 	}
 
-	public static Dimension getImageDimension(InputStream inputStream) throws IOException
+	public static Dimension getImageDimension(InputStream inputStream)
 	{
 		log.debug("inputStream: {}", inputStream);
-		return getImageDimension(ImageIO.read(inputStream));
+		try
+		{
+			return getImageDimension(ImageIO.read(inputStream));
+		} catch (Exception e)
+		{
+			throw new JaxerCoreException(e);
+		}
 	}
 
-	public static Dimension getImageDimension(BufferedImage bufferedImage) throws IOException
+	public static Dimension getImageDimension(BufferedImage bufferedImage)
 	{
 		log.debug("bufferedImage: {}", bufferedImage);
 		return bufferedImage == null ? null : new Dimension(bufferedImage.getWidth(), bufferedImage.getHeight());
@@ -141,7 +139,7 @@ public class JUtilities
 
 	public static boolean isUrl(String urlString)
 	{
-		if (JValidator.isEmpty(urlString))
+		if (JValidator.isNullOrEmpty(urlString))
 		{
 			return false;
 		}
@@ -161,7 +159,7 @@ public class JUtilities
 
 		try (InputStream inputStream = httpURLConnection.getInputStream();
 			 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-			 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);)
+			 BufferedReader bufferedReader = new BufferedReader(inputStreamReader))
 		{
 			String line;
 			while ((line = bufferedReader.readLine()) != null)
@@ -171,47 +169,6 @@ public class JUtilities
 		}
 
 		return result.toString();
-	}
-
-	public static String getNotNull(Object data, String defaultValue)
-	{
-		if (data == null)
-		{
-			return defaultValue;
-		} else
-		{
-			return data.toString();
-		}
-	}
-
-	@Deprecated
-	public static String getNotNull(Object data)
-	{
-		return getNotNull(data, "");
-	}
-
-	@Deprecated
-	public static String toString(Object object)
-	{
-		return object == null ? null : object.toString();
-	}
-
-	@Deprecated
-	public static String toString(int i)
-	{
-		return String.valueOf(i);
-	}
-
-	@Deprecated
-	public static String toString(String string)
-	{
-		return string;
-	}
-
-	@Deprecated
-	public static String toString(Date date)
-	{
-		return date == null ? null : String.valueOf(date.getTime());
 	}
 
 	public static void sleep(long mili)
@@ -226,7 +183,7 @@ public class JUtilities
 			Thread.sleep(mili);
 		} catch (InterruptedException e)
 		{
-			throw new RuntimeException(e);
+			throw new JaxerCoreException(e);
 		}
 	}
 
@@ -237,34 +194,39 @@ public class JUtilities
 
 	public static URL getRealUrlBehindRedirect(String url)
 	{
+		log.debug("url: {}", url);
 		try
 		{
 			URLConnection uRLConnection = new URL(url).openConnection();
-			System.out.println("Utilities.getRealUrlBehindRedirect() - Orignal url: " + uRLConnection.getURL());
-			uRLConnection.connect();
-			System.out.println("Utilities.getRealUrlBehindRedirect() - Connected url: " + uRLConnection.getURL());
+			log.debug("Original url: {}", uRLConnection.getURL());
 
-			try (InputStream inputStream = uRLConnection.getInputStream();)
+			uRLConnection.connect();
+			log.debug("Connected url: {}", uRLConnection.getURL());
+
+			try (InputStream inputStream = uRLConnection.getInputStream())
 			{
 				String redirectedUrl = uRLConnection.getURL().toString();
+				log.debug("redirectedUrl: {}", redirectedUrl);
+
 				String path = uRLConnection.getURL().getPath();
-				System.out.println("Utilities.getRealUrlBehindRedirect() - Redirected url: " + redirectedUrl);
-				System.out.println("Utilities.getRealUrlBehindRedirect() - path: " + path);
+				log.debug("path: {}", path);
+
 				return uRLConnection.getURL();
 			}
 		} catch (Exception exception)
 		{
-			throw new RuntimeException("Exception occured while reading real URL behind a redirect", exception);
+			throw new JaxerCoreException("Exception occured while reading real URL behind a redirect", exception);
 		}
 	}
 
 	/**
-	 *
 	 * @param value
 	 * @param percentage
+	 *
 	 * @return
-	 * @deprecated
+	 *
 	 * @see getPercentage(double, float)
+	 * @deprecated
 	 */
 	@Deprecated
 	public static int getPercentage(int value, int percentage)
@@ -277,19 +239,22 @@ public class JUtilities
 		return value * percentage / 100;
 	}
 
+	@Deprecated
 	public static String toJsonString(Object object)
 	{
-		return object == null ? null : Singletons.getGson().toJson(object);
+		return object == null ? null : JsonHandler.getGson().toJson(object);
 	}
 
+	@Deprecated
 	public static <T> T toObject(String jsonString, Class<T> clazz)
 	{
-		return JValidator.isEmpty(jsonString) ? null : Singletons.getGson().fromJson(jsonString, clazz);
+		return JValidator.isNullOrEmpty(jsonString) ? null : JsonHandler.getGson().fromJson(jsonString, clazz);
 	}
 
+	@Deprecated
 	public static <T> List<T> toObjectList(String jsonString, Class<T> clazz)
 	{
-		return JValidator.isEmpty(jsonString) ? null : Collections.toList(jsonString, clazz);
+		return JValidator.isNullOrEmpty(jsonString) ? null : JsonHandler.toObjectList(jsonString, clazz);
 	}
 
 	public static void close(AutoCloseable autoCloseable)
@@ -313,7 +278,7 @@ public class JUtilities
 			System.out.write(data.getBytes());
 			Thread.sleep(25);
 		}
-		System.out.println("");
+		System.out.println();
 	}
 
 	public static String getLocalHostAddress()
@@ -346,6 +311,17 @@ public class JUtilities
 		} catch (Exception exception)
 		{
 			throw new JaxerCoreException(exception);
+		}
+	}
+
+	public static BufferedImage getScreenShot()
+	{
+		try
+		{
+			return new Robot().createScreenCapture(new Rectangle(JUtilities.getScreenDimension()));
+		} catch (Exception exception)
+		{
+			throw new JaxerCoreException((exception));
 		}
 	}
 }

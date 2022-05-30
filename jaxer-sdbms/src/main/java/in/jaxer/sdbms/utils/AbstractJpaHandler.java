@@ -1,4 +1,3 @@
-
 package in.jaxer.sdbms.utils;
 
 import in.jaxer.core.utilities.JValidator;
@@ -7,6 +6,8 @@ import in.jaxer.sdbms.annotations.Column;
 import in.jaxer.sdbms.annotations.PrimaryKey;
 import in.jaxer.sdbms.annotations.Table;
 import in.jaxer.sdbms.exceptions.JaxerSDBMSException;
+import lombok.extern.log4j.Log4j2;
+
 import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -15,10 +16,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import lombok.extern.log4j.Log4j2;
 
 /**
- *
  * @author Shakir Ansari
  */
 @Log4j2
@@ -47,7 +46,7 @@ public abstract class AbstractJpaHandler
 		}
 
 		String tableName = ((Table) outputClass.getAnnotation(Table.class)).value();
-		if (JValidator.isEmpty(tableName))
+		if (JValidator.isNullOrEmpty(tableName))
 		{
 			throw new JaxerSDBMSException("Table name not found in " + outputClass.getName());
 		}
@@ -125,7 +124,7 @@ public abstract class AbstractJpaHandler
 			if (field.isAnnotationPresent(PrimaryKey.class))
 			{
 				PrimaryKey pk = field.getAnnotation(PrimaryKey.class);
-				if (JValidator.isEmpty(columnList))
+				if (JValidator.isNullOrEmpty(columnList))
 				{
 					columnList = new ArrayList<>();
 				}
@@ -139,7 +138,7 @@ public abstract class AbstractJpaHandler
 	{
 		List<PrimaryKey> primaryColumnList = getPrimaryKeyColumnList(outputClass);
 
-		if (JValidator.isEmpty(primaryColumnList))
+		if (JValidator.isNullOrEmpty(primaryColumnList))
 		{
 			throw new IllegalArgumentException("Annotation @" + PrimaryKey.class.getName() + " not found in " + outputClass.getName());
 		}
@@ -171,16 +170,16 @@ public abstract class AbstractJpaHandler
 
 	public <T> T find(Connection connection, Class<T> outputClass, Object id)
 	{
-		JValidator.requireNotNull(id, "Id cannot be null");
+		JValidator.throwWhenNull(id, "Id cannot be null");
 
 		return find(connection, outputClass, new Parameter(getPrimaryColumnName(outputClass), id, true));
 	}
 
 	public <T> T find(Connection connection, Class<T> outputClass, Parameter parameter)
 	{
-		JValidator.requireNotNull(parameter, "Parameter cannot be null");
+		JValidator.throwWhenNull(parameter, "Parameter cannot be null");
 
-		return  find(connection, outputClass, Arrays.asList(parameter));
+		return find(connection, outputClass, Arrays.asList(parameter));
 	}
 
 	public <T> List<T> findList(Connection connection, Class<T> outputClass)
@@ -195,7 +194,7 @@ public abstract class AbstractJpaHandler
 
 	public <T> List<T> findByIdList(Connection connection, Class<T> outputClass, List<Integer> idList)
 	{
-		if (JValidator.isEmpty(idList))
+		if (JValidator.isNullOrEmpty(idList))
 		{
 			return null;
 		}

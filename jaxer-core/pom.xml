@@ -1,86 +1,120 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-	<parent>
-		<groupId>io.github.jaxer-in</groupId>
-		<artifactId>jaxer-parent</artifactId>
-		<version>${revision}</version>
-	</parent>
+    <parent>
+        <groupId>io.github.jaxer-in</groupId>
+        <artifactId>jaxer-parent</artifactId>
+        <version>${revision}</version>
+    </parent>
 
-	<artifactId>jaxer-core</artifactId>
+    <artifactId>jaxer-core</artifactId>
 
-	<name>Jaxer Core Library</name>
-	<description>Simple and light weight library to overcome complex task</description>
-	<url>https://github.com/jaxer-in/jaxer-parent</url>
+    <name>Jaxer Core Library</name>
+    <description>Simple and light weight library to overcome complex task</description>
+    <url>https://github.com/jaxer-in/jaxer-parent</url>
 
-	<modelVersion>4.0.0</modelVersion>
-	<packaging>jar</packaging>
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>jar</packaging>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
-		<license.dir>${basedir}</license.dir>
-		<version.google.qrcode>3.4.1</version.google.qrcode>
-	</properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <license.dir>${basedir}</license.dir>
+    </properties>
 
-	<scm>
-		<connection>scm:git:git://github.com:jaxer-in/jaxer-core.git</connection>
-		<developerConnection>scm:git:ssh://github.com:jaxer-in/jaxer-core.git</developerConnection>
-		<url>https://github.com/jaxer-in/jaxer-core.git/tree/main</url>
-	</scm>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>libs/</classpathPrefix>
+                            <mainClass>in.jaxer.core.Jaxer</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.0</version>
+            </plugin>
+        </plugins>
+    </build>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>3.2.0</version>
-				<configuration>
-					<archive>
-						<manifest>
-							<addClasspath>true</addClasspath>
-							<classpathPrefix>libs/</classpathPrefix>
-							<mainClass>in.jaxer.core.Jaxer</mainClass>
-						</manifest>
-					</archive>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+    <dependencies>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
 
-	<dependencies>
-		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
-		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-			<version>2.9.0</version>
-		</dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
 
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>4.0.1</version>
-			<scope>provided</scope>
-		</dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
 
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>4.5.13</version>
-		</dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
 
-		<dependency>
-			<groupId>com.google.zxing</groupId>
-			<artifactId>core</artifactId>
-			<version>${version.google.qrcode}</version>
-		</dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+        </dependency>
 
-		<dependency>
-			<groupId>com.google.zxing</groupId>
-			<artifactId>javase</artifactId>
-			<version>${version.google.qrcode}</version>
-		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>javase</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
 </project>

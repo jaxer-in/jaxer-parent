@@ -1,13 +1,8 @@
-
 package in.jaxer.core.net;
 
 import in.jaxer.core.constants.ContentType;
 import in.jaxer.core.constants.HttpConstants;
 import in.jaxer.core.utilities.JValidator;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.List;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -16,17 +11,24 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.List;
+
 /**
- *
  * @author Shakir Ansari
  */
 public class ApacheHttpHandler
 {
+	private final HttpClient httpClient;
 
-	private final static HttpClient httpClient = HttpClientBuilder.create().build();
+	public ApacheHttpHandler(HttpClient httpClient)
+	{
+		this.httpClient = httpClient;
+	}
 
 	public String doGet(String url) throws IOException
 	{
@@ -38,7 +40,7 @@ public class ApacheHttpHandler
 	{
 		HttpPost httpPost = new HttpPost(url);
 
-		if (JValidator.isNotEmpty(nameValuePairs))
+		if (JValidator.isNotNullAndNotEmpty(nameValuePairs))
 		{
 			httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 		}
@@ -51,7 +53,7 @@ public class ApacheHttpHandler
 	{
 		HttpPost httpPost = new HttpPost(url);
 
-		if (JValidator.isNotEmpty(jsonString))
+		if (JValidator.isNotNullAndNotEmpty(jsonString))
 		{
 			StringEntity stringEntity = new StringEntity(jsonString);
 			stringEntity.setContentType(ContentType.APPLICATION_JSON);
@@ -68,7 +70,7 @@ public class ApacheHttpHandler
 	{
 		HttpPut httpPut = new HttpPut(url);
 
-		if (JValidator.isNotEmpty(jsonString))
+		if (JValidator.isNotNullAndNotEmpty(jsonString))
 		{
 			StringEntity stringEntity = new StringEntity(jsonString);
 			stringEntity.setContentType(ContentType.APPLICATION_JSON);
@@ -81,7 +83,7 @@ public class ApacheHttpHandler
 		return getResponse(httpResponse);
 	}
 
-	public String hitHttpDelete(String url) throws IOException
+	public String doDelete(String url) throws IOException
 	{
 		HttpDelete httpDelete = new HttpDelete(url);
 
@@ -99,7 +101,7 @@ public class ApacheHttpHandler
 	public String getResponse(HttpResponse response) throws IOException
 	{
 		try (InputStreamReader inputStreamReader = new InputStreamReader(response.getEntity().getContent());
-			 BufferedReader rd = new BufferedReader(inputStreamReader);)
+			 BufferedReader rd = new BufferedReader(inputStreamReader))
 		{
 			String line = null;
 			StringBuilder builder = new StringBuilder();

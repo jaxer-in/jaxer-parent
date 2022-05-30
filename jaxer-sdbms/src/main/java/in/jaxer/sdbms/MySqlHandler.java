@@ -1,4 +1,3 @@
-
 package in.jaxer.sdbms;
 
 import in.jaxer.core.utilities.Collections;
@@ -8,6 +7,8 @@ import in.jaxer.sdbms.annotations.PrimaryKey;
 import in.jaxer.sdbms.exceptions.JaxerSDBMSException;
 import in.jaxer.sdbms.utils.AbstractJpaHandler;
 import in.jaxer.sdbms.utils.NamedStatementUtils;
+import lombok.extern.log4j.Log4j2;
+
 import java.beans.PropertyDescriptor;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,12 +19,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import lombok.extern.log4j.Log4j2;
 
 /**
- *
  * @author Shakir Ansari
- * @see  in.jaxer.sdbms.MysqlJpaHandler
+ * @see in.jaxer.sdbms.MysqlJpaHandler
  */
 @Log4j2
 @Deprecated
@@ -82,7 +81,7 @@ public class MySqlHandler extends AbstractJpaHandler
 	public <T> T find(Connection connection, Class<T> outputClass, List<Parameter> parameterList)
 	{
 		List<T> objectList = _find(true, connection, outputClass, parameterList);
-		return JValidator.isEmpty(objectList) ? null : objectList.get(0);
+		return JValidator.isNullOrEmpty(objectList) ? null : objectList.get(0);
 	}
 
 	@Override
@@ -101,7 +100,7 @@ public class MySqlHandler extends AbstractJpaHandler
 
 		log.debug("sql: {}", sql);
 
-		try (PreparedStatement preparedStatement = connection.prepareStatement(sql);)
+		try (PreparedStatement preparedStatement = connection.prepareStatement(sql))
 		{
 			preparedStatement.setObject(1, id);
 			return preparedStatement.executeUpdate();
@@ -128,7 +127,7 @@ public class MySqlHandler extends AbstractJpaHandler
 		Set<Map.Entry<String, Object>> columnEntryset = columnHashMap.entrySet();
 		for (Map.Entry<String, Object> entry : columnEntryset)
 		{
-			if (JValidator.isNotEmpty(entry.getKey()))
+			if (JValidator.isNotNullAndNotEmpty(entry.getKey()))
 			{
 				columns += " `" + entry.getKey() + "` = :" + entry.getValue() + comma;
 			}
@@ -180,7 +179,7 @@ public class MySqlHandler extends AbstractJpaHandler
 		Set<Map.Entry<String, Object>> columnEntryset = columnHashMap.entrySet();
 		for (Map.Entry<String, Object> entry : columnEntryset)
 		{
-			if (JValidator.isNotEmpty(entry.getKey()))
+			if (JValidator.isNotNullAndNotEmpty(entry.getKey()))
 			{
 				columnNames += " `" + entry.getKey() + "`" + comma;
 				value += " :" + entry.getValue() + comma;
@@ -195,7 +194,7 @@ public class MySqlHandler extends AbstractJpaHandler
 		Set<Map.Entry<String, Object>> primaryColumnEntryset = primaryColumnHashMap.entrySet();
 		for (Map.Entry<String, Object> entry : primaryColumnEntryset)
 		{
-			if (JValidator.isNotEmpty(entry.getKey()))
+			if (JValidator.isNotNullAndNotEmpty(entry.getKey()))
 			{
 				columnNames += " `" + entry.getKey() + "`" + comma;
 
@@ -256,7 +255,7 @@ public class MySqlHandler extends AbstractJpaHandler
 		log.debug("sql: {}", sql);
 		log.debug("parameterList: {}", parameterList);
 
-		try (NamedStatement namedStatement = new NamedStatement(connection, sql);)
+		try (NamedStatement namedStatement = new NamedStatement(connection, sql))
 		{
 			NamedStatementUtils.setParameteres(namedStatement, parameterList);
 			try (ResultSet resultSet = namedStatement.executeQuery())

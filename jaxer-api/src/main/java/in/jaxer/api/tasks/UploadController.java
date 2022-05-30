@@ -1,11 +1,9 @@
-
 package in.jaxer.api.tasks;
 
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 
 /**
- *
  * @author Shakir Ansari
  */
 //@WebServlet(urlPatterns = "/uploadController")

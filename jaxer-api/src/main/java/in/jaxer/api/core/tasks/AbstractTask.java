@@ -1,32 +1,32 @@
-
 package in.jaxer.api.core.tasks;
 
 import in.jaxer.api.constants.RequestConstant;
 import in.jaxer.api.dtos.RequestResponseDto;
-import in.jaxer.core.utilities.JUtilities;
 import in.jaxer.core.utilities.JValidator;
+import in.jaxer.core.utilities.JsonHandler;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.log4j.Log4j2;
+
+import javax.servlet.http.HttpServletRequest;
 import java.sql.Connection;
 import java.sql.Timestamp;
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import lombok.extern.log4j.Log4j2;
 
 /**
- *
  * @author Shakir Ansari
  */
 @Log4j2
-public abstract class AbstractRestTask
+public abstract class AbstractTask
 {
-
+	@Getter
+	@Setter
 	private RequestResponseDto requestResponseDto = null;
 
 	public abstract void doTask(Connection connection) throws Exception;
 
 	public void processAbstractTask(Connection connection) throws Exception
 	{
-		log.debug("--------------------");
-
 		doBeforeTask(connection);
 
 		doTask(connection);
@@ -48,29 +48,19 @@ public abstract class AbstractRestTask
 	{
 	}
 
-	protected RequestResponseDto getRequestResponseDto()
-	{
-		return requestResponseDto;
-	}
-
-	public void setRequestResponseDto(RequestResponseDto requestResponseDto)
-	{
-		this.requestResponseDto = requestResponseDto;
-	}
-
 	public HttpServletRequest getHttpServletRequest()
 	{
-		return requestResponseDto.getHttpServletRequest();
+		return getRequestResponseDto().getHttpServletRequest();
 	}
 
 	public String getParameter(String paramName)
 	{
-		return requestResponseDto.getParameter(paramName);
+		return getRequestResponseDto().getParameter(paramName);
 	}
 
 	public <T> T getParameter(String paramName, Class<T> T)
 	{
-		return JUtilities.toObject(getParameter(paramName), T);
+		return JsonHandler.toObject(getParameter(paramName), T);
 	}
 
 	public int getParameterAsInt(String paramName)
@@ -84,27 +74,27 @@ public abstract class AbstractRestTask
 
 	public <T> List<T> getParameterList(String paramName, Class<T> T)
 	{
-		return JUtilities.toObjectList(getParameter(paramName), T);
+		return JsonHandler.toObjectList(getParameter(paramName), T);
 	}
 
 	public void setTemporaryObject(String key, Object value)
 	{
-		requestResponseDto.setTemporaryObject(key, value);
+		getRequestResponseDto().setTemporaryObject(key, value);
 	}
 
 	public <T> T getTemporaryObject(String key, Class<T> T)
 	{
-		return requestResponseDto.getTemporaryObject(key, T);
+		return getRequestResponseDto().getTemporaryObject(key, T);
 	}
 
 	public void setParameter(String key, Object value)
 	{
-		requestResponseDto.setParameter(key, value);
+		getRequestResponseDto().setParameter(key, value);
 	}
 
 	public void addUserMessage(String userMessage)
 	{
-		requestResponseDto.addUserMessage(userMessage);
+		getRequestResponseDto().addUserMessage(userMessage);
 	}
 
 	public Timestamp getTimeStamp()
@@ -120,7 +110,7 @@ public abstract class AbstractRestTask
 
 	private long getClientMilliseconds()
 	{
-		if (JValidator.isNotEmpty(getParameter(RequestConstant.API_CLIENT_MILLISECONDS)))
+		if (JValidator.isNotNullAndNotEmpty(getParameter(RequestConstant.API_CLIENT_MILLISECONDS)))
 		{
 			return Long.parseLong(getParameter(RequestConstant.API_CLIENT_MILLISECONDS));
 		}

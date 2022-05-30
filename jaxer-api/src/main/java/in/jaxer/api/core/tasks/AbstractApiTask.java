@@ -1,17 +1,15 @@
-
 package in.jaxer.api.core.tasks;
 
-import java.sql.Connection;
 import lombok.extern.log4j.Log4j2;
 
+import java.sql.Connection;
+
 /**
- *
  * @author Shakir Ansari
  */
 @Log4j2
-public abstract class AbstractApiTask extends AbstractRestTask
+public abstract class AbstractApiTask extends AbstractTask
 {
-
 	public abstract void doApiTask(Connection connection) throws Exception;
 
 	@Override

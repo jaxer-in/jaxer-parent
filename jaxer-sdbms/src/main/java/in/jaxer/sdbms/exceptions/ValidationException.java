@@ -1,15 +1,13 @@
-
 package in.jaxer.sdbms.exceptions;
 
 /**
- *
  * @author Shakir Ansari
  */
-public class ValidationException extends RuntimeException
+public class ValidationException extends JaxerSDBMSException
 {
-
 	public ValidationException()
 	{
+		super();
 	}
 
 	public ValidationException(String message)

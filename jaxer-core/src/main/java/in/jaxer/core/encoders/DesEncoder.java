@@ -1,24 +1,22 @@
-
 package in.jaxer.core.encoders;
 
 import in.jaxer.core.constants.Constants;
-import in.jaxer.core.constants.ContentType;
-import java.util.Base64;
+import in.jaxer.core.interfaces.Encoder;
+import in.jaxer.core.utilities.JValidator;
+
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 /**
- *
- * @author Shakir Ansari
+ * @author Shakir
  */
-public class DesEncoder
+public class DesEncoder implements Encoder
 {
-
 	private static KeyGenerator keygenerator = null;
-
 	private static SecretKey secretKey = null;
-
 	private static Cipher cipher;
 
 	private static void init() throws Exception
@@ -39,15 +37,17 @@ public class DesEncoder
 		}
 	}
 
-	public static String encode(final String message)
+	@Override
+	public String encode(final String message)
 	{
+		JValidator.requireNotEmpty(message);
 		try
 		{
 			init();
 
 			cipher.init(Cipher.ENCRYPT_MODE, secretKey);
 
-			byte[] cipherText = cipher.doFinal(message.getBytes(ContentType.UTF_8));
+			byte[] cipherText = cipher.doFinal(message.getBytes(StandardCharsets.UTF_8));
 
 			return Base64.getEncoder().encodeToString(cipherText);
 
@@ -57,8 +57,10 @@ public class DesEncoder
 		}
 	}
 
-	public static String decode(final String message)
+	@Override
+	public String decode(final String message)
 	{
+		JValidator.requireNotEmpty(message);
 		try
 		{
 			init();

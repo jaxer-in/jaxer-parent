@@ -1,20 +1,18 @@
-
 package in.jaxer.api.tasks;
 
 import in.jaxer.api.annotations.RestTask;
 import in.jaxer.core.utilities.PackageScanner;
-import java.util.Set;
 import lombok.extern.log4j.Log4j2;
 
+import java.util.Set;
+
 /**
- *
  * @author Shakir
  * Date 4 Dec, 2021 - 6:49:57 PM
  */
 @Log4j2
 public class Main
 {
-
 	public static void main(String[] args) throws Exception
 	{
 		long start = 0l, end = 0l;

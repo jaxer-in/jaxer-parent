@@ -1,22 +1,22 @@
-
 package in.jaxer.sdbms;
 
 import in.jaxer.core.utilities.JValidator;
 import in.jaxer.sdbms.annotations.PrimaryKey;
 import in.jaxer.sdbms.annotations.Table;
 import in.jaxer.sdbms.exceptions.JaxerSDBMSException;
+import lombok.extern.log4j.Log4j2;
+
 import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.extern.log4j.Log4j2;
 
 /**
- *
- * @author Shakir Ansari
  * @param <T>  - entity or model class
  * @param <ID> - type of primary key
+ *
+ * @author Shakir Ansari
  */
 @Log4j2
 public abstract class Repository<T, ID>
@@ -133,7 +133,7 @@ public abstract class Repository<T, ID>
 				T bean = (T) outputClass.newInstance();
 
 				List<T> objectList = ResultsetMapper.getObjectList(resultSet, outputClass);
-				bean = JValidator.isEmpty(objectList) ? null : objectList.get(0);
+				bean = JValidator.isNullOrEmpty(objectList) ? null : objectList.get(0);
 				return bean;
 			}
 		} catch (Exception exception)
@@ -164,7 +164,7 @@ public abstract class Repository<T, ID>
 			T t = find(connection, outputClass, id);
 			if (t != null)
 			{
-				if (JValidator.isEmpty(tList))
+				if (JValidator.isNullOrEmpty(tList))
 				{
 					tList = new ArrayList<>();
 				}

@@ -1,12 +1,11 @@
-
 package in.jaxer.sdbms;
 
 import in.jaxer.sdbms.utils.AbstractJpaHandler;
+
 import java.sql.Connection;
 import java.util.List;
 
 /**
- *
  * @author Shakir
  * Date 23 Feb, 2022 - 9:05:30 PM
  */
