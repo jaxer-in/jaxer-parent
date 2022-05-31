@@ -16,13 +16,12 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
  */
 @Log4j2
 @Builder(setterPrefix = "with")
 public class SimpleQuery
 {
-
 	@Getter
 	private String sqlQuery;
 

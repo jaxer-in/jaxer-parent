@@ -7,11 +7,10 @@ import java.util.List;
 
 /**
  * @author Shakir
- * Date 23 Feb, 2022 - 9:05:30 PM
+ * date 2022-02-23 21:05
  */
 public class H2JpaHandler extends AbstractJpaHandler
 {
-
 	@Override
 	public <T> T find(Connection connection, Class<T> outputClass, List<Parameter> parameterList)
 	{

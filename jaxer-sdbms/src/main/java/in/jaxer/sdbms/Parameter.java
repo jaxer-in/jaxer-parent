@@ -7,20 +7,16 @@ import lombok.ToString;
 import java.util.Collection;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
  */
 @Getter
 @Setter
 @ToString
 public class Parameter
 {
-
 	private String name;
-
 	private Object value;
-
 	private boolean equals;
-
 	private boolean collection;
 
 	/**

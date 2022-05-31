@@ -32,7 +32,7 @@ public class PropertyConfigurationManager
 		Set<Class<? extends Annotation>> propertyConfigurationSet = PackageScanner.getClasses(basePackage, PropertyConfiguration.class);
 		log.debug("propertyConfigurationSet: {}", propertyConfigurationSet);
 
-		if (JValidator.isNotNullAndNotEmpty(propertyConfigurationSet))
+		if (JValidator.isNullOrEmpty(propertyConfigurationSet))
 		{
 			log.error("No class found with @{} in base package: {}", PropertyConfiguration.class.getName(), this.getBasePackage());
 			return;

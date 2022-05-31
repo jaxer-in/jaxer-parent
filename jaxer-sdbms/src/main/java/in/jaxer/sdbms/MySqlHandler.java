@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
  * @see in.jaxer.sdbms.MysqlJpaHandler
  */
 @Log4j2

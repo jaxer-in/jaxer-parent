@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 /**
  * @param <T> for entity/model class
  *
- * @author Shakir Ansari
+ * @author Shakir
  */
 public interface RawMapper<T>
 {

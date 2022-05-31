@@ -13,18 +13,15 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
  */
 @Log4j2
+@Deprecated
 public class DbConnection
 {
-
 	private static final String HOST = "localhost:3306";
-
 	private static final String DB_NAME = "at_v2";
-
 	private static final String USERNAME = "root";
-
 	private static final String PASSWORD = "";
 
 	public static Connection getConnection()

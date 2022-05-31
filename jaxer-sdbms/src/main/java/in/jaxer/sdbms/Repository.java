@@ -16,7 +16,7 @@ import java.util.List;
  * @param <T>  - entity or model class
  * @param <ID> - type of primary key
  *
- * @author Shakir Ansari
+ * @author Shakir
  */
 @Log4j2
 public abstract class Repository<T, ID>

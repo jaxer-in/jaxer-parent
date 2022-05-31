@@ -1,7 +1,8 @@
 package in.jaxer.sdbms.exceptions;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
+ *
  */
 public class ReadOnlyException extends JaxerSDBMSException
 {

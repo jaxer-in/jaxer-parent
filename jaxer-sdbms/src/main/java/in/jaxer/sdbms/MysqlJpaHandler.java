@@ -292,5 +292,4 @@ public class MysqlJpaHandler extends AbstractJpaHandler
 
 		return where;
 	}
-
 }

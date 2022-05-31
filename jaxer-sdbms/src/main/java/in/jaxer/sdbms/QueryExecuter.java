@@ -11,12 +11,11 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
  */
 @Log4j2
 public class QueryExecuter
 {
-
 	public static List<Row> execute(Connection connection, String sql)
 	{
 		return QueryExecuter.execute(connection, sql, new ArrayList<>());

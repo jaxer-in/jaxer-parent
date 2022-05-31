@@ -4,7 +4,7 @@ import lombok.ToString;
 
 /**
  * @author Shakir
- * Date 29 Oct, 2021 - 3:14:21 PM
+ * date 2021-10-29 15:14
  */
 @ToString
 public class PaginationDto
