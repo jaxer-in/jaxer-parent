@@ -7,11 +7,10 @@ import java.util.List;
 
 /**
  * @author Shakir
- * Date 23 Feb, 2022 - 9:05:30 PM
+ * date 2022-02-23 21:05
  */
 public class H2JpaHandler extends AbstractJpaHandler
 {
-
 	@Override
 	public <T> T find(Connection connection, Class<T> outputClass, List<Parameter> parameterList)
 	{
@@ -43,7 +42,7 @@ public class H2JpaHandler extends AbstractJpaHandler
 	}
 
 	@Override
-	public long count(Connection connection, Class outputClass, List<Parameter> parameterList)
+	public long count(Connection connection, Class<?> outputClass, List<Parameter> parameterList)
 	{
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}

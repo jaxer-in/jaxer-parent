@@ -15,17 +15,13 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
  */
 public class Backup
 {
-
 	private static ResultSet rs;
-
 	private static Connection con;
-
 	private Statement st;
-
 	private final int BUFFER = 2048;
 
 	public boolean mysqlDatabaseRestore(String dbName, String dbUserName, String dbPassword, String source)
@@ -60,7 +56,6 @@ public class Backup
 
 	public String mysqlDatabaseBackUp()
 	{
-
 		String status = "";
 		String backUpPath = "C:\\folderName";
 		String host = "localhost";
@@ -131,11 +126,8 @@ public class Backup
 				System.out.println("Back Up Failed");
 				status = "n";
 				return status;
-
 			}
-
 		}
-
 		return status;
 	}
 
@@ -167,7 +159,7 @@ public class Backup
 			run = Runtime.getRuntime().exec(Mysqlpath + "mysqldump --host=" + host + " --port=" + port + " --user=" + user + " --password=" + password + "  " + "--skip-comments --skip-triggers " + db);
 		} catch (IOException ex)
 		{
-
+			ex.printStackTrace();
 		}
 
 		InputStream in = run.getInputStream();
@@ -184,7 +176,7 @@ public class Backup
 			}
 		} catch (IOException ex)
 		{
-
+			ex.printStackTrace();
 		}
 		try
 		{
@@ -192,7 +184,6 @@ public class Backup
 			in.close();
 		} catch (IOException ex)
 		{
-
 		}
 		return temp.toString();
 	}

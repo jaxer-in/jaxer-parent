@@ -11,41 +11,40 @@ import lombok.extern.log4j.Log4j2;
 import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
  */
 @Log4j2
 public abstract class AbstractJpaHandler
 {
-
 	abstract public <T> T find(Connection connection, Class<T> outputClass, List<Parameter> parameterList);
 
 	abstract public <T> List<T> findList(Connection connection, Class<T> outputClass, List<Parameter> parameterList);
 
-	abstract public int delete(Connection connection, Class outputClass, Object id);
+	abstract public int delete(Connection connection, Class<?> outputClass, Object id);
 
 	abstract public <T> T merge(Connection connection, T t);
 
 	abstract public <T> T persist(Connection connection, T t);
 
-	abstract public long count(Connection connection, Class outputClass, List<Parameter> parameterList);
+	abstract public long count(Connection connection, Class<?> outputClass, List<Parameter> parameterList);
 
 	abstract protected String getWhereClause(List<Parameter> parameterList);
 
-	protected String getTableName(Class outputClass)
+	protected String getTableName(Class<?> outputClass)
 	{
 		if (!outputClass.isAnnotationPresent(Table.class))
 		{
 			throw new JaxerSDBMSException("OutputClass [" + outputClass.getName() + "] should be decorated by @" + Table.class.getName());
 		}
 
-		String tableName = ((Table) outputClass.getAnnotation(Table.class)).value();
+		String tableName = (outputClass.getAnnotation(Table.class)).value();
 		if (JValidator.isNullOrEmpty(tableName))
 		{
 			throw new JaxerSDBMSException("Table name not found in " + outputClass.getName());
@@ -54,7 +53,7 @@ public abstract class AbstractJpaHandler
 		return tableName;
 	}
 
-	public HashMap<String, Object> getColumnKeyValue(Class outputClass, boolean primary)
+	public HashMap<String, Object> getColumnKeyValue(Class<?> outputClass, boolean primary)
 	{
 		HashMap<String, Object> hashMap = new HashMap<>();
 
@@ -83,7 +82,7 @@ public abstract class AbstractJpaHandler
 		return hashMap;
 	}
 
-	protected String getPrimaryColumnName(Class aClass)
+	protected String getPrimaryColumnName(Class<?> aClass)
 	{
 		Field[] fields = aClass.getDeclaredFields();
 		for (Field field : fields)
@@ -98,7 +97,7 @@ public abstract class AbstractJpaHandler
 		throw new JaxerSDBMSException("Primary Column not found in " + aClass.getName());
 	}
 
-	protected String getPrimaryFieldName(Class aClass)
+	protected String getPrimaryFieldName(Class<?> aClass)
 	{
 		Field[] fields = aClass.getDeclaredFields();
 		for (Field field : fields)
@@ -113,7 +112,7 @@ public abstract class AbstractJpaHandler
 		throw new JaxerSDBMSException("Primary Column not found in " + aClass.getName());
 	}
 
-	protected List<PrimaryKey> getPrimaryKeyColumnList(Class outputClass)
+	protected List<PrimaryKey> getPrimaryKeyColumnList(Class<?> outputClass)
 	{
 		List<PrimaryKey> columnList = null;
 
@@ -134,7 +133,7 @@ public abstract class AbstractJpaHandler
 		return columnList;
 	}
 
-	protected PrimaryKey getPrimaryKey(Class outputClass)
+	protected PrimaryKey getPrimaryKey(Class<?> outputClass)
 	{
 		List<PrimaryKey> primaryColumnList = getPrimaryKeyColumnList(outputClass);
 
@@ -151,10 +150,10 @@ public abstract class AbstractJpaHandler
 		return primaryColumnList.get(0);
 	}
 
-	protected void verifyPrimaryColumnValue(Class outputClass)
+	protected void verifyPrimaryColumnValue(Class<?> outputClass)
 	{
 		PrimaryKey primaryKey = getPrimaryKey(outputClass);
-		if (primaryKey.uuidValue() == false)
+		if (!primaryKey.uuidValue())
 		{
 			HashMap<String, Object> hashMap = getColumnKeyValue(outputClass, true);
 			Set<Map.Entry<String, Object>> entrySet = hashMap.entrySet();
@@ -179,7 +178,7 @@ public abstract class AbstractJpaHandler
 	{
 		JValidator.throwWhenNull(parameter, "Parameter cannot be null");
 
-		return find(connection, outputClass, Arrays.asList(parameter));
+		return find(connection, outputClass, Collections.singletonList(parameter));
 	}
 
 	public <T> List<T> findList(Connection connection, Class<T> outputClass)
@@ -189,7 +188,7 @@ public abstract class AbstractJpaHandler
 
 	public <T> List<T> findList(Connection connection, Class<T> outputClass, Parameter parameter)
 	{
-		return findList(connection, outputClass, Arrays.asList(parameter));
+		return findList(connection, outputClass, Collections.singletonList(parameter));
 	}
 
 	public <T> List<T> findByIdList(Connection connection, Class<T> outputClass, List<Integer> idList)
@@ -212,14 +211,14 @@ public abstract class AbstractJpaHandler
 		return objectList;
 	}
 
-	public long count(Connection connection, Class outputClass)
+	public long count(Connection connection, Class<?> outputClass)
 	{
 		return count(connection, outputClass, new ArrayList<>());
 	}
 
-	public long count(Connection connection, Class outputClass, Parameter parameter)
+	public long count(Connection connection, Class<?> outputClass, Parameter parameter)
 	{
 		log.debug("outputClass: {}, parameter: {}", outputClass, parameter);
-		return count(connection, outputClass, Arrays.asList(parameter));
+		return count(connection, outputClass, Collections.singletonList(parameter));
 	}
 }

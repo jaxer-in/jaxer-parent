@@ -4,6 +4,7 @@ import in.jaxer.api.annotations.RestTask;
 import in.jaxer.core.utilities.PackageScanner;
 import lombok.extern.log4j.Log4j2;
 
+import java.lang.annotation.Annotation;
 import java.util.Set;
 
 /**
@@ -20,7 +21,7 @@ public class Main
 //		Set<Class> refClasses1 = PackageScanner.getClasses("in.jaxer.api", RestTask.class);
 
 		start = System.currentTimeMillis();
-		Set<Class> refClasses = PackageScanner.getClasses("in.jaxer.api", RestTask.class);
+		Set<Class<? extends Annotation>> refClasses = PackageScanner.getClasses("in.jaxer.api", RestTask.class);
 		end = System.currentTimeMillis();
 
 		log.info("Guava took: {} ms", end - start);

@@ -16,12 +16,11 @@ import java.util.List;
  * @param <T>  - entity or model class
  * @param <ID> - type of primary key
  *
- * @author Shakir Ansari
+ * @author Shakir
  */
 @Log4j2
 public abstract class Repository<T, ID>
 {
-
 	public Connection getConnection()
 	{
 		String msg = System.lineSeparator()
@@ -84,7 +83,7 @@ public abstract class Repository<T, ID>
 		return tList;
 	}
 
-	public T find(Connection connection, Class outputClass, ID id)
+	public T find(Connection connection, Class<T> outputClass, ID id)
 	{
 		log.debug("id: {}", id);
 		log.debug("outputClass: {}", outputClass);
@@ -94,15 +93,12 @@ public abstract class Repository<T, ID>
 			throw new JaxerSDBMSException("OutputClass should be decorated by @" + Table.class.getName());
 		}
 
-		String tableName = null;
+		String tableName;
 
-		Table table = (Table) outputClass.getAnnotation(Table.class);
+		Table table = outputClass.getAnnotation(Table.class);
 		tableName = table.value();
-
-		if (JValidator.isEmpty(tableName))
-		{
-			throw new JaxerSDBMSException("Table name not found in output class");
-		}
+		log.debug("tableName: {}", tableName);
+		JValidator.throwWhenNullOrEmpty(tableName, "Table name not found in output class");
 
 		String primaryKeyName = null;
 		Field[] fields = outputClass.getDeclaredFields();
@@ -117,10 +113,8 @@ public abstract class Repository<T, ID>
 			}
 		}
 
-		if (JValidator.isEmpty(primaryKeyName))
-		{
-			throw new JaxerSDBMSException("Annotation @" + PrimaryKey.class.getName() + " not found in " + outputClass.getName() + " class");
-		}
+		log.debug("primaryKeyName: {}", primaryKeyName);
+		JValidator.throwWhenNullOrEmpty(primaryKeyName, "Annotation @" + PrimaryKey.class.getName() + " not found in " + outputClass.getName() + " class");
 
 		String sql = "SELECT * FROM `" + tableName + "` WHERE `" + primaryKeyName + "` = :pKey";
 		log.debug("sql: {}", sql);
@@ -130,7 +124,8 @@ public abstract class Repository<T, ID>
 			namedStatement.setParameter("pKey", id);
 			try (ResultSet resultSet = namedStatement.executeQuery())
 			{
-				T bean = (T) outputClass.newInstance();
+//				T bean = outputClass.newInstance();
+				T bean;
 
 				List<T> objectList = ResultsetMapper.getObjectList(resultSet, outputClass);
 				bean = JValidator.isNullOrEmpty(objectList) ? null : objectList.get(0);
@@ -143,7 +138,7 @@ public abstract class Repository<T, ID>
 		}
 	}
 
-	public T find(Class outputClass, ID id)
+	public T find(Class<T> outputClass, ID id)
 	{
 		try (Connection connection = getConnection())
 		{
@@ -155,7 +150,7 @@ public abstract class Repository<T, ID>
 		}
 	}
 
-	public List<T> find(Connection connection, Class outputClass, List<ID> idList)
+	public List<T> find(Connection connection, Class<T> outputClass, List<ID> idList)
 	{
 		List<T> tList = null;
 
@@ -175,7 +170,7 @@ public abstract class Repository<T, ID>
 		return tList;
 	}
 
-	public List<T> find(Class outputClass, List<ID> idList)
+	public List<T> find(Class<T> outputClass, List<ID> idList)
 	{
 		try (Connection connection = getConnection())
 		{

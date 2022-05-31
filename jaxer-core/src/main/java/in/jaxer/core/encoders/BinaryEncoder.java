@@ -1,6 +1,6 @@
 package in.jaxer.core.encoders;
 
-import in.jaxer.core.exceptions.EncoderException;
+import in.jaxer.core.exceptions.JaxerCoreException;
 import in.jaxer.core.interfaces.Encoder;
 import in.jaxer.core.utilities.JValidator;
 import lombok.extern.log4j.Log4j2;
@@ -47,7 +47,7 @@ public class BinaryEncoder implements Encoder
 		String pattern = "^[0-3]*$";
 		if (!message.matches(pattern))
 		{
-			throw new EncoderException("Invalid number format");
+			throw new JaxerCoreException("Invalid number format");
 		}
 
 		//spliting with two delimiters [2 or 3]

@@ -35,8 +35,7 @@ public abstract class AbstractRequestHandler
 	@Setter
 	private boolean isMultipartRequest = false;
 
-	private HashMap<String, Object> requestMap = null;
-	private Set<Class> taskList = null;
+	private Set<Class<? extends Annotation>> taskList = null;
 	private final String basePackage;
 	private final Class<? extends Annotation> taskClass;
 
@@ -50,6 +49,7 @@ public abstract class AbstractRequestHandler
 		this.taskClass = taskClass;
 	}
 
+	@SuppressWarnings("unchecked")
 	private void init(HttpServletRequest request, HttpServletResponse response) throws Exception
 	{
 		this.isMultipartRequest = Servlets.isMultipartRequest(request);
@@ -62,7 +62,7 @@ public abstract class AbstractRequestHandler
 			log.debug("taskList: {}", taskList);
 		}
 
-		requestMap = new HashMap<>();
+		HashMap<String, Object> requestMap = new HashMap<>();
 
 		if (!isMultipartRequest)
 		{
@@ -80,7 +80,7 @@ public abstract class AbstractRequestHandler
 
 	protected Class<? extends Annotation> getRequestedTask(String requestedTaskName)
 	{
-		for (Class clazz : taskList)
+		for (Class<? extends Annotation> clazz : taskList)
 		{
 			if (requestedTaskName.equals(clazz.getSimpleName()))
 			{

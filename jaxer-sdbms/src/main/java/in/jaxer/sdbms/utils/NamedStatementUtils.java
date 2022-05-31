@@ -9,7 +9,6 @@ import lombok.extern.log4j.Log4j2;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -20,12 +19,11 @@ import java.util.Set;
 
 /**
  * @author Shakir
- * Date 4 Nov, 2021 - 11:19:40 AM
+ * date 2021-11-04 11:19
  */
 @Log4j2
 public class NamedStatementUtils
 {
-
 	private static String getUniqueParameterName(String parameterName)
 	{
 		return parameterName + "_" + Strings.getUUID(parameterName).replace("-", "");
@@ -38,7 +36,7 @@ public class NamedStatementUtils
 		return getUniqueParameterName(parameterName + object.toString().replace(" ", ""));
 	}
 
-	public static String setParameterListName(String sqlQuery, String parameterName, Collection collection)
+	public static String setParameterListName(String sqlQuery, String parameterName, Collection<?> collection)
 	{
 		String tempParam = "";
 
@@ -67,7 +65,7 @@ public class NamedStatementUtils
 		{
 			if (param.isCollection())
 			{
-				sqlQuery = setParameterListName(sqlQuery, param.getName(), (Collection) param.getValue());
+				sqlQuery = setParameterListName(sqlQuery, param.getName(), (Collection<?>) param.getValue());
 			}
 		}
 		return sqlQuery;
@@ -84,7 +82,7 @@ public class NamedStatementUtils
 		{
 			if (param.isCollection())
 			{
-				Collection collection = (Collection) param.getValue();
+				Collection<?> collection = (Collection<?>) param.getValue();
 
 				int index = 0;
 				for (Object object : collection)
@@ -99,7 +97,7 @@ public class NamedStatementUtils
 		}
 	}
 
-	public static String queryParser(String query, Map paramMap)
+	public static String queryParser(String query, Map<String, List<Integer>> paramMap)
 	{
 		JValidator.throwWhenNullOrEmpty(query, "Query cannot be empty");
 
@@ -145,12 +143,8 @@ public class NamedStatementUtils
 					c = '?'; // replace the parameter with a question mark
 					i += name.length(); // skip past the end if the parameter
 
-					List indexList = (List) paramMap.get(name);
-					if (indexList == null)
-					{
-						indexList = new ArrayList();
-						paramMap.put(name, indexList);
-					}
+					//If the value at key(name) is null then it will initialize it with new ArrayList
+					List<Integer> indexList = paramMap.computeIfAbsent(name, k -> new ArrayList<>());
 
 					//Add index in list
 					indexList.add(index++);
@@ -162,7 +156,8 @@ public class NamedStatementUtils
 		return parsedQuery.toString();
 	}
 
-	public static void main(String[] args) throws SQLException
+	@SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
+	public static void main(String[] args)
 	{
 		List<String> items = Arrays.asList("it000", "it001", "it002");
 		List<String> prods = Arrays.asList("pr000", "pr001", "pr002");
@@ -171,7 +166,7 @@ public class NamedStatementUtils
 
 		String sql = "select * from table where item in (:items) and prod in (:prods) and p1 = :p1 and p2 = :p2";
 
-		Map<String, Collection> nameMap1 = new HashMap<>();
+		Map<String, Collection<?>> nameMap1 = new HashMap<>();
 		nameMap1.put("items", items);
 		nameMap1.put("prods", prods);
 
@@ -219,7 +214,7 @@ public class NamedStatementUtils
 		{
 			if (parameter.getValue() instanceof Collection)
 			{
-				namedStatement.setParameterList(parameter.getName(), (Collection) parameter.getValue());
+				namedStatement.setParameterList(parameter.getName(), (Collection<?>) parameter.getValue());
 			} else
 			{
 				namedStatement.setParameter(parameter.getName(), parameter.getValue());
@@ -227,7 +222,7 @@ public class NamedStatementUtils
 		}
 	}
 
-	public static void setParameteres(NamedStatement namedStatement, HashMap<String, Object> hashMap, Class outputClass, Object bean) throws Exception
+	public static void setParameteres(NamedStatement namedStatement, HashMap<String, Object> hashMap, Class<?> outputClass, Object bean) throws Exception
 	{
 		Set<Map.Entry<String, Object>> entryset = hashMap.entrySet();
 		for (Map.Entry<String, Object> entry : entryset)

@@ -9,13 +9,12 @@ import java.lang.annotation.Target;
 /**
  * Reference javax.persistence.Entity
  *
- * @author Shakir Ansari
+ * @author Shakir
  */
 @Documented
 @Target(value = ElementType.TYPE)
 @Retention(value = RetentionPolicy.RUNTIME)
 public @interface Entity
 {
-
 	String name() default "";
 }

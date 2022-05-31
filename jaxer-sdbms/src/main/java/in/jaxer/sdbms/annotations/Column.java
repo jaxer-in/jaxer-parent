@@ -8,21 +8,18 @@ import java.lang.annotation.Target;
 /**
  * Reference : javax.persistence.Column
  *
- * @author Shakir Ansari
+ * @author Shakir
  */
 @Target(value = ElementType.FIELD)
 @Retention(value = RetentionPolicy.RUNTIME)
 public @interface Column
 {
-
 	String value();
-
-//	public boolean primaryKey() default false;
-
-//	public boolean autoIncrement() default false;
 
 	boolean nullable() default true;
 
+//	public boolean primaryKey() default false;
+//	public boolean autoIncrement() default false;
 //	public boolean unique() default false;
 //	public boolean insertable() default true;
 //	public boolean updatable() default true;

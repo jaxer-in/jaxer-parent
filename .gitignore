@@ -46,3 +46,4 @@ buildNumber.properties
 /jaxer-sdbms/nbproject/
 /jaxer-core/nbproject/
 .idea/workspace.xml
+.idea/inspectionProfiles/Project_Default.xml

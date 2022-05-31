@@ -5,7 +5,7 @@ import lombok.Getter;
 
 /**
  * @author Shakir
- * Date 25 Oct, 2021 - 11:28:56 PM
+ * date 2021-10-25 23:28
  */
 @Getter
 public class JaxerSDBMSException extends JaxerCoreException

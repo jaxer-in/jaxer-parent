@@ -26,6 +26,7 @@ public class ApiResponseDto
 
 	public ErrorDto errorDto = null;
 
+	@SuppressWarnings("unused")
 	public void addTaskResponseValue(String key, Object value)
 	{
 		JValidator.throwWhenNullOrEmpty(key);
@@ -33,7 +34,7 @@ public class ApiResponseDto
 
 		if (JValidator.isNullOrEmpty(taskResponseValue))
 		{
-			taskResponseValue = new HashMap();
+			taskResponseValue = new HashMap<>();
 		}
 
 		taskResponseValue.put(key, value);

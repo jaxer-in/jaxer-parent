@@ -7,11 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
  */
 public class Utils
 {
-
 	public static List<Field> getColumnAnnotedFields(Class outputClass)
 	{
 		List<Field> fieldList = new ArrayList<>();
@@ -26,5 +25,4 @@ public class Utils
 		}
 		return fieldList;
 	}
-
 }

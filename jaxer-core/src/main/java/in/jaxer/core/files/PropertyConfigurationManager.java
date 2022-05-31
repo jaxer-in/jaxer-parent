@@ -7,6 +7,7 @@ import in.jaxer.core.utilities.JsonHandler;
 import in.jaxer.core.utilities.PackageScanner;
 import lombok.extern.log4j.Log4j2;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.Set;
@@ -26,23 +27,23 @@ public class PropertyConfigurationManager
 
 	public void readProperties() throws Exception
 	{
-		log.debug("basePackage: {}", this.getBasePackage());
+		log.info("basePackage: {}", this.getBasePackage());
 
-		Set<Class> propertyConfigurationSet = PackageScanner.getClasses(basePackage, PropertyConfiguration.class);
+		Set<Class<? extends Annotation>> propertyConfigurationSet = PackageScanner.getClasses(basePackage, PropertyConfiguration.class);
 		log.debug("propertyConfigurationSet: {}", propertyConfigurationSet);
 
-		if (JValidator.isNotNullAndNotEmpty(propertyConfigurationSet))
+		if (JValidator.isNullOrEmpty(propertyConfigurationSet))
 		{
 			log.error("No class found with @{} in base package: {}", PropertyConfiguration.class.getName(), this.getBasePackage());
 			return;
 		}
 
-		String propertyFileName = null;
+		String propertyFileName;
 		for (Class<?> propertyConfigurationClass : propertyConfigurationSet)
 		{
-			PropertyConfiguration propertyConfigurationAnnotation = propertyConfigurationClass.getAnnotation(PropertyConfiguration.class);
-			propertyFileName = propertyConfigurationAnnotation.value();
-			log.debug("propertyFileName: {}", propertyFileName);
+			PropertyConfiguration annotation = propertyConfigurationClass.getAnnotation(PropertyConfiguration.class);
+			propertyFileName = annotation.value();
+			log.info("propertyFileName: {}", propertyFileName);
 
 			if (!propertyFileName.toLowerCase().endsWith(PROPERTIES_EXT))
 			{
@@ -52,7 +53,7 @@ public class PropertyConfigurationManager
 			try (JPropertyReader jPropertyReader = new JPropertyReader(propertyFileName))
 			{
 				Field[] fields = propertyConfigurationClass.getDeclaredFields();
-				if (fields == null || fields.length == 0)
+				if (fields.length == 0)
 				{
 					log.warn("Field array found empty for class: {}", propertyConfigurationClass);
 					continue;
@@ -86,7 +87,7 @@ public class PropertyConfigurationManager
 
 					if (value == null)
 					{
-						log.error("value is null for feild: {} ", value, appPropertyKey.name());
+						log.error("value is null for field: {} ", appPropertyKey.name());
 						continue;
 					}
 

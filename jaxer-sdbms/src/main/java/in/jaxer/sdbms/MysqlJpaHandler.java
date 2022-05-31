@@ -1,6 +1,5 @@
 package in.jaxer.sdbms;
 
-import in.jaxer.core.utilities.Collections;
 import in.jaxer.core.utilities.JValidator;
 import in.jaxer.core.utilities.Strings;
 import in.jaxer.sdbms.annotations.PrimaryKey;
@@ -21,12 +20,11 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
  */
 @Log4j2
 public class MysqlJpaHandler extends AbstractJpaHandler
 {
-
 	private static MysqlJpaHandler instance;
 
 	private MysqlJpaHandler()
@@ -64,9 +62,7 @@ public class MysqlJpaHandler extends AbstractJpaHandler
 
 			try (ResultSet resultSet = namedStatement.executeQuery())
 			{
-				List<T> objectList = ResultsetMapper.getObjectList(resultSet, outputClass);
-
-				return objectList;
+				return ResultsetMapper.getObjectList(resultSet, outputClass);
 			}
 		} catch (Exception exception)
 		{
@@ -91,7 +87,7 @@ public class MysqlJpaHandler extends AbstractJpaHandler
 	}
 
 	@Override
-	public int delete(Connection connection, Class outputClass, Object id)
+	public int delete(Connection connection, Class<?> outputClass, Object id)
 	{
 		String tableName = getTableName(outputClass);
 		String primaryKeyColumnName = getPrimaryColumnName(outputClass);
@@ -114,7 +110,7 @@ public class MysqlJpaHandler extends AbstractJpaHandler
 	@Override
 	public <T> T merge(Connection connection, T t)
 	{
-		Class outputClass = t.getClass();
+		Class<?> outputClass = t.getClass();
 		getPrimaryKey(outputClass);
 
 		String tableName = getTableName(outputClass);
@@ -124,8 +120,8 @@ public class MysqlJpaHandler extends AbstractJpaHandler
 		HashMap<String, Object> columnHashMap = getColumnKeyValue(outputClass, false);
 
 		String columns = "";
-		Set<Map.Entry<String, Object>> columnEntryset = columnHashMap.entrySet();
-		for (Map.Entry<String, Object> entry : columnEntryset)
+		Set<Map.Entry<String, Object>> columnEntrySet = columnHashMap.entrySet();
+		for (Map.Entry<String, Object> entry : columnEntrySet)
 		{
 			if (JValidator.isNotNullAndNotEmpty(entry.getKey()))
 			{
@@ -139,8 +135,8 @@ public class MysqlJpaHandler extends AbstractJpaHandler
 		}
 
 		String where = "WHERE 1=1";
-		Set<Map.Entry<String, Object>> primaryEntryset = primaryHashMap.entrySet();
-		for (Map.Entry<String, Object> primaryEntry : primaryEntryset)
+		Set<Map.Entry<String, Object>> primaryEntrySet = primaryHashMap.entrySet();
+		for (Map.Entry<String, Object> primaryEntry : primaryEntrySet)
 		{
 			where += " AND `" + primaryEntry.getKey() + "` = :" + primaryEntry.getValue();
 			break;
@@ -168,7 +164,7 @@ public class MysqlJpaHandler extends AbstractJpaHandler
 	@Override
 	public <T> T persist(Connection connection, T t)
 	{
-		Class outputClass = t.getClass();
+		Class<?> outputClass = t.getClass();
 
 		String tableName = getTableName(outputClass);
 		String comma = ",";
@@ -176,8 +172,8 @@ public class MysqlJpaHandler extends AbstractJpaHandler
 		String value = "";
 
 		HashMap<String, Object> columnHashMap = getColumnKeyValue(outputClass, false);
-		Set<Map.Entry<String, Object>> columnEntryset = columnHashMap.entrySet();
-		for (Map.Entry<String, Object> entry : columnEntryset)
+		Set<Map.Entry<String, Object>> columnEntrySet = columnHashMap.entrySet();
+		for (Map.Entry<String, Object> entry : columnEntrySet)
 		{
 			if (JValidator.isNotNullAndNotEmpty(entry.getKey()))
 			{
@@ -186,13 +182,13 @@ public class MysqlJpaHandler extends AbstractJpaHandler
 			}
 		}
 
-		/**
+		/*
 		 * Adding primary column if auto_increment is disabled
 		 */
 		PrimaryKey primaryKey = getPrimaryKey(outputClass);
 		HashMap<String, Object> primaryColumnHashMap = getColumnKeyValue(outputClass, true);
-		Set<Map.Entry<String, Object>> primaryColumnEntryset = primaryColumnHashMap.entrySet();
-		for (Map.Entry<String, Object> entry : primaryColumnEntryset)
+		Set<Map.Entry<String, Object>> primaryColumnEntrySet = primaryColumnHashMap.entrySet();
+		for (Map.Entry<String, Object> entry : primaryColumnEntrySet)
 		{
 			if (JValidator.isNotNullAndNotEmpty(entry.getKey()))
 			{
@@ -244,7 +240,7 @@ public class MysqlJpaHandler extends AbstractJpaHandler
 	}
 
 	@Override
-	public long count(Connection connection, Class outputClass, List<Parameter> parameterList)
+	public long count(Connection connection, Class<?> outputClass, List<Parameter> parameterList)
 	{
 		String tableName = getTableName(outputClass);
 
@@ -276,7 +272,7 @@ public class MysqlJpaHandler extends AbstractJpaHandler
 	{
 		String where = "WHERE 1=1";
 
-		if (Collections.isNotEmpty(parameterList))
+		if (JValidator.isNotNullAndNotEmpty(parameterList))
 		{
 			for (Parameter parameter : parameterList)
 			{
@@ -296,5 +292,4 @@ public class MysqlJpaHandler extends AbstractJpaHandler
 
 		return where;
 	}
-
 }

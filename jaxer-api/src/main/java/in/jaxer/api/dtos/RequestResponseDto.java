@@ -12,12 +12,12 @@ import java.util.HashMap;
  */
 public class RequestResponseDto
 {
-	private HashMap<String, Object> requestMap = null;
+	private final HashMap<String, Object> requestMap;
 	private HashMap<String, Object> temporaryObjects = null;
-	private ApiResponseDto apiResponseDto = null;
-	private HttpServletRequest httpServletRequest = null;
-	private HttpServletResponse httpServletResponse = null;
-	private boolean isMultipartRequest = false;
+	private ApiResponseDto apiResponseDto;
+	private final HttpServletRequest httpServletRequest;
+	private final HttpServletResponse httpServletResponse;
+	private final boolean isMultipartRequest;
 
 	public RequestResponseDto(HashMap<String, Object> requestMap, HttpServletRequest request, HttpServletResponse response, boolean isMultipartRequest)
 	{
@@ -47,6 +47,7 @@ public class RequestResponseDto
 		temporaryObjects.put(key, value);
 	}
 
+	@SuppressWarnings("unchecked")
 	public <T> T getTemporaryObject(String key, Class<T> T)
 	{
 		if (JValidator.isNullOrEmpty(key) || T == null)
@@ -105,7 +106,7 @@ public class RequestResponseDto
 
 		if (apiResponseDto.taskResponseValue == null)
 		{
-			apiResponseDto.taskResponseValue = new HashMap();
+			apiResponseDto.taskResponseValue = new HashMap<>();
 		}
 
 		apiResponseDto.taskResponseValue.put(paramName, object);
