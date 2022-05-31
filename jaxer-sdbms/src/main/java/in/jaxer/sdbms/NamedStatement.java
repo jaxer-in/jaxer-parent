@@ -121,7 +121,7 @@ public class NamedStatement implements AutoCloseable
 			valueMap = new HashMap<>();
 		}
 
-		if (JValidator.isNullOrEmpty(parameters))
+		if (JValidator.isNotNullAndNotEmpty(parameters))
 		{
 			paramQuery = NamedStatementUtils.setParameterListName(query, parameters);
 			NamedStatementUtils.setParameterValue(valueMap, parameters);
@@ -133,7 +133,7 @@ public class NamedStatement implements AutoCloseable
 		log.debug("\nnamedStatementParamList: {}\nvalueMap: {}", parameters, valueMap);
 
 		// parsing query
-		if (JValidator.isNullOrEmpty(valueMap))
+		if (JValidator.isNotNullAndNotEmpty(valueMap))
 		{
 			indexMap = new HashMap<>();
 			parsedQuery = NamedStatementUtils.queryParser(paramQuery, indexMap);
