@@ -12,5 +12,8 @@
         <module name="jaxer-api" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="jaxer-parent" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>
