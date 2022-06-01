@@ -120,7 +120,7 @@ class JUtilitiesTest
 		void whenUrlsIsInvalid()
 		{
 			String invalidUrl = "https://some-dummy-url.com";
-			log.debug("invalidUrl: {}", invalidUrl);
+			log.info("invalidUrl: {}", invalidUrl);
 
 			Assertions.assertFalse(JUtilities.isValidUrl(invalidUrl));
 		}
@@ -129,7 +129,7 @@ class JUtilitiesTest
 		void whenUrlsIsValid()
 		{
 			String validUrl = "https://www.fb.com";
-			log.debug("validUrl: {}", validUrl);
+			log.info("validUrl: {}", validUrl);
 
 			Assertions.assertTrue(JUtilities.isValidUrl(validUrl));
 		}
@@ -138,7 +138,7 @@ class JUtilitiesTest
 		void whenUrlsIsNull()
 		{
 			String invalidUrl = null;
-			log.debug("invalidUrl: {}", invalidUrl);
+			log.info("invalidUrl: {}", invalidUrl);
 
 			Assertions.assertFalse(JUtilities.isValidUrl(invalidUrl));
 		}
@@ -150,14 +150,16 @@ class JUtilitiesTest
 		@Test
 		void whenHtmlStringSingleLine()
 		{
-			String html = "<h1>Hello world</h1>";
-			Assertions.assertTrue(JUtilities.isHtmlString(html));
+			String singleLineHtml = "<h1>Hello world</h1>";
+			log.info("singleLineHtml: {}", singleLineHtml);
+
+			Assertions.assertTrue(JUtilities.isHtmlString(singleLineHtml));
 		}
 
 		@Test
 		void whenHtmlStringMultiline()
 		{
-			String html = "" +
+			String multiLineHtml = "" +
 					"<!doc type>" +
 					"\n" +
 					"<body>" +
@@ -166,14 +168,18 @@ class JUtilitiesTest
 					"\n" +
 					"<body>" +
 					"";
-			Assertions.assertTrue(JUtilities.isHtmlString(html));
+			log.info("multiLineHtml: {}", multiLineHtml);
+
+			Assertions.assertTrue(JUtilities.isHtmlString(multiLineHtml));
 		}
 
 		@Test
 		void whenPlainString()
 		{
-			String plain = "Hello world";
-			Assertions.assertFalse(JUtilities.isHtmlString(plain));
+			String plainText = "Hello<br>world";
+			log.info("plainText: {}", plainText);
+
+			Assertions.assertFalse(JUtilities.isHtmlString(plainText));
 		}
 	}
 
