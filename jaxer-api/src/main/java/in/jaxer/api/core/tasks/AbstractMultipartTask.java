@@ -68,11 +68,10 @@ public abstract class AbstractMultipartTask extends AbstractTask
 
 		for (Part part : parts)
 		{
-			if (JValidator.isNullOrEmpty(part.getSubmittedFileName()))
+			if (JValidator.isNotNullAndNotEmpty(part.getSubmittedFileName()))
 			{
-				continue;
+				partList.add(part);
 			}
-			partList.add(part);
 		}
 
 		return partList;

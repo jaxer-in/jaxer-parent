@@ -93,12 +93,7 @@ public class AbstractServlet extends GenericServlet
 	protected List<String> getPathParams(HttpServletRequest httpServletRequest)
 	{
 		String paramString = httpServletRequest.getPathInfo();
-		if (JValidator.isNullOrEmpty(paramString))
-		{
-			return null;
-		}
-
-		return Arrays.asList(paramString.split("/"));
+		return JValidator.isNullOrEmpty(paramString) ? null : Arrays.asList(paramString.split("/"));
 	}
 
 	private void updateCacheHeaders(HttpServletResponse httpServletResponse, long maxCacheAge, long expiry)
