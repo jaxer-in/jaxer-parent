@@ -157,6 +157,15 @@ class JUtilitiesTest
 		}
 
 		@Test
+		void whenHtmlTagPresentInNetweenSingleLine()
+		{
+			String singleLineHtml = "Hello <hr/> world<";
+			log.info("singleLineHtml: {}", singleLineHtml);
+
+			Assertions.assertTrue(JUtilities.isHtmlString(singleLineHtml));
+		}
+
+		@Test
 		void whenHtmlStringMultiline()
 		{
 			String multiLineHtml = "" +
@@ -176,7 +185,7 @@ class JUtilitiesTest
 		@Test
 		void whenPlainString()
 		{
-			String plainText = "Hello<br>world";
+			String plainText = "Hello world";
 			log.info("plainText: {}", plainText);
 
 			Assertions.assertFalse(JUtilities.isHtmlString(plainText));
