@@ -18,7 +18,9 @@ import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 /**
@@ -322,6 +324,150 @@ public class JUtilities
 		} catch (Exception exception)
 		{
 			throw new JaxerCoreException((exception));
+		}
+	}
+
+	public static Number parseNumber(String str)
+	{
+		try
+		{
+			return NumberFormat.getInstance(Locale.US).parse(str);
+		} catch (Exception e)
+		{
+			return null;
+		}
+	}
+
+	/**
+	 * Range for byte(1 byte) is -128 to 127
+	 *
+	 * @param str
+	 * @param defaultValue
+	 *
+	 * @return
+	 */
+	public static byte parseByte(String str, byte defaultValue)
+	{
+		try
+		{
+			return parseNumber(str).byteValue();
+		} catch (Exception ex)
+		{
+			return defaultValue;
+		}
+	}
+
+	/**
+	 * Range for short(2 bytes) is -32,768 to 32,767
+	 *
+	 * @param str
+	 * @param defaultValue
+	 *
+	 * @return
+	 */
+	public static short parseShort(String str, short defaultValue)
+	{
+		try
+		{
+			return Short.parseShort(str);
+		} catch (Exception ex)
+		{
+			return defaultValue;
+		}
+	}
+
+	/**
+	 * Range for int(4 bytes) is -2,147,483,648 to 2,147,483,647
+	 *
+	 * @param str
+	 * @param defaultValue
+	 *
+	 * @return
+	 */
+	public static int parseInt(String str, int defaultValue)
+	{
+		try
+		{
+			return Integer.parseInt(str);
+		} catch (Exception ex)
+		{
+			return defaultValue;
+		}
+	}
+
+	/**
+	 * Range for long(8 bytes) is -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807
+	 *
+	 * @param str
+	 * @param defaultValue
+	 *
+	 * @return
+	 */
+	public static long parseLong(String str, long defaultValue)
+	{
+		try
+		{
+			return Long.parseLong(str);
+		} catch (Exception ex)
+		{
+			return defaultValue;
+		}
+	}
+
+	/**
+	 * Range for float(4 bytes) is sufficient for storing 6 to 7 decimal digits
+	 *
+	 * @param str
+	 * @param defaultValue
+	 *
+	 * @return
+	 */
+	public static float parseFloat(String str, float defaultValue)
+	{
+		try
+		{
+			return Float.parseFloat(str);
+		} catch (Exception ex)
+		{
+			return defaultValue;
+		}
+	}
+
+	/**
+	 * Range for double(8 bytes) is sufficient for storing 15 decimal digits
+	 *
+	 * @param str
+	 * @param defaultValue
+	 *
+	 * @return
+	 */
+	public static double parseDouble(String str, double defaultValue)
+	{
+		try
+		{
+			return parseNumber(str).doubleValue();
+		} catch (Exception ex)
+		{
+			return defaultValue;
+		}
+	}
+
+	/**
+	 * Range for boolean(8 bit) is sufficient for storing true or false
+	 *
+	 * @param str
+	 * @param defaultValue
+	 *
+	 * @return
+	 */
+	public static boolean parseBoolean(String str, boolean defaultValue)
+	{
+		try
+		{
+			return Boolean.parseBoolean(str);
+		} catch (Exception ex)
+		{
+			return defaultValue;
 		}
 	}
 }

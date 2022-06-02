@@ -12,12 +12,20 @@ public class Systems
 {
 	public static void setProperty(String key, String value)
 	{
+		log.info("key: {}, value: {}", key, value);
 		System.setProperty(key, value);
 	}
 
 	public static String getProperty(String key)
 	{
+		log.info("key: {}", key);
 		return System.getProperty(key);
+	}
+
+	public static String clearProperty(String key)
+	{
+		log.info("key: {}", key);
+		return System.clearProperty(key);
 	}
 
 	public static String getOsName()
@@ -42,7 +50,12 @@ public class Systems
 
 	public static boolean isUnix()
 	{
-		return getOsName().toLowerCase().contains("nix") || getOsName().toLowerCase().contains("nux") || getOsName().toLowerCase().contains("aix");
+		String osName = getOsName();
+		log.info("osName: {}", osName);
+
+		return osName.toLowerCase().contains("nix")
+				|| osName.toLowerCase().contains("nux")
+				|| osName.toLowerCase().contains("aix");
 	}
 
 	public static String getClasspathFromProperty()
@@ -71,9 +84,7 @@ public class Systems
 		for (String key : properties.stringPropertyNames())
 		{
 			String value = properties.getProperty(key);
-
-			log.debug("[{} = {}]", key, value);
-			System.out.println("[" + key + " = " + value + "]");
+			log.info("[{} = {}]", key, value);
 		}
 	}
 }

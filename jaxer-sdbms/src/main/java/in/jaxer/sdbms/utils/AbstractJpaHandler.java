@@ -45,10 +45,7 @@ public abstract class AbstractJpaHandler
 		}
 
 		String tableName = (outputClass.getAnnotation(Table.class)).value();
-		if (JValidator.isNullOrEmpty(tableName))
-		{
-			throw new JaxerSDBMSException("Table name not found in " + outputClass.getName());
-		}
+		JValidator.throwWhenNullOrEmpty(tableName, "Table name not found in " + outputClass.getName());
 
 		return tableName;
 	}

@@ -13,7 +13,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="jaxer-parent" target="1.5" />
+      <module name="jaxer" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
