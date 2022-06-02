@@ -187,7 +187,7 @@
                 </plugins>
             </build>
         </profile>
-        
+
         <profile>
             <id>local</id>
             <activation>
@@ -231,7 +231,6 @@
         <connection>scm:git:git://github.com:jaxer-in/jaxer-parent.git</connection>
         <developerConnection>scm:git:ssh://github.com:jaxer-in/jaxer-parent.git</developerConnection>
         <url>https://github.com/jaxer-in/jaxer-parent</url>
-        <!--  <url>git@github.com:jaxer-in/jaxer-parent.git</url>-->
         <tag>v${project.version}</tag>
     </scm>
 
