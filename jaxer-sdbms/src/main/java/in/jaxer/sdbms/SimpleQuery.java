@@ -33,27 +33,12 @@ public class SimpleQuery
 
 	private HashMap<String, Collection> paramListMap;
 
-	public void setNativeQuery(String sqlQuery)
-	{
-		this.sqlQuery = sqlQuery;
-	}
-
-	public void setParameter(String paramName, Object paramValue)
-	{
-		this.paramMap.put(paramName, paramValue);
-	}
-
-	public void setParameterList(String paramName, Collection collection)
-	{
-		this.paramListMap.put(paramName, collection);
-	}
-
 	private void processParams(NamedStatement namedStatement)
 	{
 		if (JValidator.isNotNullAndNotEmpty(paramListMap))
 		{
-			Set<Map.Entry<String, Collection>> entrysetList = paramListMap.entrySet();
-			for (Map.Entry<String, Collection> entry : entrysetList)
+			Set<Map.Entry<String, Collection>> entrySetList = paramListMap.entrySet();
+			for (Map.Entry<String, Collection> entry : entrySetList)
 			{
 				if (sqlQuery.contains(":" + entry.getKey()))
 				{
@@ -63,8 +48,8 @@ public class SimpleQuery
 		}
 		if (JValidator.isNotNullAndNotEmpty(paramMap))
 		{
-			Set<Map.Entry<String, Object>> entryset = paramMap.entrySet();
-			for (Map.Entry<String, Object> entry : entryset)
+			Set<Map.Entry<String, Object>> entrySet = paramMap.entrySet();
+			for (Map.Entry<String, Object> entry : entrySet)
 			{
 				if (sqlQuery.contains(":" + entry.getKey()))
 				{

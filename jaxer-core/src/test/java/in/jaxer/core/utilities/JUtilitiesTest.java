@@ -198,19 +198,34 @@ class JUtilitiesTest
 		@Test
 		void whenImageFile()
 		{
-			Assertions.assertEquals("jpg", JUtilities.getExtension("c:\\users\\john doe\\images\\IMG_00987.jpg"));
+			String fileName = "c:\\users\\john doe\\images\\IMG_00987.jpg";
+			String expectedExtension = "jpg";
+			String result = JUtilities.getExtension(fileName);
+
+			log.info("fileName: {}, expectedExtension: {}, result: {}", fileName, expectedExtension, result);
+			Assertions.assertEquals(expectedExtension, result);
 		}
 
 		@Test
 		void whenBinaryFile()
 		{
-			Assertions.assertEquals("exe", JUtilities.getExtension("c:\\users\\john doe\\softwares\\NetBeans.v13.001.patch.exe"));
+			String fileName = "c:\\users\\john doe\\softwares\\NetBeans.v13.001.patch.exe";
+			String expectedExtension = "exe";
+			String result = JUtilities.getExtension(fileName);
+
+			log.info("fileName: {}, expectedExtension: {}, result: {}", fileName, expectedExtension, result);
+			Assertions.assertEquals(expectedExtension, result);
 		}
 
 		@Test
 		void whenNoExtensionFile()
 		{
-			Assertions.assertNull(JUtilities.getExtension("c:\\users\\john doe\\etc\\simple-text"));
+			String fileName = "c:\\users\\john doe\\etc\\simple-text";
+			String expectedExtension = null;
+			String result = JUtilities.getExtension(fileName);
+
+			log.info("fileName: {}, expectedExtension: {}, result: {}", fileName, expectedExtension, result);
+			Assertions.assertEquals(expectedExtension, result);
 		}
 	}
 
@@ -220,19 +235,34 @@ class JUtilitiesTest
 		@Test
 		void whenImageFile()
 		{
-			Assertions.assertEquals(".jpg", JUtilities.getExtensionWithDot("c:\\users\\john doe\\images\\IMG_00987.jpg"));
+			String fileName = "c:\\users\\john doe\\images\\IMG_00987.jpg";
+			String expectedExtension = ".jpg";
+			String result = JUtilities.getExtensionWithDot(fileName);
+
+			log.info("fileName: {}, expectedExtension: {}, result: {}", fileName, expectedExtension, result);
+			Assertions.assertEquals(expectedExtension, result);
 		}
 
 		@Test
-		void whenBinanyFile()
+		void whenBinaryFile()
 		{
-			Assertions.assertEquals(".exe", JUtilities.getExtensionWithDot("c:\\users\\john doe\\softwares\\NetBeans.v13.001.patch.exe"));
+			String fileName = "c:\\users\\john doe\\softwares\\NetBeans.v13.001.patch.exe";
+			String expectedExtension = ".exe";
+			String result = JUtilities.getExtensionWithDot(fileName);
+
+			log.info("fileName: {}, expectedExtension: {}, result: {}", fileName, expectedExtension, result);
+			Assertions.assertEquals(expectedExtension, result);
 		}
 
 		@Test
 		void whenNoExtensionFile()
 		{
-			Assertions.assertNull(JUtilities.getExtensionWithDot("c:\\users\\john doe\\etc\\simple-text"));
+			String fileName = "c:\\users\\john doe\\etc\\simple-text";
+			String expectedExtension = null;
+			String result = JUtilities.getExtensionWithDot(fileName);
+
+			log.info("fileName: {}, expectedExtension: {}, result: {}", fileName, expectedExtension, result);
+			Assertions.assertEquals(expectedExtension, result);
 		}
 	}
 
@@ -244,15 +274,20 @@ class JUtilitiesTest
 		{
 			URL url = JUtilities.class.getResource("/statics/images/lorem-picsum-536x354.jpg");
 
-			Dimension dimension = JUtilities.getImageDimension(url.getPath());
-			Assertions.assertEquals(dimension.width, 536);
-			Assertions.assertEquals(dimension.height, 354);
+			Dimension expected = new Dimension(536, 354);
+			Dimension result = JUtilities.getImageDimension(url.getPath());
+
+			log.info("expected: {}, result: {}", expected, result);
+
+			Assertions.assertEquals(expected, result);
 		}
 
 		@Test
 		void whenArgIsInvalidString()
 		{
 			URL url = JUtilities.class.getResource("/statics/images/file-does-not-exist.jpg");
+
+			log.info("url: {}", url);
 
 			Assertions.assertThrows(NullPointerException.class, () -> JUtilities.getImageDimension(url.getPath()));
 		}
@@ -262,9 +297,12 @@ class JUtilitiesTest
 		{
 			URL url = JUtilities.class.getResource("/statics/images/lorem-picsum-536x354.jpg");
 
-			Dimension dimension = JUtilities.getImageDimension(new File(url.getPath()));
-			Assertions.assertEquals(dimension.width, 536);
-			Assertions.assertEquals(dimension.height, 354);
+			Dimension expected = new Dimension(536, 354);
+			Dimension result = JUtilities.getImageDimension(new File(url.getPath()));
+
+			log.info("expected: {}, result: {}", expected, result);
+
+			Assertions.assertEquals(expected, result);
 		}
 
 		@Test
@@ -272,37 +310,30 @@ class JUtilitiesTest
 		{
 			URL url = JUtilities.class.getResource("/statics/images/file-does-not-exist.jpg");
 
+			log.info("url: {}", url);
+
 			Assertions.assertThrows(NullPointerException.class, () -> JUtilities.getImageDimension(new File(url.getPath())));
 		}
 
 		@Test
-		void whenArgIsInputStream()
+		void whenArgIsInputStream() throws IOException
 		{
 			URL url = JUtilities.class.getResource("/statics/images/lorem-picsum-536x354.jpg");
 
-			try
-			{
-				Dimension dimension = JUtilities.getImageDimension(url.openStream());
-				Assertions.assertEquals(dimension.width, 536);
-				Assertions.assertEquals(dimension.height, 354);
-			} catch (IOException e)
-			{
-				throw new RuntimeException(e);
-			}
+			Dimension result = JUtilities.getImageDimension(url.openStream());
+			Dimension expected = new Dimension(536, 354);
+			log.info("expected: {}, result: {}", expected, result);
 
+			Assertions.assertEquals(expected, result);
 		}
 
 		@Test
 		void whenArgIsInvalidInputStream()
 		{
 			URL url = JUtilities.class.getResource("/statics/images/file-does-not-exist.jpg");
+			log.info("url: {}", url);
 
-			Assertions.assertThrows(NullPointerException.class, () ->
-			{
-				Dimension dimension = JUtilities.getImageDimension(url.openStream());
-				Assertions.assertEquals(dimension.width, 536);
-				Assertions.assertEquals(dimension.height, 354);
-			});
+			Assertions.assertThrows(NullPointerException.class, () -> JUtilities.getImageDimension(url.openStream()));
 		}
 
 		@Test
@@ -312,9 +343,11 @@ class JUtilitiesTest
 
 			try
 			{
-				Dimension dimension = JUtilities.getImageDimension(ImageIO.read(url));
-				Assertions.assertEquals(dimension.width, 536);
-				Assertions.assertEquals(dimension.height, 354);
+				Dimension result = JUtilities.getImageDimension(ImageIO.read(url));
+				Dimension expected = new Dimension(536, 354);
+				log.info("expected: {}, result: {}", expected, result);
+
+				Assertions.assertEquals(expected, result);
 			} catch (IOException e)
 			{
 				throw new RuntimeException(e);
@@ -325,6 +358,7 @@ class JUtilitiesTest
 		void whenArgIsInvalidBufferedImage()
 		{
 			URL url = JUtilities.class.getResource("/statics/images/file-does-not-exist.jpg");
+			log.info("url: {}", url);
 
 			Assertions.assertThrows(IllegalArgumentException.class, () -> JUtilities.getImageDimension(ImageIO.read(url)));
 		}
@@ -336,11 +370,11 @@ class JUtilitiesTest
 		@Test
 		void shouldBeGreaterThanZero()
 		{
-			Dimension dimension = JUtilities.getScreenDimension();
-			System.out.printf("dimension: %s\n", dimension);
+			Dimension result = JUtilities.getScreenDimension();
+			log.info("result: {}", result);
 
-			Assertions.assertTrue(dimension.width > 0);
-			Assertions.assertTrue(dimension.height > 0);
+			Assertions.assertTrue(result.width > 0);
+			Assertions.assertTrue(result.height > 0);
 		}
 	}
 
@@ -350,13 +384,23 @@ class JUtilitiesTest
 		@Test
 		void whenInvalidUrl()
 		{
-			Assertions.assertFalse(JUtilities.isUrl("hello-world.com"));
+			String url = "hello-world.com";
+			boolean result = JUtilities.isUrl(url);
+
+			log.info("result: {}, url: {}", result, url);
+
+			Assertions.assertFalse(result);
 		}
 
 		@Test
 		void whenValidUrl()
 		{
-			Assertions.assertTrue(JUtilities.isUrl("https://www.some-website.com"));
+			String url = "https://www.some-website.com";
+			boolean result = JUtilities.isUrl(url);
+
+			log.info("result: {}, url: {}", result, url);
+
+			Assertions.assertTrue(result);
 		}
 	}
 

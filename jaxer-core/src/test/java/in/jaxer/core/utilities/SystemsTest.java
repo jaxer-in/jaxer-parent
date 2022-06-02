@@ -1,103 +1,127 @@
 package in.jaxer.core.utilities;
 
+import lombok.extern.log4j.Log4j2;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.core.StringContains;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 
 /**
  * @author Shakir
  */
+@Log4j2
 public class SystemsTest
 {
-	public SystemsTest()
-	{
-	}
-
 	@Test
 	public void testSetGetProperty()
 	{
-		System.out.println("setProperty - getProperty");
 		String key = "some.dummy.key";
 		String value = "some.dummy.value";
+
+		log.info("key: {}, value: {}", key, value);
 		Systems.setProperty(key, value);
 
 		Assertions.assertEquals(value, Systems.getProperty(key));
+
+		// clearing key
+		Systems.clearProperty(key);
+		Assertions.assertNull(Systems.getProperty(key));
 	}
 
 	@Test
+	@EnabledOnOs(OS.WINDOWS)
 	public void testGetOsName()
 	{
-		System.out.println("getOsName");
 		String result = Systems.getOsName();
-		System.out.println("result: " + result);
+		String expected = "windows";
+
+		log.info("result: {}, expected: {}", result, expected);
+		MatcherAssert.assertThat(result.toLowerCase(), StringContains.containsString(expected));
 	}
 
 	@Test
+	@EnabledOnOs(OS.MAC)
 	public void testIsMac()
 	{
-		System.out.println("isMac");
-		Assertions.assertEquals(false, Systems.isMac());
+		boolean result = Systems.isMac();
+		log.info("result: {}", result);
+
+		Assertions.assertTrue(result);
 	}
 
 	@Test
+	@EnabledOnOs(OS.WINDOWS)
 	public void testIsWindows()
 	{
-		System.out.println("isWindows");
-		Assertions.assertEquals(true, Systems.isWindows());
+		boolean result = Systems.isWindows();
+		log.info("result: {}", result);
+
+		Assertions.assertTrue(result);
 	}
 
 	@Test
+	@EnabledOnOs(OS.SOLARIS)
 	public void testIsSolaris()
 	{
-		System.out.println("isSolaris");
-		Assertions.assertEquals(false, Systems.isSolaris());
+		boolean result = Systems.isSolaris();
+		log.info("result: {}", result);
+
+		Assertions.assertTrue(result);
 	}
 
 	@Test
+	@EnabledOnOs(OS.AIX)
 	public void testIsUnix()
 	{
-		System.out.println("isUnix");
-		Assertions.assertEquals(false, Systems.isUnix());
+		boolean result = Systems.isUnix();
+		log.info("result: {}", result);
+
+		Assertions.assertTrue(result);
 	}
 
 	@Test
 	public void testGetClasspathFromProperty()
 	{
-		System.out.println("getClasspathFromProperty");
 		String result = Systems.getClasspathFromProperty();
-		System.out.println("result: " + result);
+		log.info("result: {}", result);
+
+		Assertions.assertNotNull(result);
 	}
 
 	@Test
 	public void testGetUserHomeDirectory()
 	{
-		System.out.println("getUserHomeDirectory");
-		String expResult = "C:\\Users\\Shakir";
 		String result = Systems.getUserHomeDirectory();
-		Assertions.assertEquals(expResult, result);
+		log.info("result: {}", result);
+
+		Assertions.assertNotNull(result);
 	}
 
 	@Test
 	public void testGetPresentWorkingDirectory()
 	{
-		System.out.println("getPresentWorkingDirectory");
 		String result = Systems.getPresentWorkingDirectory();
-		System.out.println("result: " + result);
+		log.info("result: {}", result);
+
+		Assertions.assertNotNull(result);
 	}
 
 	@Test
+	@EnabledOnOs(OS.WINDOWS)
 	public void testGetTempDirectory()
 	{
-		System.out.println("getTempDirectory");
-		String expResult = "C:\\Users\\Shakir\\AppData\\Local\\Temp\\";
 		String result = Systems.getTempDirectory();
-		Assertions.assertEquals(expResult, result);
+		String expected = "C:\\Users\\Shakir\\AppData\\Local\\Temp\\";
+		log.info("result: {}, expected: {}", result, expected);
+
+		Assertions.assertEquals(expected, result);
 	}
 
 	@Test
 	public void testPrintAllProperties()
 	{
-		System.out.println("printAllProperties");
 		Systems.printAllProperties();
 	}
-
 }
