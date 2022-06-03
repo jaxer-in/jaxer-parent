@@ -32,10 +32,11 @@ public class HttpHandler implements Runnable
 
 	private String payload;
 
+	private String payloadCharsets = ContentType.UTF_8;
 	private String payloadContentType = ContentType.APPLICATION_JSON;
 	private String requestContentType = ContentType.APPLICATION_JSON;
 
-	private HttpHandlerListner httpHandlerListner;
+	private CallbackListener callbackListener;
 
 	@Override
 	public void run()
@@ -44,7 +45,7 @@ public class HttpHandler implements Runnable
 		log.debug("urlString: {}", urlString);
 		log.debug("payload: {}", payload);
 
-		long startMiliSeconds = System.currentTimeMillis();
+		long startMilliSeconds = System.currentTimeMillis();
 		int responseCode = 0;
 
 		try
@@ -62,7 +63,7 @@ public class HttpHandler implements Runnable
 
 				try (OutputStream outputStream = httpURLConnection.getOutputStream())
 				{
-					byte[] input = payload.getBytes(StandardCharsets.UTF_8);
+					byte[] input = payload.getBytes(payloadCharsets);
 					outputStream.write(input, 0, input.length);
 					outputStream.flush();
 				}
@@ -74,36 +75,33 @@ public class HttpHandler implements Runnable
 				 BufferedReader bufferedReader = new BufferedReader(inputStreamReader))
 			{
 				StringBuilder response = new StringBuilder();
-				String responseLine = null;
-
+				String responseLine;
 				while ((responseLine = bufferedReader.readLine()) != null)
 				{
 					response.append(responseLine).append(System.lineSeparator());
 				}
 
-				if (httpHandlerListner != null)
+				if (callbackListener != null)
 				{
-					httpHandlerListner.onSuccess(httpURLConnection.getResponseCode(), response.toString());
+					callbackListener.onSuccess(httpURLConnection.getResponseCode(), response.toString());
 				}
 			}
 		} catch (Exception exception)
 		{
-//			log.error("Exception", exception);
-
-			if (httpHandlerListner != null)
+			if (callbackListener != null)
 			{
-				httpHandlerListner.onError(responseCode, exception);
+				callbackListener.onError(responseCode, exception);
 			}
 		} finally
 		{
-			if (httpHandlerListner != null)
+			if (callbackListener != null)
 			{
-				httpHandlerListner.onComplete(responseCode, Time.getTimeDifference(startMiliSeconds, System.currentTimeMillis()));
+				callbackListener.onComplete(responseCode, Time.getTimeDifference(startMilliSeconds, System.currentTimeMillis()));
 			}
 		}
 	}
 
-	public interface HttpHandlerListner
+	public interface CallbackListener
 	{
 		void onSuccess(int responseCode, String response);
 

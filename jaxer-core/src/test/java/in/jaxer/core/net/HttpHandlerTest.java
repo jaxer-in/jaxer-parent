@@ -21,7 +21,7 @@ class HttpHandlerTest
 	void beforEach()
 	{
 		httpHandler = new HttpHandler();
-		httpHandler.setHttpHandlerListner(new HttpHandler.HttpHandlerListner()
+		httpHandler.setCallbackListener(new HttpHandler.CallbackListener()
 		{
 			@Override
 			public void onSuccess(int responseCode, String response)
