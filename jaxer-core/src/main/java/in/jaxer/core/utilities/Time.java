@@ -174,11 +174,17 @@ public class Time
 	{
 		log.debug("start: {}, end: {}", start, end);
 
-		boolean inverse = end > start;
-		log.debug("inverse: {}", inverse);
-
-		long diff = inverse ? end - start : start - end;
+		long diff = end - start;
 		log.debug("diff: {}", diff);
+
+		boolean inverse = false;
+		if (diff < 0)
+		{
+			inverse = true;
+			diff = -diff;
+		}
+
+		log.debug("inverse: {}", inverse);
 
 		TimeDifference timeDifference = new TimeDifference();
 
@@ -187,6 +193,7 @@ public class Time
 			return timeDifference;
 		}
 
+		timeDifference.milliSeconds = diff % 1000;
 		timeDifference.seconds = diff / 1000 % 60;
 		timeDifference.minutes = diff / (60 * 1000) % 60;
 		timeDifference.hours = diff / (60 * 60 * 1000) % 24;
@@ -194,6 +201,7 @@ public class Time
 
 		if (inverse)
 		{
+			timeDifference.milliSeconds = -timeDifference.milliSeconds;
 			timeDifference.seconds = -timeDifference.seconds;
 			timeDifference.minutes = -timeDifference.minutes;
 			timeDifference.hours = -timeDifference.hours;

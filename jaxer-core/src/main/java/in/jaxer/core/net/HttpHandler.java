@@ -45,7 +45,7 @@ public class HttpHandler implements Runnable
 		log.debug("payload: {}", payload);
 
 		long startMiliSeconds = System.currentTimeMillis();
-		boolean isError = false;
+		int responseCode = 0;
 
 		try
 		{
@@ -68,6 +68,7 @@ public class HttpHandler implements Runnable
 				}
 			}
 
+			responseCode = httpURLConnection.getResponseCode();
 			try (InputStream inputStream = httpURLConnection.getInputStream();
 				 InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
 				 BufferedReader bufferedReader = new BufferedReader(inputStreamReader))
@@ -82,33 +83,32 @@ public class HttpHandler implements Runnable
 
 				if (httpHandlerListner != null)
 				{
-					httpHandlerListner.onSuccess(response.toString());
+					httpHandlerListner.onSuccess(httpURLConnection.getResponseCode(), response.toString());
 				}
 			}
 		} catch (Exception exception)
 		{
-			isError = false;
-			log.error("Exception", exception);
+//			log.error("Exception", exception);
 
 			if (httpHandlerListner != null)
 			{
-				httpHandlerListner.onError(exception);
+				httpHandlerListner.onError(responseCode, exception);
 			}
 		} finally
 		{
 			if (httpHandlerListner != null)
 			{
-				httpHandlerListner.onComplete(isError, Time.getTimeDifference(startMiliSeconds, System.currentTimeMillis()));
+				httpHandlerListner.onComplete(responseCode, Time.getTimeDifference(startMiliSeconds, System.currentTimeMillis()));
 			}
 		}
 	}
 
 	public interface HttpHandlerListner
 	{
-		void onSuccess(String response);
+		void onSuccess(int responseCode, String response);
 
-		void onError(Exception exception);
+		void onError(int responseCode, Exception exception);
 
-		void onComplete(boolean isSuccess, TimeDifference timeDifference);
+		void onComplete(int responseCode, TimeDifference timeDifference);
 	}
 }

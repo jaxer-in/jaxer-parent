@@ -6,6 +6,7 @@ package in.jaxer.core.dtos;
  */
 public class TimeDifference
 {
+	public long milliSeconds = 0;
 	public long seconds = 0;
 	public long minutes = 0;
 	public long hours = 0;
@@ -19,7 +20,8 @@ public class TimeDifference
 		response += days != 0 ? days + " days, " : "";
 		response += hours != 0 ? hours + " hours, " : "";
 		response += minutes != 0 ? minutes + " minutes, " : "";
-		response += seconds != 0 ? seconds + " seconds " : "";
+		response += seconds != 0 ? seconds + " seconds, " : "";
+		response += milliSeconds != 0 ? milliSeconds + " milliSeconds " : "";
 
 		return response;
 	}
