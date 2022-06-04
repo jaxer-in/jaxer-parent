@@ -8,97 +8,238 @@ import java.util.Properties;
 
 /**
  * @author Shakir Ansari
+ * @since 0.0.1
  */
 public class JValidator
 {
+	/**
+	 * @since 0.0.1
+	 * @deprecated As of 1.0.6-beta, replaced by {@link #isNotNullAndNotEmpty(String)}
+	 */
 	@Deprecated
 	public static boolean isEmpty(String string)
 	{
 		return string == null || string.trim().isEmpty();
 	}
 
+	/**
+	 * @since 0.0.1
+	 * @deprecated As of 1.0.6-beta, replaced by {@link #isNotNullAndNotEmpty(String)}
+	 */
 	@Deprecated
 	public static boolean isNotEmpty(String string)
 	{
 		return !isEmpty(string);
 	}
 
+	/**
+	 * @since 1.0.6-beta
+	 * @deprecated As of 1.0.9-beta, replaced by {@link #isBlank(String)}
+	 */
+	@Deprecated
 	public static boolean isNullOrEmpty(String str)
 	{
 		return Strings.isNullOrEmpty(str);
 	}
 
+	/**
+	 * @since 1.0.6-beta
+	 * @deprecated As of 1.0.9-beta, replaced by {@link #isNotBlank(String)}
+	 */
+	@Deprecated
 	public static boolean isNotNullAndNotEmpty(String str)
 	{
 		return Strings.isNotNullAndNotEmpty(str);
 	}
 
+	/**
+	 * @since 1.0.9-beta
+	 */
+	public static boolean isBlank(String string)
+	{
+		return string == null || string.trim().isEmpty();
+	}
+
+	/**
+	 * @since 1.0.9-beta
+	 */
+	public static boolean isNotBlank(String string)
+	{
+		return string != null && !string.trim().isEmpty();
+	}
+
+	/**
+	 * @since 0.0.1
+	 * @deprecated As of 1.0.6-beta, replaced by {@link #isNullOrEmpty(Collection)}
+	 */
 	@Deprecated
 	public static boolean isEmpty(Collection collection)
 	{
 		return collection == null || collection.isEmpty();
 	}
 
+	/**
+	 * @since 0.0.1
+	 * @deprecated As of 1.0.6-beta, replaced by {@link #isNotNullAndNotEmpty(Collection)}
+	 */
 	@Deprecated
 	public static boolean isNotEmpty(Collection collection)
 	{
 		return !isEmpty(collection);
 	}
 
+	/**
+	 * @since 1.0.6-beta
+	 * @deprecated As of 1.0.9-beta, replaced by {@link #isBlank(Collection)}
+	 */
+	@Deprecated
 	public static boolean isNullOrEmpty(Collection collection)
 	{
 		return collection == null || collection.isEmpty();
 	}
 
+	/**
+	 * @since 1.0.6-beta
+	 * @deprecated As of 1.0.9-beta, replaced by {@link #isNotBlank(Collection)}
+	 */
+	@Deprecated
 	public static boolean isNotNullAndNotEmpty(Collection collection)
 	{
 		return collection != null && !collection.isEmpty();
 	}
 
+	/**
+	 * @since 1.0.9-beta
+	 */
+	public static boolean isBlank(Collection collection)
+	{
+		return collection == null || collection.isEmpty();
+	}
+
+	/**
+	 * @since 1.0.9-beta
+	 */
+	public static boolean isNotBlank(Collection collection)
+	{
+		return collection != null && !collection.isEmpty();
+	}
+
+	/**
+	 * @since 0.0.1
+	 * @deprecated As of 1.0.6-beta, replaced by {@link #isNullOrEmpty(Map)}
+	 */
 	@Deprecated
 	public static boolean isEmpty(Map map)
 	{
 		return map == null || map.isEmpty();
 	}
 
+	/**
+	 * @since 0.0.1
+	 * @deprecated As of 1.0.6-beta, replaced by {@link #isNotNullAndNotEmpty(Map)}
+	 */
 	@Deprecated
 	public static boolean isNotEmpty(Map map)
 	{
 		return !isEmpty(map);
 	}
 
+	/**
+	 * @since 1.0.6-beta
+	 * @deprecated As of 1.0.9-beta, replaced by {@link #isBlank(Map)}
+	 */
+	@Deprecated
 	public static boolean isNullOrEmpty(Map map)
 	{
 		return map == null || map.isEmpty();
 	}
 
+	/**
+	 * @since 1.0.6-beta
+	 * @deprecated As of 1.0.9-beta, replaced by {@link #isNotBlank(Map)}
+	 */
+	@Deprecated
 	public static boolean isNotNullAndNotEmpty(Map map)
 	{
 		return map != null && !map.isEmpty();
 	}
 
+	/**
+	 * @since 1.0.9-beta
+	 */
+	public static boolean isBlank(Map map)
+	{
+		return map == null || map.isEmpty();
+	}
+
+	/**
+	 * @since 1.0.9-beta
+	 */
+	public static boolean isNotBlank(Map map)
+	{
+		return map != null && !map.isEmpty();
+	}
+
+	/**
+	 * @since 0.0.1
+	 * @deprecated As of 1.0.6-beta, replaced by {@link #isNullOrEmpty(Properties)}
+	 */
 	@Deprecated
 	public static boolean isEmpty(Properties properties)
 	{
 		return properties == null || properties.isEmpty();
 	}
 
+	/**
+	 * @since 0.0.1
+	 * @deprecated As of 1.0.6-beta, replaced by {@link #isNotNullAndNotEmpty(Properties)}
+	 */
 	@Deprecated
 	public static boolean isNotEmpty(Properties properties)
 	{
 		return !isEmpty(properties);
 	}
 
+	/**
+	 * @since 1.0.6-beta
+	 * @deprecated As of 1.0.9-beta, replaced by {@link #isBlank(Properties)}
+	 */
+	@Deprecated
 	public static boolean isNullOrEmpty(Properties properties)
 	{
 		return properties == null || properties.isEmpty();
 	}
 
+	/**
+	 * @since 1.0.6-beta
+	 * @deprecated As of 1.0.9-beta, replaced by {@link #isNotBlank(Properties)}
+	 */
+	@Deprecated
 	public static boolean isNotNullAndNotEmpty(Properties properties)
 	{
 		return properties != null && !properties.isEmpty();
 	}
 
+	/**
+	 * @since 1.0.9-beta
+	 */
+	public static boolean isBlank(Properties properties)
+	{
+		return properties == null || properties.isEmpty();
+	}
+
+	/**
+	 * @since 1.0.9-beta
+	 */
+	public static boolean isNotBlank(Properties properties)
+	{
+		return properties != null && !properties.isEmpty();
+	}
+
+	/**
+	 * @since 0.0.1
+	 * @deprecated As of 1.0.6-beta, replaced by {@link #isNullOrEmpty(String...)}
+	 */
 	@Deprecated
 	public static boolean isEmpty(String... strings)
 	{
@@ -116,10 +257,10 @@ public class JValidator
 	 * if any String in given array is null or empty
 	 * this method will return true otherwise false
 	 *
-	 * @param strings array of String
-	 *
-	 * @return true or false
+	 * @since 1.0.6-beta
+	 * @deprecated As of 1.0.9-beta, replaced by {@link #isBlank(String...)}
 	 */
+	@Deprecated
 	public static boolean isNullOrEmpty(String... strings)
 	{
 		for (String string : strings)
@@ -136,10 +277,10 @@ public class JValidator
 	 * If any String in given array is not null and not empty
 	 * this method will return true otherwise false
 	 *
-	 * @param strings array of String
-	 *
-	 * @return true or false
+	 * @since 1.0.6-beta
+	 * @deprecated As of 1.0.9-beta, replaced by {@link #isNotBlank(String...)}
 	 */
+	@Deprecated
 	public static boolean isNotNullAndNotEmpty(String... strings)
 	{
 		for (String string : strings)
@@ -152,27 +293,108 @@ public class JValidator
 		return false;
 	}
 
+	/**
+	 * if any String in given array is null or empty
+	 * this method will return true otherwise false
+	 *
+	 * @since 1.0.6-beta
+	 */
+	public static boolean isBlank(String... strings)
+	{
+		for (String string : strings)
+		{
+			if (isNullOrEmpty(string))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * If any String in given array is not null and not empty
+	 * this method will return true otherwise false
+	 *
+	 * @since 1.0.9-beta
+	 */
+	public static boolean isNotBlank(String... strings)
+	{
+		for (String string : strings)
+		{
+			if (isNotNullAndNotEmpty(string))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * @since 0.0.1
+	 * @deprecated As of 1.0.6-beta, replaced by {@link #isNullOrEmpty(char[])}
+	 */
 	@Deprecated
 	public static boolean isEmpty(char[] array)
 	{
 		return array == null || array.length < 0;
 	}
 
+	/**
+	 * @since 1.0.6-beta
+	 * @deprecated As of 1.0.9-beta, replaced by {@link #isBlank(char[])}
+	 */
+	@Deprecated
 	public static boolean isNullOrEmpty(char[] array)
 	{
 		return array == null || array.length < 0;
 	}
 
+	/**
+	 * @since 1.0.6-beta
+	 * @deprecated As of 1.0.9-beta, replaced by {@link #isNotBlank(char[])}
+	 */
+	@Deprecated
 	public static boolean isNotNullAndNotEmpty(char[] array)
 	{
 		return array != null && array.length > 0;
 	}
 
+	/**
+	 * @since 1.0.9-beta
+	 */
+	public static boolean isBlank(char[] array)
+	{
+		return array == null || array.length < 0;
+	}
+
+	/**
+	 * @since 1.0.9-beta
+	 */
+	public static boolean isNotBlank(char[] array)
+	{
+		return array != null && array.length > 0;
+	}
+
+	/**
+	 * @since 0.0.1
+	 * @deprecated As of 1.0.9-beta, replaced by {@link #throwWhenBlank(char[])}
+	 */
 	public static void requireNotEmpty(char[] array)
 	{
 		if (isEmpty(array))
 		{
 			throw new ValidationException("Array cannot be null or empty");
+		}
+	}
+
+	/**
+	 * @since 1.0.9-beta
+	 */
+	public static void throwWhenBlank(char[] array)
+	{
+		if (isBlank(array))
+		{
+			throw new NullPointerException();
 		}
 	}
 
