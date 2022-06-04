@@ -11,6 +11,11 @@ import static java.lang.annotation.ElementType.PACKAGE;
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
+/**
+ * @author Shakir
+ * date 2022-06-04 19:17
+ * @since 1.0.9-beta
+ */
 @Target({TYPE, METHOD, CONSTRUCTOR, FIELD, PACKAGE})
 @Retention(RUNTIME)
 @Documented
