@@ -1,4 +1,4 @@
-package in.jaxer.core;
+package in.jaxer.core.annotations;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
