@@ -398,12 +398,20 @@ public class JValidator
 		}
 	}
 
+	/**
+	 * @since 0.0.1
+	 * @deprecated As of 1.0.6-beta, replaced by {@link #throwWhenNullOrEmpty(String)}
+	 */
 	@Deprecated
 	public static void requireNotEmpty(String str)
 	{
 		requireNotEmpty(str, "String cannot be null or empty");
 	}
 
+	/**
+	 * @since 0.0.1
+	 * @deprecated As of 1.0.6-beta, replaced by {@link #throwWhenNullOrEmpty(String, String)}
+	 */
 	@Deprecated
 	public static void requireNotEmpty(String str, String exceptionMessage)
 	{
@@ -413,6 +421,10 @@ public class JValidator
 		}
 	}
 
+	/**
+	 * @since 0.0.1
+	 * @deprecated As of 1.0.6-beta, replaced by {@link #throwWhenNullOrEmpty(String, Throwable)}
+	 */
 	@Deprecated
 	public static void requireNotEmpty(String str, Throwable throwable)
 	{
@@ -422,6 +434,11 @@ public class JValidator
 		}
 	}
 
+	/**
+	 * @since 1.0.6-beta
+	 * @deprecated As of 1.0.9-beta, replaced by {@link #throwWhenBlank(String)}
+	 */
+	@Deprecated
 	public static void throwWhenNullOrEmpty(String str)
 	{
 		if (JValidator.isNullOrEmpty(str))
@@ -430,6 +447,11 @@ public class JValidator
 		}
 	}
 
+	/**
+	 * @since 1.0.6-beta
+	 * @deprecated As of 1.0.9-beta, replaced by {@link #throwWhenBlank(String, String)}
+	 */
+	@Deprecated
 	public static void throwWhenNullOrEmpty(String str, String customExceptionMessage)
 	{
 		if (JValidator.isNullOrEmpty(str))
@@ -438,6 +460,11 @@ public class JValidator
 		}
 	}
 
+	/**
+	 * @since 1.0.6-beta
+	 * @deprecated As of 1.0.9-beta, replaced by {@link #throwWhenBlank(String, Throwable)}
+	 */
+	@Deprecated
 	public static void throwWhenNullOrEmpty(String str, Throwable throwable)
 	{
 		if (JValidator.isNullOrEmpty(str))
@@ -446,12 +473,53 @@ public class JValidator
 		}
 	}
 
+	/**
+	 * @since 1.0.9-beta
+	 */
+	public static void throwWhenBlank(String str)
+	{
+		if (JValidator.isNullOrEmpty(str))
+		{
+			throw new NullPointerException();
+		}
+	}
+
+	/**
+	 * @since 1.0.9-beta
+	 */
+	public static void throwWhenBlank(String str, String customExceptionMessage)
+	{
+		if (JValidator.isNullOrEmpty(str))
+		{
+			throw new NullPointerException(customExceptionMessage);
+		}
+	}
+
+	/**
+	 * @since 1.0.9-beta
+	 */
+	public static void throwWhenBlank(String str, Throwable throwable)
+	{
+		if (JValidator.isNullOrEmpty(str))
+		{
+			rethrow(throwable);
+		}
+	}
+
+	/**
+	 * @since 0.0.1
+	 * @deprecated As of 1.0.6-beta, replaced by {@link #throwWhenNullOrEmpty(Collection)}
+	 */
 	@Deprecated
 	public static void requireNotEmpty(Collection collection)
 	{
 		requireNotEmpty(collection, "Collection cannot not be empty");
 	}
 
+	/**
+	 * @since 0.0.1
+	 * @deprecated As of 1.0.6-beta, replaced by {@link #throwWhenNullOrEmpty(Collection, String)}
+	 */
 	@Deprecated
 	public static void requireNotEmpty(Collection collection, String exceptionMessage)
 	{
@@ -461,6 +529,10 @@ public class JValidator
 		}
 	}
 
+	/**
+	 * @since 0.0.1
+	 * @deprecated As of 1.0.6-beta, replaced by {@link #throwWhenNullOrEmpty(Collection, Throwable)}
+	 */
 	@Deprecated
 	public static void requireNotEmpty(Collection collection, Throwable throwable)
 	{
@@ -470,6 +542,11 @@ public class JValidator
 		}
 	}
 
+	/**
+	 * @since 1.0.6-beta
+	 * @deprecated As of 1.0.9-beta, replaced by {@link #throwWhenBlank(Collection)}
+	 */
+	@Deprecated
 	public static void throwWhenNullOrEmpty(Collection collection)
 	{
 		if (JValidator.isNullOrEmpty(collection))
@@ -478,6 +555,11 @@ public class JValidator
 		}
 	}
 
+	/**
+	 * @since 1.0.6-beta
+	 * @deprecated As of 1.0.9-beta, replaced by {@link #throwWhenBlank(Collection, String)}
+	 */
+	@Deprecated
 	public static void throwWhenNullOrEmpty(Collection collection, String customExceptionMessage)
 	{
 		if (JValidator.isNullOrEmpty(collection))
@@ -486,6 +568,11 @@ public class JValidator
 		}
 	}
 
+	/**
+	 * @since 1.0.6-beta
+	 * @deprecated As of 1.0.9-beta, replaced by {@link #throwWhenBlank(Collection, Throwable)}
+	 */
+	@Deprecated
 	public static void throwWhenNullOrEmpty(Collection collection, Throwable throwable)
 	{
 		if (JValidator.isNullOrEmpty(collection))
@@ -494,7 +581,43 @@ public class JValidator
 		}
 	}
 
-	public static void throwWhenNullOrEmpty(Map map)
+	/**
+	 * @since 1.0.9-beta
+	 */
+	public static void throwWhenBlank(Collection collection)
+	{
+		if (JValidator.isNullOrEmpty(collection))
+		{
+			throw new NullPointerException();
+		}
+	}
+
+	/**
+	 * @since 1.0.9-beta
+	 */
+	public static void throwWhenBlank(Collection collection, String customExceptionMessage)
+	{
+		if (JValidator.isNullOrEmpty(collection))
+		{
+			throw new NullPointerException(customExceptionMessage);
+		}
+	}
+
+	/**
+	 * @since 1.0.9-beta
+	 */
+	public static void throwWhenBlank(Collection collection, Throwable throwable)
+	{
+		if (JValidator.isNullOrEmpty(collection))
+		{
+			rethrow(throwable);
+		}
+	}
+
+	/**
+	 * @since 1.0.9-beta
+	 */
+	public static void throwWhenBlank(Map map)
 	{
 		if (JValidator.isNullOrEmpty(map))
 		{
@@ -502,7 +625,10 @@ public class JValidator
 		}
 	}
 
-	public static void throwWhenNullOrEmpty(Map map, String customExceptionMessage)
+	/**
+	 * @since 1.0.9-beta
+	 */
+	public static void throwWhenBlank(Map map, String customExceptionMessage)
 	{
 		if (JValidator.isNullOrEmpty(map))
 		{
@@ -510,7 +636,10 @@ public class JValidator
 		}
 	}
 
-	public static void throwWhenNullOrEmpty(Map map, Throwable throwable)
+	/**
+	 * @since 1.0.9-beta
+	 */
+	public static void throwWhenBlank(Map map, Throwable throwable)
 	{
 		if (JValidator.isNullOrEmpty(map))
 		{
@@ -518,6 +647,10 @@ public class JValidator
 		}
 	}
 
+	/**
+	 * @since 0.0.1
+	 * @deprecated As of 1.0.6-beta, replaced by {@link #throwWhenNull(Object)}
+	 */
 	@Deprecated
 	public static void requireNotNull(Object object)
 	{
@@ -527,6 +660,10 @@ public class JValidator
 		}
 	}
 
+	/**
+	 * @since 0.0.1
+	 * @deprecated As of 1.0.6-beta, replaced by {@link #throwWhenNull(Object, String)}
+	 */
 	@Deprecated
 	public static void requireNotNull(Object object, String exceptionMessage)
 	{
@@ -536,6 +673,10 @@ public class JValidator
 		}
 	}
 
+	/**
+	 * @since 0.0.1
+	 * @deprecated As of 1.0.6-beta, replaced by {@link #throwWhenNull(Object, Throwable)}
+	 */
 	@Deprecated
 	public static void requireNotNull(Object object, Throwable throwable)
 	{
@@ -545,6 +686,9 @@ public class JValidator
 		}
 	}
 
+	/**
+	 * @since 1.0.6-beta
+	 */
 	public static void throwWhenNull(Object object)
 	{
 		if (object == null)
@@ -553,6 +697,9 @@ public class JValidator
 		}
 	}
 
+	/**
+	 * @since 1.0.6-beta
+	 */
 	public static void throwWhenNull(Object object, String customExceptionMessage)
 	{
 		if (object == null)
@@ -561,6 +708,9 @@ public class JValidator
 		}
 	}
 
+	/**
+	 * @since 1.0.6-beta
+	 */
 	public static void throwWhenNull(Object object, Throwable throwable)
 	{
 		if (object == null)
@@ -569,22 +719,31 @@ public class JValidator
 		}
 	}
 
+	/**
+	 * @since 1.0.9-beta
+	 */
 	public static void throwWhenTrue(boolean trueCondition)
 	{
 		if (trueCondition)
 		{
-			throw new NullPointerException();
+			throw new AssertionError();
 		}
 	}
 
+	/**
+	 * @since 1.0.9-beta
+	 */
 	public static void throwWhenTrue(boolean trueCondition, String customExceptionMessage)
 	{
 		if (trueCondition)
 		{
-			throw new NullPointerException(customExceptionMessage);
+			throw new AssertionError(customExceptionMessage);
 		}
 	}
 
+	/**
+	 * @since 1.0.9-beta
+	 */
 	public static void throwWhenTrue(boolean trueCondition, Throwable throwable)
 	{
 		if (trueCondition)
@@ -593,22 +752,31 @@ public class JValidator
 		}
 	}
 
+	/**
+	 * @since 1.0.9-beta
+	 */
 	public static void throwWhenFalse(boolean trueCondition)
 	{
 		if (!trueCondition)
 		{
-			throw new NullPointerException();
+			throw new AssertionError();
 		}
 	}
 
+	/**
+	 * @since 1.0.9-beta
+	 */
 	public static void throwWhenFalse(boolean trueCondition, String customExceptionMessage)
 	{
 		if (!trueCondition)
 		{
-			throw new NullPointerException(customExceptionMessage);
+			throw new AssertionError(customExceptionMessage);
 		}
 	}
 
+	/**
+	 * @since 1.0.9-beta
+	 */
 	public static void throwWhenFalse(boolean trueCondition, Throwable throwable)
 	{
 		if (!trueCondition)
@@ -617,6 +785,9 @@ public class JValidator
 		}
 	}
 
+	/**
+	 * @since 1.0.9-beta
+	 */
 	public static void rethrow(Throwable throwable)
 	{
 		throwWhenNull(throwable);
@@ -632,6 +803,9 @@ public class JValidator
 		}
 	}
 
+	/**
+	 * @since 0.0.1
+	 */
 	public static boolean isEqualsToAny(String original, String... others)
 	{
 		for (String string : others)
@@ -644,11 +818,17 @@ public class JValidator
 		return false;
 	}
 
+	/**
+	 * @since 0.0.1
+	 */
 	public static boolean isNotEqualsToAny(String original, String... others)
 	{
 		return !isEqualsToAny(original, others);
 	}
 
+	/**
+	 * @since 0.0.1
+	 */
 	public static boolean isEqualsIgnoreCaseToAny(String original, String... others)
 	{
 		for (String string : others)
@@ -661,6 +841,9 @@ public class JValidator
 		return false;
 	}
 
+	/**
+	 * @since 0.0.1
+	 */
 	public static boolean isNotEqualsIgnoreCaseToAny(String original, String... others)
 	{
 		return !isEqualsIgnoreCaseToAny(original, others);

@@ -8,6 +8,7 @@ import java.util.Base64;
 
 /**
  * @author Shakir
+ * @since 0.0.1
  */
 public class Base64Encoder
 {

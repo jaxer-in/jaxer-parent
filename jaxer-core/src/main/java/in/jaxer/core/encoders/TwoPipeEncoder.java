@@ -6,6 +6,7 @@ import in.jaxer.core.utilities.JValidator;
 
 /**
  * @author Shakir
+ * @since 0.0.1
  */
 public class TwoPipeEncoder implements Encoder
 {
@@ -14,7 +15,7 @@ public class TwoPipeEncoder implements Encoder
 	@Override
 	public String encode(String message)
 	{
-		JValidator.throwWhenNullOrEmpty(message);
+		JValidator.throwWhenBlank(message);
 
 		String firstHalf = "", secondHalf = "";
 		for (int i = 0; i < message.length(); i++)
@@ -35,7 +36,7 @@ public class TwoPipeEncoder implements Encoder
 	@Override
 	public String decode(String msg)
 	{
-		JValidator.throwWhenNullOrEmpty(msg);
+		JValidator.throwWhenBlank(msg);
 
 		int len = msg.length();
 

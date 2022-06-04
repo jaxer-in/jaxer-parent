@@ -8,6 +8,7 @@ import java.util.Arrays;
 
 /**
  * @author Shakir
+ * @since 0.0.1
  */
 @Log4j2
 public class OctalEncoder implements Encoder
@@ -25,7 +26,7 @@ public class OctalEncoder implements Encoder
 	@Override
 	public String encode(String message)
 	{
-		JValidator.throwWhenNullOrEmpty(message);
+		JValidator.throwWhenBlank(message);
 
 		String encoded = "";
 
@@ -41,7 +42,7 @@ public class OctalEncoder implements Encoder
 	@Override
 	public String decode(String message)
 	{
-		JValidator.throwWhenNullOrEmpty(message);
+		JValidator.throwWhenBlank(message);
 
 		String pattern = "^[0-9]*$";
 		if (!message.matches(pattern))
@@ -61,6 +62,6 @@ public class OctalEncoder implements Encoder
 			decoded += (char) convert(charInt[i]);
 		}
 
-		return JValidator.isNullOrEmpty(decoded) ? null : decoded;
+		return JValidator.isBlank(decoded) ? null : decoded;
 	}
 }

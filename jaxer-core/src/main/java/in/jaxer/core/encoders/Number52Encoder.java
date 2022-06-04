@@ -7,6 +7,7 @@ import lombok.extern.log4j.Log4j2;
 
 /**
  * @author Shakir
+ * @since 0.0.1
  */
 @Log4j2
 public class Number52Encoder implements Encoder
@@ -81,7 +82,7 @@ public class Number52Encoder implements Encoder
 	@Override
 	public String encode(String message)
 	{
-		JValidator.throwWhenNullOrEmpty(message);
+		JValidator.throwWhenBlank(message);
 
 		int ch;
 		int length = message.length();
@@ -102,7 +103,7 @@ public class Number52Encoder implements Encoder
 	@Override
 	public String decode(String message)
 	{
-		JValidator.throwWhenNullOrEmpty(message);
+		JValidator.throwWhenBlank(message);
 
 		String pattern = "^[0-9a-zA-Z]*$";
 		if (!message.matches(pattern))

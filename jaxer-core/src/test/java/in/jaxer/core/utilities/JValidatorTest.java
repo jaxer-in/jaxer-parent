@@ -32,6 +32,12 @@ class JValidatorTest
 		{
 			Assertions.assertThrowsExactly(NullPointerException.class, () -> JValidator.rethrow(new NullPointerException()));
 		}
+
+		@Test
+		void whenThrowableIsInstanceOfAssertionError()
+		{
+			Assertions.assertThrowsExactly(AssertionError.class, () -> JValidator.rethrow(new AssertionError()));
+		}
 	}
 
 	@Nested
@@ -126,6 +132,78 @@ class JValidatorTest
 				Assertions.assertThrowsExactly(JaxerCoreException.class, () -> JValidator.throwWhenNullOrEmpty((ArrayList<String>) null, new JaxerCoreException()));
 			}
 		}
+	}
+
+	@Nested
+	class ThrowWhenBlank
+	{
+		@Nested
+		class WithString
+		{
+			@Test
+			void whenOk()
+			{
+				JValidator.throwWhenBlank("HelloWorld");
+			}
+
+			@Test
+			void onEmpty()
+			{
+				Assertions.assertThrowsExactly(NullPointerException.class, () -> JValidator.throwWhenBlank(""));
+			}
+
+			@Test
+			void onNull()
+			{
+				Assertions.assertThrowsExactly(NullPointerException.class, () -> JValidator.throwWhenBlank((String) null));
+			}
+
+			@Test
+			void onEmptyWithCustomException()
+			{
+				Assertions.assertThrowsExactly(JaxerCoreException.class, () -> JValidator.throwWhenBlank("", new JaxerCoreException()));
+			}
+
+			@Test
+			void onNullWithCustomException()
+			{
+				Assertions.assertThrowsExactly(JaxerCoreException.class, () -> JValidator.throwWhenBlank((String) null, new JaxerCoreException()));
+			}
+		}
+
+		@Nested
+		class WithCollection
+		{
+			@Test
+			void whenOk()
+			{
+				JValidator.throwWhenBlank(Collections.singletonList("Hello World"));
+			}
+
+			@Test
+			void onEmpty()
+			{
+				Assertions.assertThrowsExactly(NullPointerException.class, () -> JValidator.throwWhenBlank(new ArrayList<>()));
+			}
+
+			@Test
+			void onNull()
+			{
+				Assertions.assertThrowsExactly(NullPointerException.class, () -> JValidator.throwWhenBlank((ArrayList<String>) null));
+			}
+
+			@Test
+			void onEmptyWithCustomException()
+			{
+				Assertions.assertThrowsExactly(JaxerCoreException.class, () -> JValidator.throwWhenBlank(new ArrayList<>(), new JaxerCoreException()));
+			}
+
+			@Test
+			void onNullWithCustomException()
+			{
+				Assertions.assertThrowsExactly(JaxerCoreException.class, () -> JValidator.throwWhenBlank((ArrayList<String>) null, new JaxerCoreException()));
+			}
+		}
 
 		@Nested
 		class WithMap
@@ -136,31 +214,31 @@ class JValidatorTest
 				Map<String, String> map = new HashMap<>();
 
 				map.put("hello", "world");
-				JValidator.throwWhenNullOrEmpty(map);
+				JValidator.throwWhenBlank(map);
 			}
 
 			@Test
 			void onEmpty()
 			{
-				Assertions.assertThrowsExactly(NullPointerException.class, () -> JValidator.throwWhenNullOrEmpty(new HashMap<>()));
+				Assertions.assertThrowsExactly(NullPointerException.class, () -> JValidator.throwWhenBlank(new HashMap<>()));
 			}
 
 			@Test
 			void onNull()
 			{
-				Assertions.assertThrowsExactly(NullPointerException.class, () -> JValidator.throwWhenNullOrEmpty((Map<String, Object>) null));
+				Assertions.assertThrowsExactly(NullPointerException.class, () -> JValidator.throwWhenBlank((Map<String, Object>) null));
 			}
 
 			@Test
 			void onEmptyWithCustomException()
 			{
-				Assertions.assertThrowsExactly(JaxerCoreException.class, () -> JValidator.throwWhenNullOrEmpty(new HashMap<>(), new JaxerCoreException()));
+				Assertions.assertThrowsExactly(JaxerCoreException.class, () -> JValidator.throwWhenBlank(new HashMap<>(), new JaxerCoreException()));
 			}
 
 			@Test
 			void onNullWithCustomException()
 			{
-				Assertions.assertThrowsExactly(JaxerCoreException.class, () -> JValidator.throwWhenNullOrEmpty((Map<String, Object>) null, new JaxerCoreException()));
+				Assertions.assertThrowsExactly(JaxerCoreException.class, () -> JValidator.throwWhenBlank((Map<String, Object>) null, new JaxerCoreException()));
 			}
 		}
 	}
@@ -171,13 +249,13 @@ class JValidatorTest
 		@Test
 		void throwWhenTrue()
 		{
-			Assertions.assertThrows(NullPointerException.class, () -> JValidator.throwWhenTrue(true));
+			Assertions.assertThrows(AssertionError.class, () -> JValidator.throwWhenTrue(true));
 		}
 
 		@Test
 		void throwWhenTrueWithCustomExceptionMessage()
 		{
-			Assertions.assertThrows(NullPointerException.class, () -> JValidator.throwWhenTrue(true, "Custom exception message"));
+			Assertions.assertThrows(AssertionError.class, () -> JValidator.throwWhenTrue(true, "Custom exception message"));
 		}
 
 		@Test
@@ -193,13 +271,13 @@ class JValidatorTest
 		@Test
 		void throwWhenTrue()
 		{
-			Assertions.assertThrows(NullPointerException.class, () -> JValidator.throwWhenFalse(false));
+			Assertions.assertThrows(AssertionError.class, () -> JValidator.throwWhenFalse(false));
 		}
 
 		@Test
 		void throwWhenTrueWithCustomExceptionMessage()
 		{
-			Assertions.assertThrows(NullPointerException.class, () -> JValidator.throwWhenFalse(false, "Custom exception message"));
+			Assertions.assertThrows(AssertionError.class, () -> JValidator.throwWhenFalse(false, "Custom exception message"));
 		}
 
 		@Test
