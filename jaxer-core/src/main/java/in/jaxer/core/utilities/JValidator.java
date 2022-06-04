@@ -17,15 +17,15 @@ public class JValidator
 		return string == null || string.trim().isEmpty();
 	}
 
-	public static boolean isNullOrEmpty(String str)
-	{
-		return Strings.isNullOrEmpty(str);
-	}
-
 	@Deprecated
 	public static boolean isNotEmpty(String string)
 	{
 		return !isEmpty(string);
+	}
+
+	public static boolean isNullOrEmpty(String str)
+	{
+		return Strings.isNullOrEmpty(str);
 	}
 
 	public static boolean isNotNullAndNotEmpty(String str)
@@ -39,20 +39,20 @@ public class JValidator
 		return collection == null || collection.isEmpty();
 	}
 
-	public static boolean isNullOrEmpty(Collection collection)
-	{
-		return Collections.isNullOrEmpty(collection);
-	}
-
 	@Deprecated
 	public static boolean isNotEmpty(Collection collection)
 	{
 		return !isEmpty(collection);
 	}
 
+	public static boolean isNullOrEmpty(Collection collection)
+	{
+		return collection == null || collection.isEmpty();
+	}
+
 	public static boolean isNotNullAndNotEmpty(Collection collection)
 	{
-		return Collections.isNotNullAndNotEmpty(collection);
+		return collection != null && !collection.isEmpty();
 	}
 
 	@Deprecated
@@ -61,20 +61,20 @@ public class JValidator
 		return map == null || map.isEmpty();
 	}
 
-	public static boolean isNullOrEmpty(Map map)
-	{
-		return Collections.isNullOrEmpty(map);
-	}
-
 	@Deprecated
 	public static boolean isNotEmpty(Map map)
 	{
 		return !isEmpty(map);
 	}
 
+	public static boolean isNullOrEmpty(Map map)
+	{
+		return map == null || map.isEmpty();
+	}
+
 	public static boolean isNotNullAndNotEmpty(Map map)
 	{
-		return Collections.isNotNullAndNotEmpty(map);
+		return map != null && !map.isEmpty();
 	}
 
 	@Deprecated
@@ -83,15 +83,15 @@ public class JValidator
 		return properties == null || properties.isEmpty();
 	}
 
-	public static boolean isNullOrEmpty(Properties properties)
-	{
-		return properties == null || properties.isEmpty();
-	}
-
 	@Deprecated
 	public static boolean isNotEmpty(Properties properties)
 	{
 		return !isEmpty(properties);
+	}
+
+	public static boolean isNullOrEmpty(Properties properties)
+	{
+		return properties == null || properties.isEmpty();
 	}
 
 	public static boolean isNotNullAndNotEmpty(Properties properties)
@@ -182,25 +182,12 @@ public class JValidator
 		requireNotEmpty(str, "String cannot be null or empty");
 	}
 
-	public static void throwWhenNullOrEmpty(String str)
-	{
-		throwWhenNullOrEmpty(str, "String cannot be null or empty");
-	}
-
 	@Deprecated
 	public static void requireNotEmpty(String str, String exceptionMessage)
 	{
 		if (isEmpty(str))
 		{
 			throw new ValidationException(exceptionMessage);
-		}
-	}
-
-	public static void throwWhenNullOrEmpty(String str, String customExceptionMessage)
-	{
-		if (Strings.isNullOrEmpty(str))
-		{
-			throw new ValidationException(customExceptionMessage);
 		}
 	}
 
@@ -213,11 +200,27 @@ public class JValidator
 		}
 	}
 
+	public static void throwWhenNullOrEmpty(String str)
+	{
+		if (JValidator.isNullOrEmpty(str))
+		{
+			throw new NullPointerException();
+		}
+	}
+
+	public static void throwWhenNullOrEmpty(String str, String customExceptionMessage)
+	{
+		if (JValidator.isNullOrEmpty(str))
+		{
+			throw new NullPointerException(customExceptionMessage);
+		}
+	}
+
 	public static void throwWhenNullOrEmpty(String str, Throwable throwable)
 	{
-		if (Strings.isNullOrEmpty(str))
+		if (JValidator.isNullOrEmpty(str))
 		{
-			throw new RuntimeException(throwable);
+			rethrow(throwable);
 		}
 	}
 
@@ -227,25 +230,12 @@ public class JValidator
 		requireNotEmpty(collection, "Collection cannot not be empty");
 	}
 
-	public static void throwWhenNullOrEmpty(Collection collection)
-	{
-		throwWhenNullOrEmpty(collection, "Collection cannot not be empty");
-	}
-
 	@Deprecated
 	public static void requireNotEmpty(Collection collection, String exceptionMessage)
 	{
 		if (JValidator.isEmpty(collection))
 		{
 			throw new ValidationException(exceptionMessage);
-		}
-	}
-
-	public static void throwWhenNullOrEmpty(Collection collection, String customExceptionMessage)
-	{
-		if (Collections.isNullOrEmpty(collection))
-		{
-			throw new ValidationException(customExceptionMessage);
 		}
 	}
 
@@ -258,11 +248,51 @@ public class JValidator
 		}
 	}
 
+	public static void throwWhenNullOrEmpty(Collection collection)
+	{
+		if (JValidator.isNullOrEmpty(collection))
+		{
+			throw new NullPointerException();
+		}
+	}
+
+	public static void throwWhenNullOrEmpty(Collection collection, String customExceptionMessage)
+	{
+		if (JValidator.isNullOrEmpty(collection))
+		{
+			throw new NullPointerException(customExceptionMessage);
+		}
+	}
+
 	public static void throwWhenNullOrEmpty(Collection collection, Throwable throwable)
 	{
-		if (Collections.isNullOrEmpty(collection))
+		if (JValidator.isNullOrEmpty(collection))
 		{
-			throw new RuntimeException(throwable);
+			rethrow(throwable);
+		}
+	}
+
+	public static void throwWhenNullOrEmpty(Map map)
+	{
+		if (JValidator.isNullOrEmpty(map))
+		{
+			throw new NullPointerException();
+		}
+	}
+
+	public static void throwWhenNullOrEmpty(Map map, String customExceptionMessage)
+	{
+		if (JValidator.isNullOrEmpty(map))
+		{
+			throw new NullPointerException(customExceptionMessage);
+		}
+	}
+
+	public static void throwWhenNullOrEmpty(Map map, Throwable throwable)
+	{
+		if (JValidator.isNullOrEmpty(map))
+		{
+			rethrow(throwable);
 		}
 	}
 
@@ -272,6 +302,24 @@ public class JValidator
 		if (object == null)
 		{
 			throw new NullPointerException();
+		}
+	}
+
+	@Deprecated
+	public static void requireNotNull(Object object, String exceptionMessage)
+	{
+		if (object == null)
+		{
+			throw new NullPointerException(exceptionMessage);
+		}
+	}
+
+	@Deprecated
+	public static void requireNotNull(Object object, Throwable throwable)
+	{
+		if (object == null)
+		{
+			throw new RuntimeException(throwable);
 		}
 	}
 
@@ -291,28 +339,74 @@ public class JValidator
 		}
 	}
 
-	@Deprecated
-	public static void requireNotNull(Object object, String exceptionMessage)
-	{
-		if (object == null)
-		{
-			throw new NullPointerException(exceptionMessage);
-		}
-	}
-
-	public static void requireNotNull(Object object, Throwable throwable)
-	{
-		if (object == null)
-		{
-			throw new RuntimeException(throwable);
-		}
-	}
-
 	public static void throwWhenNull(Object object, Throwable throwable)
 	{
 		if (object == null)
 		{
-			throw new RuntimeException(throwable);
+			rethrow(throwable);
+		}
+	}
+
+	public static void throwWhenTrue(boolean trueCondition)
+	{
+		if (trueCondition)
+		{
+			throw new NullPointerException();
+		}
+	}
+
+	public static void throwWhenTrue(boolean trueCondition, String customExceptionMessage)
+	{
+		if (trueCondition)
+		{
+			throw new NullPointerException(customExceptionMessage);
+		}
+	}
+
+	public static void throwWhenTrue(boolean trueCondition, Throwable throwable)
+	{
+		if (trueCondition)
+		{
+			rethrow(throwable);
+		}
+	}
+
+	public static void throwWhenFalse(boolean trueCondition)
+	{
+		if (!trueCondition)
+		{
+			throw new NullPointerException();
+		}
+	}
+
+	public static void throwWhenFalse(boolean trueCondition, String customExceptionMessage)
+	{
+		if (!trueCondition)
+		{
+			throw new NullPointerException(customExceptionMessage);
+		}
+	}
+
+	public static void throwWhenFalse(boolean trueCondition, Throwable throwable)
+	{
+		if (!trueCondition)
+		{
+			rethrow(throwable);
+		}
+	}
+
+	public static void rethrow(Throwable throwable)
+	{
+		throwWhenNull(throwable);
+
+		if (throwable instanceof RuntimeException)
+		{
+			throw (RuntimeException) throwable;
+		}
+
+		if (throwable instanceof Error)
+		{
+			throw (Error) throwable;
 		}
 	}
 
