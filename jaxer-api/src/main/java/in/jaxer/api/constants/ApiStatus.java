@@ -6,7 +6,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
+ * @since 0.0.1
  */
 @Getter
 @Setter
@@ -15,9 +16,7 @@ import lombok.ToString;
 public class ApiStatus
 {
 	private int code;
-
 	private String message;
-
 	public ApiStatus(int code)
 	{
 		this.code = code;

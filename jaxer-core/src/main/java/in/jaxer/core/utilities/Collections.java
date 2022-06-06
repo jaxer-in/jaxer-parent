@@ -207,11 +207,15 @@ public class Collections
 	/**
 	 * @see 0.0.1
 	 */
-	public static <T> List<T> getNextIdList(int chunk, int currentIndex, List<T> idList)
+	public static <T> List<T> getNextIdList(int chunk, int startIndex, List<T> idList)
 	{
-		List<T> temp = new ArrayList<>();
+		if (JValidator.isBlank(idList))
+		{
+			return idList;
+		}
 
-		for (int i = currentIndex; i < chunk + currentIndex; i++)
+		List<T> temp = new ArrayList<>();
+		for (int i = startIndex; i < chunk + startIndex; i++)
 		{
 			if (i < idList.size())
 			{

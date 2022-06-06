@@ -1,6 +1,8 @@
 package in.jaxer.core.utilities;
 
 import lombok.extern.log4j.Log4j2;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -98,6 +100,51 @@ class CollectionsTest
 			log.info("result: {}", result);
 
 			Assertions.assertLinesMatch(expectedList, result);
+		}
+
+		@Test
+		void whenInputListIsNull()
+		{
+			List<String> actualList = null;
+			List<String> result = Collections.reverse(actualList);
+
+			log.info("actualList: {}", actualList);
+			log.info("result: {}", result);
+
+			Assertions.assertNull(result);
+		}
+
+		@Test
+		void whenInputListIsEmpty()
+		{
+			List<String> actualList = new ArrayList<>();
+			List<String> expectedList = new ArrayList<>();
+			List<String> result = Collections.reverse(actualList);
+
+			log.info("actualList: {}", actualList);
+			log.info("expectedList: {}", expectedList);
+			log.info("result: {}", result);
+
+			Assertions.assertLinesMatch(expectedList, result);
+		}
+	}
+
+	@Nested
+	class GetNextIdListTests
+	{
+ 		@Test
+		void okTest01()
+		{
+			List<Integer> actualList = Arrays.asList(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20);
+			int chunkSize = 8;
+			List<Integer>  expectedList = Arrays.asList(3,4,5,6,7,8,9,10);
+			List<Integer> result = Collections.getNextIdList(chunkSize, 3, actualList);
+
+			log.info("actualList: {}", actualList);
+			log.info("expectedList: {}", expectedList);
+			log.info("result: {}", result);
+
+			Assertions.assertTrue(result.equals(expectedList));
 		}
 	}
 

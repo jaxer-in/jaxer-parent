@@ -13,12 +13,12 @@ import java.lang.annotation.Annotation;
 import java.sql.Connection;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
+ * @since 0.0.1
  */
 @Log4j2
 public class RestRequestHandler extends AbstractRequestHandler
 {
-
 	public RestRequestHandler(String basePackage, Class<? extends Annotation> taskClass)
 	{
 		super(basePackage, taskClass);
@@ -29,7 +29,7 @@ public class RestRequestHandler extends AbstractRequestHandler
 	{
 		final String requestedApiTaskName = getRequestResponseDto().getTaskName();
 		log.debug("requestedApiTaskName: {}", requestedApiTaskName);
-		JValidator.throwWhenNullOrEmpty(requestedApiTaskName, "Api task name cannot be empty");
+		JValidator.throwWhenBlank(requestedApiTaskName, "Api task name cannot be empty");
 
 		Class<? extends Annotation> clazz = getRequestedTask(requestedApiTaskName);
 		JValidator.throwWhenNull(clazz, "Request ApiTask [" + requestedApiTaskName + "] not found");
