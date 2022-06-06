@@ -9,7 +9,7 @@ import javax.servlet.http.Part;
 import java.sql.Connection;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
  */
 @Log4j2
 @MultipartTask

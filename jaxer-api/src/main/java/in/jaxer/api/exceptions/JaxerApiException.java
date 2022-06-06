@@ -4,7 +4,8 @@ import in.jaxer.core.exceptions.JaxerCoreException;
 
 /**
  * @author Shakir
- * Date 22 Dec, 2021 - 12:58:40 AM
+ * 		datte 2021-12-22 - 00:58
+ * @since 0.0.1
  */
 public class JaxerApiException extends JaxerCoreException
 {

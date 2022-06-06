@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.sql.Connection;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
  */
 @Log4j2
 @WebServlet(urlPatterns = "/jaxerRestController")

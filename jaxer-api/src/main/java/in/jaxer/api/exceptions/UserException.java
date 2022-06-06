@@ -3,11 +3,10 @@ package in.jaxer.api.exceptions;
 import in.jaxer.api.constants.ApiStatus;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
  */
-public class UserException extends Exception
+public class UserException extends JaxerApiException
 {
-
 	public UserException()
 	{
 		super();

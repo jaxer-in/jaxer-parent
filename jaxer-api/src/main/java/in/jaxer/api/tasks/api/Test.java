@@ -10,7 +10,8 @@ import java.sql.Connection;
 import java.util.Date;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
+ * @since 0.0.1
  */
 @Log4j2
 @RestTask(isPublicApi = true)
