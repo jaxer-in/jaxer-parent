@@ -89,8 +89,7 @@ public class Time
 
 	public static String formatDate(String format, Date date)
 	{
-		new SimpleDateFormat().applyPattern(format);
-		return new SimpleDateFormat().format(date);
+		return new SimpleDateFormat(format).format(date);
 	}
 
 	public static String formatDate(String format, long miliseconds)
