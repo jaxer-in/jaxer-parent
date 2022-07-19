@@ -7,10 +7,12 @@ import java.util.Date;
 
 /**
  * @author Shakir
- * 		date 20-06-2022
+ * @date 20-06-2022
  */
 public class DateTime
 {
+	public static final String DEFAULT_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+
 	private final Date date;
 
 	public DateTime()
@@ -31,7 +33,7 @@ public class DateTime
 	@Override
 	public String toString()
 	{
-		return "DateTime{date=" + date + '}';
+		return new SimpleDateFormat(DEFAULT_DATE_TIME_FORMAT).format(date);
 	}
 
 	public String toString(String pattern)
