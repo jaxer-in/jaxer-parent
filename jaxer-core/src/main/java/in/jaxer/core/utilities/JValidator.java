@@ -303,7 +303,7 @@ public class JValidator
 	{
 		for (String string : strings)
 		{
-			if (isNullOrEmpty(string))
+			if (isBlank(string))
 			{
 				return true;
 			}
@@ -321,7 +321,7 @@ public class JValidator
 	{
 		for (String string : strings)
 		{
-			if (isNotNullAndNotEmpty(string))
+			if (isNotBlank(string))
 			{
 				return true;
 			}
@@ -478,7 +478,7 @@ public class JValidator
 	 */
 	public static void throwWhenBlank(String str)
 	{
-		if (JValidator.isNullOrEmpty(str))
+		if (JValidator.isBlank(str))
 		{
 			throw new NullPointerException();
 		}
@@ -489,7 +489,7 @@ public class JValidator
 	 */
 	public static void throwWhenBlank(String str, String customExceptionMessage)
 	{
-		if (JValidator.isNullOrEmpty(str))
+		if (JValidator.isBlank(str))
 		{
 			throw new NullPointerException(customExceptionMessage);
 		}
@@ -500,7 +500,7 @@ public class JValidator
 	 */
 	public static void throwWhenBlank(String str, Throwable throwable)
 	{
-		if (JValidator.isNullOrEmpty(str))
+		if (JValidator.isBlank(str))
 		{
 			rethrow(throwable);
 		}

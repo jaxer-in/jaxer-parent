@@ -14,11 +14,23 @@ import java.util.Map.Entry;
 @Log4j2
 public class Strings
 {
+	/**
+	 * @since 0.0.1
+	 * @deprecated As of 1.0.9-beta, replaced by #see
+	 * @see in.jaxer.core.utilities.JValidator#isBlank(String)
+	 */
+	@Deprecated
 	public static boolean isNullOrEmpty(String str)
 	{
 		return str == null || str.isEmpty();
 	}
 
+	/**
+	 * @since 0.0.1
+	 * @deprecated As of 1.0.9-beta, replaced by #see
+	 * @see in.jaxer.core.utilities.JValidator#isNotBlank(String) 
+	 */
+	@Deprecated
 	public static boolean isNotNullAndNotEmpty(String str)
 	{
 		return str != null && !str.isEmpty();
