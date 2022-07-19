@@ -16,8 +16,7 @@ public class Strings
 {
 	/**
 	 * @since 0.0.1
-	 * @deprecated As of 1.0.9-beta, replaced by #see
-	 * @see in.jaxer.core.utilities.JValidator#isBlank(String)
+	 * @deprecated As of 1.0.9-beta, replaced by {@link in.jaxer.core.utilities.JValidator#isBlank(String)}
 	 */
 	@Deprecated
 	public static boolean isNullOrEmpty(String str)
@@ -27,8 +26,7 @@ public class Strings
 
 	/**
 	 * @since 0.0.1
-	 * @deprecated As of 1.0.9-beta, replaced by #see
-	 * @see in.jaxer.core.utilities.JValidator#isNotBlank(String) 
+	 * @deprecated As of 1.0.9-beta, replaced by {@link in.jaxer.core.utilities.JValidator#isNotBlank(String)}
 	 */
 	@Deprecated
 	public static boolean isNotNullAndNotEmpty(String str)
@@ -504,10 +502,6 @@ public class Strings
 
 	/**
 	 * This method will return milliseconds from a date in string datatype
-	 *
-	 * @param date
-	 *
-	 * @return
 	 */
 	public static String valueOf(Date date)
 	{
