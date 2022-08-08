@@ -1,5 +1,6 @@
 package in.jaxer.core.encoders;
 
+import in.jaxer.core.ExceptionUtils;
 import in.jaxer.core.constants.Constants;
 import in.jaxer.core.interfaces.Encoder;
 import in.jaxer.core.utilities.JValidator;
@@ -95,7 +96,7 @@ public class AesEncoder implements Encoder
 			return new String(cipherText);
 		} catch (Exception exception)
 		{
-			JValidator.rethrow(exception);
+			ExceptionUtils.rethrow(exception);
 			return null;
 		}
 	}

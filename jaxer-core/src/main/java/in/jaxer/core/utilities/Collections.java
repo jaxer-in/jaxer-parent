@@ -15,26 +15,6 @@ import java.util.Map;
 public class Collections
 {
 	/**
-	 * @since 0.0.1
-	 * @deprecated As of 1.0.6-beta, replaced by {@link #isNullOrEmpty(Collection)}
-	 */
-	@Deprecated
-	public static boolean isEmpty(Collection collection)
-	{
-		return JValidator.isEmpty(collection);
-	}
-
-	/**
-	 * @since 0.0.1
-	 * @deprecated As of 1.0.6-beta, replaced by {@link #isNotNullAndNotEmpty(Collection)}
-	 */
-	@Deprecated
-	public static boolean isNotEmpty(Collection collection)
-	{
-		return JValidator.isNotEmpty(collection);
-	}
-
-	/**
 	 * @see in.jaxer.core.utilities.JValidator#isBlank(Collection)
 	 * @since 1.0.6-beta
 	 * @deprecated As of 1.0.9-beta
@@ -54,26 +34,6 @@ public class Collections
 	public static boolean isNotNullAndNotEmpty(Collection collection)
 	{
 		return collection != null && !collection.isEmpty();
-	}
-
-	/**
-	 * @since 0.0.1
-	 * @deprecated As of 1.0.6-beta, replaced by {@link #isNullOrEmpty(Map)}
-	 */
-	@Deprecated
-	public static boolean isEmpty(Map map)
-	{
-		return JValidator.isEmpty(map);
-	}
-
-	/**
-	 * @since 0.0.1
-	 * @deprecated As of 1.0.6-beta, replaced by {@link #isNotNullAndNotEmpty(Map)}
-	 */
-	@Deprecated
-	public static boolean isNotEmpty(Map map)
-	{
-		return !isEmpty(map);
 	}
 
 	/**

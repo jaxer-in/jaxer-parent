@@ -272,7 +272,7 @@ public class MySqlHandler extends AbstractJpaHandler
 	{
 		String where = "WHERE 1=1";
 
-		if (Collections.isNotEmpty(parameterList))
+		if (JValidator.isBlank(parameterList))
 		{
 			for (Parameter parameter : parameterList)
 			{

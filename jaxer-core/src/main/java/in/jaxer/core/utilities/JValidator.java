@@ -1,6 +1,6 @@
 package in.jaxer.core.utilities;
 
-import in.jaxer.core.exceptions.ValidationException;
+import in.jaxer.core.ExceptionUtils;
 
 import java.util.Collection;
 import java.util.Map;
@@ -12,26 +12,6 @@ import java.util.Properties;
  */
 public class JValidator
 {
-	/**
-	 * @since 0.0.1
-	 * @deprecated As of 1.0.6-beta, replaced by {@link #isNotNullAndNotEmpty(String)}
-	 */
-	@Deprecated
-	public static boolean isEmpty(String string)
-	{
-		return string == null || string.trim().isEmpty();
-	}
-
-	/**
-	 * @since 0.0.1
-	 * @deprecated As of 1.0.6-beta, replaced by {@link #isNotNullAndNotEmpty(String)}
-	 */
-	@Deprecated
-	public static boolean isNotEmpty(String string)
-	{
-		return !isEmpty(string);
-	}
-
 	/**
 	 * @since 1.0.6-beta
 	 * @deprecated As of 1.0.9-beta, replaced by {@link #isBlank(String)}
@@ -66,26 +46,6 @@ public class JValidator
 	public static boolean isNotBlank(String string)
 	{
 		return string != null && !string.trim().isEmpty();
-	}
-
-	/**
-	 * @since 0.0.1
-	 * @deprecated As of 1.0.6-beta, replaced by {@link #isNullOrEmpty(Collection)}
-	 */
-	@Deprecated
-	public static boolean isEmpty(Collection collection)
-	{
-		return collection == null || collection.isEmpty();
-	}
-
-	/**
-	 * @since 0.0.1
-	 * @deprecated As of 1.0.6-beta, replaced by {@link #isNotNullAndNotEmpty(Collection)}
-	 */
-	@Deprecated
-	public static boolean isNotEmpty(Collection collection)
-	{
-		return !isEmpty(collection);
 	}
 
 	/**
@@ -125,26 +85,6 @@ public class JValidator
 	}
 
 	/**
-	 * @since 0.0.1
-	 * @deprecated As of 1.0.6-beta, replaced by {@link #isNullOrEmpty(Map)}
-	 */
-	@Deprecated
-	public static boolean isEmpty(Map map)
-	{
-		return map == null || map.isEmpty();
-	}
-
-	/**
-	 * @since 0.0.1
-	 * @deprecated As of 1.0.6-beta, replaced by {@link #isNotNullAndNotEmpty(Map)}
-	 */
-	@Deprecated
-	public static boolean isNotEmpty(Map map)
-	{
-		return !isEmpty(map);
-	}
-
-	/**
 	 * @since 1.0.6-beta
 	 * @deprecated As of 1.0.9-beta, replaced by {@link #isBlank(Map)}
 	 */
@@ -178,26 +118,6 @@ public class JValidator
 	public static boolean isNotBlank(Map map)
 	{
 		return map != null && !map.isEmpty();
-	}
-
-	/**
-	 * @since 0.0.1
-	 * @deprecated As of 1.0.6-beta, replaced by {@link #isNullOrEmpty(Properties)}
-	 */
-	@Deprecated
-	public static boolean isEmpty(Properties properties)
-	{
-		return properties == null || properties.isEmpty();
-	}
-
-	/**
-	 * @since 0.0.1
-	 * @deprecated As of 1.0.6-beta, replaced by {@link #isNotNullAndNotEmpty(Properties)}
-	 */
-	@Deprecated
-	public static boolean isNotEmpty(Properties properties)
-	{
-		return !isEmpty(properties);
 	}
 
 	/**
@@ -237,20 +157,19 @@ public class JValidator
 	}
 
 	/**
-	 * @since 0.0.1
-	 * @deprecated As of 1.0.6-beta, replaced by {@link #isNullOrEmpty(String...)}
+	 * @since 1.0.9-beta
 	 */
-	@Deprecated
-	public static boolean isEmpty(String... strings)
+	public static boolean isBlank(Object... objects)
 	{
-		for (String string : strings)
-		{
-			if (isNotEmpty(string))
-			{
-				return false;
-			}
-		}
-		return true;
+		return objects == null || objects.length == 0;
+	}
+
+	/**
+	 * @since 1.0.9-beta
+	 */
+	public static boolean isNotBlank(Object... objects)
+	{
+		return !isBlank(objects);
 	}
 
 	/**
@@ -303,7 +222,7 @@ public class JValidator
 	{
 		for (String string : strings)
 		{
-			if (isNullOrEmpty(string))
+			if (isBlank(string))
 			{
 				return true;
 			}
@@ -321,22 +240,12 @@ public class JValidator
 	{
 		for (String string : strings)
 		{
-			if (isNotNullAndNotEmpty(string))
+			if (isNotBlank(string))
 			{
 				return true;
 			}
 		}
 		return false;
-	}
-
-	/**
-	 * @since 0.0.1
-	 * @deprecated As of 1.0.6-beta, replaced by {@link #isNullOrEmpty(char[])}
-	 */
-	@Deprecated
-	public static boolean isEmpty(char[] array)
-	{
-		return array == null || array.length < 0;
 	}
 
 	/**
@@ -376,18 +285,6 @@ public class JValidator
 	}
 
 	/**
-	 * @since 0.0.1
-	 * @deprecated As of 1.0.9-beta, replaced by {@link #throwWhenBlank(char[])}
-	 */
-	public static void requireNotEmpty(char[] array)
-	{
-		if (isEmpty(array))
-		{
-			throw new ValidationException("Array cannot be null or empty");
-		}
-	}
-
-	/**
 	 * @since 1.0.9-beta
 	 */
 	public static void throwWhenBlank(char[] array)
@@ -395,42 +292,6 @@ public class JValidator
 		if (isBlank(array))
 		{
 			throw new NullPointerException();
-		}
-	}
-
-	/**
-	 * @since 0.0.1
-	 * @deprecated As of 1.0.6-beta, replaced by {@link #throwWhenNullOrEmpty(String)}
-	 */
-	@Deprecated
-	public static void requireNotEmpty(String str)
-	{
-		requireNotEmpty(str, "String cannot be null or empty");
-	}
-
-	/**
-	 * @since 0.0.1
-	 * @deprecated As of 1.0.6-beta, replaced by {@link #throwWhenNullOrEmpty(String, String)}
-	 */
-	@Deprecated
-	public static void requireNotEmpty(String str, String exceptionMessage)
-	{
-		if (isEmpty(str))
-		{
-			throw new ValidationException(exceptionMessage);
-		}
-	}
-
-	/**
-	 * @since 0.0.1
-	 * @deprecated As of 1.0.6-beta, replaced by {@link #throwWhenNullOrEmpty(String, Throwable)}
-	 */
-	@Deprecated
-	public static void requireNotEmpty(String str, Throwable throwable)
-	{
-		if (isEmpty(str))
-		{
-			throw new RuntimeException(throwable);
 		}
 	}
 
@@ -469,7 +330,7 @@ public class JValidator
 	{
 		if (JValidator.isNullOrEmpty(str))
 		{
-			rethrow(throwable);
+			ExceptionUtils.rethrow(throwable);
 		}
 	}
 
@@ -478,7 +339,7 @@ public class JValidator
 	 */
 	public static void throwWhenBlank(String str)
 	{
-		if (JValidator.isNullOrEmpty(str))
+		if (JValidator.isBlank(str))
 		{
 			throw new NullPointerException();
 		}
@@ -489,7 +350,7 @@ public class JValidator
 	 */
 	public static void throwWhenBlank(String str, String customExceptionMessage)
 	{
-		if (JValidator.isNullOrEmpty(str))
+		if (JValidator.isBlank(str))
 		{
 			throw new NullPointerException(customExceptionMessage);
 		}
@@ -500,45 +361,9 @@ public class JValidator
 	 */
 	public static void throwWhenBlank(String str, Throwable throwable)
 	{
-		if (JValidator.isNullOrEmpty(str))
+		if (JValidator.isBlank(str))
 		{
-			rethrow(throwable);
-		}
-	}
-
-	/**
-	 * @since 0.0.1
-	 * @deprecated As of 1.0.6-beta, replaced by {@link #throwWhenNullOrEmpty(Collection)}
-	 */
-	@Deprecated
-	public static void requireNotEmpty(Collection collection)
-	{
-		requireNotEmpty(collection, "Collection cannot not be empty");
-	}
-
-	/**
-	 * @since 0.0.1
-	 * @deprecated As of 1.0.6-beta, replaced by {@link #throwWhenNullOrEmpty(Collection, String)}
-	 */
-	@Deprecated
-	public static void requireNotEmpty(Collection collection, String exceptionMessage)
-	{
-		if (JValidator.isEmpty(collection))
-		{
-			throw new ValidationException(exceptionMessage);
-		}
-	}
-
-	/**
-	 * @since 0.0.1
-	 * @deprecated As of 1.0.6-beta, replaced by {@link #throwWhenNullOrEmpty(Collection, Throwable)}
-	 */
-	@Deprecated
-	public static void requireNotEmpty(Collection collection, Throwable throwable)
-	{
-		if (isEmpty(collection))
-		{
-			throw new RuntimeException(throwable);
+			ExceptionUtils.rethrow(throwable);
 		}
 	}
 
@@ -577,7 +402,7 @@ public class JValidator
 	{
 		if (JValidator.isNullOrEmpty(collection))
 		{
-			rethrow(throwable);
+			ExceptionUtils.rethrow(throwable);
 		}
 	}
 
@@ -610,7 +435,7 @@ public class JValidator
 	{
 		if (JValidator.isNullOrEmpty(collection))
 		{
-			rethrow(throwable);
+			ExceptionUtils.rethrow(throwable);
 		}
 	}
 
@@ -643,46 +468,7 @@ public class JValidator
 	{
 		if (JValidator.isNullOrEmpty(map))
 		{
-			rethrow(throwable);
-		}
-	}
-
-	/**
-	 * @since 0.0.1
-	 * @deprecated As of 1.0.6-beta, replaced by {@link #throwWhenNull(Object)}
-	 */
-	@Deprecated
-	public static void requireNotNull(Object object)
-	{
-		if (object == null)
-		{
-			throw new NullPointerException();
-		}
-	}
-
-	/**
-	 * @since 0.0.1
-	 * @deprecated As of 1.0.6-beta, replaced by {@link #throwWhenNull(Object, String)}
-	 */
-	@Deprecated
-	public static void requireNotNull(Object object, String exceptionMessage)
-	{
-		if (object == null)
-		{
-			throw new NullPointerException(exceptionMessage);
-		}
-	}
-
-	/**
-	 * @since 0.0.1
-	 * @deprecated As of 1.0.6-beta, replaced by {@link #throwWhenNull(Object, Throwable)}
-	 */
-	@Deprecated
-	public static void requireNotNull(Object object, Throwable throwable)
-	{
-		if (object == null)
-		{
-			throw new RuntimeException(throwable);
+			ExceptionUtils.rethrow(throwable);
 		}
 	}
 
@@ -715,7 +501,7 @@ public class JValidator
 	{
 		if (object == null)
 		{
-			rethrow(throwable);
+			ExceptionUtils.rethrow(throwable);
 		}
 	}
 
@@ -748,7 +534,7 @@ public class JValidator
 	{
 		if (trueCondition)
 		{
-			rethrow(throwable);
+			ExceptionUtils.rethrow(throwable);
 		}
 	}
 
@@ -781,25 +567,7 @@ public class JValidator
 	{
 		if (!trueCondition)
 		{
-			rethrow(throwable);
-		}
-	}
-
-	/**
-	 * @since 1.0.9-beta
-	 */
-	public static void rethrow(Throwable throwable)
-	{
-		throwWhenNull(throwable);
-
-		if (throwable instanceof RuntimeException)
-		{
-			throw (RuntimeException) throwable;
-		}
-
-		if (throwable instanceof Error)
-		{
-			throw (Error) throwable;
+			ExceptionUtils.rethrow(throwable);
 		}
 	}
 
@@ -821,14 +589,6 @@ public class JValidator
 	/**
 	 * @since 0.0.1
 	 */
-	public static boolean isNotEqualsToAny(String original, String... others)
-	{
-		return !isEqualsToAny(original, others);
-	}
-
-	/**
-	 * @since 0.0.1
-	 */
 	public static boolean isEqualsIgnoreCaseToAny(String original, String... others)
 	{
 		for (String string : others)
@@ -839,6 +599,14 @@ public class JValidator
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * @since 0.0.1
+	 */
+	public static boolean isNotEqualsToAny(String original, String... others)
+	{
+		return !isEqualsToAny(original, others);
 	}
 
 	/**
