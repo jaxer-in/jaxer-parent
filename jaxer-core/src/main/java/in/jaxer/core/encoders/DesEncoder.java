@@ -1,7 +1,7 @@
 package in.jaxer.core.encoders;
 
+import in.jaxer.core.ExceptionUtils;
 import in.jaxer.core.constants.Constants;
-import in.jaxer.core.exceptions.JaxerCoreException;
 import in.jaxer.core.interfaces.Encoder;
 import in.jaxer.core.utilities.JValidator;
 
@@ -13,6 +13,7 @@ import java.util.Base64;
 
 /**
  * @author Shakir
+ * @since 0.0.1
  */
 public class DesEncoder implements Encoder
 {
@@ -41,7 +42,7 @@ public class DesEncoder implements Encoder
 	@Override
 	public String encode(final String message)
 	{
-		JValidator.throwWhenNullOrEmpty(message);
+		JValidator.throwWhenBlank(message);
 		try
 		{
 			init();
@@ -54,14 +55,15 @@ public class DesEncoder implements Encoder
 
 		} catch (Exception exception)
 		{
-			throw new JaxerCoreException("Error occured while encrypting message", exception);
+			ExceptionUtils.rethrow(exception);
+			return null;
 		}
 	}
 
 	@Override
 	public String decode(final String message)
 	{
-		JValidator.throwWhenNullOrEmpty(message);
+		JValidator.throwWhenBlank(message);
 		try
 		{
 			init();
@@ -74,7 +76,8 @@ public class DesEncoder implements Encoder
 
 		} catch (Exception exception)
 		{
-			throw new JaxerCoreException("Error occured while decrypting message", exception);
+			ExceptionUtils.rethrow(exception);
+			return null;
 		}
 	}
 }

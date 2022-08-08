@@ -9,6 +9,7 @@ import java.util.Arrays;
 
 /**
  * @author Shakir
+ * @since 0.0.1
  */
 @Log4j2
 public class BinaryEncoder implements Encoder
@@ -26,7 +27,7 @@ public class BinaryEncoder implements Encoder
 	@Override
 	public String encode(String message)
 	{
-		JValidator.throwWhenNullOrEmpty(message);
+		JValidator.throwWhenBlank(message);
 
 		String encoded = "";
 
@@ -42,7 +43,7 @@ public class BinaryEncoder implements Encoder
 	@Override
 	public String decode(String message)
 	{
-		JValidator.throwWhenNullOrEmpty(message);
+		JValidator.throwWhenBlank(message);
 
 		String pattern = "^[0-3]*$";
 		if (!message.matches(pattern))
@@ -50,7 +51,7 @@ public class BinaryEncoder implements Encoder
 			throw new JaxerCoreException("Invalid number format");
 		}
 
-		//spliting with two delimiters [2 or 3]
+		//splitting with two delimiters [2 or 3]
 		String[] charInt = message.split("[23]");
 		log.debug(Arrays.toString(charInt));
 
@@ -62,6 +63,6 @@ public class BinaryEncoder implements Encoder
 			decoded += (char) convert(charInt[i]);
 		}
 
-		return JValidator.isNullOrEmpty(decoded) ? null : decoded;
+		return JValidator.isBlank(decoded) ? null : decoded;
 	}
 }

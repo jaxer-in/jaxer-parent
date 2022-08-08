@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.sql.Connection;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
+ * @since 0.0.1
  */
 @Log4j2
 public abstract class AbstractRestController extends AbstractController

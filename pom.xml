@@ -20,7 +20,9 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <revision>1.0.8-beta</revision>
+        <revision>1.0.9-beta</revision>
+
+        <log4j2.console.pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %level [%c{1.}.%M():%L] - %msg%n</log4j2.console.pattern>
 
         <version.flatten>1.2.7</version.flatten>
         <version.log4j2>2.17.2</version.log4j2>
@@ -187,7 +189,7 @@
                 </plugins>
             </build>
         </profile>
-        
+
         <profile>
             <id>local</id>
             <activation>
@@ -231,7 +233,6 @@
         <connection>scm:git:git://github.com:jaxer-in/jaxer-parent.git</connection>
         <developerConnection>scm:git:ssh://github.com:jaxer-in/jaxer-parent.git</developerConnection>
         <url>https://github.com/jaxer-in/jaxer-parent</url>
-        <!--  <url>git@github.com:jaxer-in/jaxer-parent.git</url>-->
         <tag>v${project.version}</tag>
     </scm>
 

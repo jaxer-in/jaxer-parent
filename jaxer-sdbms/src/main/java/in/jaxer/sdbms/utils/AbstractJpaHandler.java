@@ -2,6 +2,7 @@ package in.jaxer.sdbms.utils;
 
 import in.jaxer.core.utilities.JValidator;
 import in.jaxer.sdbms.Parameter;
+import in.jaxer.sdbms.Session;
 import in.jaxer.sdbms.annotations.Column;
 import in.jaxer.sdbms.annotations.PrimaryKey;
 import in.jaxer.sdbms.annotations.Table;

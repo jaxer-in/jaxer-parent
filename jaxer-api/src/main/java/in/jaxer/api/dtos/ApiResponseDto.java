@@ -14,7 +14,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
+ * @since 0.0.1
  */
 @Log4j2
 @ToString
@@ -29,10 +30,10 @@ public class ApiResponseDto
 	@SuppressWarnings("unused")
 	public void addTaskResponseValue(String key, Object value)
 	{
-		JValidator.throwWhenNullOrEmpty(key);
+		JValidator.throwWhenBlank(key);
 		JValidator.throwWhenNull(value);
 
-		if (JValidator.isNullOrEmpty(taskResponseValue))
+		if (JValidator.isBlank(taskResponseValue))
 		{
 			taskResponseValue = new HashMap<>();
 		}
@@ -42,9 +43,9 @@ public class ApiResponseDto
 
 	public void addUserMessage(String msg)
 	{
-		JValidator.throwWhenNullOrEmpty(msg);
+		JValidator.throwWhenBlank(msg);
 
-		if (JValidator.isNullOrEmpty(userMessageList))
+		if (JValidator.isBlank(userMessageList))
 		{
 			userMessageList = new ArrayList<>();
 		}
@@ -83,11 +84,11 @@ public class ApiResponseDto
 			}
 		}
 
-		if (JValidator.isNullOrEmpty(errorDto.errorMessage))
+		if (JValidator.isBlank(errorDto.errorMessage))
 		{
 			errorDto.errorMessage = exception.getMessage();
 
-			if (JValidator.isNullOrEmpty(errorDto.errorMessage))
+			if (JValidator.isBlank(errorDto.errorMessage))
 			{
 				errorDto.errorMessage = "Something went wrong";
 			}
@@ -95,7 +96,7 @@ public class ApiResponseDto
 
 		errorDto.stacktraceList = Strings.getListOfStackTraces(exception, null);
 
-		if (JValidator.isNotNullAndNotEmpty(errorDto.stacktraceList))
+		if (JValidator.isNotBlank(errorDto.stacktraceList))
 		{
 			if (errorDto.stacktraceList.get(0).equalsIgnoreCase(errorDto.errorMessage))
 			{

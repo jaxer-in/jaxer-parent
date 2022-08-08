@@ -19,7 +19,6 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 @TestInstance(Lifecycle.PER_CLASS)
 public class DesEncoderTest
 {
-
 	private Encoder encoder;
 
 	public DesEncoderTest()
@@ -51,16 +50,16 @@ public class DesEncoderTest
 	public void whenMessageIsEmpty()
 	{
 		System.out.println("whenMessageIsEmpty");
-		Assertions.assertThrows(ValidationException.class, () -> encoder.encode(""));
-		Assertions.assertThrows(ValidationException.class, () -> encoder.decode(""));
+		Assertions.assertThrows(NullPointerException.class, () -> encoder.encode(""));
+		Assertions.assertThrows(NullPointerException.class, () -> encoder.decode(""));
 	}
 
 	@Test
 	public void whenMessageIsNull()
 	{
 		System.out.println("whenMessageIsNull");
-		Assertions.assertThrows(ValidationException.class, () -> encoder.encode(null));
-		Assertions.assertThrows(ValidationException.class, () -> encoder.decode(null));
+		Assertions.assertThrows(NullPointerException.class, () -> encoder.encode(null));
+		Assertions.assertThrows(NullPointerException.class, () -> encoder.decode(null));
 	}
 
 	@Test

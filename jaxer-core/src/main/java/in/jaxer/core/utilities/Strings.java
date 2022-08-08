@@ -10,20 +10,36 @@ import java.util.Map.Entry;
 
 /**
  * @author Shakir Ansari
+ * @since v0.0.1-beta
  */
 @Log4j2
 public class Strings
 {
+	/**
+	 * @since 0.0.1
+	 * @deprecated As of 1.0.9-beta, replaced by {@link in.jaxer.core.utilities.JValidator#isBlank(String)}
+	 */
+	@Deprecated
 	public static boolean isNullOrEmpty(String str)
 	{
 		return str == null || str.isEmpty();
 	}
 
+	/**
+	 * @since 0.0.1
+	 * @deprecated As of 1.0.9-beta, replaced by {@link in.jaxer.core.utilities.JValidator#isNotBlank(String)}
+	 */
+	@Deprecated
 	public static boolean isNotNullAndNotEmpty(String str)
 	{
 		return str != null && !str.isEmpty();
 	}
 
+	/**
+	 * @since 0.0.1
+	 * @deprecated As of 1.0.9-beta, replaced by {@link in.jaxer.core.ExceptionUtils#getStackTraces(Throwable, String)}
+	 */
+	@Deprecated
 	public static List<String> getListOfStackTraces(Throwable throwable, String packageFilter)
 	{
 		if (throwable == null)
@@ -492,10 +508,6 @@ public class Strings
 
 	/**
 	 * This method will return milliseconds from a date in string datatype
-	 *
-	 * @param date
-	 *
-	 * @return
 	 */
 	public static String valueOf(Date date)
 	{

@@ -1,5 +1,6 @@
 package in.jaxer.core.encoders;
 
+import in.jaxer.core.ExceptionUtils;
 import in.jaxer.core.constants.Constants;
 import in.jaxer.core.interfaces.Encoder;
 import in.jaxer.core.utilities.JValidator;
@@ -13,6 +14,7 @@ import java.util.Base64;
 
 /**
  * @author Shakir
+ * @since 0.0.1
  */
 public class AesEncoder implements Encoder
 {
@@ -21,17 +23,14 @@ public class AesEncoder implements Encoder
 
 	private static byte[] getKeyBytes(String key)
 	{
-		JValidator.throwWhenNullOrEmpty(key, "Key cannot be null");
+		JValidator.throwWhenBlank(key, "Key cannot be null");
 
 		while (key.length() < 16)
 		{
 			key = key + "0";
 		}
 
-		if (key.length() != 16)
-		{
-			throw new IllegalArgumentException("Secret key should must be 16 char long only");
-		}
+		JValidator.throwWhenTrue(key.length() != 16, "Secret key should must be 16 char long only");
 
 //		if (key.length() > 16)
 //		{
@@ -54,7 +53,7 @@ public class AesEncoder implements Encoder
 	@Override
 	public String encode(final String message)
 	{
-		JValidator.throwWhenNullOrEmpty(message);
+		JValidator.throwWhenBlank(message);
 
 		try
 		{
@@ -80,7 +79,7 @@ public class AesEncoder implements Encoder
 	@Override
 	public String decode(final String message)
 	{
-		JValidator.throwWhenNullOrEmpty(message);
+		JValidator.throwWhenBlank(message);
 
 		try
 		{
@@ -97,7 +96,8 @@ public class AesEncoder implements Encoder
 			return new String(cipherText);
 		} catch (Exception exception)
 		{
-			throw new RuntimeException("Error occured while decrypting message", exception);
+			ExceptionUtils.rethrow(exception);
+			return null;
 		}
 	}
 }

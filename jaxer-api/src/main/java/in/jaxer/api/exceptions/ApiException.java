@@ -4,7 +4,8 @@ import in.jaxer.api.constants.ApiStatus;
 import lombok.Getter;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
+ * @since 0.0.1
  */
 @Getter
 public class ApiException extends JaxerApiException

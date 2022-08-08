@@ -65,7 +65,7 @@ public class Constants
 	public static final String sunday = "sunday";
 
 	/**
-	 * Date/Time formates
+	 * Date/Time formats
 	 */
 	public static final String SimpleDate = "yyyy-MM-dd";
 	public static final String SimpleTime = "hh:mm:ss";

@@ -14,12 +14,12 @@ import java.sql.Connection;
 
 /**
  * @author Shakir
- * Date 21 Dec, 2021 - 9:23:46 PM
+ * @since 0.0.1
+ * 		date 2021-12-21 - 21:23
  */
 @Log4j2
 public class MultipartRequestHandler extends AbstractRequestHandler
 {
-
 	public MultipartRequestHandler(String basePackage, Class<? extends Annotation> taskClass)
 	{
 		super(basePackage, taskClass);
@@ -30,7 +30,7 @@ public class MultipartRequestHandler extends AbstractRequestHandler
 	{
 		final String requestedMultipartTaskName = getRequestResponseDto().getTaskName();
 		log.debug("requestedMultipartTaskName: {}", requestedMultipartTaskName);
-		JValidator.throwWhenNullOrEmpty(requestedMultipartTaskName, "Multipart task name cannot be empty");
+		JValidator.throwWhenBlank(requestedMultipartTaskName, "Multipart task name cannot be empty");
 
 		Class<? extends Annotation> clazz = getRequestedTask(requestedMultipartTaskName);
 		JValidator.throwWhenNull(clazz, "Request Multipart task [" + requestedMultipartTaskName + "] not found");

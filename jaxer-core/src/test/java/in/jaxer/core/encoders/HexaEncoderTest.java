@@ -19,7 +19,6 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 @TestInstance(Lifecycle.PER_CLASS)
 public class HexaEncoderTest
 {
-
 	private Encoder encoder;
 
 	private final String encodedMessage = "g68h65g6Ch6Cg6Fh20g77h6Fg72h6Cg64";
@@ -53,16 +52,16 @@ public class HexaEncoderTest
 	public void whenMessageIsEmpty()
 	{
 		System.out.println("whenMessageIsEmpty");
-		Assertions.assertThrows(ValidationException.class, () -> encoder.encode(""));
-		Assertions.assertThrows(ValidationException.class, () -> encoder.decode(""));
+		Assertions.assertThrows(NullPointerException.class, () -> encoder.encode(""));
+		Assertions.assertThrows(NullPointerException.class, () -> encoder.decode(""));
 	}
 
 	@Test
 	public void whenMessageIsNull()
 	{
 		System.out.println("whenMessageIsNull");
-		Assertions.assertThrows(ValidationException.class, () -> encoder.encode(null));
-		Assertions.assertThrows(ValidationException.class, () -> encoder.decode(null));
+		Assertions.assertThrows(NullPointerException.class, () -> encoder.encode(null));
+		Assertions.assertThrows(NullPointerException.class, () -> encoder.decode(null));
 	}
 
 	@Test

@@ -22,7 +22,8 @@ import java.util.Set;
 
 /**
  * @author Shakir
- * Date 21 Dec, 2021 - 9:11:23 PM
+ * @since 0.0.1
+ * 		date 2021-12-21 - 21:11
  */
 @Log4j2
 public abstract class AbstractRequestHandler
@@ -55,7 +56,7 @@ public abstract class AbstractRequestHandler
 		this.isMultipartRequest = Servlets.isMultipartRequest(request);
 		log.debug("isMultipartRequest: {}, taskList{}", isMultipartRequest, taskList);
 
-		if (JValidator.isNullOrEmpty(taskList))
+		if (JValidator.isBlank(taskList))
 		{
 			log.debug("initializing taskList");
 			taskList = PackageScanner.getClasses(basePackage, this.taskClass);
@@ -69,7 +70,7 @@ public abstract class AbstractRequestHandler
 			String requestBody = Servlets.getRequestBody(request);
 			log.debug("requestBody: {}", requestBody);
 
-			if (JValidator.isNotNullAndNotEmpty(requestBody))
+			if (JValidator.isNotBlank(requestBody))
 			{
 				requestMap = JsonHandler.getGson().fromJson(requestBody, HashMap.class);
 			}

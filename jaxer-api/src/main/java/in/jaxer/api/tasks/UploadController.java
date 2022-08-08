@@ -4,7 +4,7 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
  */
 //@WebServlet(urlPatterns = "/uploadController")
 @MultipartConfig()

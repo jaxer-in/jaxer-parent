@@ -8,7 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
+ * @since 0.0.1
  */
 public class RequestResponseDto
 {
@@ -33,12 +34,12 @@ public class RequestResponseDto
 
 	public void setTemporaryObject(String key, Object value)
 	{
-		if (JValidator.isNullOrEmpty(key) || value == null)
+		if (JValidator.isBlank(key) || value == null)
 		{
 			return;
 		}
 
-		if (JValidator.isNullOrEmpty(temporaryObjects))
+		if (JValidator.isBlank(temporaryObjects))
 		{
 			temporaryObjects = new HashMap<>();
 		}
@@ -50,7 +51,7 @@ public class RequestResponseDto
 	@SuppressWarnings("unchecked")
 	public <T> T getTemporaryObject(String key, Class<T> T)
 	{
-		if (JValidator.isNullOrEmpty(key) || T == null)
+		if (JValidator.isBlank(key) || T == null)
 		{
 			return null;
 		}

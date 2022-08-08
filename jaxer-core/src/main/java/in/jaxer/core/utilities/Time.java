@@ -1,5 +1,6 @@
 package in.jaxer.core.utilities;
 
+import in.jaxer.core.DateTimeUtils;
 import in.jaxer.core.constants.Constants;
 import in.jaxer.core.dtos.TimeDifference;
 import lombok.extern.log4j.Log4j2;
@@ -13,7 +14,6 @@ import java.util.Date;
  * ** ************************************
  * ** Useful Keys
  * ** ************************************
- *
  * G Era designator :AD
  * y Year :1996; 96
  * Y Week year :2009; 09
@@ -36,14 +36,20 @@ import java.util.Date;
  * z Time zone	Pacific Standard Time; PST; GMT-08:00
  * Z Time zone	-0800
  * X Time zone	-08; -0800; -08:00
- *
  * ** *************************************
  *
  * @author Shakir Ansari
+ * @since v0.0.1
+ * @deprecated on v1.0.9-beta, please check {@link DateTimeUtils}
  */
 @Log4j2
+@Deprecated
 public class Time
 {
+	/**
+	 * @since v0.0.1
+	 */
+	@Deprecated
 	private static Date _addTime(Date date, int field, int amount)
 	{
 		Calendar cal = Calendar.getInstance();
@@ -52,36 +58,71 @@ public class Time
 		return cal.getTime();
 	}
 
+	/**
+	 * @since v0.0.1
+	 * @deprecated on v1.0.9-beta, please check {@link DateTimeUtils#addMilliSeconds(Date, int)}
+	 */
+	@Deprecated
 	public static Date addMilliSeconds(Date date, int milliSeconds)
 	{
 		return _addTime(date, Calendar.MILLISECOND, milliSeconds);
 	}
 
+	/**
+	 * @since v0.0.1
+	 * @deprecated on v1.0.9-beta, please check {@link DateTimeUtils#addSeconds(Date, int)}
+	 */
+	@Deprecated
 	public static Date addSeconds(Date date, int seconds)
 	{
 		return _addTime(date, Calendar.SECOND, seconds);
 	}
 
+	/**
+	 * @since v0.0.1
+	 * @deprecated on v1.0.9-beta, please check {@link DateTimeUtils#addMinutes(Date, int)}
+	 */
+	@Deprecated
 	public static Date addMinutes(Date date, int minutes)
 	{
 		return _addTime(date, Calendar.MINUTE, minutes);
 	}
 
+	/**
+	 * @since v0.0.1
+	 * @deprecated on v1.0.9-beta, please check {@link DateTimeUtils#addHours(Date, int)}
+	 */
+	@Deprecated
 	public static Date addHours(Date date, int hours)
 	{
 		return _addTime(date, Calendar.HOUR, hours);
 	}
 
+	/**
+	 * @since v0.0.1
+	 * @deprecated on v1.0.9-beta, please check {@link DateTimeUtils#addDays(Date, int)}
+	 */
+	@Deprecated
 	public static Date addDays(Date date, int days)
 	{
 		return _addTime(date, Calendar.DATE, days);
 	}
 
+	/**
+	 * @since v0.0.1
+	 * @deprecated on v1.0.9-beta, please check {@link DateTimeUtils#addMonths(Date, int)}
+	 */
+	@Deprecated
 	public static Date addMonths(Date date, int months)
 	{
 		return _addTime(date, Calendar.MONTH, months);
 	}
 
+	/**
+	 * @since v0.0.1
+	 * @deprecated on v1.0.9-beta, please check {@link DateTimeUtils#addYears(Date, int)}
+	 */
+	@Deprecated
 	public static Date addYears(Date date, int years)
 	{
 		return _addTime(date, Calendar.YEAR, years);
@@ -89,8 +130,7 @@ public class Time
 
 	public static String formatDate(String format, Date date)
 	{
-		new SimpleDateFormat().applyPattern(format);
-		return new SimpleDateFormat().format(date);
+		return new SimpleDateFormat(format).format(date);
 	}
 
 	public static String formatDate(String format, long miliseconds)
@@ -174,11 +214,17 @@ public class Time
 	{
 		log.debug("start: {}, end: {}", start, end);
 
-		boolean inverse = end > start;
-		log.debug("inverse: {}", inverse);
-
-		long diff = inverse ? end - start : start - end;
+		long diff = end - start;
 		log.debug("diff: {}", diff);
+
+		boolean inverse = false;
+		if (diff < 0)
+		{
+			inverse = true;
+			diff = -diff;
+		}
+
+		log.debug("inverse: {}", inverse);
 
 		TimeDifference timeDifference = new TimeDifference();
 
@@ -187,6 +233,7 @@ public class Time
 			return timeDifference;
 		}
 
+		timeDifference.milliSeconds = diff % 1000;
 		timeDifference.seconds = diff / 1000 % 60;
 		timeDifference.minutes = diff / (60 * 1000) % 60;
 		timeDifference.hours = diff / (60 * 60 * 1000) % 24;
@@ -194,6 +241,7 @@ public class Time
 
 		if (inverse)
 		{
+			timeDifference.milliSeconds = -timeDifference.milliSeconds;
 			timeDifference.seconds = -timeDifference.seconds;
 			timeDifference.minutes = -timeDifference.minutes;
 			timeDifference.hours = -timeDifference.hours;
