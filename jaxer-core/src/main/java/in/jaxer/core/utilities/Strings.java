@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 
 /**
  * @author Shakir Ansari
+ * @since v0.0.1-beta
  */
 @Log4j2
 public class Strings
@@ -34,6 +35,11 @@ public class Strings
 		return str != null && !str.isEmpty();
 	}
 
+	/**
+	 * @since 0.0.1
+	 * @deprecated As of 1.0.9-beta, replaced by {@link in.jaxer.core.ExceptionUtils#getStackTraces(Throwable, String)}
+	 */
+	@Deprecated
 	public static List<String> getListOfStackTraces(Throwable throwable, String packageFilter)
 	{
 		if (throwable == null)

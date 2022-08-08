@@ -1,5 +1,7 @@
 package in.jaxer.core.utilities;
 
+import in.jaxer.core.ExceptionUtils;
+
 import java.util.Collection;
 import java.util.Map;
 import java.util.Properties;
@@ -152,6 +154,22 @@ public class JValidator
 	public static boolean isNotBlank(Properties properties)
 	{
 		return properties != null && !properties.isEmpty();
+	}
+
+	/**
+	 * @since 1.0.9-beta
+	 */
+	public static boolean isBlank(Object... objects)
+	{
+		return objects == null || objects.length == 0;
+	}
+
+	/**
+	 * @since 1.0.9-beta
+	 */
+	public static boolean isNotBlank(Object... objects)
+	{
+		return !isBlank(objects);
 	}
 
 	/**
@@ -312,7 +330,7 @@ public class JValidator
 	{
 		if (JValidator.isNullOrEmpty(str))
 		{
-			rethrow(throwable);
+			ExceptionUtils.rethrow(throwable);
 		}
 	}
 
@@ -345,7 +363,7 @@ public class JValidator
 	{
 		if (JValidator.isBlank(str))
 		{
-			rethrow(throwable);
+			ExceptionUtils.rethrow(throwable);
 		}
 	}
 
@@ -384,7 +402,7 @@ public class JValidator
 	{
 		if (JValidator.isNullOrEmpty(collection))
 		{
-			rethrow(throwable);
+			ExceptionUtils.rethrow(throwable);
 		}
 	}
 
@@ -417,7 +435,7 @@ public class JValidator
 	{
 		if (JValidator.isNullOrEmpty(collection))
 		{
-			rethrow(throwable);
+			ExceptionUtils.rethrow(throwable);
 		}
 	}
 
@@ -450,7 +468,7 @@ public class JValidator
 	{
 		if (JValidator.isNullOrEmpty(map))
 		{
-			rethrow(throwable);
+			ExceptionUtils.rethrow(throwable);
 		}
 	}
 
@@ -483,7 +501,7 @@ public class JValidator
 	{
 		if (object == null)
 		{
-			rethrow(throwable);
+			ExceptionUtils.rethrow(throwable);
 		}
 	}
 
@@ -516,7 +534,7 @@ public class JValidator
 	{
 		if (trueCondition)
 		{
-			rethrow(throwable);
+			ExceptionUtils.rethrow(throwable);
 		}
 	}
 
@@ -549,25 +567,7 @@ public class JValidator
 	{
 		if (!trueCondition)
 		{
-			rethrow(throwable);
-		}
-	}
-
-	/**
-	 * @since 1.0.9-beta
-	 */
-	public static void rethrow(Throwable throwable)
-	{
-		throwWhenNull(throwable);
-
-		if (throwable instanceof RuntimeException)
-		{
-			throw (RuntimeException) throwable;
-		}
-
-		if (throwable instanceof Error)
-		{
-			throw (Error) throwable;
+			ExceptionUtils.rethrow(throwable);
 		}
 	}
 
