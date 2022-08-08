@@ -13,34 +13,6 @@ import java.util.Map;
 class JValidatorTest
 {
 	@Nested
-	class RethrowTests
-	{
-		@Test
-		void whenThrowableIsNull()
-		{
-			Assertions.assertThrowsExactly(NullPointerException.class, () -> JValidator.rethrow(null));
-		}
-
-		@Test
-		void whenThrowableIsRuntimeException()
-		{
-			Assertions.assertThrowsExactly(RuntimeException.class, () -> JValidator.rethrow(new RuntimeException()));
-		}
-
-		@Test
-		void whenThrowableIsInstanceOfRuntimeException()
-		{
-			Assertions.assertThrowsExactly(NullPointerException.class, () -> JValidator.rethrow(new NullPointerException()));
-		}
-
-		@Test
-		void whenThrowableIsInstanceOfAssertionError()
-		{
-			Assertions.assertThrowsExactly(AssertionError.class, () -> JValidator.rethrow(new AssertionError()));
-		}
-	}
-
-	@Nested
 	class ThrowWhenNull
 	{
 		@Test
