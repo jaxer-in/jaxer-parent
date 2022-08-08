@@ -101,11 +101,19 @@ public class Files
 		return (inGB(length) / 1024f);
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta, please refer {@link in.jaxer.core.FileUtils#readLines(String)}
+	 */
+	@Deprecated
 	public static String readFile(String file) throws IOException
 	{
 		return readFile(new File(file));
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta, please refer {@link in.jaxer.core.FileUtils#readLines(String)}
+	 */
+	@Deprecated
 	public static String readFile(File file) throws IOException
 	{
 		log.debug("file: {}", file);
