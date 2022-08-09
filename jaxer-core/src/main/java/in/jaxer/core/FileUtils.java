@@ -1,6 +1,6 @@
 package in.jaxer.core;
 
-import in.jaxer.core.constants.Constants;
+import in.jaxer.core.utilities.HashHandler;
 import in.jaxer.core.utilities.JsonHandler;
 import in.jaxer.core.utilities.Strings;
 import in.jaxer.core.utilities.Systems;
@@ -400,4 +400,25 @@ public class FileUtils
 		log.info("[{}] \t {}" + file.delete(), file.getAbsolutePath());
 	}
 
+	/**
+	 * @since v1.1.0-beta
+	 */
+	public static boolean equals(String file0, String file1)
+	{
+		return equals(new File(file0), new File(file1));
+	}
+
+	/**
+	 * @since v1.1.0-beta
+	 */
+	public static boolean equals(File file0, File file1)
+	{
+		String hash0 = HashHandler.getFileChecksumSHA1(file0);
+		log.debug("file0: {}, hash0: {}", file0, hash0);
+
+		String hash1 = HashHandler.getFileChecksumSHA1(file1);
+		log.debug("file1: {}, hash1: {}", file1, hash1);
+
+		return hash0.equals(hash1);
+	}
 }

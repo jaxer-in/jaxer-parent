@@ -23,11 +23,19 @@ import java.nio.file.FileAlreadyExistsException;
 @Deprecated
 public class Files
 {
+	/**
+	 * @deprecated on v1.1.0-beta, please refer {@link in.jaxer.core.FileUtils#equals(String, String)}
+	 */
+	@Deprecated
 	public static boolean equals(String file0, String file1)
 	{
 		return equals(new File(file0), new File(file1));
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta, please refer {@link in.jaxer.core.FileUtils#equals(File, File)}
+	 */
+	@Deprecated
 	public static boolean equals(File file0, File file1)
 	{
 		String hash0 = HashHandler.getFileChecksumSHA1(file0);
