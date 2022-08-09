@@ -1,6 +1,6 @@
 package in.jaxer.core.net;
 
-import in.jaxer.core.constants.Constants;
+import in.jaxer.core.FileUtils;
 import in.jaxer.core.constants.ContentType;
 import in.jaxer.core.utilities.JValidator;
 
@@ -67,7 +67,7 @@ public class HttpHandlerMultipart
 
 		try (FileInputStream fileInputStream = new FileInputStream(uploadFile))
 		{
-			byte[] buffer = new byte[Constants.BUFFER_SIZE];
+			byte[] buffer = new byte[FileUtils.BUFFER_SIZE];
 			int bytesRead = -1;
 			while ((bytesRead = fileInputStream.read(buffer)) != -1)
 			{

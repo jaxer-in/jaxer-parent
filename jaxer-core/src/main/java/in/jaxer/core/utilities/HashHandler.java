@@ -1,5 +1,6 @@
 package in.jaxer.core.utilities;
 
+import in.jaxer.core.FileUtils;
 import in.jaxer.core.constants.Constants;
 import in.jaxer.core.exceptions.JaxerCoreException;
 import lombok.extern.log4j.Log4j2;
@@ -75,7 +76,7 @@ public class HashHandler
 		{
 			MessageDigest digest = MessageDigest.getInstance(encodeType);
 
-			byte[] byteArray = new byte[Constants.BUFFER_SIZE];
+			byte[] byteArray = new byte[FileUtils.BUFFER_SIZE];
 			int bytesCount = 0;
 			while ((bytesCount = inputStream.read(byteArray)) != -1)
 			{

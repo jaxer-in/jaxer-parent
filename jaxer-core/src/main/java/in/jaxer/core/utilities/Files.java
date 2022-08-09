@@ -1,6 +1,7 @@
 package in.jaxer.core.utilities;
 
 import com.google.gson.Gson;
+import in.jaxer.core.FileUtils;
 import in.jaxer.core.constants.Constants;
 import in.jaxer.core.constants.ContentType;
 import in.jaxer.core.constants.Singletons;
@@ -16,8 +17,10 @@ import java.nio.file.FileAlreadyExistsException;
 
 /**
  * @author Shakir Ansari
+ * @deprecated on v1.1.0-beta, please check {@link in.jaxer.core.FileUtils}
  */
 @Log4j2
+@Deprecated
 public class Files
 {
 	public static boolean equals(String file0, String file1)
@@ -36,12 +39,20 @@ public class Files
 		return hash0.equals(hash1);
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta, please refer {@link in.jaxer.core.FileUtils#getExtension(String, boolean)}
+	 */
+	@Deprecated
 	public static String getExtensionWithDot(String text)
 	{
 		String ext = getExtensionWithoutDot(text);
 		return ext == null ? null : "." + ext;
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta, please refer {@link in.jaxer.core.FileUtils#getExtension(String)}
+	 */
+	@Deprecated
 	public static String getExtensionWithoutDot(String text)
 	{
 		if (text.contains("."))
@@ -63,7 +74,7 @@ public class Files
 
 		float size = inKB(fileLength);
 		sizeString = String.format("%.2f", size) + " KB";
-		if (size > (float) Constants.ONE_BYTE)
+		if (size > (float) FileUtils.ONE_BYTE)
 		{
 			size = inMB(fileLength);
 			sizeString = String.format("%.2f", size) + " MB";
@@ -102,7 +113,7 @@ public class Files
 	}
 
 	/**
-	 * @deprecated on v1.1.0-beta, please refer {@link in.jaxer.core.FileUtils#readLines(String)}
+	 * @deprecated on v1.1.0-beta, please refer {@link in.jaxer.core.FileUtils#readFile(String)}
 	 */
 	@Deprecated
 	public static String readFile(String file) throws IOException
@@ -111,7 +122,7 @@ public class Files
 	}
 
 	/**
-	 * @deprecated on v1.1.0-beta, please refer {@link in.jaxer.core.FileUtils#readLines(String)}
+	 * @deprecated on v1.1.0-beta, please refer {@link in.jaxer.core.FileUtils#readLines(File)}
 	 */
 	@Deprecated
 	public static String readFile(File file) throws IOException
@@ -132,11 +143,19 @@ public class Files
 		return builder.toString();
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta, please refer {@link in.jaxer.core.FileUtils#writeFile(String, String, boolean)}
+	 */
+	@Deprecated
 	public static void writeFile(String filePath, String msg, boolean append) throws IOException
 	{
 		writeFile(new File(filePath), msg, append);
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta, please refer {@link in.jaxer.core.FileUtils#writeFile(File, String, boolean)}
+	 */
+	@Deprecated
 	public static void writeFile(File file, String msg, boolean append) throws IOException
 	{
 		log.debug("file: {}, append: {}, msg: {}", file, append, msg);
@@ -146,12 +165,20 @@ public class Files
 		}
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta, please refer {@link in.jaxer.core.FileUtils#readSerializedObject(String)}
+	 */
+	@Deprecated
 	public static final Object readSerializedObject(String filePath) throws Exception
 	{
 		log.debug("filePath: {}", filePath);
 		return readSerializedObject(new File(filePath));
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta, please refer {@link in.jaxer.core.FileUtils#readSerializedObject(File)}
+	 */
+	@Deprecated
 	public static final Object readSerializedObject(File file) throws Exception
 	{
 		log.debug("file: {}", file);
@@ -162,12 +189,20 @@ public class Files
 		}
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta, please refer {@link in.jaxer.core.FileUtils#writeSerializedObject(String, Object)}
+	 */
+	@Deprecated
 	public static final void writeSerializedObject(String filePath, Object object) throws Exception
 	{
 		log.debug("filePath: {}, object: {}", filePath, object);
 		writeSerializedObject(new File(filePath), object);
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta, please refer {@link in.jaxer.core.FileUtils#writeSerializedObject(File, Object)}
+	 */
+	@Deprecated
 	public static final void writeSerializedObject(File file, Object object) throws Exception
 	{
 		log.debug("file: {}, object: {}", file, object);
@@ -178,12 +213,20 @@ public class Files
 		}
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta, please refer {@link in.jaxer.core.FileUtils#readXmlObject(String)}
+	 */
+	@Deprecated
 	public static final Object readXmlObject(String filePath) throws Exception
 	{
 		log.debug("file: {}", filePath);
 		return readXmlObject(new File(filePath));
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta, please refer {@link in.jaxer.core.FileUtils#readXmlObject(File)}
+	 */
+	@Deprecated
 	public static final Object readXmlObject(File file) throws Exception
 	{
 		log.debug("file: {}", file);
@@ -194,12 +237,20 @@ public class Files
 		}
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta, please refer {@link in.jaxer.core.FileUtils#writeXmlObject(String, Object)}
+	 */
+	@Deprecated
 	public static final void writeXmlObject(String filePath, Object object) throws Exception
 	{
 		log.debug("filePath: {}, object", filePath, object);
 		writeXmlObject(new File(filePath), object);
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta, please refer {@link in.jaxer.core.FileUtils#writeXmlObject(File, Object)}
+	 */
+	@Deprecated
 	public static final void writeXmlObject(File file, Object object) throws Exception
 	{
 		log.debug("file: {}, object", file, object);
@@ -210,12 +261,20 @@ public class Files
 		}
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta, please refer {@link in.jaxer.core.FileUtils#readJsonObject(Class, File)}
+	 */
+	@Deprecated
 	public static <T> T readJsonObject(Class<T> outputClass, File file) throws IOException
 	{
 		log.debug("outputClass: {}, file: {}, object", outputClass, file);
 		return readJsonObject(outputClass, JsonHandler.getGson(), file);
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta, please refer {@link in.jaxer.core.FileUtils#readJsonObject(Class, File)}
+	 */
+	@Deprecated
 	public static <T> T readJsonObject(Class<T> outputClass, Gson gson, File file) throws IOException
 	{
 		log.debug("outputClass: {}, gson: {}, file: {}", outputClass, gson, file);
@@ -223,24 +282,40 @@ public class Files
 		return gson.fromJson(fileData, outputClass);
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta, please refer {@link in.jaxer.core.FileUtils#writeJsonObject(File, Object)}
+	 */
+	@Deprecated
 	public static void writeJsonObject(File file, Object object) throws IOException
 	{
 		log.debug("file: {}, object: {}", file, object);
 		writeJsonObject(JsonHandler.getGson(), file, object);
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta, please refer {@link in.jaxer.core.FileUtils#writeJsonObject(File, Object)}
+	 */
+	@Deprecated
 	public static void writeJsonObject(File file, Object object, boolean append) throws IOException
 	{
 		log.debug("file: {}, object: {}, append: {}", file, object, append);
 		writeJsonObject(JsonHandler.getGson(), file, object, append);
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta, please refer {@link in.jaxer.core.FileUtils#writeJsonObject(File, Object)}
+	 */
+	@Deprecated
 	public static void writeJsonObject(Gson gson, File file, Object object) throws IOException
 	{
 		log.debug("gson: {}, file: {}, objetc: {}", gson, file, object);
 		writeJsonObject(gson, file, object, false);
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta, please refer {@link in.jaxer.core.FileUtils#writeJsonObject(File, Object)}
+	 */
+	@Deprecated
 	public static void writeJsonObject(Gson gson, File file, Object object, boolean append) throws IOException
 	{
 		log.debug("gson: {}, file: {}, objetc: {}, append: {}", gson, file, object, append);
@@ -248,11 +323,19 @@ public class Files
 		writeFile(file, jsonString, append);
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta, please refer {@link FileUtils#createTempFile()}
+	 */
+	@Deprecated
 	public static File createTempFile() throws FileAlreadyExistsException
 	{
 		return createTempFile(Strings.getUUID());
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta, please refer {@link FileUtils#createTempFile(String)}
+	 */
+	@Deprecated
 	public static File createTempFile(String tempFileName) throws FileAlreadyExistsException
 	{
 		log.debug("tempFileName: {}", tempFileName);
@@ -264,12 +347,20 @@ public class Files
 		return file;
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta, please refer {@link FileUtils#copy(String, String)}
+	 */
+	@Deprecated
 	public static void copy(String source, String target) throws IOException
 	{
 		log.debug("source: {}, target: {}", source, target);
 		copy(new File(source), new File(target));
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta, please refer {@link FileUtils#copy(File, File)}
+	 */
+	@Deprecated
 	public static void copy(File source, File target) throws IOException
 	{
 		log.debug("source: {}, target: {}", source, target);
@@ -280,12 +371,20 @@ public class Files
 		}
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta, please refer {@link FileUtils#copyBytes(InputStream, OutputStream)}
+	 */
+	@Deprecated
 	public static void copyBytes(InputStream inputStream, OutputStream outputStream) throws IOException
 	{
 		log.debug("inputStream: {}, outputStream: {}", inputStream, outputStream);
-		copyBytes(Constants.BUFFER_SIZE, inputStream, outputStream);
+		copyBytes(FileUtils.BUFFER_SIZE, inputStream, outputStream);
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta, please refer {@link FileUtils#copyBytes(int, InputStream, OutputStream)}
+	 */
+	@Deprecated
 	public static void copyBytes(int bufferSize, InputStream inputStream, OutputStream outputStream) throws IOException
 	{
 		log.debug("bufferSize: {}, inputStream: {}, outputStream: {}", bufferSize, inputStream, outputStream);
@@ -305,12 +404,20 @@ public class Files
 		outputStream.flush();
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta, please refer {@link in.jaxer.core.FileUtils#delete(String, boolean)}
+	 */
+	@Deprecated
 	public static void delete(String file, boolean recursive)
 	{
 		log.debug("file: {}, recursive: {}", file, recursive);
 		delete(new File(file), recursive);
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta, please refer {@link in.jaxer.core.FileUtils#delete(File, boolean)}
+	 */
+	@Deprecated
 	public static void delete(File file, boolean recursive)
 	{
 		log.debug("file: {}, recursive: {}", file, recursive);
@@ -331,31 +438,51 @@ public class Files
 		log.debug("[{}] \t {}" + file.delete(), file.getAbsolutePath());
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta
+	 */
+	@Deprecated
 	public static String getMimeType(String fileName)
 	{
 		log.debug("fileName: {}", fileName);
 		return Singletons.getMimetypesFileTypeMap().getContentType(fileName);
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta
+	 */
+	@Deprecated
 	public static String getMimeType(File file)
 	{
 		log.debug("file: {}", file);
 		return getMimeType(file.getName());
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta
+	 */
+	@Deprecated
 	public static String getDefaultMimeType(String filename)
 	{
 		log.debug("filename: {}", filename);
 		String mime = getMimeType(filename);
-		return JValidator.isNotNullAndNotEmpty(mime) ? mime : ContentType.APPLICATION_OCTET_STREAM;
+		return JValidator.isNotBlank(mime) ? mime : ContentType.APPLICATION_OCTET_STREAM;
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta
+	 */
+	@Deprecated
 	public static String getDefaultMimeType(File file)
 	{
 		log.debug("file: {}", file);
 		return getDefaultMimeType(file.getName());
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta
+	 */
+	@Deprecated
 	public static void downloadFile(URL url)
 	{
 		try
