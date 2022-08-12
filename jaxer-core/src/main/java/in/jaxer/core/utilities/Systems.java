@@ -6,8 +6,10 @@ import java.util.Properties;
 
 /**
  * @author Shakir Ansari
+ * @deprecated on v1.1.0-beta, please use {@link in.jaxer.core.SystemUtils}
  */
 @Log4j2
+@Deprecated
 public class Systems
 {
 	public static void setProperty(String key, String value)
