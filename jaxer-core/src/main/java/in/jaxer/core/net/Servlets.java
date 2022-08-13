@@ -15,8 +15,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
+ * @deprecated on v1.1.0-beta, please use {@link in.jaxer.core.ServletUtils}
  */
+@Deprecated
 public class Servlets
 {
 	static public String getRequestForwardURI(HttpServletRequest request)
@@ -191,12 +193,6 @@ public class Servlets
 	/**
 	 * If HttpServletRequest contain parameter [isPrettyPrint=true]
 	 * then it will send pretty response
-	 *
-	 * @param request
-	 * @param response
-	 * @param obj
-	 *
-	 * @throws IOException
 	 */
 	static public void printJsonResponse(HttpServletRequest request, HttpServletResponse response, Object obj) throws IOException
 	{
@@ -284,10 +280,9 @@ public class Servlets
 	 * <br>
 	 * In simple words, this method will let you know if the request contains attachments or not
 	 *
-	 * @param request
-	 *
-	 * @return boolean
+	 * @deprecated on v1.1.0-beta, please use {@link in.jaxer.core.ServletUtils#isMultipartRequest(HttpServletRequest)}
 	 */
+	@Deprecated
 	static public boolean isMultipartRequest(HttpServletRequest request)
 	{
 		return request.getContentType() != null
