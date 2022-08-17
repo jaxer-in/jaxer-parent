@@ -1,6 +1,8 @@
 package in.jaxer.core;
 
+import in.jaxer.core.dtos.TimeDifference;
 import lombok.Getter;
+import lombok.extern.log4j.Log4j2;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -38,6 +40,7 @@ import java.util.Date;
  * @date 20-06-2022
  * @since 1.0.9-beta
  */
+@Log4j2
 public class DateTimeUtils
 {
 	public static final String DEFAULT_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
@@ -125,6 +128,79 @@ public class DateTimeUtils
 	public DateTimeUtils addYears(Date date, int years)
 	{
 		return addDateTime(Calendar.YEAR, years);
+	}
+
+	/**
+	 * @since 1.1.0-beta
+	 */
+	public static TimeDifference getDifference(Date start)
+	{
+		log.debug("start: {}", start);
+
+		return getDifference(start, new Date());
+	}
+
+	/**
+	 * @since 1.1.0-beta
+	 */
+	public static TimeDifference getDifference(Date start, Date end)
+	{
+		log.debug("start: {}, end: {}", start, end);
+
+		return getDifference(start.getTime(), end.getTime());
+	}
+
+	/**
+	 * @since 1.1.0-beta
+	 */
+	public static TimeDifference getDifference(long start)
+	{
+		log.debug("start: {}", start);
+		return getDifference(start, System.currentTimeMillis());
+	}
+
+	/**
+	 * @since 1.1.0-beta
+	 */
+	public static TimeDifference getDifference(long start, long end)
+	{
+		log.debug("start: {}, end: {}", start, end);
+
+		long diff = end - start;
+		log.debug("diff: {}", diff);
+
+		boolean inverse = false;
+		if (diff < 0)
+		{
+			inverse = true;
+			diff = -diff;
+		}
+
+		log.debug("inverse: {}", inverse);
+
+		TimeDifference timeDifference = new TimeDifference();
+
+		if (diff == 0)
+		{
+			return timeDifference;
+		}
+
+		timeDifference.milliSeconds = diff % 1000;
+		timeDifference.seconds = diff / 1000 % 60;
+		timeDifference.minutes = diff / (60 * 1000) % 60;
+		timeDifference.hours = diff / (60 * 60 * 1000) % 24;
+		timeDifference.days = diff / (24 * 60 * 60 * 1000);
+
+		if (inverse)
+		{
+			timeDifference.milliSeconds = -timeDifference.milliSeconds;
+			timeDifference.seconds = -timeDifference.seconds;
+			timeDifference.minutes = -timeDifference.minutes;
+			timeDifference.hours = -timeDifference.hours;
+			timeDifference.days = -timeDifference.days;
+		}
+
+		return timeDifference;
 	}
 
 	/**

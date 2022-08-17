@@ -1,13 +1,16 @@
 package in.jaxer.core.utilities;
 
+import in.jaxer.core.ArrayUtils;
 import lombok.extern.log4j.Log4j2;
 
 import java.util.Arrays;
 
 /**
  * @author Shakir Ansari
+ * @deprecated on v1.1.0-beta, please use {@link ArrayUtils}
  */
 @Log4j2
+@Deprecated
 public class Sortings
 {
 	public static void bubbleSort(int[] array)
@@ -57,6 +60,10 @@ public class Sortings
 		}
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta, please use {@link ArrayUtils#reverse(int[])}
+	 */
+	@Deprecated
 	public static void reverseArray(int[] array)
 	{
 		log.debug("array: {}", Arrays.toString(array));

@@ -2,8 +2,10 @@ package in.jaxer.core.constants;
 
 /**
  * @author Shakir
- * date 2021-11-09 22:02
+ * @date 2021-11-09 22:02
+ * @deprecated on v1.1.0-beta, please use {@link in.jaxer.core.DatabaseUtils}
  */
+@Deprecated
 public class DbDriverClassNames
 {
 	/**
