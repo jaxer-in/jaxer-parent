@@ -1,6 +1,6 @@
 package in.jaxer.core.utilities;
 
-import in.jaxer.core.constants.HttpConstants;
+import in.jaxer.core.HttpUtils;
 import in.jaxer.core.exceptions.JaxerCoreException;
 import lombok.extern.log4j.Log4j2;
 
@@ -165,7 +165,7 @@ public class JUtilities
 
 		URL url = new URL(urlToRead);
 		HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-		httpURLConnection.setRequestMethod(HttpConstants.GET);
+		httpURLConnection.setRequestMethod(HttpUtils.Method.GET);
 
 		try (InputStream inputStream = httpURLConnection.getInputStream();
 			 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);

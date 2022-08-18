@@ -1,9 +1,9 @@
 package in.jaxer.core.net;
 
+import in.jaxer.core.DateTimeUtils;
+import in.jaxer.core.HttpUtils;
 import in.jaxer.core.constants.ContentType;
-import in.jaxer.core.constants.HttpConstants;
 import in.jaxer.core.dtos.TimeDifference;
-import in.jaxer.core.utilities.Time;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
@@ -28,7 +28,7 @@ public class HttpHandler implements Runnable
 	@NonNull
 	private String urlString;
 
-	private String httpMethod = HttpConstants.GET;
+	private String httpMethod = HttpUtils.Method.GET;
 
 	private String payload;
 
@@ -53,13 +53,13 @@ public class HttpHandler implements Runnable
 			URL url = new URL(urlString);
 			HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
 
-			httpURLConnection.setRequestProperty(HttpConstants.Accept, requestContentType);
+			httpURLConnection.setRequestProperty(HttpUtils.Header.ACCEPT, requestContentType);
 			httpURLConnection.setRequestMethod(httpMethod);
 
 			if (payload != null)
 			{
 				httpURLConnection.setDoOutput(true);
-				httpURLConnection.setRequestProperty(HttpConstants.Content_Type, payloadContentType);
+				httpURLConnection.setRequestProperty(HttpUtils.Header.CONTENT_TYPE, payloadContentType);
 
 				try (OutputStream outputStream = httpURLConnection.getOutputStream())
 				{
@@ -83,7 +83,7 @@ public class HttpHandler implements Runnable
 
 				if (callbackListener != null)
 				{
-					callbackListener.onSuccess(httpURLConnection.getResponseCode(), response.toString());
+					callbackListener.onSuccess(responseCode, response.toString());
 				}
 			}
 		} catch (Exception exception)
@@ -96,7 +96,7 @@ public class HttpHandler implements Runnable
 		{
 			if (callbackListener != null)
 			{
-				callbackListener.onComplete(responseCode, Time.getTimeDifference(startMilliSeconds, System.currentTimeMillis()));
+				callbackListener.onComplete(responseCode, DateTimeUtils.getDifference(startMilliSeconds, System.currentTimeMillis()));
 			}
 		}
 	}

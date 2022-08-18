@@ -1,7 +1,7 @@
 package in.jaxer.core.net;
 
+import in.jaxer.core.HttpUtils;
 import in.jaxer.core.constants.ContentType;
-import in.jaxer.core.constants.HttpConstants;
 import in.jaxer.core.utilities.Files;
 import in.jaxer.core.utilities.JUtilities;
 import in.jaxer.core.utilities.JValidator;
@@ -116,8 +116,8 @@ public class Servlets
 
 		final long expiry = System.currentTimeMillis() + milli;
 
-		httpServletResponse.setDateHeader(HttpConstants.Expires, expiry);
-		httpServletResponse.setHeader(HttpConstants.Cache_Control, "max-age=" + milli);
+		httpServletResponse.setDateHeader(HttpUtils.Header.EXPIRES, expiry);
+		httpServletResponse.setHeader(HttpUtils.Header.CACHE_CONTROL, "max-age=" + milli);
 	}
 
 	@Deprecated

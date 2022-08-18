@@ -196,7 +196,7 @@ public class ArrayUtils
 	/**
 	 * @since v1.1.0-beta
 	 */
-	public static <T extends Comparable> void bubbleSort(T[] array)
+	public static <T extends Comparable<T>> void bubbleSort(T[] array)
 	{
 		log.debug("unsorted array: {}", Arrays.toString(array));
 
@@ -344,6 +344,37 @@ public class ArrayUtils
 	/**
 	 * @since v1.1.0-beta
 	 */
+	public static void selectionSort(long[] array)
+	{
+		log.debug("unsorted array: {}", Arrays.toString(array));
+
+		for (int i = 0; i < array.length - 1; i++)
+		{
+			// Index of the smallest remaining value.
+			int minIndex = i;
+			for (int j = i + 1; j < array.length; j++)
+			{
+				if (array[minIndex] > array[j])
+				{
+					minIndex = j;
+				}
+			}
+
+			if (minIndex != i)
+			{
+				// Exchange current element with the smallest remaining.
+				long temp = array[i];
+				array[i] = array[minIndex];
+				array[minIndex] = temp;
+			}
+		}
+
+		log.debug("unsorted array: {}", Arrays.toString(array));
+	}
+
+	/**
+	 * @since v1.1.0-beta
+	 */
 	public static void selectionSort(float[] array)
 	{
 		log.debug("unsorted array: {}", Arrays.toString(array));
@@ -406,7 +437,7 @@ public class ArrayUtils
 	/**
 	 * @since v1.1.0-beta
 	 */
-	public static <T extends Comparable> void selectionSort(T[] array)
+	public static <T extends Comparable<T>> void selectionSort(T[] array)
 	{
 		log.debug("unsorted array: {}", Arrays.toString(array));
 
@@ -603,7 +634,7 @@ public class ArrayUtils
 	/**
 	 * @since v1.1.0-beta
 	 */
-	public static <T extends Comparable> void insertionSort(T[] array)
+	public static <T extends Comparable<T>> void insertionSort(T[] array)
 	{
 		for (int i = 1; i < array.length; ++i)
 		{
@@ -767,7 +798,7 @@ public class ArrayUtils
 	/**
 	 * @since v1.1.0-beta
 	 */
-	public static <T extends Comparable> void binaryInsertionSort(T[] array)
+	public static <T extends Comparable<T>> void binaryInsertionSort(T[] array)
 	{
 		for (int i = 1; i < array.length; i++)
 		{
@@ -948,7 +979,7 @@ public class ArrayUtils
 	/**
 	 * @since v1.1.0-beta
 	 */
-	public static <T extends Comparable> void reverse(T[] array)
+	public static <T> void reverse(T[] array)
 	{
 		log.debug("array before reverse: {}", Arrays.toString(array));
 
