@@ -6,8 +6,7 @@ import java.util.Properties;
 
 /**
  * @author Shakir
- * @date 2022-08-13
- * @since v1.1.0-beta
+ * @since v1.1.0-beta [2022-08-13]
  */
 @Log4j2
 public class SystemUtils

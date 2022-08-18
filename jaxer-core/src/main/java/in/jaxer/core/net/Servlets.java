@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 /**
  * @author Shakir
- * @deprecated on v1.1.0-beta, please use {@link in.jaxer.core.ServletUtils}
+ * @deprecated on v1.1.0-beta, please use {@link in.jaxer.core.HttpUtils}
  */
 @Deprecated
 public class Servlets
@@ -280,7 +280,7 @@ public class Servlets
 	 * <br>
 	 * In simple words, this method will let you know if the request contains attachments or not
 	 *
-	 * @deprecated on v1.1.0-beta, please use {@link in.jaxer.core.ServletUtils#isMultipartRequest(HttpServletRequest)}
+	 * @deprecated on v1.1.0-beta, please use {@link in.jaxer.core.HttpUtils#isMultipartRequest(HttpServletRequest)}
 	 */
 	@Deprecated
 	static public boolean isMultipartRequest(HttpServletRequest request)

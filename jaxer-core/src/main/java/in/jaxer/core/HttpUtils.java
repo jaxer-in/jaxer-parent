@@ -1,18 +1,25 @@
 package in.jaxer.core;
 
+import in.jaxer.core.constants.ContentType;
+import lombok.extern.log4j.Log4j2;
+
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @author Shakir
- * @date 17-08-2022
- * @since v1.1.0-beta
+ * @since v1.1.0-beta [2022-08-17]
  */
+@Log4j2
 public class HttpUtils
 {
+	public static final String PRETTY_PRINT = "pretty-print";
+
 	/**
 	 * Standard Http Headers
 	 *
 	 * @since v1.1.0-beta
 	 */
-	public class Header
+	public static class Header
 	{
 		public static final String ACCEPT = "Accept";
 		public static final String ACCESS_CONTROL_ALLOW_HEADERS = "Access-Control-Allow-Headers";
@@ -316,7 +323,7 @@ public class HttpUtils
 	 *
 	 * @since v1.1.0-beta
 	 */
-	public class Method
+	public static class Method
 	{
 		public static final String DELETE = "DELETE";
 		public static final String HEAD = "HEAD";
@@ -325,5 +332,18 @@ public class HttpUtils
 		public static final String POST = "POST";
 		public static final String PUT = "PUT";
 		public static final String TRACE = "TRACE";
+	}
+
+	/**
+	 * <p>This method will check if the request's content type is multipart/form-data</p>
+	 * <p>In simple words, this method will let you know if the request contains attachments or not</p>
+	 *
+	 * @since v1.1.0-beta
+	 */
+	static public boolean isMultipartRequest(HttpServletRequest request)
+	{
+		log.debug("request: {}", request);
+		return request.getContentType() != null
+				&& request.getContentType().toLowerCase().contains(ContentType.MULTIPART_FORM_DATA);
 	}
 }

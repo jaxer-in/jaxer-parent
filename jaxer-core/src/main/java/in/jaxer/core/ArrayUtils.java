@@ -6,13 +6,15 @@ import java.util.Arrays;
 
 /**
  * @author Shakir
- * @date 17-08-2022
- * @since v1.1.0-beta
+ * @since v1.1.0-beta [2022-08-13]
  */
 @Log4j2
 public class ArrayUtils
 {
-	private static <T> void swap(T[] array, int pos1, int pos2)
+	/**
+	 * @since v1.1.0-beta
+	 */
+	public static <T> void swap(T[] array, int pos1, int pos2)
 	{
 		T temp = array[pos1];
 		array[pos1] = array[pos2];

@@ -2,8 +2,7 @@ package in.jaxer.core;
 
 /**
  * @author Shakir
- * @date 13-08-2022
- * @since v1.1.0-beta
+ * @since v1.1.0-beta [2022-08-13]
  */
 public class MathUtils
 {

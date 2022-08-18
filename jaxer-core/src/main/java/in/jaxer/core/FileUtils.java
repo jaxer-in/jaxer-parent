@@ -3,7 +3,6 @@ package in.jaxer.core;
 import in.jaxer.core.utilities.HashHandler;
 import in.jaxer.core.utilities.JsonHandler;
 import in.jaxer.core.utilities.Strings;
-import in.jaxer.core.utilities.Systems;
 import lombok.extern.log4j.Log4j2;
 
 import java.beans.XMLDecoder;
@@ -15,8 +14,7 @@ import java.util.List;
 
 /**
  * @author Shakir
- * @date 08-08-2022
- * @since v1.1.0-beta
+ * @since v1.1.0-beta [2022-08-08]
  */
 @Log4j2
 public class FileUtils
@@ -42,7 +40,7 @@ public class FileUtils
 		try (FileInputStream fileInputStream = new FileInputStream(file);
 			 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream)))
 		{
-			String line = null;
+			String line;
 			while ((line = bufferedReader.readLine()) != null)
 			{
 				lines.add(line);
@@ -204,7 +202,7 @@ public class FileUtils
 	 */
 	public static void writeXmlObject(String filePath, Object object)
 	{
-		log.debug("filePath: {}, object", filePath, object);
+		log.debug("filePath: {}, object: {}", filePath, object);
 		writeXmlObject(new File(filePath), object);
 	}
 
@@ -213,7 +211,7 @@ public class FileUtils
 	 */
 	public static void writeXmlObject(File file, Object object)
 	{
-		log.debug("file: {}, object", file, object);
+		log.debug("file: {}, object: {}", file, object);
 		try (FileOutputStream fileOutputStream = new FileOutputStream(file);
 			 XMLEncoder xMLEncoder = new XMLEncoder(fileOutputStream))
 		{
@@ -275,7 +273,7 @@ public class FileUtils
 	public static File createTempFile(String tempFileName) throws FileAlreadyExistsException
 	{
 		log.debug("tempFileName: {}", tempFileName);
-		File file = new File(Systems.getTempDirectory(), tempFileName);
+		File file = new File(SystemUtils.getTempDirectory(), tempFileName);
 		if (file.exists())
 		{
 			throw new FileAlreadyExistsException(file.getAbsolutePath());
@@ -328,7 +326,7 @@ public class FileUtils
 		{
 			int i;
 			byte[] buffer = new byte[bufferSize];
-			long totalReadBytes = 0l;
+			long totalReadBytes = 0L;
 
 			while ((i = inputStream.read(buffer)) != -1)
 			{
@@ -390,14 +388,16 @@ public class FileUtils
 
 		if (recursive && file.isDirectory())
 		{
+			//noinspection ConstantConditions
 			for (File childFile : file.listFiles())
 			{
+				//noinspection ConstantConditions
 				delete(childFile, recursive);
 			}
 		}
 
 		// deleting
-		log.info("[{}] \t {}" + file.delete(), file.getAbsolutePath());
+		log.info("[{}] \t {}", file.delete(), file.getAbsolutePath());
 	}
 
 	/**

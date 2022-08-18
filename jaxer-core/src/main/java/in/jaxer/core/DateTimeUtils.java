@@ -37,8 +37,7 @@ import java.util.Date;
  * ** *************************************
  *
  * @author Shakir
- * @date 20-06-2022
- * @since 1.0.9-beta
+ * @since 1.0.9-beta [2022-06-20]
  */
 @Log4j2
 public class DateTimeUtils
