@@ -800,7 +800,7 @@ public class ArrayUtils
 	/**
 	 * @since v1.1.0-beta
 	 */
-	public static <T extends Comparable<T>> void binaryInsertionSort(T[] array)
+	public static <T> void binaryInsertionSort(T[] array)
 	{
 		for (int i = 1; i < array.length; i++)
 		{
