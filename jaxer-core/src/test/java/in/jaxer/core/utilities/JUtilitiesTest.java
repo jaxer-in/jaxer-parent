@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -368,6 +370,7 @@ class JUtilitiesTest
 	public class GetScreenDimensionTest
 	{
 		@Test
+		@EnabledOnOs(OS.WINDOWS)
 		void shouldBeGreaterThanZero()
 		{
 			Dimension result = JUtilities.getScreenDimension();
