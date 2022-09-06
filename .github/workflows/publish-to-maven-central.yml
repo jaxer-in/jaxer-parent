@@ -22,6 +22,10 @@ jobs:
         java-version: '8'
         distribution: 'corretto'
         cache: maven
+
+    - name: maven version
+      run: mvn --version
+
     - name: Build with Maven
       run: mvn clean package --no-transfer-progress
       
