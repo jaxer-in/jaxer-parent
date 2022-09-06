@@ -20,7 +20,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <revision>1.1.1</revision>
+        <revision>1.0.10</revision>
 
         <log4j2.console.pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %level [%c{1.}.%M():%L] - %msg%n</log4j2.console.pattern>
 
