@@ -5,7 +5,7 @@
 
     <groupId>io.github.jaxer-in</groupId>
     <artifactId>jaxer-parent</artifactId>
-    <version>${revision}</version>
+    <version>1.0.10</version>
 
     <name>Jaxer Parent</name>
     <description>Parent project for managing all jaxer projects</description>
@@ -32,11 +32,11 @@
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
-    <modules>
+<!--     <modules>
         <module>jaxer-core</module>
         <module>jaxer-api</module>
         <module>jaxer-sdbms</module>
-    </modules>
+    </modules> -->
 
     <build>
         <resources>
