@@ -1,6 +1,6 @@
 package in.jaxer.core.utilities;
 
-import in.jaxer.core.constants.HttpConstants;
+import in.jaxer.core.HttpUtils;
 import in.jaxer.core.exceptions.JaxerCoreException;
 import lombok.extern.log4j.Log4j2;
 
@@ -29,6 +29,10 @@ import java.util.regex.Pattern;
 @Log4j2
 public class JUtilities
 {
+	/**
+	 * @deprecated on v1.1.0-beta, please use {@link in.jaxer.core.MathUtils#min(int...)}
+	 */
+	@Deprecated
 	public static int min(int... values)
 	{
 		int min = values[0];
@@ -39,6 +43,10 @@ public class JUtilities
 		return min;
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta, please use {@link in.jaxer.core.MathUtils#max(int...)}
+	 */
+	@Deprecated
 	public static int max(int... values)
 	{
 		int max = values[0];
@@ -157,7 +165,7 @@ public class JUtilities
 
 		URL url = new URL(urlToRead);
 		HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-		httpURLConnection.setRequestMethod(HttpConstants.GET);
+		httpURLConnection.setRequestMethod(HttpUtils.Method.GET);
 
 		try (InputStream inputStream = httpURLConnection.getInputStream();
 			 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
@@ -222,13 +230,7 @@ public class JUtilities
 	}
 
 	/**
-	 * @param value
-	 * @param percentage
-	 *
-	 * @return
-	 *
-	 * @see getPercentage(double, float)
-	 * @deprecated
+	 * @deprecated, please use {@link in.jaxer.core.MathUtils#getPercentage(int, int)}
 	 */
 	@Deprecated
 	public static int getPercentage(int value, int percentage)
@@ -236,23 +238,36 @@ public class JUtilities
 		return value * percentage / 100;
 	}
 
+	/**
+	 * @deprecated, please use {@link in.jaxer.core.MathUtils#getPercentage(double, float)}
+	 */
+	@Deprecated
 	public static double getPercentage(double value, float percentage)
 	{
 		return value * percentage / 100;
 	}
 
+	/**
+	 * @deprecated please use {@link JsonHandler#toJsonString(Object)}
+	 */
 	@Deprecated
 	public static String toJsonString(Object object)
 	{
 		return object == null ? null : JsonHandler.getGson().toJson(object);
 	}
 
+	/**
+	 * @deprecated please use {@link JsonHandler#toObject(String, Class)}
+	 */
 	@Deprecated
 	public static <T> T toObject(String jsonString, Class<T> clazz)
 	{
 		return JValidator.isNullOrEmpty(jsonString) ? null : JsonHandler.getGson().fromJson(jsonString, clazz);
 	}
 
+	/**
+	 * @deprecated please use {@link JsonHandler#toObjectList(String, Class)}
+	 */
 	@Deprecated
 	public static <T> List<T> toObjectList(String jsonString, Class<T> clazz)
 	{
@@ -327,6 +342,10 @@ public class JUtilities
 		}
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta, please use {@link in.jaxer.core.NumberUtils#parseNumber(String)}
+	 */
+	@Deprecated
 	public static Number parseNumber(String str)
 	{
 		try
@@ -341,11 +360,9 @@ public class JUtilities
 	/**
 	 * Range for byte(1 byte) is -128 to 127
 	 *
-	 * @param str
-	 * @param defaultValue
-	 *
-	 * @return
+	 * @deprecated on v1.1.0-beta, please use {@link in.jaxer.core.NumberUtils#toByte(String, byte)}
 	 */
+	@Deprecated
 	public static byte parseByte(String str, byte defaultValue)
 	{
 		try
@@ -360,11 +377,9 @@ public class JUtilities
 	/**
 	 * Range for short(2 bytes) is -32,768 to 32,767
 	 *
-	 * @param str
-	 * @param defaultValue
-	 *
-	 * @return
+	 * @deprecated on v1.1.0-beta, please use {@link in.jaxer.core.NumberUtils#toShort(String, short)}
 	 */
+	@Deprecated
 	public static short parseShort(String str, short defaultValue)
 	{
 		try
@@ -379,11 +394,9 @@ public class JUtilities
 	/**
 	 * Range for int(4 bytes) is -2,147,483,648 to 2,147,483,647
 	 *
-	 * @param str
-	 * @param defaultValue
-	 *
-	 * @return
+	 * @deprecated on v1.1.0-beta, please use {@link in.jaxer.core.NumberUtils#toInt(String, int)}
 	 */
+	@Deprecated
 	public static int parseInt(String str, int defaultValue)
 	{
 		try
@@ -398,11 +411,9 @@ public class JUtilities
 	/**
 	 * Range for long(8 bytes) is -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807
 	 *
-	 * @param str
-	 * @param defaultValue
-	 *
-	 * @return
+	 * @deprecated on v1.1.0-beta, please use {@link in.jaxer.core.NumberUtils#toLong(String, long)}
 	 */
+	@Deprecated
 	public static long parseLong(String str, long defaultValue)
 	{
 		try
@@ -417,11 +428,9 @@ public class JUtilities
 	/**
 	 * Range for float(4 bytes) is sufficient for storing 6 to 7 decimal digits
 	 *
-	 * @param str
-	 * @param defaultValue
-	 *
-	 * @return
+	 * @deprecated on v1.1.0-beta, please use {@link in.jaxer.core.NumberUtils#toFloat(String, float)}
 	 */
+	@Deprecated
 	public static float parseFloat(String str, float defaultValue)
 	{
 		try
@@ -436,11 +445,9 @@ public class JUtilities
 	/**
 	 * Range for double(8 bytes) is sufficient for storing 15 decimal digits
 	 *
-	 * @param str
-	 * @param defaultValue
-	 *
-	 * @return
+	 * @deprecated on v1.1.0-beta, please use {@link in.jaxer.core.NumberUtils#toDouble(String, double)}
 	 */
+	@Deprecated
 	public static double parseDouble(String str, double defaultValue)
 	{
 		try
@@ -454,11 +461,6 @@ public class JUtilities
 
 	/**
 	 * Range for boolean(8 bit) is sufficient for storing true or false
-	 *
-	 * @param str
-	 * @param defaultValue
-	 *
-	 * @return
 	 */
 	public static boolean parseBoolean(String str, boolean defaultValue)
 	{

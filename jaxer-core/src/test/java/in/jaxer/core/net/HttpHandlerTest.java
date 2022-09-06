@@ -1,6 +1,6 @@
 package in.jaxer.core.net;
 
-import in.jaxer.core.constants.HttpConstants;
+import in.jaxer.core.HttpUtils;
 import in.jaxer.core.dtos.TimeDifference;
 import in.jaxer.core.utilities.JUtilities;
 import lombok.extern.log4j.Log4j2;
@@ -66,7 +66,7 @@ class HttpHandlerTest
 	@Test
 	void httpHandlerPostTest()
 	{
-		httpHandler.setHttpMethod(HttpConstants.POST);
+		httpHandler.setHttpMethod(HttpUtils.Method.POST);
 		httpHandler.setUrlString(baseUrl + "/todos");
 
 		String payload = "{" +
@@ -82,7 +82,7 @@ class HttpHandlerTest
 	@Test
 	void httpHandlerPutTest()
 	{
-		httpHandler.setHttpMethod(HttpConstants.PUT);
+		httpHandler.setHttpMethod(HttpUtils.Method.PUT);
 		httpHandler.setUrlString(baseUrl + "/todos/1");
 
 		String payload = "{" +
@@ -97,7 +97,7 @@ class HttpHandlerTest
 	@Test
 	void httpHandlerPatchTest()
 	{
-		httpHandler.setHttpMethod(HttpConstants.PUT);
+		httpHandler.setHttpMethod(HttpUtils.Method.PUT);
 		httpHandler.setUrlString(baseUrl + "/todos/1");
 
 		String payload = "{\"userId\": 21}";
@@ -107,7 +107,7 @@ class HttpHandlerTest
 	@Test
 	void httpHandlerDeleteTest()
 	{
-		httpHandler.setHttpMethod(HttpConstants.DELETE);
+		httpHandler.setHttpMethod(HttpUtils.Method.DELETE);
 		httpHandler.setUrlString(baseUrl + "/todos/1");
 	}
 }

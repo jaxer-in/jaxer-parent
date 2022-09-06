@@ -21,6 +21,10 @@ public class Singletons
 	@Deprecated
 	private static Gson gson;
 
+	/**
+	 * @deprecated on v1.1.0-beta
+	 */
+	@Deprecated
 	private static MimetypesFileTypeMap mimetypesFileTypeMap = new MimetypesFileTypeMap();
 
 	@Deprecated
@@ -78,6 +82,10 @@ public class Singletons
 		}
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta
+	 */
+	@Deprecated
 	public static MimetypesFileTypeMap getMimetypesFileTypeMap()
 	{
 		if (mimetypesFileTypeMap == null)

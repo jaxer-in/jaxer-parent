@@ -7,8 +7,7 @@ import java.util.List;
 
 /**
  * @author Shakir
- * @date 08-08-2022
- * @since v1.0.9-beta
+ * @since v1.0.9-beta [2022-08-08]
  */
 public class ExceptionUtils
 {
@@ -51,6 +50,7 @@ public class ExceptionUtils
 		}
 
 		StackTraceElement[] stackTraceElements = throwable.getStackTrace();
+		//noinspection ConfusingArgumentToVarargsMethod
 		if (JValidator.isNotBlank(stackTraceElements))
 		{
 			for (StackTraceElement stackTraceElement : stackTraceElements)

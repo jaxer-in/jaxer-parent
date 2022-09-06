@@ -5,8 +5,18 @@ package in.jaxer.core.constants;
  */
 public class Constants
 {
+	/**
+	 * @deprecated on v1.1.0-beta, please use {@link in.jaxer.core.FileUtils#BUFFER_SIZE}
+	 */
+	@Deprecated
 	public static final int BUFFER_SIZE = 1024;
+
+	/**
+	 * @deprecated on v1.1.0-beta, please use {@link in.jaxer.core.FileUtils#ONE_BYTE}
+	 */
+	@Deprecated
 	public static final int ONE_BYTE = 1024;
+
 	public static final long ONE_SECOND = 1000L;
 
 	/**

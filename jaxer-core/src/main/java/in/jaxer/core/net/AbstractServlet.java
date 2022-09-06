@@ -1,7 +1,7 @@
 package in.jaxer.core.net;
 
+import in.jaxer.core.HttpUtils;
 import in.jaxer.core.constants.ContentType;
-import in.jaxer.core.constants.HttpConstants;
 import in.jaxer.core.utilities.Files;
 import in.jaxer.core.utilities.JUtilities;
 import in.jaxer.core.utilities.JValidator;
@@ -30,31 +30,31 @@ public class AbstractServlet extends GenericServlet
 
 		switch (httpServletRequest.getMethod().toUpperCase())
 		{
-			case HttpConstants.GET:
+			case HttpUtils.Method.GET:
 				this.doGet(httpServletRequest, httpServletResponse);
 				break;
 
-			case HttpConstants.POST:
+			case HttpUtils.Method.POST:
 				this.doPost(httpServletRequest, httpServletResponse);
 				break;
 
-			case HttpConstants.DELETE:
+			case HttpUtils.Method.DELETE:
 				this.doDelete(httpServletRequest, httpServletResponse);
 				break;
 
-			case HttpConstants.HEAD:
+			case HttpUtils.Method.HEAD:
 				this.doHead(httpServletRequest, httpServletResponse);
 				break;
 
-			case HttpConstants.OPTIONS:
+			case HttpUtils.Method.OPTIONS:
 				this.doOptions(httpServletRequest, httpServletResponse);
 				break;
 
-			case HttpConstants.PUT:
+			case HttpUtils.Method.PUT:
 				this.doPut(httpServletRequest, httpServletResponse);
 				break;
 
-			case HttpConstants.TRACE:
+			case HttpUtils.Method.TRACE:
 				this.doTrace(httpServletRequest, httpServletResponse);
 				break;
 
@@ -105,8 +105,6 @@ public class AbstractServlet extends GenericServlet
 
 	/**
 	 * Use this method if you want cache your response for <b>30days</b>
-	 *
-	 * @param httpServletResponse
 	 */
 	protected void cacheResponse(HttpServletResponse httpServletResponse)
 	{

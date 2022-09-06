@@ -2,7 +2,7 @@ package in.jaxer.core.interfaces;
 
 /**
  * @author Shakir
- * date 2022-04-24 - 18:28
+ * @date 2022-04-24
  */
 public interface Encoder
 {

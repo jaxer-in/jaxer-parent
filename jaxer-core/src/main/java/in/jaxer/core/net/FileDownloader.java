@@ -1,6 +1,6 @@
 package in.jaxer.core.net;
 
-import in.jaxer.core.constants.Constants;
+import in.jaxer.core.FileUtils;
 import in.jaxer.core.utilities.Files;
 import in.jaxer.core.utilities.Systems;
 import lombok.extern.log4j.Log4j2;
@@ -31,7 +31,7 @@ public class FileDownloader
 
 			long total = 0l;
 			int n = 0;
-			final byte[] bytes = new byte[Constants.BUFFER_SIZE];
+			final byte[] bytes = new byte[FileUtils.BUFFER_SIZE];
 			while (-1 != (n = inputStream.read(bytes)))
 			{
 				fileOutputStream.write(bytes, 0, n);

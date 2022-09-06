@@ -1,7 +1,7 @@
 package in.jaxer.core.net;
 
+import in.jaxer.core.HttpUtils;
 import in.jaxer.core.constants.ContentType;
-import in.jaxer.core.constants.HttpConstants;
 import in.jaxer.core.utilities.Files;
 import in.jaxer.core.utilities.JUtilities;
 import in.jaxer.core.utilities.JValidator;
@@ -15,8 +15,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @author Shakir Ansari
+ * @author Shakir
+ * @deprecated on v1.1.0-beta, please use {@link in.jaxer.core.HttpUtils}
  */
+@Deprecated
 public class Servlets
 {
 	static public String getRequestForwardURI(HttpServletRequest request)
@@ -114,8 +116,8 @@ public class Servlets
 
 		final long expiry = System.currentTimeMillis() + milli;
 
-		httpServletResponse.setDateHeader(HttpConstants.Expires, expiry);
-		httpServletResponse.setHeader(HttpConstants.Cache_Control, "max-age=" + milli);
+		httpServletResponse.setDateHeader(HttpUtils.Header.EXPIRES, expiry);
+		httpServletResponse.setHeader(HttpUtils.Header.CACHE_CONTROL, "max-age=" + milli);
 	}
 
 	@Deprecated
@@ -191,12 +193,6 @@ public class Servlets
 	/**
 	 * If HttpServletRequest contain parameter [isPrettyPrint=true]
 	 * then it will send pretty response
-	 *
-	 * @param request
-	 * @param response
-	 * @param obj
-	 *
-	 * @throws IOException
 	 */
 	static public void printJsonResponse(HttpServletRequest request, HttpServletResponse response, Object obj) throws IOException
 	{
@@ -284,10 +280,9 @@ public class Servlets
 	 * <br>
 	 * In simple words, this method will let you know if the request contains attachments or not
 	 *
-	 * @param request
-	 *
-	 * @return boolean
+	 * @deprecated on v1.1.0-beta, please use {@link in.jaxer.core.HttpUtils#isMultipartRequest(HttpServletRequest)}
 	 */
+	@Deprecated
 	static public boolean isMultipartRequest(HttpServletRequest request)
 	{
 		return request.getContentType() != null

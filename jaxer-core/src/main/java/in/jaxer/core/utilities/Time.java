@@ -190,6 +190,10 @@ public class Time
 		return formatDate(Constants.MySQLDateTime, date);
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta, please use {@link DateTimeUtils#getDifference(Date)}
+	 */
+	@Deprecated
 	public static TimeDifference getTimeDifference(Date start)
 	{
 		log.debug("start: {}", start);
@@ -197,6 +201,10 @@ public class Time
 		return getTimeDifference(start, new Date());
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta, please use {@link DateTimeUtils#getDifference(Date, Date)}
+	 */
+	@Deprecated
 	public static TimeDifference getTimeDifference(Date start, Date end)
 	{
 		log.debug("start: {}, end: {}", start, end);
@@ -204,12 +212,20 @@ public class Time
 		return getTimeDifference(start.getTime(), end.getTime());
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta, please use {@link DateTimeUtils#getDifference(long)}
+	 */
+	@Deprecated
 	public static TimeDifference getTimeDifference(long start)
 	{
 		log.debug("start: {}", start);
 		return getTimeDifference(start, System.currentTimeMillis());
 	}
 
+	/**
+	 * @deprecated on v1.1.0-beta, please use {@link DateTimeUtils#getDifference(long, long)}
+	 */
+	@Deprecated
 	public static TimeDifference getTimeDifference(long start, long end)
 	{
 		log.debug("start: {}, end: {}", start, end);

@@ -2,7 +2,9 @@ package in.jaxer.core.constants;
 
 /**
  * @author Shakir
+ * @deprecated on v1.1.0-beta, please use {@link in.jaxer.core.HttpUtils}
  */
+@Deprecated
 public class HttpConstants
 {
 	/**
