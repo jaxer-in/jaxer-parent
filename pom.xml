@@ -37,7 +37,7 @@
     <modules>
         <module>jaxer-core</module>
         <module>jaxer-api</module>
-        <module>jaxer-sdbms</module>
+<!--        <module>jaxer-sdbms</module>-->
     </modules>
 
     <build>
