@@ -21,8 +21,10 @@ jobs:
       with:
         java-version: '8'
         distribution: 'corretto'
-        cache: maven
 
+    - name: Setup Maven Action
+      uses: s4u/setup-maven-action@3.6.0
+    
     - name: maven version
       run: mvn --version
 
