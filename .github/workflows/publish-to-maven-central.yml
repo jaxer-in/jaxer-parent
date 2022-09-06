@@ -27,7 +27,7 @@ jobs:
           gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }} # Value of the GPG private key to import
           gpg-passphrase: MAVEN_GPG_PASSPHRASE # env variable for GPG private key passphrase
       - name: Publish to Maven Central
-        run: mvn deploy --batch-mode -D skipTests --activate-profiles release --no-transfer-progress
+        run: mvn deploy --batch-mode -D skipTests -Prelease --no-transfer-progress
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
