@@ -37,7 +37,7 @@
     <modules>
         <module>jaxer-core</module>
         <module>jaxer-api</module>
-<!--        <module>jaxer-sdbms</module>-->
+        <module>jaxer-sdbms</module>
     </modules>
 
     <build>
@@ -82,7 +82,7 @@
                     <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.10.1</version>
+                    <version>3.1</version>
                     <configuration>
                         <source>${version.compiler}</source>
                         <target>${version.compiler}</target>
@@ -145,7 +145,7 @@
                     <!-- https://mvnrepository.com/artifact/org.sonatype.plugins/nexus-staging-maven-plugin -->
                     <groupId>org.sonatype.plugins</groupId>
                     <artifactId>nexus-staging-maven-plugin</artifactId>
-                    <version>1.6.13</version>
+                    <version>1.6.7</version>
                 </plugin>
             </plugins>
         </pluginManagement>
