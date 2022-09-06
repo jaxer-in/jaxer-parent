@@ -22,6 +22,7 @@ jobs:
       with:
         distribution: 'corretto'
         java-version: '8'
+        cache: 'maven'
     - run: java -version
     
     - name: Build with Maven
