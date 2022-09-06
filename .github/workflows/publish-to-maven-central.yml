@@ -5,9 +5,9 @@ name: Publish to maven central
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "cicd" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "cicd" ]
 
 jobs:
   build:
