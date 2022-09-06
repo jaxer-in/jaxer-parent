@@ -1,14 +1,12 @@
 package in.jaxer.sdbms.dto;
 
-import org.junit.jupiter.api.Test;
-
 /**
  * @author Shakir
  */
 public class PaginationDtoTest
 {
 
-	@Test
+	//	@Test
 	public void testToString()
 	{
 		System.out.println("toString");
