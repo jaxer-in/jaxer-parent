@@ -1,16 +1,14 @@
 name: Publish package to the Maven Central Repository
 
-on:
-  push:
-    branches: [ "cicd" ]
-  pull_request:
-    branches: [ "cicd" ]
-
-#name: release and push to central
 #on:
 #  push:
-#    tags:
-#      - '*'
+#    branches: [ "cicd" ]
+#  pull_request:
+#    branches: [ "cicd" ]
+on:
+  push:
+    tags:
+      - '*'
 
 jobs:
   publish:
