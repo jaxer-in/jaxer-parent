@@ -2,6 +2,7 @@ package in.jaxer.core.utilities;
 
 import in.jaxer.core.constants.RegexConstants;
 import lombok.extern.log4j.Log4j2;
+import org.apache.commons.lang3.StringUtils;
 
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
@@ -572,5 +573,10 @@ public class Strings
 		long truncated = value / (divideBy / 10); //the number part of the output times 10
 		boolean hasDecimal = truncated < 100 && (truncated / 100d) != (truncated / 100);
 		return hasDecimal ? (truncated / 10d) + suffix : (truncated / 10) + suffix;
+	}
+
+	public static void doNotUseThisMethod()
+	{
+		StringUtils.abbreviate()
 	}
 }
