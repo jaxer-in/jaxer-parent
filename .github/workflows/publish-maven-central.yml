@@ -1,53 +1,118 @@
-# This workflow will build a package using Maven and then publish it to GitHub packages when a release is created
-# For more information see: https://github.com/actions/setup-java/blob/main/docs/advanced-usage.md#apache-maven-with-a-settings-path
+name: Maven Central Deployment
 
-name: Publish to Central Repository
-
-# on:
-#   release:
-#     types: [created]
 on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Tag Version (add prefix v)
+        required: true
 
 jobs:
-  build:
-
+  build-publish:
+    name: Build & maven publish
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-
     steps:
-    - name: Checking in code
-    - uses: actions/checkout@v3
-    
-    # https://github.com/actions/setup-java
-    - name: Set up JDK 1.8
-    - uses: actions/setup-java@v3
-      with:
-        distribution: 'corretto'
-        java-version: '8'
-    - run: java -version
+      - name: Code checkout
+        uses: actions/checkout@v3
 
-    - name: Build with Maven
-      run: mvn clean package
+      # https://github.com/actions/setup-java
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'corretto'
+          java-version: '8'
+      - run: java -version
 
-    - name: Install gpg secret key
-      run: |
-        cat <(echo -e "${{ secrets.OSSRH_GPG_SECRET_KEY }}") | gpg --batch --import
-        gpg --list-secret-keys --keyid-format LONG
-    
-    - id: publish-to-central
-      name: Publish to Central Repository
-      env:
-        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
-      run: |
-        mvn \
-          --no-transfer-progress \
-          --batch-mode \
-          -Dgpg.passphrase=${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }} \
-          clean deploy
+      - name: Build with Maven
+        run: mvn clean package
+
+      - name: Install gpg secret key
+        run: |
+          cat <(echo -e "${{ secrets.OSSRH_GPG_SECRET_KEY }}") | gpg --batch --import
+          gpg --list-secret-keys --keyid-format LONG
+
+      - name: Publish to Central Repository
+        id: publish-to-central
+        env:
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+        run: |
+          mvn \
+            clean deploy \
+            -Dgpg.passphrase=${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }} \
+            --batch-mode \
+            --no-transfer-progress
+
+
+  
+
+  tag-release:
+    needs: build-publish
+    name: Git tag & release
+    runs-on: ubuntu-latest
+    container: ershakiransari/jdk:8-mvn3
+    steps:
+      # Set Current Date As Env Variable
+      - name: Set current date as env variable
+        run: echo "date_today=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+
+      - name: Code checkout for ${{ github.event.inputs.version }}
+        uses: actions/checkout@v3
+
+      - name: Building artifact for ${{ github.event.inputs.version }}
+        run: mvn clean package --no-transfer-progress
+
+      # Creating A Release
+      - name: Creating Release ${{ github.event.inputs.version }}
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ github.event.inputs.version }}
+          release_name: Version ${{ github.event.inputs.version }}
+          body: |
+            - Build Number: ${{ github.run_number }}
+            - Released on ${{ env.date_today }}
+          draft: false
+          prerelease: false
+
+      # Attaching artifact to release
+      - name: Attaching artifacts to release jaxer-api-${{ github.event.inputs.version }}.jar
+        id: attaching-jaxer-api
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./jaxer-api/target/jaxer-api.jar
+          asset_name: jaxer-api-${{ github.event.inputs.version }}.jar
+          asset_content_type: application/java-archive
+
+      # Attaching artifact to release
+      - name: Attaching artifacts to release jaxer-core-${{ github.event.inputs.version }}.jar
+        id: attaching-jaxer-core
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./jaxer-core/target/jaxer-core.jar
+          asset_name: jaxer-core-${{ github.event.inputs.version }}.jar
+          asset_content_type: application/java-archive
+
+      # Attaching artifact to release
+      - name: Attaching artifacts to release jaxer-sdbms-${{ github.event.inputs.version }}.jar
+        id: attaching-jaxer-sdbms
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./jaxer-sdbms/target/jaxer-sdbms.jar
+          asset_name: jaxer-sdbms-${{ github.event.inputs.version }}.jar
+          asset_content_type: application/java-archive
+
