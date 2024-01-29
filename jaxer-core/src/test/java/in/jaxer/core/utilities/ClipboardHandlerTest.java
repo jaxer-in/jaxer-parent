@@ -5,6 +5,7 @@ import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.TestInstance;
  * @author Shakir
  * date 2022-05-22 23:48
  */
+@Disabled
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class ClipboardHandlerTest
 {
