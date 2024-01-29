@@ -574,9 +574,4 @@ public class Strings
 		boolean hasDecimal = truncated < 100 && (truncated / 100d) != (truncated / 100);
 		return hasDecimal ? (truncated / 10d) + suffix : (truncated / 10) + suffix;
 	}
-
-	public static void doNotUseThisMethod()
-	{
-		StringUtils.abbreviate()
-	}
 }
