@@ -31,7 +31,7 @@ jobs:
         run: mvn clean package --no-transfer-progress
 
       - name: Publish ${{ github.event.inputs.version }} to the Maven Central Repository
-        run: mvn deploy -P release -Dmaven.test.skip=true --no-transfer-progress -e
+        run: mvn deploy -P ci-cd -Dmaven.test.skip=true --no-transfer-progress -e
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
