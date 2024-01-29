@@ -4,7 +4,7 @@ Parent project for managing all jaxer projects
 [Maven Central Repository - jaxer](https://mvnrepository.com/artifact/io.github.jaxer-in)
 
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.jaxer-in/jaxer-parent/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.github.jaxer-in/jaxer-parent)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.jaxer-in/jaxer-parent/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.github.jaxer-in/jaxer-parent) [![simple-maven-build](https://github.com/jaxer-in/jaxer-parent/actions/workflows/simple-maven-build.yml/badge.svg?branch=master)](https://github.com/jaxer-in/jaxer-parent/actions/workflows/simple-maven-build.yml)
 
 
 ---
