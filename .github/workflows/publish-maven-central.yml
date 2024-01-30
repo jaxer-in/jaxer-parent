@@ -20,15 +20,15 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-          # Set this in pom.xml
-          server-id: ossrh-jaxer-in
+          # Set this in pom.xml or in parent/pom.xml
+          server-id: ossrh-ajaxer-org
           server-username: MAVEN_USERNAME
           server-password: MAVEN_PASSWORD
           gpg-private-key: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
-      - name: Build & Deploy artifact ${{ github.event.inputs.version }} to maven central
-        run: mvn clean deploy -P release -Dmaven.test.skip=true --no-transfer-progress -e
+      - name: Building & Deploying ${{ github.event.inputs.version }}
+        run: mvn clean deploy -P release --no-transfer-progress -e
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}

@@ -270,7 +270,7 @@
         <tag>v${project.version}</tag>
     </scm>
 
-    <dependencyManagement>
+    <dependencyManagementx>
         <dependencies>
             <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
             <dependency>
@@ -371,6 +371,6 @@
                 <scope>test</scope>
             </dependency>
         </dependencies>
-    </dependencyManagement>
+    </dependencyManagementx>
 
 </project>
