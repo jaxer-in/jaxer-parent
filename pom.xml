@@ -45,83 +45,180 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
+
+        <pluginManagement>
+            <plugins>
+                <!--maven-release-plugin-->
+                <plugin>
+                    <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-release-plugin -->
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>3.0.1</version>
+                    <configuration>
+                        <!--<tagNameFormat>${project.artifactId}-v${project.version}</tagNameFormat>-->
+                        <tagNameFormat>v@{project.version}</tagNameFormat>
+                        <autoVersionSubmodules>true</autoVersionSubmodules>
+                        <releaseProfiles>release</releaseProfiles>
+                        <scmCommentPrefix>[RELEASE]</scmCommentPrefix>
+                    </configuration>
+                </plugin>
+
+                <!--maven-jar-plugin-->
+                <plugin>
+                    <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.3.0</version>
+                    <configuration>
+                        <archive>
+                            <manifest>
+                                <mainClass>com.path.to.MainClass</mainClass>
+                                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            </manifest>
+                        </archive>
+                    </configuration>
+                </plugin>
+
+                <!--maven-gpg-plugin-->
+                <plugin>
+                    <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-gpg-plugin -->
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>3.1.0</version>
+                    <executions>
+                        <execution>
+                            <id>sign-artifacts</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>sign</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <!--maven-source-plugin-->
+                <plugin>
+                    <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-source-plugin -->
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>3.3.0</version>
+                    <executions>
+                        <execution>
+                            <id>attach-sources</id>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <!--maven-javadoc-plugin-->
+                <plugin>
+                    <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-javadoc-plugin -->
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.6.3</version>
+                    <executions>
+                        <execution>
+                            <id>attach-javadocs</id>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                            <configuration>
+                                <!-- add this to disable checking -->
+                                <doclint>none</doclint>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <!-- nexus-staging-maven-plugin -->
+                <plugin>
+                    <!-- https://mvnrepository.com/artifact/org.sonatype.plugins/nexus-staging-maven-plugin -->
+                    <groupId>org.sonatype.plugins</groupId>
+                    <artifactId>nexus-staging-maven-plugin</artifactId>
+                    <version>1.6.13</version>
+                    <extensions>true</extensions>
+                    <configuration>
+                        <serverId>ossrh-jaxer-in</serverId>
+                        <!-- below url will be provided by sonatype in you JIRA issue -->
+                        <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                        <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                    </configuration>
+                </plugin>
+
+                <!--maven-resources-plugin-->
+                <plugin>
+                    <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-resources-plugin -->
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.3.1</version>
+                    <executions>
+                        <execution>
+                            <id>copy-resources</id>
+                            <phase>validate</phase>
+                            <goals>
+                                <goal>copy-resources</goal>
+                            </goals>
+                            <configuration>
+                                <outputDirectory>${basedir}</outputDirectory>
+                                <resources>
+                                    <resource>
+                                        <directory>docs</directory>
+                                        <filtering>true</filtering>
+                                    </resource>
+                                </resources>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <!--maven-release-plugin-->
+            <plugin>
+                <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-release-plugin -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+            </plugin>
+        </plugins>
     </build>
 
     <profiles>
-        <!--ci-cd-pipeline-->
+        <!-- release -->
         <profile>
             <id>release</id>
             <build>
                 <plugins>
                     <!--maven-gpg-plugin-->
                     <plugin>
-                        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-gpg-plugin -->
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>3.1.0</version>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                            </execution>
-                        </executions>
                     </plugin>
 
                     <!--maven-source-plugin-->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
-                        <version>3.2.0</version>
-                        <executions>
-                            <execution>
-                                <id>attach-sources</id>
-                                <goals>
-                                    <goal>jar-no-fork</goal>
-                                </goals>
-                            </execution>
-                        </executions>
                     </plugin>
 
                     <!--maven-javadoc-plugin-->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>3.2.0</version>
-                        <executions>
-                            <execution>
-                                <id>attach-javadocs</id>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                                <configuration>
-                                    <!-- add this to disable checking -->
-                                    <doclint>none</doclint>
-                                </configuration>
-                            </execution>
-                        </executions>
                     </plugin>
 
-                    <!--maven-surefire-plugin-->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.22.0</version>
-                    </plugin>
-
-                    <!--nexus-staging-maven-plugin-->
+                    <!-- nexus-staging-maven-plugin -->
                     <plugin>
                         <groupId>org.sonatype.plugins</groupId>
                         <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.6.7</version>
-                        <extensions>true</extensions>
-                        <configuration>
-                            <serverId>ossrh-jaxer-in</serverId>
-                            <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
-                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                        </configuration>
+                    </plugin>
+
+                    <!--maven-resources-plugin-->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-resources-plugin</artifactId>
                     </plugin>
                 </plugins>
             </build>
