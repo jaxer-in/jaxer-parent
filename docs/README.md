@@ -13,9 +13,9 @@ Parent project for managing all `jaxer ` projects
 
 ```
 <dependency>
-    <groupId>io.github.jaxer-in</groupId>
+    <groupId>${project.groupId}</groupId>
     <artifactId>jaxer-parent</artifactId>
-    <version>2.0.0-beta</version>
+    <version>${project.version}</version>
     <type>pom</type>
 </dependency>
 ```
@@ -25,9 +25,9 @@ Parent project for managing all `jaxer ` projects
 
 ```
 <dependency>
-    <groupId>io.github.jaxer-in</groupId>
+    <groupId>${project.groupId}</groupId>
     <artifactId>jaxer-core</artifactId>
-    <version>2.0.0-beta</version>
+    <version>${project.version}</version>
 </dependency>
 ```
 
@@ -36,9 +36,9 @@ Parent project for managing all `jaxer ` projects
 
 ```
 <dependency>
-    <groupId>io.github.jaxer-in</groupId>
+    <groupId>${project.groupId}</groupId>
     <artifactId>jaxer-api</artifactId>
-    <version>2.0.0-beta</version>
+    <version>${project.version}</version>
 </dependency>
 ```
 
@@ -47,8 +47,8 @@ Parent project for managing all `jaxer ` projects
 
 ```
 <dependency>
-    <groupId>io.github.jaxer-in</groupId>
+    <groupId>${project.groupId}</groupId>
     <artifactId>jaxer-sdbms</artifactId>
-    <version>2.0.0-beta</version>
+    <version>${project.version}</version>
 </dependency>
 ```
