@@ -12,8 +12,8 @@ jobs:
     name: Build & maven publish
     runs-on: ubuntu-latest
     steps:
-      - name: Code checkout
-        uses: actions/checkout@v3
+      - name: Code checkout for ${{ github.event.inputs.version }}
+        uses: actions/checkout@v4.1.1
 
         # DO NOT USE CONTAINER, else gpg sign step will fail
       - name: Setup Java JDK
@@ -46,7 +46,7 @@ jobs:
         run: echo "date_today=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
 
       - name: Code checkout for ${{ github.event.inputs.version }}
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4.1.1
 
       - name: Building artifact for ${{ github.event.inputs.version }}
         run: mvn clean package -Dmaven.test.skip=true --no-transfer-progress -e
