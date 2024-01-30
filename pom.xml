@@ -94,17 +94,6 @@
                             </goals>
                         </execution>
                     </executions>
-                    <configuration>
-                        <!--
-                            Prevent `gpg` from using pinentry programs,
-                            for non interactive mode such as CICD ie. GitHub action,
-                            remove <gpgArguments> tag for manual deploy
-                         -->
-                        <gpgArguments>
-                            <arg>--pinentry-mode</arg>
-                            <arg>loopback</arg>
-                        </gpgArguments>
-                    </configuration>
                 </plugin>
 
                 <!--maven-source-plugin-->
