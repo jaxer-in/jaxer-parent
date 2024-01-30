@@ -28,7 +28,7 @@ jobs:
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
       - name: Building & Deploying ${{ github.event.inputs.version }}
-        run: mvn clean deploy -P release --no-transfer-progress -e
+        run: mvn clean deploy -P release --no-transfer-progress -X
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
